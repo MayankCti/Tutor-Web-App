@@ -1,0 +1,221 @@
+
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1631px;
+    }
+}
+
+@media screen and (max-width:1199px){
+    .ct_testimonial_main:after{
+        width: 100%;
+    }
+
+    .chat-icon {
+        display: block;
+        margin-right: 5px;
+    }
+    .chatlist {
+        width: 100%;
+    }
+    .chatbox {
+        width: 100%;
+        position: absolute;
+        left: 1000px;
+        top: 0px;
+        right: 0;
+        background: #fff;
+        transition: all 0.5s ease;
+        border-left: none;
+    }
+    .showbox {
+        left: 0 !important;
+        transition: all 0.5s ease;
+    }
+    .msg-head h3 {
+        font-size: 14px;
+    }
+    .msg-head p {
+        font-size: 12px;
+    }
+    .msg-head .flex-shrink-0 img {
+        height: 30px;
+    }
+   
+    .send-box .form-control {
+        width: 70%;
+    }
+    .chat-list h3 {
+        font-size: 14px;
+    }
+    .chat-list p {
+        font-size: 12px;
+    }
+    .msg-body ul li.sender p {
+        font-size: 13px;
+        padding: 8px;
+        border-bottom-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    .msg-body ul li.repaly p {
+        font-size: 13px;
+        padding: 8px;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+    }
+    .ct_chat_user{
+        display: flex;
+        align-items: center;
+        
+    }
+    .ct_student_chat_box{
+        left: 0px !important;
+    }
+}
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1400px) {
+    .ct_login_form form {
+    max-height: 457px;
+}
+}
+
+@media screen and (min-device-width: 1024px) and (max-device-width: 1280px) {
+    .ct_login_form form {
+    max-height: 490px;
+}
+}
+
+
+@media screen and (max-width:991px){
+    .ct_banner_right_img img {
+        transform: unset;
+        height: 376px;
+        object-fit: contain;
+    }
+    .ct_fs_52 {
+        font-size: 40px;
+        line-height: 50px;
+    }
+    .ct_banner_section ,.ct_hero_banner{
+        height: 100%;
+    }
+    .ct_py_136{
+        padding-block: 100px;
+    }
+    .ct_testimonial_slider_cnt {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        /* grid-template-columns: 44% auto; */
+        align-items: center;
+    }
+    .ct_testimonial_title{
+        margin-left: 0px;
+    }
+    .ct_testimonial_slider .owl-nav{
+        display: none;
+    }
+    .ct_testimonial_slider .owl-dots{
+        display: block;
+    }
+    .ct_testimonial_slider .owl-dots{
+        justify-content: center;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    .ct_testimonial_slider .owl-dots .owl-dot span{
+        width: 15px;
+        height: 6px;
+        border-radius: 100px;
+        background-color: #DDDDDD;
+        display: block;
+        transition: 0.4s ease all;
+    }
+    .ct_testimonial_slider .owl-dots .owl-dot.active span{
+        width: 25px;
+        background-color: #1C1C1C;
+    }
+    .ct_testimonial_slider .owl-dots{
+        padding-top: 30px;
+    }
+    .ct_login_right_img{
+        display: none;
+    }
+    .ct_login_form{
+        height: 90vh;
+      
+    }
+
+    .ct_side_bar{
+        left: -100%;
+    }
+    .ct_right_content{
+        width: calc(100% - 0px);
+        margin-left: 0px;
+    }
+    .ct_collapsed_sidebar .ct_side_bar {
+        left: 0%;
+    }
+    .ct_collapsed_sidebar .ct_right_content{
+        width: calc(100% - 0px);
+        /* margin-left: 260px; */
+    }
+    .ct_close_menu{
+        display: flex;
+    }
+    
+}
+
+@media screen and (max-width:767px){
+   
+    .ct_fs_52 {
+        font-size: 35px;
+        line-height: 45px;
+    }
+    .ct_fs_36{
+        font-size: 24px;
+        list-style: 34px;
+    }
+    .ct_px_46{
+        padding-inline: 0px !important;
+    }
+    /* .ct_right_header {
+        flex-direction: column;
+    } */
+    .ct_right_header_left{
+        width: 100%;
+    }
+    .calendar-week-day,.calendar-day{
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media screen and (max-width:575px){
+    .ct_btn_group{
+        flex-direction: column;
+    }
+    .ct_btn_group a{
+        width: 100% !important;
+        text-align: center;
+        justify-content: center;
+    }
+    .ct_res_fs_30{
+        font-size: 30px;
+    }
+
+    .ct_right_header {
+        padding-inline: 15px;
+    }
+    .ct_right_header_right {
+        gap: 15px;
+    }
+    .ct_back_text span{
+        display: none;
+    }
+    .ec-title{
+        font-size: 20px;
+    }
+}
