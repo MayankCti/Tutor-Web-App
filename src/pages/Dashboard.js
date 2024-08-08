@@ -2,39 +2,16 @@ import React from "react";
 import StudentTable from "../components/StudentTable";
 import Loader from "../components/Loader";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const cardData = [
-    {
-      backgroundColor: "#D398E7",
-      iconSrc: "assets/img/student_icon.svg",
-      title: "Total Classes",
-      value: "40",
-    },
-    {
-      backgroundColor: "#F0C274",
-      iconSrc: "assets/img/user_icon.svg",
-      title: "Total Students",
-      value: "2514",
-    },
-    {
-      backgroundColor: "#70A1E5",
-      iconSrc: "assets/img/anount_icon.svg",
-      title: "Time Due Amount",
-      value: "$26",
-    },
-    {
-      backgroundColor: "#e570c8",
-      iconSrc: "assets/img/total_payment_icon.svg",
-      title: "Total Payments",
-      value: "$236",
-    },
-  ];
-  const { isLoading } = useSelector((state) => state?.studentReducer);
+  const navigate = useNavigate();
+  const { isLoading, cardData } = useSelector((state) => state?.studentReducer);
 
   if (isLoading) {
     return <Loader />;
   }
+
   return (
     <div className="ct_inner_dashbaord_main">
       <div className="ct_white_bg ct_mt_28">
@@ -43,7 +20,8 @@ const Dashboard = () => {
           {cardData?.map((card, index) => (
             <div
               key={index}
-              className="col-xxl-3 col-xl-6 col-lg-6 col-md-6 mb-4 mb-xxl-0"
+              className="col-xxl-3 col-xl-6 col-lg-6 col-md-6 mb-4 mb-xxl-0 ct_pointer_curser"
+              onClick={() => navigate(card?.path)}
             >
               <div className="ct_dashboard_card">
                 <div
