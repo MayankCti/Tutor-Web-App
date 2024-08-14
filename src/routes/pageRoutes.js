@@ -1,33 +1,49 @@
-import Calendar from "../pages/Calendar";
-import Classes from "../pages/Classes";
-import Dashboard from "../pages/Dashboard";
-import EditProfile from "../pages/EditProfile";
-import FeeDue from "../pages/FeeDue";
-import Login from "../pages/Login";
-import Messages from "../pages/Messages";
-import Profile from "../pages/Profile";
-import Student from "../pages/Student";
+import Home from "../pages";
+import Calendar from "../pages/teacher/Calendar";
+import Classes from "../pages/teacher/Classes";
+import Dashboard from "../pages/teacher/Dashboard";
+import EditProfile from "../pages/teacher/EditProfile";
+import FeeDue from "../pages/teacher/FeeDue";
+import ForgotPassword from "../pages/teacher/ForgotPassword";
+import Login from "../pages/teacher/Login";
+import Messages from "../pages/teacher/Messages";
+import Profile from "../pages/teacher/Profile";
+import Signup from "../pages/teacher/Signup";
+import Student from "../pages/teacher/Student";
 
 export const pageRoutes = {
-  dashboard: "/",
+  home: "/",
+  login: "/login",
+  sign_up: "/signup",
   student: "/student",
   classes: "/classes",
-  feeDue: "/fee-and-due",
+  profile: "/profile",
   messages: "/messages",
   calendar: "/calendar",
+  feeDue: "/fee-and-due",
+  dashboard: "/dashboard",
   editProfile: "/editProfile",
-  profile: "/profile",
-  login: "/login",
-  signup: "/signup",
   forgot_password: "/forgot-password",
 };
 
 export const AllRoutes = [
   {
-    name: "Dashboard",
-    path: pageRoutes?.dashboard,
-    element: <Dashboard />,
-    isPrivate: true,
+    name: "Home",
+    path: pageRoutes?.home,
+    element: <Home />,
+    isPrivate: false,
+  },
+  {
+    name: "Login",
+    path: pageRoutes?.login,
+    element: <Login />,
+    isPrivate: false,
+  },
+  {
+    name: "SignUp",
+    path: pageRoutes?.sign_up,
+    element: <Signup />,
+    isPrivate: false,
   },
   {
     name: "Student",
@@ -42,9 +58,9 @@ export const AllRoutes = [
     isPrivate: true,
   },
   {
-    name: "FeeDue",
-    path: pageRoutes?.feeDue,
-    element: <FeeDue />,
+    name: "Profile",
+    path: pageRoutes?.profile,
+    element: <Profile />,
     isPrivate: true,
   },
   {
@@ -60,9 +76,15 @@ export const AllRoutes = [
     isPrivate: true,
   },
   {
-    name: "Profile",
-    path: pageRoutes?.profile,
-    element: <Profile />,
+    name: "FeeDue",
+    path: pageRoutes?.feeDue,
+    element: <FeeDue />,
+    isPrivate: true,
+  },
+  {
+    name: "Dashboard",
+    path: pageRoutes?.dashboard,
+    element: <Dashboard />,
     isPrivate: true,
   },
   {
@@ -72,9 +94,9 @@ export const AllRoutes = [
     isPrivate: true,
   },
   {
-    name: "Login",
-    path: pageRoutes?.login,
-    element: <Login />,
+    name: "ForgotPassword",
+    path: pageRoutes?.forgot_password,
+    element: <ForgotPassword />,
     isPrivate: false,
   },
 ];

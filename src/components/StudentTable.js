@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NoRecord from "./NoRecord";
+import NoRecord from "./other/NoRecord";
 import { useLocation } from "react-router-dom";
 import { pageRoutes } from "../routes/pageRoutes";
 import { useSelector } from "react-redux";
