@@ -1,41 +1,62 @@
 import React, { useEffect, useState } from "react";
-import MonthInput from "../../components/MonthInput";
 import Loader from "../../components/other/Loader";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { useSelector } from "react-redux";
+import SelectDropdown from "../../components/formInput/SelectDropdown";
 
 const Classes = () => {
   const { isToggle } = useSelector((state) => state.authReducer);
-  const [month, setMonth] = useState("");
+  const [selectedValue, setSelectedValue] = useState("option1");
+  const [selectedValue1, setSelectedValue1] = useState("option1");
+  const options = [
+    { value: "Class type", label: "Class type" },
+    { value: "1:1 Classes", label: "1:1 Classes" },
+    { value: "Group Class", label: "Group Class" },
+    { value: "School Readiness", label: "School Readiness" },
+    { value: "Homework Clubs", label: "Homework Clubs" },
+  ];
+  const options1 = [
+    { value: "Month", label: "Month" },
+    { value: "January", label: "January" },
+    { value: "February", label: "February" },
+    { value: "March", label: "March" },
+  ];
+
   const classData = [
     {
       day: "Monday",
+      name: "Group Class",
       date: "12-09-2024",
       times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
     },
     {
       day: "Tuesday",
+      name: "1:1 Classes",
       date: "13-09-2024",
       times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
     },
     {
       day: "Wednesday",
+      name: "Group Class",
       date: "14-09-2024",
       times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
     },
     {
       day: "Thursday",
+      name: "Group Class",
       date: "15-09-2024",
       times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
     },
     {
       day: "Friday",
+      name: "1:1 Classes",
       date: "16-09-2024",
       times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
     },
     {
       day: "Saturday",
+      name: "School Readiness",
       date: "17-09-2024",
       times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
     },
@@ -54,16 +75,28 @@ const Classes = () => {
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
-                <div className="d-flex align-items-center justify-content-between gap-2 mb-3">
-                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">
-                    {classData?.length ?? 0} Classes This Month
+                <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+                  <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">
+                    Classes This Month
                   </h4>
-                  <MonthInput
-                    id="monthInput"
-                    label="Month"
-                    value={month}
-                    onChange={(e) => setMonth(e.target.value)}
-                  />
+                  <div class="d-flex align-items-center gap-2">
+                    <div>
+                      <SelectDropdown
+                        id="floatingInputValue"
+                        options={options}
+                        selectedValue={selectedValue}
+                        onChange={setSelectedValue}
+                      />
+                    </div>
+                    <div>
+                      <SelectDropdown
+                        id="floatingInputValue"
+                        options={options1}
+                        selectedValue={selectedValue1}
+                        onChange={setSelectedValue1}
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="row">
                   {classData.map((classItem, index) => (
@@ -76,16 +109,29 @@ const Classes = () => {
                         data-bs-toggle="modal"
                         data-bs-target="#class_detail_modal"
                       >
-                        <span className="ct_fs_14 ct_fw_600 ct_ff_roboto ct_purple_text">
-                          {classItem.day}
-                        </span>
-                        <h5 className="ct_fs_20 mt-3 ct_fw_700 ct_ff_roboto">
-                          {classItem.date}
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                          <span class="ct_fs_14 ct_fw_600 ct_ff_roboto">
+                            {" "}
+                            {classItem?.day}
+                          </span>
+                          <span class="ct_fs_14 ct_fw_600 ct_ff_roboto">
+                            {classItem?.date}
+                          </span>
+                        </div>
+
+                        <h5 className="ct_fs_20 mt-3 ct_fw_700 ct_ff_roboto text-start">
+                          {classItem?.name}
                         </h5>
                         <div className="row mt-4 pt-1">
-                          {classItem.times.map((time, idx) => (
+                          {classItem?.times.map((time, idx) => (
                             <div key={idx} className="col-xxl-6 mb-3">
-                              <button className="ct_purple_btn ct_border_radius_10 w-100 ct_extra_dark_btn_bg">
+                              <button
+                                className={`ct_purple_btn ct_border_radius_10 w-100 ct_extra_dark_btn_bg ${
+                                  time == "09:00 AM"
+                                    ? "ct_red_bg"
+                                    : "ct_light_darkgreen_bg"
+                                }`}
+                              >
                                 {time}
                               </button>
                             </div>
@@ -117,6 +163,28 @@ const Classes = () => {
                   Class Details
                 </h4>
                 <div>
+                  <ul class="ct_class_detail_time_btn mb-5">
+                    <li>
+                      <button class="ct_purple_btn ct_outline_btn_purple active">
+                        09:00 AM
+                      </button>
+                    </li>
+                    <li>
+                      <button class="ct_outline_btn_purple ct_purple_btn">
+                        10:00 AM
+                      </button>
+                    </li>
+                    <li>
+                      <button class="ct_outline_btn_purple ct_purple_btn">
+                        11:00 AM
+                      </button>
+                    </li>
+                    <li>
+                      <button class="ct_outline_btn_purple ct_purple_btn">
+                        12:00 AM
+                      </button>
+                    </li>
+                  </ul>
                   <div className="">
                     <div className="d-flex align-items-center justify-content-between gap-3 ">
                       <div className="d-flex align-items-center gap-2">

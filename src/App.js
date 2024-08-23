@@ -9,7 +9,7 @@ function App() {
       <Routes>
         {AllRoutes?.map((item, i) => (
           <Route
-            path={item.path}
+            path={item?.path}
             key={i}
             exact
             element={

@@ -74,19 +74,6 @@
     }
 }
 
-@media screen and (min-device-width: 1200px) and (max-device-width: 1400px) {
-    .ct_login_form form {
-    max-height: 457px;
-}
-}
-
-@media screen and (min-device-width: 1024px) and (max-device-width: 1280px) {
-    .ct_login_form form {
-    max-height: 490px;
-}
-}
-
-
 @media screen and (max-width:991px){
     .ct_banner_right_img img {
         transform: unset;

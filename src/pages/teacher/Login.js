@@ -23,6 +23,7 @@ const Login = () => {
       Cookies.set("user_id", values?.email, { expires: 365 });
       Cookies.set("user_pass", values?.password, { expires: 365 });
     }
+    navigate(pageRoutes?.dashboard);
     // const callback = (response) => {
     //     if (response.success) navigate(pageRoutes?.dashboard);
     // };
@@ -113,7 +114,7 @@ const Login = () => {
                       <p className="mb-0 ct_color_8E8E8E">
                         <label className="d-flex align-items-center gap-2 ct_ff_roboto">
                           <input
-                            onClick={() => setIsChecked(!isChecked)}
+                            onChange={() => setIsChecked(!isChecked)}
                             type="checkbox"
                             className="ct_custom_checkbox ct_ff_roboto"
                             checked={isChecked}

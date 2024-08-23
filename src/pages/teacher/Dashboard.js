@@ -37,7 +37,7 @@ const Dashboard = () => {
                       <img src={card?.iconSrc} alt="" />
                     </div>
                     <div>
-                      <p className="ct_fw_600 mb-2">{card?.title ?? ""}</p>
+                      <p className="ct_fw_600 mb-2 ct_purple_text">{card?.title ?? ""}</p>
                       <h2 className="ct_fs_28 ct_fw_600">
                         {card?.value ?? ""}
                       </h2>
