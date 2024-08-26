@@ -40,3 +40,13 @@ export const pipSaveProfile = (profile) => {
 export const pipGetProfile = () => {
   return JSON.parse(localStorage.getItem("user_data"));
 };
+
+// Register form step
+export const pipSetRegisterStep = (step) => {
+  localStorage.setItem("register_step", step);
+};
+
+export const pipGetRegisterStep = () => {
+  const step = parseInt(localStorage.getItem("register_step"));
+  if (step) return step;
+};

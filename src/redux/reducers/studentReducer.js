@@ -88,14 +88,14 @@ const initialState = {
       iconSrc: "assets/img/anount_icon.svg",
       title: "Invoices due this week",
       value: "$26",
-      path: pageRoutes?.feeDue,
+      path: pageRoutes?.billing,
     },
     {
       backgroundColor: "#e570c8",
       iconSrc: "assets/img/total_payment_icon.svg",
       title: "Total payments this week",
       value: "$236",
-      path: pageRoutes?.feeDue,
+      path: pageRoutes?.billing,
     },
   ],
 };

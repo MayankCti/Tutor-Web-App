@@ -50,10 +50,10 @@ const Sidebar = () => {
             Classes
           </a>
         </li>
-        <li onClick={() => navigate(pageRoutes.feeDue)}>
+        <li onClick={() => navigate(pageRoutes.billing)}>
           <a
             href="javascript:void(0)"
-            className={pathname == pageRoutes?.feeDue ? "active" : ""}
+            className={pathname == pageRoutes?.billing ? "active" : ""}
           >
             <img src="assets/img/fee-due_icon.svg" alt="" />
             Billing
@@ -68,7 +68,7 @@ const Sidebar = () => {
             Messages
           </a>
         </li> */}
-        <li onClick={() => navigate(pagnpeRoutes.calendar)}>
+        <li onClick={() => navigate(pageRoutes.calendar)}>
           <a
             href="javascript:void(0)"
             className={pathname == pageRoutes?.calendar ? "active" : ""}

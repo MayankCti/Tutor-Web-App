@@ -30,7 +30,11 @@ const Profile = () => {
                     >
                       Edit Profile
                     </a>
-                    <a href="javascript:void(0)" className="ct_purple_btn">
+                    <a
+                      href="javascript:void(0)"
+                      onClick={() => navigate(pageRoutes?.changePassword)}
+                      className="ct_purple_btn"
+                    >
                       Change Password
                     </a>
                   </div>

@@ -102,12 +102,12 @@ const Login = () => {
                             placeholder="Enter password"
                           />
                           <Eye isEye={isEye} onClick={() => setIsEye(!isEye)} />
+                        </div>
                           <ErrorMessage
                             errors={errors}
                             touched={touched}
                             fieldName="password"
                           />
-                        </div>
                       </div>
                     </div>
                     <div className="d-flex align-items-center justify-content-between gap-2 flex-wrap mt-3">
@@ -124,8 +124,8 @@ const Login = () => {
                       </p>
                       <a
                         href="javascript:void(0)"
-                        onClick={() => navigate(pageRoutes.forgot_password)}
-                        className="ct_color_8E8E8E  ct_forgot_password_link ct_ff_roboto"
+                        onClick={() => navigate(pageRoutes.forgotPassword)}
+                        className="ct_color_8E8E8E  ct_forgotPassword_link ct_ff_roboto"
                       >
                         Forgot Password ?
                       </a>

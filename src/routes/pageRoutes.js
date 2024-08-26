@@ -3,13 +3,15 @@ import Calendar from "../pages/teacher/Calendar";
 import Classes from "../pages/teacher/Classes";
 import Dashboard from "../pages/teacher/Dashboard";
 import EditProfile from "../pages/teacher/EditProfile";
-import FeeDue from "../pages/teacher/FeeDue";
 import ForgotPassword from "../pages/teacher/ForgotPassword";
 import Login from "../pages/teacher/Login";
 import Messages from "../pages/teacher/Messages";
 import Profile from "../pages/teacher/Profile";
 import Signup from "../pages/teacher/Signup";
 import Student from "../pages/teacher/Student";
+import Billing from "../pages/teacher/Billing";
+import ChangePassword from "../pages/teacher/ChangePassword";
+import StepForm from "../pages/teacher/StepForm";
 
 export const pageRoutes = {
   home: "/",
@@ -20,10 +22,12 @@ export const pageRoutes = {
   profile: "/profile",
   messages: "/messages",
   calendar: "/calendar",
-  feeDue: "/fee-and-due",
+  billing: "/fee-and-due",
   dashboard: "/dashboard",
   editProfile: "/editProfile",
-  forgot_password: "/forgot-password",
+  forgotPassword: "/forgot-password",
+  changePassword: "/change-password",
+  stepForm: "/step-form",
 };
 
 export const AllRoutes = [
@@ -76,9 +80,9 @@ export const AllRoutes = [
     isPrivate: true,
   },
   {
-    name: "FeeDue",
-    path: pageRoutes?.feeDue,
-    element: <FeeDue />,
+    name: "billing",
+    path: pageRoutes?.billing,
+    element: <Billing />,
     isPrivate: true,
   },
   {
@@ -95,8 +99,20 @@ export const AllRoutes = [
   },
   {
     name: "ForgotPassword",
-    path: pageRoutes?.forgot_password,
+    path: pageRoutes?.forgotPassword,
     element: <ForgotPassword />,
+    isPrivate: false,
+  },
+  {
+    name: "ChangePassword",
+    path: pageRoutes?.changePassword,
+    element: <ChangePassword />,
+    isPrivate: true,
+  },
+  {
+    name: "StepForm",
+    path: pageRoutes?.stepForm,
+    element: <StepForm />,
     isPrivate: false,
   },
 ];

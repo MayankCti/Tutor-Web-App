@@ -875,7 +875,7 @@ footer{
     width: 16px;
     height: 16px;
 }
-.ct_forgot_password_link:hover{
+.ct_forgotPassword_link:hover{
     color: var(--dark_purple);
 }
 .ct_admin_login_btn_fixed{
@@ -994,10 +994,10 @@ footer{
   }
   /*Hide all except first fieldset*/
  
-  #msform fieldset:not(:first-of-type) {
+  /* #msform fieldset:not(:first-of-type) {
     display: none;
     
-  }
+  } */
   /*inputs*/
   #msform input,
   #msform textarea {
