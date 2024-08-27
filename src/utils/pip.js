@@ -14,6 +14,14 @@ export const pipGetAccessToken = () => {
   return localStorage.getItem("AccessToken");
 };
 
+export const pipSaveTeacherProfile = (profile) => {
+  localStorage.setItem("teacher-profile", JSON.stringify(profile));
+};
+
+export const pipGetTeacherProfile = () => {
+  const profile = localStorage.getItem("teacher-profile");
+  return profile ? JSON.parse(profile) : {};
+};
 
 export const setAuth = (token) => {
   if (!token) return;
@@ -22,10 +30,9 @@ export const setAuth = (token) => {
 
 export const getAuth = () => {
   const token = localStorage.getItem("TOKEN");
-  if(!token) return;
+  if (!token) return;
   return token;
 };
-
 
 export const setAuthStudent = (token) => {
   if (!token) return;
@@ -34,23 +41,18 @@ export const setAuthStudent = (token) => {
 
 export const getAuthStudent = () => {
   const token = localStorage.getItem("STUDENT-TOKEN");
-  if(!token) return;
+  if (!token) return;
   return token;
 };
-
-
-
-
 
 // Date View Format
 export const pipViewDate = (date) => {
   return moment(date).format("DD-MM-YYYY");
 };
 
-
-export const pipViewTime = (value) =>{
-  return moment(value).format("hh:mm A")
- }
+export const pipViewTime = (value) => {
+  return moment(value).format("hh:mm A");
+};
 
 export const clearAuth = () => {
   toast.success("Successfully logged out");
@@ -83,6 +85,3 @@ export const pipGetRegisterStep = () => {
   const step = parseInt(localStorage.getItem("register_step"));
   if (step) return step;
 };
-
-
-

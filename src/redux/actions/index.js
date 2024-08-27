@@ -1,13 +1,15 @@
 import axios from "axios";
 import { message as toast } from "antd";
-import { pageRoutes } from "../../routes/path";
 import { BASE_URL } from "../../routes/endPoints";
-import { clearAuth, getAuth } from "../../utils/pip";
+import { clearAuth, getAuthStudent, pipGetAccessToken } from "../../utils/pip";
+import { pageRoutes } from "../../routes/pageRoutes";
 
 export const API_REQUEST = async (props) => {
-  const {  url, method, data, headers, params, isErrorToast = true } = props;
-  const token = getAuth();
-  
+  const { url, method, data, headers, params, isErrorToast = true } = props;
+  const urlSegment = window?.location?.pathname.split("/")[1];
+  const isStudentRoute = urlSegment === "student";
+  const token = isStudentRoute ? getAuthStudent() : pipGetAccessToken();
+
   const requestOptions = {
     url: BASE_URL + url,
     method,
@@ -33,7 +35,9 @@ export const API_REQUEST = async (props) => {
         if (error?.response?.data?.status == 401) {
           toast.error(error?.response?.data?.message);
           clearAuth();
-          window.location.href = pageRoutes?.login;
+          window.location.href = isStudentRoute
+            ? pageRoutes.studentlogin
+            : pageRoutes.login;
           return;
         }
         toast.error(error?.response?.data?.message);

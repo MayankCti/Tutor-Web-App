@@ -1,11 +1,12 @@
 import React from "react";
-import { clearAuth } from "../utils/pip";
+import { clearAuth, pipGetTeacherProfile } from "../utils/pip";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../routes/pageRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleChange } from "../redux/reducers/authReducer";
 
 const Headers = () => {
+  const { username, profile_image } = pipGetTeacherProfile();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isToggle } = useSelector((state) => state.authReducer);
@@ -27,15 +28,14 @@ const Headers = () => {
           >
             <a href="javascript:void(0)">
               <img
-                src="assets/img/user_profile.png"
+                src={profile_image ?? "assets/img/user_profile.png"}
                 alt=""
                 className="ct_img_44"
               />
               <div>
                 <h6 className="ct_fs_14 ct_fw_700 mb-0 ct_ff_roboto mb-1">
-                  Aris Lomen
+                  {username ?? ""}
                 </h6>
-                <p className="mb-0 ct_fs_12 ct_fw_500 ct_ff_roboto ">Tutor</p>
               </div>
             </a>
           </div>

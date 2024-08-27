@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
 
-function Header({onToggleSidebar}) {
-
-  const navigate = useNavigate()
+function Header({ onToggleSidebar }) {
+  const navigate = useNavigate();
 
   return (
     <>
@@ -17,9 +16,9 @@ function Header({onToggleSidebar}) {
         <div className="ct_right_header_right">
           <div className="ct_user_profile_head">
             <a
-             href="javascript:void(0)"
-             onClick={()=>navigate(pageRoutes?.studentprofile)}
-             >
+              href="javascript:void(0)"
+              onClick={() => navigate(pageRoutes?.studentprofile)}
+            >
               <img
                 src="../assets/img/user_profile.png"
                 alt=""

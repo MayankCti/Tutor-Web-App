@@ -1,29 +1,41 @@
-import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router";
-import { pageRoutes } from "../../routes/pageRoutes";
-import Eye from "../../components/Eye";
 import { Formik } from "formik";
+import Eye from "../../components/Eye";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import { signUpSchema } from "../../utils/Schema";
+import Loader from "../../components/other/Loader";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../../components/ErrorMessage";
+import { teacherRegister } from "../../redux/actions/authAction";
 import AuthRightContainer from "../../components/other/AuthRightContainer";
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEye, setIsEye] = useState(false);
   const [isEye1, setIsEye1] = useState(false);
+  const { isLoading } = useSelector((state) => state.authReducer);
 
   const initialState = {
-    user_name: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
 
   const handleSignUp = async (values, { setSubmitting }) => {
-    setSubmitting(false);
-    navigate(pageRoutes.stepForm);
+    const callback = (response) => {
+      if (response.success) navigate(pageRoutes.login);
+      // navigate(pageRoutes.stepForm);
+    };
+    const { confirmPassword, ...payload } = values;
+    dispatch(teacherRegister({ payload, callback }));
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section className="">
       <div className="container-fluid">
@@ -53,7 +65,7 @@ const Signup = () => {
                   handleBlur,
                   handleSubmit,
                 }) => (
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="ct_login_form_cnt">
                       <div className="ct_mb_50">
                         <h2 className="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">
@@ -66,18 +78,18 @@ const Signup = () => {
                         </label>
                         <div className="position-relative">
                           <input
-                            id="user_name"
+                            id="username"
                             type="text"
                             className="form-control ct_input ct_ff_roboto"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.user_name}
+                            value={values.username}
                             placeholder="Enter user name"
                           />
                           <ErrorMessage
                             errors={errors}
                             touched={touched}
-                            fieldName="user_name"
+                            fieldName="username"
                           />
                         </div>
                       </div>

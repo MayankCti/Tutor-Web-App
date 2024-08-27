@@ -1,21 +1,32 @@
 import React from "react";
 import { Formik } from "formik";
+import { useNavigate } from "react-router";
+import Loader from "../../components/other/Loader";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../../components/ErrorMessage";
 import { ForgotPasswordSchema } from "../../utils/Schema";
-import {  useNavigate } from "react-router";
-import { pageRoutes } from "../../routes/pageRoutes";
+import { teacherForgotPassword } from "../../redux/actions/authAction";
 import AuthRightContainer from "../../components/other/AuthRightContainer";
 
 const ForgotPassword = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.authReducer);
   const initialState = {
     email: "",
   };
 
   const handleForgotPassword = async (values, { setSubmitting }) => {
-    setSubmitting(false);
+    const callback = (response) => {
+      if (response.success) navigate(pageRoutes?.login);
+    };
+    dispatch(teacherForgotPassword({ payload: values, callback }));
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section>
       <div className="container-fluid">
@@ -45,7 +56,7 @@ const ForgotPassword = () => {
                   handleBlur,
                   handleSubmit,
                 }) => (
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="ct_login_form_cnt">
                       <div className="ct_mb_50">
                         <h2 className="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">

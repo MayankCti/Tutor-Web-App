@@ -1,37 +1,42 @@
-import React, { useState } from "react";
-import ErrorMessage from "../../components/ErrorMessage";
-import { signInSchema } from "../../utils/Schema";
 import Cookies from "js-cookie";
 import { Formik } from "formik";
 import Eye from "../../components/Eye";
-import { pageRoutes } from "../../routes/pageRoutes";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { signInSchema } from "../../utils/Schema";
+import ErrorMessage from "../../components/ErrorMessage";
+import { teacherlogin } from "../../redux/actions/authAction";
 import AuthRightContainer from "../../components/other/AuthRightContainer";
-import { pipSetAccessToken } from "../../utils/pip";
+import Loader from "../../components/other/Loader";
 
 const Login = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEye, setIsEye] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const { isLoading } = useSelector((state) => state.authReducer);
   const initialState = {
     email: Cookies.get("teacherEmail") ?? "",
     password: Cookies.get("teacherPass" ?? ""),
   };
 
   const handleLogin = async (values, { setSubmitting }) => {
-    pipSetAccessToken("kfdjlkajkdfsjlkakdf");
-    setSubmitting(false);
     if (isChecked) {
       Cookies.set("teacherEmail", values?.email, { expires: 365 });
       Cookies.set("teacherPass", values?.password, { expires: 365 });
     }
     navigate(pageRoutes?.dashboard);
-    // const callback = (response) => {
-    //     if (response.success) navigate(pageRoutes?.dashboard);
-    // };
-    // dispatch(adminLogin({ payload: values, callback }));
+    const callback = (response) => {
+      if (response.success) navigate(pageRoutes?.dashboard);
+    };
+    dispatch(teacherlogin({ payload: values, callback }));
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section className="">
       <div className="container-fluid">
@@ -61,7 +66,7 @@ const Login = () => {
                   handleBlur,
                   handleSubmit,
                 }) => (
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="ct_login_form_cnt">
                       <div className="ct_mb_50">
                         <h2 className="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">
