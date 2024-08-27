@@ -8,6 +8,7 @@ import { message } from "antd";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { changePasswordValidationSchema } from "../../utils/Schema";
 
+
 function StudentChangePassword() {
   const navigate = useNavigate();
 
