@@ -21,8 +21,6 @@ function App() {
           }
           />
         ))}
-        {/* {console.log("appjs",AllRoutes.map((item)=>(console.log("app js",item.element))))} */}
-        {console.log("app js",AllRoutes[0]?.element)}
       </Routes>
     </>
   );

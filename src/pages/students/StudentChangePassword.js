@@ -81,7 +81,7 @@ function StudentChangePassword() {
                               className="d-flex align-items-center justify-content-between mb-2"
                             >
                               <span className="ct_fw_600 ct_fs_20">
-                                Old Password
+                                Current Password
                               </span>
                             </label>
                             <div className="position-relative">

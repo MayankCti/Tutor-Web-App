@@ -37,7 +37,7 @@ export const pageRoutes = {
   forgotPassword: "/forgot-password",
   changePassword: "/change-password",
   stepForm: "/step-form",
-  // studentProfie : "/student-profile",
+  // studentProfie
   studentchangePassword: "/student/change-password",
   studenteditProfile: "/student/edit-profile",
   studentfeesAndDues: "/student/fees-and-dues",
@@ -134,7 +134,7 @@ export const AllRoutes = [
     isPrivate: false,
   },
 
-  // Anurag
+  // Students
   {
     name: "studentchangePassword",
     path: pageRoutes?.studentchangePassword,

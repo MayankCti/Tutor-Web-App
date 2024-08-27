@@ -77,7 +77,7 @@ function StudentProfile() {
                           alt=""
                           className="ct_img_148"
                         />
-                        <label htmlFor="ct_edit_profile">
+                        {/* <label htmlFor="ct_edit_profile">
                           <input
                             type="file "
                             id="ct_edit_profile"
@@ -86,7 +86,7 @@ function StudentProfile() {
                           <div className="ct_edit_profile_icon">
                             <i className="fa-solid fa-pen" />
                           </div>
-                        </label>
+                        </label> */}
                       </div>
                       <div className="row mt-5">
                         <div className="col-md-6 mb-4">
