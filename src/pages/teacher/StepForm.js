@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import FirstStep from "../../components/Steps/FirstStep";
 import SecondStep from "../../components/Steps/SecondStep";
 import ThirdStep from "../../components/Steps/ThirdStep";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FourthStep from "../../components/Steps/FourthStep";
 
 const StepForm = () => {
+  const dispatch = useDispatch();
   const { currentStep } = useSelector((state) => state?.authReducer);
   const CurrentPage = (pageNo) => {
     switch (pageNo) {

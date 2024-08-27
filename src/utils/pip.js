@@ -14,10 +14,43 @@ export const pipGetAccessToken = () => {
   return localStorage.getItem("AccessToken");
 };
 
+
+export const setAuth = (token) => {
+  if (!token) return;
+  localStorage.setItem("TOKEN", token);
+};
+
+export const getAuth = () => {
+  const token = localStorage.getItem("TOKEN");
+  if(!token) return;
+  return token;
+};
+
+
+export const setAuthStudent = (token) => {
+  if (!token) return;
+  localStorage.setItem("STUDENT-TOKEN", token);
+};
+
+export const getAuthStudent = () => {
+  const token = localStorage.getItem("STUDENT-TOKEN");
+  if(!token) return;
+  return token;
+};
+
+
+
+
+
 // Date View Format
 export const pipViewDate = (date) => {
   return moment(date).format("DD-MM-YYYY");
 };
+
+
+export const pipViewTime = (value) =>{
+  return moment(value).format("hh:mm A")
+ }
 
 export const clearAuth = () => {
   toast.success("Successfully logged out");
@@ -50,3 +83,6 @@ export const pipGetRegisterStep = () => {
   const step = parseInt(localStorage.getItem("register_step"));
   if (step) return step;
 };
+
+
+

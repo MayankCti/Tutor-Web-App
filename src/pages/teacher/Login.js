@@ -155,6 +155,7 @@ const Login = () => {
                       <p className="mb-0 ct_color_8E8E8E ct_ff_roboto text-center ct_decoration_text_line">
                         <a
                           href="javascript:void(0)"
+                          onClick={()=>navigate(pageRoutes?.studentlogin)}
                           className="ct_purple_text ct_fw_700 ms-3"
                         >
                           Student Login
