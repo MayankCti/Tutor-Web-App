@@ -26,7 +26,7 @@ export const pageRoutes = {
   home: "/",
   login: "/login",
   sign_up: "/signup",
-  student: "/student",
+  student: "/student-list",
   classes: "/classes",
   profile: "/profile",
   messages: "/messages",
