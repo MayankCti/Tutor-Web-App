@@ -4,14 +4,14 @@ import { getAuthStudent, pipGetAccessToken } from "../utils/pip";
 import { pageRoutes } from "../routes/pageRoutes";
 
 const PrivateRoute = ({ children }) => {
-  const urlSegment = window.location.pathname.split("/")[1];
+  const urlSegment = window?.location?.pathname.split("/")[1];
   const isStudentRoute = urlSegment === "student";
   const isAuthenticated = isStudentRoute
     ? getAuthStudent()
     : pipGetAccessToken();
   const redirectTo = isStudentRoute
-    ? pageRoutes.login
-    : pageRoutes.studentlogin;
+    ? pageRoutes.studentlogin
+    : pageRoutes.login;
 
   return isAuthenticated ? children : <Navigate to={redirectTo} />;
 };

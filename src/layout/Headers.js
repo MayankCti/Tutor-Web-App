@@ -98,9 +98,11 @@ const Headers = () => {
                 <a
                   onClick={() => {
                     clearAuth();
+                    navigate(pageRoutes?.login);
                   }}
                   href="javascript:void(0)"
                   type="button"
+                  data-bs-dismiss="modal"
                   className="bg-danger ct_purple_btn justify-content-center"
                   style={{ borderColor: "rgb(220, 53, 69)" }}
                 >
