@@ -73,7 +73,7 @@ function StudentProfile() {
                       <div className="ct_profile_img">
                         <img
                           // src={studentProfile ? studentProfile.profileImage : assets/img/user_profile.png}
-                          src="assets/img/user_profile.png"
+                          src="../assets/img/user_profile.png"
                           alt=""
                           className="ct_img_148"
                         />

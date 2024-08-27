@@ -97,7 +97,7 @@ function StudentEditProfile() {
                         <div className="col-lg-6 mx-auto">
                           <div className="ct_profile_img mb-4">
                             <img
-                              src={imagePreview || "assets/img/user_profile.png"}
+                              src={imagePreview || "../assets/img/user_profile.png"}
                               alt=""
                               className="ct_img_148"
                             />

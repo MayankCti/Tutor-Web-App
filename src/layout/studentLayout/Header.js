@@ -21,7 +21,7 @@ function Header({onToggleSidebar}) {
              onClick={()=>navigate(pageRoutes?.studentprofile)}
              >
               <img
-                src="assets/img/user_profile.png"
+                src="../assets/img/user_profile.png"
                 alt=""
                 className="ct_img_44"
               />
