@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FirstStep from "../../components/Steps/FirstStep";
 import SecondStep from "../../components/Steps/SecondStep";
 import ThirdStep from "../../components/Steps/ThirdStep";
@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import FourthStep from "../../components/Steps/FourthStep";
 
 const StepForm = () => {
-    const dispatch = useDispatch();
   const { currentStep } = useSelector((state) => state?.authReducer);
   const CurrentPage = (pageNo) => {
     switch (pageNo) {
@@ -18,7 +17,6 @@ const StepForm = () => {
         return <ThirdStep />;
       case 4:
         return <FourthStep />;
-
       default:
         break;
     }
@@ -28,7 +26,7 @@ const StepForm = () => {
     <section class="">
       <div class="container">
         <div class="ct_logo ct_login_logo">
-          <a href="index.html">
+          <a href="javascript:void(0)">
             <img src="assets/img/logo.svg" alt="" />
           </a>
         </div>
@@ -37,12 +35,15 @@ const StepForm = () => {
             <form id="msform" action="dashboard.html">
               {/* <!-- progressbar --> */}
               <ul id="progressbar" class="mb-5">
-                <li class={currentStep >= 1 ? "active" : ""}>Step 1</li>
-                <li class={currentStep >= 2 ? "active" : ""}>Step 2</li>
-                <li class={currentStep >= 3 ? "active" : ""}>Step 3</li>
-                <li class={currentStep >= 4 ? "active" : ""}>Step 4</li>
+                {[1, 2, 3, 4]?.map((item, index) => (
+                  <li
+                    key={index}
+                    class={currentStep >= index + 1 ? "active" : ""}
+                  >
+                    Step {index + 1}
+                  </li>
+                ))}
               </ul>
-              {/* <!-- fieldsets --> */}
               <div class="ct_step_form_inner">{CurrentPage(currentStep)}</div>
             </form>
           </div>

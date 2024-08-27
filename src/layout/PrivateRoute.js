@@ -1,13 +1,19 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { pipGetAccessToken } from '../utils/pip';
-import { pageRoutes } from '../routes/pageRoutes';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { getAuthStudent, pipGetAccessToken } from "../utils/pip";
+import { pageRoutes } from "../routes/pageRoutes";
 
 const PrivateRoute = ({ children }) => {
-    const isAuth = pipGetAccessToken();
-    return (
-        isAuth ? children : <Navigate to={pageRoutes.login} />
-    )
-}
+  const urlSegment = window?.location?.pathname.split("/")[1];
+  const isStudentRoute = urlSegment === "student";
+  const isAuthenticated = isStudentRoute
+    ? getAuthStudent()
+    : pipGetAccessToken();
+  const redirectTo = isStudentRoute
+    ? pageRoutes.studentlogin
+    : pageRoutes.login;
+
+  return isAuthenticated ? children : <Navigate to={redirectTo} />;
+};
 
 export default PrivateRoute;

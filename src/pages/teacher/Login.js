@@ -1,35 +1,42 @@
-import React, { useState } from "react";
-import ErrorMessage from "../../components/ErrorMessage";
-import { signInSchema } from "../../utils/Schema";
 import Cookies from "js-cookie";
 import { Formik } from "formik";
 import Eye from "../../components/Eye";
-import { pageRoutes } from "../../routes/pageRoutes";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { signInSchema } from "../../utils/Schema";
+import ErrorMessage from "../../components/ErrorMessage";
+import { teacherlogin } from "../../redux/actions/authAction";
 import AuthRightContainer from "../../components/other/AuthRightContainer";
+import Loader from "../../components/other/Loader";
 
 const Login = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEye, setIsEye] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const { isLoading } = useSelector((state) => state.authReducer);
   const initialState = {
-    email: Cookies.get("user_id") ?? "",
-    password: Cookies.get("user_pass" ?? ""),
+    email: Cookies.get("teacherEmail") ?? "",
+    password: Cookies.get("teacherPass" ?? ""),
   };
 
   const handleLogin = async (values, { setSubmitting }) => {
-    setSubmitting(false);
     if (isChecked) {
-      Cookies.set("user_id", values?.email, { expires: 365 });
-      Cookies.set("user_pass", values?.password, { expires: 365 });
+      Cookies.set("teacherEmail", values?.email, { expires: 365 });
+      Cookies.set("teacherPass", values?.password, { expires: 365 });
     }
     navigate(pageRoutes?.dashboard);
-    // const callback = (response) => {
-    //     if (response.success) navigate(pageRoutes?.dashboard);
-    // };
-    // dispatch(adminLogin({ payload: values, callback }));
+    const callback = (response) => {
+      if (response.success) navigate(pageRoutes?.dashboard);
+    };
+    dispatch(teacherlogin({ payload: values, callback }));
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section className="">
       <div className="container-fluid">
@@ -59,7 +66,7 @@ const Login = () => {
                   handleBlur,
                   handleSubmit,
                 }) => (
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="ct_login_form_cnt">
                       <div className="ct_mb_50">
                         <h2 className="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">
@@ -103,11 +110,11 @@ const Login = () => {
                           />
                           <Eye isEye={isEye} onClick={() => setIsEye(!isEye)} />
                         </div>
-                          <ErrorMessage
-                            errors={errors}
-                            touched={touched}
-                            fieldName="password"
-                          />
+                        <ErrorMessage
+                          errors={errors}
+                          touched={touched}
+                          fieldName="password"
+                        />
                       </div>
                     </div>
                     <div className="d-flex align-items-center justify-content-between gap-2 flex-wrap mt-3">
@@ -155,6 +162,7 @@ const Login = () => {
                       <p className="mb-0 ct_color_8E8E8E ct_ff_roboto text-center ct_decoration_text_line">
                         <a
                           href="javascript:void(0)"
+                          onClick={() => navigate(pageRoutes?.studentlogin)}
                           className="ct_purple_text ct_fw_700 ms-3"
                         >
                           Student Login
@@ -166,7 +174,7 @@ const Login = () => {
               </Formik>
             </div>
           </div>
-          <AuthRightContainer/>
+          <AuthRightContainer />
         </div>
       </div>
     </section>

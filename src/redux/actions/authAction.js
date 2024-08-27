@@ -1,0 +1,84 @@
+import { API_REQUEST } from ".";
+import { teachForgotPasswordAPI, teachLoginAPI, teachProfileAPI, teachRegisterAPI, teachUpdateProfileAPI } from "../../routes/endPoints";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { pipSetAccessToken } from "../../utils/pip";
+
+// auth-register
+export const teacherRegister = createAsyncThunk(
+  "auth-register",
+  async (props) => {
+    const { payload, callback } = props;
+    try {
+      const response = await API_REQUEST({
+        url: teachRegisterAPI,
+        method: "POST",
+        data: payload,
+      });
+      callback(response);
+      return response;
+    } catch (error) {
+      callback(null, error);
+    }
+  }
+);
+// auth-login
+export const teacherlogin = createAsyncThunk("auth-login", async (props) => {
+  const { payload, callback } = props;
+  try {
+    const response = await API_REQUEST({
+      url: teachLoginAPI,
+      method: "POST",
+      data: payload,
+      isErrorToast: true,
+    });
+    pipSetAccessToken(response?.data);
+    callback(response);
+    return response;
+  } catch (error) {
+    callback(null, error);
+  }
+});
+// auth-forgot-password
+export const teacherForgotPassword = createAsyncThunk("auth-forgot-password",async (props) => {
+  const { payload, callback } = props;
+  try {
+      const response = await API_REQUEST({
+        url: teachForgotPasswordAPI,
+        method: "POST",
+        data: payload,
+        isErrorToast : true
+      });
+      callback(response);
+      return response
+
+    } catch (error) {
+      callback(null, error);
+    }
+})
+// fetch-profile
+export const fetchProfile = createAsyncThunk("fetch-profile", async () => {
+  try {
+    const response = await API_REQUEST({
+      url: teachProfileAPI,
+      method: "GET",
+    });
+    return response;
+  } catch (error) {}
+});
+// update-profile
+export const updateProfile = createAsyncThunk("update-profile",async (props) => {
+  const { payload, callback } = props;
+  try {
+      const response = await API_REQUEST({
+        url: teachUpdateProfileAPI,
+        method: "POST",
+        data: payload,
+        isErrorToast : true
+      });
+      callback(response);
+      return response
+
+    } catch (error) {
+      callback(null, error);
+    }
+})

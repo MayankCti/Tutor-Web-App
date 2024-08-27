@@ -1,15 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/other/Loader";
 import StudentTable from "../../components/StudentTable";
+import { fetchProfile } from "../../redux/actions/authAction";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isToggle } = useSelector((state) => state.authReducer);
   const { isLoading, cardData } = useSelector((state) => state?.studentReducer);
+
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, []);
 
   if (isLoading) {
     return <Loader />;
@@ -37,7 +43,9 @@ const Dashboard = () => {
                       <img src={card?.iconSrc} alt="" />
                     </div>
                     <div>
-                      <p className="ct_fw_600 mb-2 ct_purple_text">{card?.title ?? ""}</p>
+                      <p className="ct_fw_600 mb-2 ct_purple_text">
+                        {card?.title ?? ""}
+                      </p>
                       <h2 className="ct_fs_28 ct_fw_600">
                         {card?.value ?? ""}
                       </h2>

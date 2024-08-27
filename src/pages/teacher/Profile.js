@@ -1,14 +1,28 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
+import { fetchProfile } from "../../redux/actions/authAction";
+import Loader from "../../components/other/Loader";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isToggle } = useSelector((state) => state.authReducer);
+  const { isToggle, isLoading } = useSelector((state) => state.authReducer);
+  const { profile } = useSelector((state) => state?.authReducer);
+  console.log({ object: profile });
+  const { full_name, email, stream_name, theme_color, profile_image } =
+    profile ?? {};
+  console.log({ profile });
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, []);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
@@ -45,7 +59,7 @@ const Profile = () => {
                     <div className="col-lg-6 mx-auto">
                       <div className="ct_profile_img">
                         <img
-                          src="assets/img/user_profile.png"
+                          src={profile_image ?? "assets/img/user_profile.png"}
                           alt=""
                           className="ct_img_148"
                         />
@@ -61,7 +75,7 @@ const Profile = () => {
                         <input
                           type="text"
                           className="ct_input form-control ct_input_40 ct_input_h_52"
-                          value="Alex meian"
+                          value={full_name ?? ""}
                           disabled
                         />
                       </div>
@@ -75,7 +89,7 @@ const Profile = () => {
                         <input
                           type="email"
                           className="ct_input form-control ct_input_40 ct_input_h_52"
-                          value="alex214578@domain.com"
+                          value={email}
                           disabled
                         />
                       </div>
@@ -84,12 +98,12 @@ const Profile = () => {
                           for=""
                           className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text"
                         >
-                          Stream
+                          stream_name
                         </label>
                         <input
                           type="text"
                           className="ct_input form-control ct_input_40 ct_input_h_52"
-                          value="Math"
+                          value={stream_name ?? ""}
                           disabled
                         />
                       </div>
@@ -103,10 +117,15 @@ const Profile = () => {
                         <div className="position-relative">
                           <input
                             type="text"
+                            value={theme_color ?? "#0098a8"}
                             className="ct_input ct_color_input form-control ct_input_h_52"
                             disabled
                           />
-                          <input type="color" className="ct_color" />
+                          <input
+                            type="color"
+                            className="ct_color"
+                          value={theme_color}
+                          />
                         </div>
                       </div>
                     </div>

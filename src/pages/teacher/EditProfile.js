@@ -1,23 +1,28 @@
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { myProfileSchema } from "../../utils/Schema";
+import { pipGetTeacherProfile } from "../../utils/pip";
 import ErrorMessage from "../../components/ErrorMessage";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { updateProfile } from "../../redux/actions/authAction";
 
 const EditProfile = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isToggle } = useSelector((state) => state.authReducer);
   const [changeProfile, setChangeProfile] = useState();
-  const [profile, setProfile] = useState("assets/img/user_profile.png");
-  const [themeColour, setThemeColour] = useState();
+  const { profile_image, full_name, email, stream_name, theme_color } =
+    pipGetTeacherProfile() ?? {};
+
   const initialState = {
-    full_name: "",
-    email: "",
-    stream: "",
-    theme_colour_code: "",
+    full_name: full_name ?? "",
+    email: email ?? "",
+    stream: stream_name ?? "",
+    theme: theme_color ?? "",
   };
 
   const onHandleChangeImage = (e) => {
@@ -25,7 +30,18 @@ const EditProfile = () => {
   };
 
   const handleSubmitProfileData = async (values, { setSubmitting }) => {
-    setSubmitting(false);
+    const callback = (response) => {
+      if (response.success) navigate(pageRoutes?.profile);
+    };
+    const data = new FormData();
+    data.append("full_name", values?.full_name);
+    data.append("stream", values?.stream);
+    data.append("theme", values?.theme);
+    {
+      changeProfile && data.append("file", changeProfile);
+    }
+
+    dispatch(updateProfile({ payload: data, callback }));
   };
 
   return (
@@ -65,7 +81,7 @@ const EditProfile = () => {
                     handleBlur,
                     handleSubmit,
                   }) => (
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="row">
                         <div className="col-lg-6 mx-auto">
                           <div className="ct_profile_img">
@@ -73,7 +89,8 @@ const EditProfile = () => {
                               src={
                                 changeProfile
                                   ? URL.createObjectURL(changeProfile)
-                                  : profile
+                                  : profile_image ??
+                                    "assets/img/user_profile.png"
                               }
                               className="ct_img_148"
                             />
@@ -101,6 +118,11 @@ const EditProfile = () => {
                               onBlur={handleBlur}
                               value={values.full_name}
                             />
+                            <ErrorMessage
+                              errors={errors}
+                              touched={touched}
+                              fieldName="full_name"
+                            />
                           </div>
                           <div className="form-group text-start mb-4">
                             <label className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text">
@@ -113,19 +135,30 @@ const EditProfile = () => {
                               onChange={handleChange}
                               onBlur={handleBlur}
                               value={values.email}
+                              disabled
+                            />
+                            <ErrorMessage
+                              errors={errors}
+                              touched={touched}
+                              fieldName="email"
                             />
                           </div>
                           <div className="form-group text-start mb-4">
                             <label className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text">
-                              Stream
+                              stream
                             </label>
                             <input
-                              id="stream"
                               type="text"
                               className="ct_input form-control ct_input_40 ct_input_h_52"
+                              id="stream"
                               onChange={handleChange}
                               onBlur={handleBlur}
                               value={values.stream}
+                            />
+                            <ErrorMessage
+                              errors={errors}
+                              touched={touched}
+                              fieldName="stream"
                             />
                           </div>
                           <div className="form-group text-start mb-4">
@@ -139,20 +172,33 @@ const EditProfile = () => {
                               <input
                                 type="text"
                                 className="ct_input ct_color_input form-control ct_input_h_52"
-                                value={themeColour}
+                                value={values.theme}
                                 readOnly
                               />
                               <input
                                 type="color"
                                 className="ct_color"
-                                onChange={(e) => setThemeColour(e.target.value)}
+                                id="theme"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.theme}
+                              />
+                              <ErrorMessage
+                                errors={errors}
+                                touched={touched}
+                                fieldName="theme"
                               />
                             </div>
                           </div>
                         </div>
                       </div>
                       <div className="text-center">
-                        <button className="ct_purple_btn px-5">Save</button>
+                        <button
+                          className="ct_purple_btn px-5"
+                          onClick={handleSubmit}
+                        >
+                          Save
+                        </button>
                       </div>
                     </form>
                   )}
