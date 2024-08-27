@@ -4,10 +4,11 @@ import { useNavigate } from "react-router";
 import { toggleChange } from "../redux/reducers/authReducer";
 import { pageRoutes } from "../routes/pageRoutes";
 import { useLocation } from "react-router-dom";
+
 const Sidebar = () => {
-  const pathname = useLocation()?.pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const pathname = useLocation()?.pathname;
   const { isToggle } = useSelector((state) => state.authReducer);
 
   return (
@@ -49,23 +50,29 @@ const Sidebar = () => {
             Classes
           </a>
         </li>
-        <li onClick={() => navigate(pageRoutes.feeDue)}>
+        <li onClick={() => navigate(pageRoutes.billing)}>
           <a
             href="javascript:void(0)"
-            className={pathname == pageRoutes?.feeDue ? "active" : ""}
+            className={pathname == pageRoutes?.billing ? "active" : ""}
           >
             <img src="assets/img/fee-due_icon.svg" alt="" />
-            Fee & Dues
+            Billing
           </a>
         </li>
-        <li>
-          <a href="javascript:void(0)">
+        {/* <li onClick={() => navigate(pageRoutes.messages)}>
+          <a
+            href="javascript:void(0)"
+            className={pathname == pageRoutes?.messages ? "active" : ""}
+          >
             <img src="assets/img/message_icon.svg" alt="" />
             Messages
           </a>
-        </li>
-        <li>
-          <a href="javascript:void(0)">
+        </li> */}
+        <li onClick={() => navigate(pageRoutes.calendar)}>
+          <a
+            href="javascript:void(0)"
+            className={pathname == pageRoutes?.calendar ? "active" : ""}
+          >
             <img src="assets/img/calendar_icon.svg" alt="" />
             Calendar
           </a>

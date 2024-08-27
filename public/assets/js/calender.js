@@ -29,7 +29,7 @@ window.onload = function () {
   let calendarTodayButton = document.getElementsByClassName(
     "calendar-today-button"
   )[0];
-  calendarTodayButton.textContent = `Today ${todaysDate}`;
+  calendarTodayButton?.textContent = `Today ${todaysDate}`;
 
   calendarTodayButton.addEventListener("click", () => {
     generateCalendarDays(currentDate);
@@ -37,8 +37,8 @@ window.onload = function () {
 
   weekArray.forEach((week) => {
     let li = document.createElement("li");
-    li.textContent = week;
-    li.classList.add("calendar-week-day");
+    li?.textContent = week;
+    li?.classList?.add("calendar-week-day");
     calendarWeek.appendChild(li);
   });
 
@@ -51,7 +51,7 @@ window.onload = function () {
 
   monthArray.forEach((month, index) => {
     let option = document.createElement("option");
-    option.textContent = month;
+    option?.textContent = month;
     option.value = index;
     option.selected = index === selectedMonth;
     calendarMonths.appendChild(option);
@@ -63,7 +63,7 @@ window.onload = function () {
   let newYear = startYear;
   while (newYear <= endYear) {
     let option = document.createElement("option");
-    option.textContent = newYear;
+    option?.textContent = newYear;
     option.value = newYear;
     option.selected = newYear === selectedYear;
     calendarYears.appendChild(option);
@@ -120,7 +120,7 @@ function generateCalendarDays(currentDate) {
   let firstDay = 1;
   while (firstDay <= firstDayOfWeek) {
     let li = document.createElement("li");
-    li.classList.add("calendar-day");
+    li?.classList?.add("calendar-day");
     calendarDays.appendChild(li);
     firstDay++;
   }
@@ -128,10 +128,10 @@ function generateCalendarDays(currentDate) {
   let day = 1;
   while (day <= totalDaysInMonth) {
     let li = document.createElement("li");
-    li.textContent = day;
-    li.classList.add("calendar-day");
+    li?.textContent = day;
+    li?.classList?.add("calendar-day");
     if (todaysDate === day && currentMonth === month && currentYear === year) {
-      li.classList.add("calendar-day-active");
+      li?.classList?.add("calendar-day-active");
     }
     calendarDays.appendChild(li);
     day++;

@@ -10,21 +10,8 @@
 section{
     overflow-x: hidden;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-button.ec-button.ec-today {
-    text-transform: capitalize;
-}
 :root{
-    --dark_purple:#6A307D;
+    --dark_purple:#0098A8;
     --sky-clr:#1DA1F2;
     --orange_yellow_gredient:linear-gradient(94.15deg, #EAB308 0%, #EF4444 43.23%);
     --orange:#EF4444;
@@ -36,9 +23,11 @@ button.ec-button.ec-today {
     --dark_green:#115C18;
     --grey_text:#999999;
 }
-.ct_extra_dark_btn_bg{
-    background-color: #4A115C !important
+.ct_light_darkgreen_bg{
+    background-color: var(--green) !important;
 }
+
+
 .ct_purple_text{
     color: var(--dark_purple) !important;
 }
@@ -588,7 +577,7 @@ section.ct_explore_section {
 /* footer css S */
 footer{
     padding-top: 50px;
-    background-color: var(--extra_dark_purple);
+    background-color: var(--dark_purple);
 }
 .ct_footer_social_icons{
     display: flex;
@@ -617,9 +606,9 @@ footer{
     gap:15px;
     flex-wrap:wrap
 }
-.ct_footer_menu li  span{
-    color: #999999;
-    /* opacity: 0.2; */
+.ct_footer_menu li span {
+    color: #fff;
+    opacity: 0.4;
 }
 .ct_footer_menu li + li{
     margin-top: 15px;
@@ -652,7 +641,7 @@ footer{
 .ct_newletter_input .ct_send_btn{
     width:48px !important;
     height: 48px;
-    background-color: #F97316;
+    background-color: #CD8577;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -837,31 +826,31 @@ footer{
     overflow-y: auto;
     max-height: 645px;
 }
-.ct_login_form form::-webkit-scrollbar,.chatlist .modal-dialog-scrollable .modal-body::-webkit-scrollbar,.chatbox .modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-  width: 4px;
-}
-
-/* Track */
-.ct_login_form form::-webkit-scrollbar-track ,.chatlist .modal-dialog-scrollable .modal-body::-webkit-scrollbar-track,.chatbox .modal-dialog-scrollable .modal-body::-webkit-scrollbar-track{
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-.ct_login_form form::-webkit-scrollbar-thumb ,.chatlist .modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb,.chatbox .modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb{
-  background: #888; 
-}
-
-/* Handle on hover */
-.ct_login_form form::-webkit-scrollbar-thumb:hover,.chatlist .modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover,.chatbox .modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
+.ct_login_form form::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  /* Track */
+  .ct_login_form form::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  .ct_login_form form::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  .ct_login_form form::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 .ct_outline_btn {
     padding: 2px 10px;
     height: 55px;
     width: 194px;
     border: 2px solid var(--borderColor);
     border-radius: 18px;
-    color: var(--dark_purple);
+    color: #000;
     background-color: transparent;
     font-weight: 500;
     position: relative;
@@ -886,7 +875,7 @@ footer{
     width: 16px;
     height: 16px;
 }
-.ct_forgot_password_link:hover{
+.ct_forgotPassword_link:hover{
     color: var(--dark_purple);
 }
 .ct_admin_login_btn_fixed{
@@ -969,6 +958,7 @@ footer{
     position: relative;
     padding-inline: 12px;
     font-weight: 700;
+    text-decoration: underline;
 }
 .ct_light_green_bg{
     background-color: #D4FFE4;
@@ -1004,10 +994,10 @@ footer{
   }
   /*Hide all except first fieldset*/
  
-  #msform fieldset:not(:first-of-type) {
+  /* #msform fieldset:not(:first-of-type) {
     display: none;
     
-  }
+  } */
   /*inputs*/
   #msform input,
   #msform textarea {
@@ -1202,6 +1192,7 @@ input.next.action-button,input.submit.action-button  {
     width: 48% !important;
     margin-left: 2%;
     float: left;
+    border-color: transparent;
 }
 .ct_step_form_inner .next.action-button.ct_first_next_full{
     width: 100% !important;
@@ -1263,6 +1254,7 @@ input.next.action-button,input.submit.action-button  {
     height: 25px;
     display: flex;
     font-weight: 600;
+    font-size: 13px;
     align-items: center;
     justify-content: center;
 }
@@ -1324,7 +1316,7 @@ input.next.action-button,input.submit.action-button  {
   }
   
   .calendar-day-active {
-    background-color: #4A115C;
+    background-color: #0098A8;
     color: white;
     border-radius: 50%;
 }

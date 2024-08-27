@@ -1,12 +1,14 @@
 import React from "react";
+import { clearAuth } from "../utils/pip";
+import { useNavigate } from "react-router-dom";
+import { pageRoutes } from "../routes/pageRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleChange } from "../redux/reducers/authReducer";
-import { clearAuth } from "../utils/pip";
 
 const Headers = () => {
-  const { isToggle } = useSelector((state) => state.authReducer);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { isToggle } = useSelector((state) => state.authReducer);
   return (
     <>
       <div className="ct_right_header">
@@ -19,7 +21,10 @@ const Headers = () => {
           </div>
         </div>
         <div className="ct_right_header_right">
-          <div className="ct_user_profile_head">
+          <div
+            className="ct_user_profile_head"
+            onClick={() => navigate(pageRoutes?.profile)}
+          >
             <a href="javascript:void(0)">
               <img
                 src="assets/img/user_profile.png"
@@ -91,7 +96,9 @@ const Headers = () => {
                   Cancel
                 </button>
                 <a
-                onClick={()=>{clearAuth()}}
+                  onClick={() => {
+                    clearAuth();
+                  }}
                   href="javascript:void(0)"
                   type="button"
                   className="bg-danger ct_purple_btn justify-content-center"
