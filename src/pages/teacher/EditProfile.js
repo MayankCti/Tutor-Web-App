@@ -9,11 +9,12 @@ import { pipGetTeacherProfile } from "../../utils/pip";
 import ErrorMessage from "../../components/ErrorMessage";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { updateProfile } from "../../redux/actions/authAction";
+import Loader from "../../components/other/Loader";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isToggle } = useSelector((state) => state.authReducer);
+  const { isToggle,isLoading } = useSelector((state) => state.authReducer);
   const [changeProfile, setChangeProfile] = useState();
   const { profile_image, full_name, email, stream_name, theme_color } =
     pipGetTeacherProfile() ?? {};
@@ -44,6 +45,9 @@ const EditProfile = () => {
     dispatch(updateProfile({ payload: data, callback }));
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>

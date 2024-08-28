@@ -80,6 +80,39 @@ export const myProfileSchema = Yup.object().shape({
   stream: Yup.string().required("Please enter stream"),
   theme: Yup.string().required("Please select theme colour code"),
 });
+export const basicDetailSchema = Yup.object().shape({
+  // file: Yup.mixed()
+  //   .test("fileType", "Invalid file type", (value) => {
+  //     if (!value) return true;
+  //     const validFileTypes = [
+  //       "image/jpeg",
+  //       "image/jpg",
+  //       "image/png",
+  //       "image/gif",
+  //     ];
+  //     return validFileTypes.includes(value.type);
+  //   })?.optional(),
+  theme: Yup.string().required("Please select theme colour code"),
+  coaching_classes_name: Yup.string().required("Please enter class name"),
+  contact_number: Yup.string()
+    .matches(/^[0-9]{10}$/, "Please enter contact number")
+    .required("Please enter contact number"),
+  stream: Yup.string().required("Please enter stream"),
+  address: Yup.string().required("Please enter address"),
+});
+
+export const secondStepSchema = Yup.object().shape({
+  max_student_headcount: Yup.number()
+    .typeError("Max Students Headcount must be a number")
+    .required("Max Students Headcount is required")
+    .positive("Max Students Headcount must be a positive number")
+    .integer("Max Students Headcount must be an integer"),
+  per_hour_pricing: Yup.number()
+    .typeError("Per Hour Pricing must be a number")
+    .required("Per Hour Pricing is required")
+    .positive("Per Hour Pricing must be a positive number"),
+});
+
 
 // Student Schemas
 

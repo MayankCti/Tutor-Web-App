@@ -9,11 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../../components/ErrorMessage";
 import { changePasswordSchema } from "../../utils/Schema";
 import { teacherChangePassword } from "../../redux/actions/authAction";
+import Loader from "../../components/other/Loader";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isToggle } = useSelector((state) => state.authReducer);
+  const { isToggle,isLoading } = useSelector((state) => state.authReducer);
   const [eyes, setEyes] = useState({
     eye1: false,
     eye2: false,
@@ -33,6 +34,10 @@ const ChangePassword = () => {
     const { confirmPassword, ...rest } = values;
     dispatch(teacherChangePassword({ payload: rest, callback }));
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>

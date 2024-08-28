@@ -5,16 +5,15 @@ import {
   pipSetRegisterStep,
 } from "../../utils/pip";
 import {
+  createBasicDetail,
   fetchProfile,
+  studentAndPricing,
   teacherChangePassword,
   teacherForgotPassword,
   teacherlogin,
   teacherRegister,
   updateProfile,
 } from "../actions/authAction";
-// import {
-//     adminLogin,
-// } from "../actions/authActions";
 
 const initialState = {
   isLoading: false,
@@ -82,9 +81,19 @@ export const authSlice = createSlice({
     builder.addCase(fetchProfile.fulfilled, (state, action) => {
       const { data, success } = action?.payload ?? {};
       const { teacher, stream, theme } = success ? data : {};
-      const { profile_image, full_name, email, username } = teacher ?? {};
-      const { theme_color } = theme;
-      const { stream_name } = stream;
+      const {
+        profile_image,
+        full_name,
+        email,
+        username,
+        coaching_classes_name,
+        address,
+        contact_number,
+        per_hour_pricing,
+        max_student_headcount,
+      } = teacher ?? {};
+      const { theme_color } = theme ?? {};
+      const { stream_name } = stream ?? {};
       const profile = {
         profile_image,
         full_name,
@@ -92,10 +101,18 @@ export const authSlice = createSlice({
         stream_name,
         theme_color,
         username,
+        file: profile_image,
+        stream: stream_name,
+        theme: theme_color,
+        coaching_classes_name,
+        address,
+        contact_number,
+        max_student_headcount: max_student_headcount,
+        per_hour_pricing: per_hour_pricing,
       };
       if (success) {
         const root = document.documentElement;
-        root.style.setProperty('--dark_purple', theme_color);
+        root.style.setProperty("--dark_purple", theme_color);
         state.profile = profile;
         pipSaveTeacherProfile(profile ?? {});
       }
@@ -112,6 +129,36 @@ export const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    // create-basic-detail
+    builder.addCase(createBasicDetail.fulfilled, (state, action) => {
+      const { success } = action?.payload ?? {};
+      if (success) {
+        pipSetRegisterStep(2);
+        state.currentStep = 2;
+      }
+      state.isLoading = false;
+    });
+    builder.addCase(createBasicDetail.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createBasicDetail.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //  student-and-pricing
+    builder.addCase(studentAndPricing.fulfilled, (state, action) => {
+      const { success } = action?.payload ?? {};
+      if (success) {
+        pipSetRegisterStep(3);
+        state.currentStep = 3;
+      }
+      state.isLoading = false;
+    });
+    builder.addCase(studentAndPricing.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(studentAndPricing.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

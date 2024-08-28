@@ -1,5 +1,5 @@
 import { API_REQUEST } from ".";
-import { teacherChangePasswordAPI, teachForgotPasswordAPI, teachLoginAPI, teachProfileAPI, teachRegisterAPI, teachUpdateProfileAPI } from "../../routes/endPoints";
+import { teacherChangePasswordAPI, teacherCreateBasicDetailsAPI, teacherStudentAndPricingAPI, teachForgotPasswordAPI, teachLoginAPI, teachProfileAPI, teachRegisterAPI, teachUpdateProfileAPI } from "../../routes/endPoints";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { pipSetAccessToken } from "../../utils/pip";
 
@@ -96,5 +96,34 @@ export const updateProfile = createAsyncThunk("update-profile",async (props) => 
 
     } catch (error) {
       callback(null, error);
+    }
+})
+// create-basic-detail
+export const createBasicDetail = createAsyncThunk("create-basic-detail",async (props) => {
+  const { payload} = props;
+  try {
+      const response = await API_REQUEST({
+        url: teacherCreateBasicDetailsAPI,
+        method: "POST",
+        data: payload,
+        isErrorToast : false
+      });
+      return response
+    } catch (error) {
+    }
+})
+
+// student-and-pricing
+export const studentAndPricing = createAsyncThunk("student-and-pricing",async (props) => {
+  const { payload} = props;
+  try {
+      const response = await API_REQUEST({
+        url: teacherStudentAndPricingAPI,
+        method: "POST",
+        data: payload,
+        isErrorToast : false
+      });
+      return response
+    } catch (error) {
     }
 })

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../components/other/Loader";
 import StudentTable from "../../components/StudentTable";
 import { fetchProfile } from "../../redux/actions/authAction";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { handleCurrentStep } from "../../redux/reducers/authReducer";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -14,7 +16,13 @@ const Dashboard = () => {
   const { isLoading, cardData } = useSelector((state) => state?.studentReducer);
 
   useEffect(() => {
-    dispatch(fetchProfile());
+    dispatch(fetchProfile()).then((profile) => {
+      const formStatus = profile?.payload?.data?.form_completed
+      if (formStatus <= 4) {
+        dispatch(handleCurrentStep(formStatus));
+        navigate(pageRoutes?.stepForm);
+      }
+    });
   }, []);
 
   if (isLoading) {

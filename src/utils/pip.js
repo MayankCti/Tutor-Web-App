@@ -57,6 +57,10 @@ export const pipViewTime = (value) => {
 export const clearAuth = () => {
   toast.success("Successfully logged out");
   localStorage.removeItem("AccessToken");
+  localStorage.removeItem("register_step");
+  localStorage.removeItem("teacher-profile");
+  localStorage.removeItem("teacher-stream");
+  localStorage.removeItem("teacher-theme");
 };
 
 export const pipSuccessMessage = (message) => {
@@ -78,6 +82,7 @@ export const pipGetProfile = () => {
 
 // Register form step
 export const pipSetRegisterStep = (step) => {
+  console.log({step})
   localStorage.setItem("register_step", step);
 };
 
@@ -85,3 +90,4 @@ export const pipGetRegisterStep = () => {
   const step = parseInt(localStorage.getItem("register_step"));
   if (step) return step;
 };
+
