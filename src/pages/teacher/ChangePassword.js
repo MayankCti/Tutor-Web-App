@@ -1,15 +1,17 @@
+import { Formik } from "formik";
+import Eye from "../../components/Eye";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
-import { Formik } from "formik";
-import { changePasswordSchema } from "../../utils/Schema";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../../components/ErrorMessage";
-import Eye from "../../components/Eye";
+import { changePasswordSchema } from "../../utils/Schema";
+import { teacherChangePassword } from "../../redux/actions/authAction";
 
 const ChangePassword = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isToggle } = useSelector((state) => state.authReducer);
   const [eyes, setEyes] = useState({
@@ -18,7 +20,7 @@ const ChangePassword = () => {
     eye3: false,
   });
   const initialState = {
-    currPassword: "",
+    currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   };
@@ -29,6 +31,7 @@ const ChangePassword = () => {
       }
     };
     const { confirmPassword, ...rest } = values;
+    dispatch(teacherChangePassword({ payload: rest, callback }));
   };
   return (
     <>
@@ -81,12 +84,12 @@ const ChangePassword = () => {
                             <div class="position-relative">
                               <input
                                 type={eyes.eye1 ? "text" : "password"}
-                                value={values?.currPassword}
+                                value={values?.currentPassword}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                id="currPassword"
+                                id="currentPassword"
                                 class="form-control ct_input ct_ff_roboto"
-                                placeholder="Enter Old Password"
+                                placeholder="Enter Current Password"
                               />
                               <Eye
                                 isEye={eyes.eye1}
@@ -98,7 +101,7 @@ const ChangePassword = () => {
                             <ErrorMessage
                               errors={errors}
                               touched={touched}
-                              fieldName="currPassword"
+                              fieldName="currentPassword"
                             />
                           </div>
                           <div class="form-group  mb-4">

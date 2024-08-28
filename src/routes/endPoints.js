@@ -6,4 +6,5 @@ export const teachLoginAPI = "teacher/login"
 export const teachForgotPasswordAPI = "teacher/forgot-password"
 export const teachProfileAPI = "teacher/profile"
 export const teachUpdateProfileAPI = "teacher/profile/update"
+export const teacherChangePasswordAPI= "teacher/change-password"
 

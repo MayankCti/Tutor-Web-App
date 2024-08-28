@@ -6,6 +6,7 @@ import {
 } from "../../utils/pip";
 import {
   fetchProfile,
+  teacherChangePassword,
   teacherForgotPassword,
   teacherlogin,
   teacherRegister,
@@ -64,6 +65,16 @@ export const authSlice = createSlice({
     builder.addCase(teacherForgotPassword.rejected, (state, action) => {
       state.isLoading = false;
     });
+    // auth-change-password
+    builder.addCase(teacherChangePassword.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(teacherChangePassword.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(teacherChangePassword.rejected, (state, action) => {
+      state.isLoading = false;
+    });
     // fetch-profile
     builder.addCase(fetchProfile.pending, (state, action) => {
       state.isLoading = true;
@@ -71,7 +82,7 @@ export const authSlice = createSlice({
     builder.addCase(fetchProfile.fulfilled, (state, action) => {
       const { data, success } = action?.payload ?? {};
       const { teacher, stream, theme } = success ? data : {};
-      const { profile_image, full_name, email, username } = teacher;
+      const { profile_image, full_name, email, username } = teacher ?? {};
       const { theme_color } = theme;
       const { stream_name } = stream;
       const profile = {
@@ -80,9 +91,11 @@ export const authSlice = createSlice({
         email,
         stream_name,
         theme_color,
-        username
+        username,
       };
       if (success) {
+        const root = document.documentElement;
+        root.style.setProperty('--dark_purple', theme_color);
         state.profile = profile;
         pipSaveTeacherProfile(profile ?? {});
       }

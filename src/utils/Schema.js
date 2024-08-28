@@ -49,7 +49,7 @@ export const signUpSchema = Yup.object().shape({
 });
 
 export const changePasswordSchema = Yup.object().shape({
-  currPassword: Yup.string()
+  currentPassword: Yup.string()
     .required("Please enter your current password")
     .min(8, "Current Password cannot be less then 8 characters")
     .matches(

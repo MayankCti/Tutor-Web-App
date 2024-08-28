@@ -1,5 +1,5 @@
 import { API_REQUEST } from ".";
-import { teachForgotPasswordAPI, teachLoginAPI, teachProfileAPI, teachRegisterAPI, teachUpdateProfileAPI } from "../../routes/endPoints";
+import { teacherChangePasswordAPI, teachForgotPasswordAPI, teachLoginAPI, teachProfileAPI, teachRegisterAPI, teachUpdateProfileAPI } from "../../routes/endPoints";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { pipSetAccessToken } from "../../utils/pip";
 
@@ -55,6 +55,22 @@ export const teacherForgotPassword = createAsyncThunk("auth-forgot-password",asy
       callback(null, error);
     }
 })
+// auth-change-password
+export const teacherChangePassword = createAsyncThunk("auth-change-password",async (props) => {
+  const { payload, callback } = props;
+  try {
+      const response = await API_REQUEST({
+        url: teacherChangePasswordAPI,
+        method: "POST",
+        data: payload,
+      });
+      callback(response);
+      return response
+    } catch (error) {
+      callback(null, error);
+    }
+})
+
 // fetch-profile
 export const fetchProfile = createAsyncThunk("fetch-profile", async () => {
   try {
