@@ -7,6 +7,9 @@ import { ErrorMessage, Formik } from "formik";
 import { message } from "antd";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { editProfileValidationSchema } from "../../utils/Schema";
+import axios from "axios";
+import { BASE_URL, studentUpdateProfile } from "../../routes/endPoints";
+import { getAuthStudent } from "../../utils/pip";
 
 
 function StudentEditProfile() {
@@ -18,26 +21,27 @@ function StudentEditProfile() {
     setActive(!active);
   };
 
+
+  
+
   const initialValues = {
-    profile_images: "" || "assets/img/user_profile.png",
-    firstname: "",
-    lastname: "",
+    file: "" || "assets/img/user_profile.png",
+    first_name: "",
+    last_name: "",
     email: "",
-    contact: "",
-    emergencyContact: "",
+    contact_number: "",
+    emergency_contact_number: "",
     address: "",
-    dob: "",
+    date_of_birth: "",
     grade: "",
-    chooseServices: "",
     subject: "",
-    school: "",
-    otherNotes: "",
-    parentFirstName: "",
-    parentLastName: "",
-    parentEmail: "",
-    parentContact: "",
-    parentAddress: "",
-    group: "",
+    city : "",
+    school_name: "",
+    other_notes: "",
+    parent_first_name: "",
+    parent_last_name: "",
+    parent_email: "",
+    parent_contact_number: "",
   };
   
 
@@ -45,14 +49,32 @@ function StudentEditProfile() {
     const file = event.target.files[0];
     if (file) {
       setImagePreview(URL.createObjectURL(file));
-      setFieldValue("profile_images", file);
+      setFieldValue("file", file);
     }
   };
 
   const handleUpdate = (values) => {
     console.log(values);
-    message.success("profile has been edited")
-    navigate(pageRoutes?.studentprofile)
+    const token = getAuthStudent()
+    console.log("token",token);
+  axios({
+    method :'post',
+    url : BASE_URL + studentUpdateProfile,
+    data : values,
+     headers: {
+      Authorization : `Bearer ${token}`
+    },
+  })
+  .then((res)=>{
+    if(res?.data?.success){
+      console.log("handleupdate",res?.data);
+      message.success(res?.data?.data)
+      navigate(pageRoutes?.studentprofile)
+    }
+  })
+  .catch((err)=>{
+    console.log("An error occured",err);
+  })
   };
 
 
@@ -107,7 +129,7 @@ function StudentEditProfile() {
                             >
                               <input
                                 type="file"
-                                id="ct_edit_profile"
+                                id="file"
                                 className="d-none"
                                 onChange={(event) =>
                                   handleImageChange(event, setFieldValue)
@@ -131,15 +153,15 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"                                  
-                                  id="firstname"
-                                  name="firstname" 
-                                  values={values?.firstname}
+                                  id="first_name"
+                                  name="first_name" 
+                                  values={values?.first_name}
                                   placeholder="Enter first name"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="firstname"
+                                  name="first_name"
                                   component="div"
                                   className="text-danger"
                                 />
@@ -157,15 +179,15 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"                                  
-                                  id="lastname"
-                                  name="lastname" 
-                                  values={values?.lastname}
+                                  id="last_name"
+                                  name="last_name" 
+                                  values={values?.last_name}
                                   placeholder="Enter last name"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="lastname"
+                                  name="last_name"
                                   component="div"
                                   className="text-danger"
                                 />                                
@@ -207,15 +229,15 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="contact"
-                                  name="contact" 
-                                  values={values?.contact}
+                                  id="contact_number"
+                                  name="contact_number" 
+                                  values={values?.contact_number}
                                   placeholder="Enter contact "
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="contact"
+                                  name="contact_number"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -232,15 +254,15 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="emergencyContact"
-                                  name="emergencyContact" 
-                                  values={values?.emergencyContact}
+                                  id="emergency_contact_number"
+                                  name="emergency_contact_number" 
+                                  values={values?.emergency_contact_number}
                                   placeholder="Enter emergency contact"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="emergencyContact"
+                                  name="emergency_contact_number"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -281,15 +303,15 @@ function StudentEditProfile() {
                                 <input
                                   type="date"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="dob"
-                                  name="dob" 
-                                  values={values?.dob}
+                                  id="date_of_birth"
+                                  name="date_of_birth" 
+                                  values={values?.date_of_birth}
                                   placeholder="Enter DOB"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="dob"
+                                  name="date_of_birth"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -329,35 +351,7 @@ function StudentEditProfile() {
                                   className="text-danger"
                                 /> 
                               </div>
-                            </div>
-                            <div className="col-md-6 mb-4">
-                              <div className="form-group text-start">
-                                <label
-                                  htmlFor=""
-                                  className="ct_ff_roboto mb-2 ct_fw_500 "
-                                >
-                                  Choose Services
-                                </label>
-                                <select 
-                                className="ct_input form-control ct_input_40 ct_input_h_52"
-                                id="chooseServices"
-                                name="chooseServices"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values?.chooseServices}
-                                >
-                                  <option value="1:1 sessions">1:1 sessions</option>
-                                  <option value="1:2 sessions">1:2 sessions</option>
-                                  <option value="1:3 sessions">1:3 sessions</option>
-                                  <option value="1:4 sessions">1:4 sessions</option>
-                                </select>
-                                <ErrorMessage
-                                  name="chooseServices"
-                                  component="div"
-                                  className="text-danger"
-                                /> 
-                              </div>
-                            </div>
+                            </div>                            
                             <div className="col-md-6 mb-4">
                               <div className="form-group text-start">
                                 <label
@@ -389,6 +383,32 @@ function StudentEditProfile() {
                                 /> 
                               </div>
                             </div>
+                            <div className="col-md-6 mb-4">
+                              <div className="form-group text-start">
+                                <label
+                                  htmlFor=""
+                                  className="ct_ff_roboto mb-2 ct_fw_500 "
+                                >
+                                  City{" "}
+                                  <span className="ct_required_star">*</span>{" "}
+                                </label>
+                                <input
+                                  type="text"
+                                  className="ct_input form-control ct_input_40 ct_input_h_52"                                  
+                                  id="city"
+                                  name="city" 
+                                  values={values?.city}
+                                  placeholder="Enter City "
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                />
+                                <ErrorMessage
+                                  name="city"
+                                  component="div"
+                                  className="text-danger"
+                                />
+                              </div>
+                            </div>
                             <div className="col-md-12 mb-4">
                               <div className="form-group text-star">
                                 <label
@@ -400,15 +420,15 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="school"
-                                  name="school" 
-                                  values={values?.school}
+                                  id="school_name"
+                                  name="school_name" 
+                                  values={values?.school_name}
                                   placeholder="Enter school"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="school"
+                                  name="school_name"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -425,15 +445,15 @@ function StudentEditProfile() {
                                 <textarea
                                   className="ct_input form-control ct_input_40 ct_input_h_52 h-auto"
                                   rows={4}                                  
-                                  id="otherNotes"
-                                  name="otherNotes" 
-                                  values={values?.otherNotes}
+                                  id="other_notes"
+                                  name="other_notes" 
+                                  values={values?.other_notes}
                                   placeholder="Type here...."
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="otherNotes"
+                                  name="other_notes"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -451,15 +471,15 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="parentFirstName"
-                                  name="parentFirstName" 
-                                  values={values?.parentFirstName}
+                                  id="parent_first_name"
+                                  name="parent_first_name" 
+                                  values={values?.parent_first_name}
                                   placeholder="Enter parent first name"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="parentFirstName"
+                                  name="parent_first_name"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -477,15 +497,15 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="parentLastName"
-                                  name="parentLastName" 
-                                  values={values?.parentLastName}
+                                  id="parent_last_name"
+                                  name="parent_last_name" 
+                                  values={values?.parent_last_name}
                                   placeholder="Enter parent last name"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="parentLastName"
+                                  name="parent_last_name"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -502,15 +522,15 @@ function StudentEditProfile() {
                                 <input
                                   type="email"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="parentEmail"
-                                  name="parentEmail" 
-                                  values={values?.parentEmail}
+                                  id="parent_email"
+                                  name="parent_email" 
+                                  values={values?.parent_email}
                                   placeholder="Enter parent email"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="parentEmail"
+                                  name="parent_email"
                                   component="div"
                                   className="text-danger"
                                 /> 
@@ -527,75 +547,20 @@ function StudentEditProfile() {
                                 <input
                                   type="text"
                                   className="ct_input form-control ct_input_40 ct_input_h_52"
-                                  id="parentContact"
-                                  name="parentContact" 
-                                  values={values?.parentContact}
+                                  id="parent_contact_number"
+                                  name="parent_contact_number" 
+                                  values={values?.parent_contact_number}
                                   placeholder="Enter parent contact no."
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                 />
                                 <ErrorMessage
-                                  name="parentContact"
+                                  name="parent_contact_number"
                                   component="div"
                                   className="text-danger"
                                 /> 
                               </div>
-                            </div>
-                            <div className="col-md-12  mb-4">
-                              <div className="form-group text-start">
-                                <label
-                                  htmlFor=""
-                                  className="ct_ff_roboto mb-2 ct_fw_500 "
-                                >
-                                 Parent Address
-                                </label>
-                                <textarea
-                                  className="ct_input form-control ct_input_40 ct_input_h_52 h-auto"
-                                  rows={4}
-                                  id="parentAddress"
-                                  name="parentAddress" 
-                                  values={values?.parentAddress}
-                                  placeholder="Type here...."
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                />
-                                <ErrorMessage
-                                  name="parentAddress"
-                                  component="div"
-                                  className="text-danger"
-                                /> 
-                              </div>
-                            </div>
-                            <div className="col-md-12 mb-4">
-                              <div className="form-group text-start">
-                                <label
-                                  htmlFor=""
-                                  className="ct_ff_roboto mb-2 ct_fw_500 "
-                                >
-                                  Group
-                                </label>
-                                <select 
-                                className="ct_input form-control ct_input_40 ct_input_h_52"
-                                id="group"
-                                name="group"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values?.group}
-                                
-                                >
-                                  <option value="">Select group name</option>
-                                  <option value="Group A">Group A</option>
-                                  <option value="Group B">Group B</option>
-                                  <option value="Group C">Group C</option>
-                                  <option value="Group D">Group D</option>
-                                </select>
-                                <ErrorMessage
-                                  name="group"
-                                  component="div"
-                                  className="text-danger"
-                                />
-                              </div>
-                            </div>
+                            </div>                
                           </div>
                         </div>
                       </div>
