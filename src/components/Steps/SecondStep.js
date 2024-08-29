@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { handleCurrentStep } from "../../redux/reducers/authReducer";
+import { Formik } from "formik";
+import Loader from "../other/Loader";
 import {
   fetchProfile,
   studentAndPricing,
 } from "../../redux/actions/authAction";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { useEffect } from "react";
 import ErrorMessage from "../ErrorMessage";
+import { useDispatch, useSelector } from "react-redux";
 import { secondStepSchema } from "../../utils/Schema";
 import { pipGetTeacherProfile } from "../../utils/pip";
+import { handleCurrentStep } from "../../redux/reducers/authReducer";
 
 const SecondStep = () => {
+  const { isLoading } = useSelector((state) => state?.authReducer);
   const dispatch = useDispatch();
   const { max_student_headcount, per_hour_pricing } = pipGetTeacherProfile();
   const initialState = {
@@ -26,6 +27,10 @@ const SecondStep = () => {
   const handlePrices = async (values, { setSubmitting }) => {
     dispatch(studentAndPricing({ payload: values }));
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <Formik
       initialValues={initialState}

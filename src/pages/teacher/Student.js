@@ -5,6 +5,7 @@ import Headers from "../../layout/Headers";
 import Loader from "../../components/other/Loader";
 import StudentTable from "../../components/StudentTable";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
+import AstrickMark from "../../components/other/AstrickMark";
 
 const Student = () => {
   const [statusFilter, setStatusFilter] = useState("all");
@@ -79,7 +80,7 @@ const Student = () => {
                   <div class="col-md-6">
                     <div class="form-group text-start mb-4">
                       <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
-                        First Name <span class="ct_required_star">*</span>
+                        First Name <AstrickMark/>
                       </label>
                       <input
                         type="text"
@@ -101,7 +102,7 @@ const Student = () => {
                   <div class="col-md-12">
                     <div class="form-group text-start mb-4">
                       <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
-                        Email Address <span class="ct_required_star">*</span>
+                        Email Address <AstrickMark/>
                       </label>
                       <input
                         type="email"
@@ -355,7 +356,7 @@ const Student = () => {
                     <div class="form-group text-start mb-4">
                       <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
                         Parent First Name{" "}
-                        <span class="ct_required_star">*</span>
+                        <AstrickMark/>
                       </label>
                       <input
                         type="text"
@@ -377,7 +378,7 @@ const Student = () => {
                   <div class="col-md-6">
                     <div class="form-group text-start mb-4">
                       <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
-                        Email Address <span class="ct_required_star">*</span>
+                        Email Address <AstrickMark/>
                       </label>
                       <input
                         type="email"

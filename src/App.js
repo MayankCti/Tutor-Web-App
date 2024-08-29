@@ -9,16 +9,16 @@ function App() {
       <Routes>
         {AllRoutes?.map((item, i) => (
           <Route
-          path={item?.path}
-          key={i}
-          exact
-          element={
-            item?.isPrivate ? (
-              <PrivateRoute>{item?.element}</PrivateRoute>
-            ) : (
-              item?.element
-            )
-          }
+            path={item?.path}
+            key={i}
+            exact
+            element={
+              item?.isPrivate ? (
+                <PrivateRoute>{item?.element}</PrivateRoute>
+              ) : (
+                item?.element
+              )
+            }
           />
         ))}
       </Routes>

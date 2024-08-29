@@ -160,7 +160,7 @@ const FirstStep = () => {
                     Contact No.
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     class="ct_input form-control ct_input_40"
                     id="contact_number"
                     onChange={handleChange}

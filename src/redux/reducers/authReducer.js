@@ -5,6 +5,7 @@ import {
   pipSetRegisterStep,
 } from "../../utils/pip";
 import {
+  bankDetail,
   createBasicDetail,
   fetchProfile,
   studentAndPricing,
@@ -159,6 +160,21 @@ export const authSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(studentAndPricing.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //  Bank-details
+    builder.addCase(bankDetail.fulfilled, (state, action) => {
+      const { success } = action?.payload ?? {};
+      if (success) {
+        pipSetRegisterStep(5);
+        state.currentStep = 5;
+      }
+      state.isLoading = false;
+    });
+    builder.addCase(bankDetail.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(bankDetail.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

@@ -3,6 +3,7 @@ import NoRecord from "./other/NoRecord";
 import { useLocation } from "react-router-dom";
 import { pageRoutes } from "../routes/pageRoutes";
 import { useSelector } from "react-redux";
+import AstrickMark from "./other/AstrickMark";
 
 const StudentTable = ({ statusFilter }) => {
   const pathname = useLocation()?.pathname;
@@ -94,7 +95,7 @@ const StudentTable = ({ statusFilter }) => {
                     <div class="col-md-6">
                       <div class="form-group text-start mb-4">
                         <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
-                          First Name <span class="ct_required_star">*</span>
+                          First Name <AstrickMark/>
                         </label>
                         <input
                           type="text"
@@ -118,7 +119,7 @@ const StudentTable = ({ statusFilter }) => {
                     <div class="col-md-12">
                       <div class="form-group text-start mb-4">
                         <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
-                          Email Address <span class="ct_required_star">*</span>
+                          Email Address <AstrickMark/>
                         </label>
                         <input
                           type="email"
@@ -378,7 +379,7 @@ const StudentTable = ({ statusFilter }) => {
                       <div class="form-group text-start mb-4">
                         <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
                           Parent First Name{" "}
-                          <span class="ct_required_star">*</span>
+                          <AstrickMark/>
                         </label>
                         <input
                           type="text"
@@ -402,7 +403,7 @@ const StudentTable = ({ statusFilter }) => {
                     <div class="col-md-6">
                       <div class="form-group text-start mb-4">
                         <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
-                          Email Address <span class="ct_required_star">*</span>
+                          Email Address <AstrickMark/>
                         </label>
                         <input
                           type="email"
