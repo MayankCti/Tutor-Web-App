@@ -19,3 +19,4 @@ export const teacherBankDetailAPI = "teacher/update-bank-details";
 export const studentLoginAPI = "student/login";
 export const studentForgotPassword = 'student/forgot-password';
 export const studentUpdateProfile = 'student/update-profile';
+export const studentProfile = 'student/profile';

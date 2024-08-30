@@ -150,6 +150,7 @@ export const loginvalidationSchema = Yup.object({
     .max(16, "Password cannot be more then 16 characters"),
 });
 
+
 export const editProfileValidationSchema = Yup.object().shape({
   first_name: Yup.string()
     .min(2, "First name must be at least 2 characters")
@@ -162,18 +163,18 @@ export const editProfileValidationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
-  contact_number: Yup.string()
+    contact_number: Yup.string()
     .matches(/^[0-9]{10}$/, "Contact number must be exactly 10 digits")
     .required("Contact number is required"),
   emergency_contact_number: Yup.string()
     .matches(
-      /^[0-9]{10}$/,
-      "Emergency contact number must be exactly 10 digits"
+      /^(?:\+61|0)[2-9]\d{8}$/,
+      "Emergency contact number must be a valid"
     )
     .required("Emergency contact number is required"),
   address: Yup.string()
     .min(10, "Address must be at least 10 characters")
-    .max(100, "Address cannot exceed 120 characters")
+    .max(100, "Address cannot exceed 100 characters")
     .required("Address is required"),
   date_of_birth: Yup.date().required("Date of birth is required"),
   grade: Yup.string().required("Grade is required"),
@@ -195,10 +196,11 @@ export const editProfileValidationSchema = Yup.object().shape({
   parent_email: Yup.string()
     .email("Invalid parent email format")
     .required("Parent email is required"),
-  parent_contact_number: Yup.string()
+    parent_contact_number: Yup.string()
     .matches(/^[0-9]{10}$/, "Parent contact number must be exactly 10 digits")
     .required("Parent contact number is required"),
 });
+
 
 export const changePasswordValidationSchema = Yup.object().shape({
   old_password: Yup.string()
