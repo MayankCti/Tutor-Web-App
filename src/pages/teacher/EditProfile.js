@@ -1,20 +1,20 @@
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
+import Loader from "../../components/other/Loader";
 import { myProfileSchema } from "../../utils/Schema";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { useDispatch, useSelector } from "react-redux";
 import { pipGetTeacherProfile } from "../../utils/pip";
 import ErrorMessage from "../../components/ErrorMessage";
-import { pageRoutes } from "../../routes/pageRoutes";
 import { updateProfile } from "../../redux/actions/authAction";
-import Loader from "../../components/other/Loader";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isToggle,isLoading } = useSelector((state) => state.authReducer);
+  const { isToggle, isLoading } = useSelector((state) => state.authReducer);
   const [changeProfile, setChangeProfile] = useState();
   const { profile_image, full_name, email, stream_name, theme_color } =
     pipGetTeacherProfile() ?? {};
@@ -114,6 +114,7 @@ const EditProfile = () => {
                             <label className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text">
                               Full Name{" "}
                             </label>
+
                             <input
                               id="full_name"
                               type="text"

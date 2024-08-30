@@ -99,7 +99,7 @@ const Classes = () => {
                   </div>
                 </div>
                 <div className="row">
-                  {classData.map((classItem, index) => (
+                  {classData?.map((classItem, index) => (
                     <div
                       key={index}
                       className="col-xl-3 col-lg-4 col-md-6 mb-4"

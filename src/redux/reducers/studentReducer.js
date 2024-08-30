@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { pageRoutes } from "../../routes/pageRoutes";
+import { createStudent, fetchStudentList, updateStudent } from "../actions/studentAction";
 
 const initialState = {
   isLoading: false,
@@ -104,6 +105,40 @@ export const studentSlice = createSlice({
   name: "student",
   initialState: initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    // fetch-student-list
+    builder.addCase(fetchStudentList.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchStudentList.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.students = data ?? [];
+      state.isLoading = false;
+    });
+    builder.addCase(fetchStudentList.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    // create-student
+    builder.addCase(createStudent.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createStudent.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(createStudent.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    // update-student
+    builder.addCase(updateStudent.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateStudent.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(updateStudent.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+  },
 });
 
 export default studentSlice.reducer;

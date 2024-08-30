@@ -41,7 +41,7 @@ const ThirdStep = () => {
         </div>
         <div>
           <div>
-            {timeRanges.map((range, index) => (
+            {timeRanges?.map((range, index) => (
               <Row key={index} gutter={16} style={{ marginBottom: 10 }}>
                 <Col>
                   <TimePicker

@@ -13,10 +13,13 @@ export const teachUpdateProfileAPI = "teacher/profile/update";
 export const teacherCreateBasicDetailsAPI = "teacher/update-basic-details";
 export const teacherStudentAndPricingAPI = "teacher/update-student-and-pricing";
 export const teacherBankDetailAPI = "teacher/update-bank-details";
+export const teacherStudentListAPI = "teacher/get-all-student";
+export const teacherCreateStudentAPI = "teacher/create-student";
+export const teacherUpdateStudentAPI = "teacher/update-student";
 
 //Students
 
 export const studentLoginAPI = "student/login";
-export const studentForgotPassword = 'student/forgot-password';
-export const studentUpdateProfile = 'student/update-profile';
-export const studentProfile = 'student/profile';
+export const studentForgotPassword = "student/forgot-password";
+export const studentUpdateProfile = "student/update-profile";
+export const studentProfile = "student/profile";

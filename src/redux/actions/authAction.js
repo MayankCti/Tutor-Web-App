@@ -85,7 +85,6 @@ export const teacherChangePassword = createAsyncThunk(
     }
   }
 );
-
 // fetch-profile
 export const fetchProfile = createAsyncThunk("fetch-profile", async () => {
   try {
@@ -131,7 +130,6 @@ export const createBasicDetail = createAsyncThunk(
     } catch (error) {}
   }
 );
-
 // student-and-pricing
 export const studentAndPricing = createAsyncThunk(
   "student-and-pricing",
@@ -148,7 +146,6 @@ export const studentAndPricing = createAsyncThunk(
     } catch (error) {}
   }
 );
-
 // Bank-details
 export const bankDetail = createAsyncThunk("Bank-details", async (props) => {
   const { payload,callback } = props;
