@@ -60,12 +60,18 @@ const TimeInput = () => {
       }
     }
     setErrors(newErrors);
-    if (newErrors.every((error) => error === null)) {
-      message.success("Valid time ranges!");
-    }
+    // if (newErrors.every((error) => error === null)) {
+    //   message.success("Valid time ranges!");
+    // }
   };
 
-  return { timeRanges, addTimeRange, deleteTimeRange, handleTimeChange, errors };
+  return {
+    timeRanges,
+    addTimeRange,
+    deleteTimeRange,
+    handleTimeChange,
+    errors,
+  };
 };
 
 export default TimeInput;

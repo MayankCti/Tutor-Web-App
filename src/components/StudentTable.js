@@ -4,10 +4,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { pageRoutes } from "../routes/pageRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import AstrickMark from "./other/AstrickMark";
+import {
+  deleteStudent,
+  fetchStudentList,
+} from "../redux/actions/studentAction";
 
 const StudentTable = ({ statusFilter }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const pathname = useLocation()?.pathname;
+  const [studentId, setStudentId] = useState();
   const list = useSelector((state) => state?.studentReducer?.students);
   const [students, setStudents] = useState(list);
 
@@ -20,6 +26,24 @@ const StudentTable = ({ statusFilter }) => {
     }
     setStudents(filtered);
   }, [statusFilter, list]);
+
+  // delete faq
+  const handleDeleteStudent = () => {
+    const callback = (response) => {
+      if (response.success) {
+        setStudentId("");
+        dispatch(fetchStudentList());
+      }
+    };
+    dispatch(
+      deleteStudent({
+        payload: {
+          student_id: studentId,
+        },
+        callback,
+      })
+    );
+  };
 
   const tableBody = () => {
     return students?.map((item) => {
@@ -42,8 +66,8 @@ const StudentTable = ({ statusFilter }) => {
           <td>{item?.city ?? ""}</td>
           <td>{item?.student_status}</td>
           <td className="text-end">
-            <button
-              className="ct_purple_btn py-1 ct_border_radius_10"
+            <i
+              class="fa-regular fa-pen-to-square ms-2"
               onClick={() => {
                 navigate(pageRoutes?.editStudentDetail, {
                   state: {
@@ -51,9 +75,13 @@ const StudentTable = ({ statusFilter }) => {
                   },
                 });
               }}
-            >
-              Edit
-            </button>
+            ></i>
+            <i
+              class="fa-solid fa-trash trash_icon_color ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#ct_confirmation_modal"
+              onClick={() => setStudentId(item?.id)}
+            ></i>
           </td>
         </tr>
       );
@@ -65,7 +93,7 @@ const StudentTable = ({ statusFilter }) => {
         <table className="table ct_custom_table">
           <thead>
             <tr>
-              <th> Students Name</th>
+              <th>Name</th>
               <th>Email Address</th>
               <th>Contact No.</th>
               <th>City</th>
@@ -80,6 +108,56 @@ const StudentTable = ({ statusFilter }) => {
               : tableBody()}
           </tbody>
         </table>
+      </div>
+
+      {/* DELETE STUDENT CONFIRMATION */}
+      <div
+        className="modal fade ct_assets_modal"
+        id="ct_confirmation_modal"
+        tabindex="-1"
+        aria-labelledby="ct_logout_modalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header border-0 pt-0">
+              <button
+                type="button"
+                className="btn-close ct_cloose_btn"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div className="modal-body border-0 ">
+              <h4 className="text-center mb-4 ct_fw_600">Delete Student</h4>
+              <p className="text-center ct_grey_text">
+                Are you sure, you want to delete this Student?
+              </p>
+              <div className="modal-footer border-0 justify-content-center">
+                <button
+                  type="button"
+                  className="ct_purple_btn ct_outline_blue"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <a
+                  onClick={handleDeleteStudent}
+                  href="javascript:void(0)"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  className="bg-danger ct_purple_btn justify-content-center"
+                  style={{ borderColor: "rgb(220, 53, 69)" }}
+                >
+                  Delete
+                </a>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

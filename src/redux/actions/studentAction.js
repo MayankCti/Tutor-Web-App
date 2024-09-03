@@ -2,8 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API_REQUEST } from ".";
 import {
   teacherCreateStudentAPI,
+  teacherDeleteStudentAPI,
   teacherStudentListAPI,
   teacherUpdateStudentAPI,
+  teacherUploadFileAPI,
 } from "../../routes/endPoints";
 
 // fetch-student-list
@@ -39,6 +41,25 @@ export const createStudent = createAsyncThunk(
     }
   }
 );
+// upload-student-file
+export const uploadStudentFile = createAsyncThunk(
+  "upload-student-file",
+  async (props) => {
+    const { payload, callback } = props;
+    try {
+      const response = await API_REQUEST({
+        url: teacherUploadFileAPI,
+        method: "POST",
+        data: payload,
+        isErrorToast: true,
+      });
+      callback(response);
+      return response;
+    } catch (error) {
+      callback(null, error);
+    }
+  }
+);
 // update-student
 export const updateStudent = createAsyncThunk(
   "update-student",
@@ -50,6 +71,25 @@ export const updateStudent = createAsyncThunk(
         method: "POST",
         data: payload,
         isErrorToast: true,
+      });
+      callback(response);
+      return response;
+    } catch (error) {
+      callback(null, error);
+    }
+  }
+);
+
+ // delete-student
+ export const deleteStudent = createAsyncThunk(
+  "delete-student",
+  async (props) => {
+    const { payload, callback } = props;
+    try {
+      const response = await API_REQUEST({
+        url: teacherDeleteStudentAPI,
+        method: "DELETE",
+        data:payload
       });
       callback(response);
       return response;

@@ -4,8 +4,11 @@ import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { useSelector } from "react-redux";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
+import { useNavigate } from "react-router-dom";
+import { pageRoutes } from "../../routes/pageRoutes";
 
 const Classes = () => {
+  const navigate = useNavigate();
   const { isToggle } = useSelector((state) => state.authReducer);
   const [selectedValue, setSelectedValue] = useState("option1");
   const [selectedValue1, setSelectedValue1] = useState("option1");
@@ -95,6 +98,9 @@ const Classes = () => {
                         selectedValue={selectedValue1}
                         onChange={setSelectedValue1}
                       />
+                    </div>
+                    <div>
+                      <button className="ct_purple_btn" onClick={()=> navigate(pageRoutes?.createClass)}><i class="fa-solid fa-plus me-1"></i> Add Class</button>
                     </div>
                   </div>
                 </div>

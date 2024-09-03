@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { pageRoutes } from "../../routes/pageRoutes";
-import { createStudent, fetchStudentList, updateStudent } from "../actions/studentAction";
+import {
+  createStudent,
+  deleteStudent,
+  fetchStudentList,
+  updateStudent,
+  uploadStudentFile,
+} from "../actions/studentAction";
 
 const initialState = {
   isLoading: false,
@@ -99,6 +105,11 @@ const initialState = {
       path: pageRoutes?.billing,
     },
   ],
+  options: [
+    { value: "all", label: "All" },
+    { value: "Active", label: "Active" },
+    { value: "Inactive", label: "Inactive" },
+  ],
 };
 
 export const studentSlice = createSlice({
@@ -128,6 +139,16 @@ export const studentSlice = createSlice({
     builder.addCase(createStudent.rejected, (state, action) => {
       state.isLoading = false;
     });
+    // upload-student-file
+    builder.addCase(uploadStudentFile.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(uploadStudentFile.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(uploadStudentFile.rejected, (state, action) => {
+      state.isLoading = false;
+    });
     // update-student
     builder.addCase(updateStudent.pending, (state, action) => {
       state.isLoading = true;
@@ -137,6 +158,16 @@ export const studentSlice = createSlice({
     });
     builder.addCase(updateStudent.rejected, (state, action) => {
       state.isLoading = false;
+    });
+    // delete-student
+    builder.addCase(deleteStudent.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deleteStudent.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deleteStudent.pending, (state, action) => {
+      state.isLoading = true;
     });
   },
 });

@@ -15,7 +15,9 @@ export const teacherStudentAndPricingAPI = "teacher/update-student-and-pricing";
 export const teacherBankDetailAPI = "teacher/update-bank-details";
 export const teacherStudentListAPI = "teacher/get-all-student";
 export const teacherCreateStudentAPI = "teacher/create-student";
+export const teacherUploadFileAPI = "teacher/upload-csv-student";
 export const teacherUpdateStudentAPI = "teacher/update-student";
+export const teacherDeleteStudentAPI = "teacher/delete-student";
 
 //Students
 

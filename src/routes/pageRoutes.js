@@ -23,6 +23,8 @@ import StudentLogin from "../pages/students/StudentLogin";
 import StudentProfile from "../pages/students/StudentProfile";
 import CreateStudent from "../pages/teacher/CreateStudent";
 import EditStudentDetail from "../pages/teacher/EditStudentDetail";
+import CreateClass from "../pages/teacher/CreateClass";
+
 
 export const pageRoutes = {
   home: "/",
@@ -40,6 +42,7 @@ export const pageRoutes = {
   changePassword: "/change-password",
   stepForm: "/step-form",
   createStudent: "/add-student",
+  createClass: "/create-class",
   editStudentDetail: "/edit-student-details",
   // studentProfie
   studentchangePassword: "/student/change-password",
@@ -147,6 +150,12 @@ export const AllRoutes = [
     name: "editStudentDetail",
     path: pageRoutes?.editStudentDetail,
     element: <EditStudentDetail />,
+    isPrivate: false,
+  },
+  {
+    name: "CreateClass",
+    path: pageRoutes?.createClass,
+    element: <CreateClass />,
     isPrivate: false,
   },
 
