@@ -49,7 +49,7 @@ export const signUpSchema = Yup.object().shape({
 });
 
 export const changePasswordSchema = Yup.object().shape({
-  currPassword: Yup.string()
+  currentPassword: Yup.string()
     .required("Please enter your current password")
     .min(8, "Current Password cannot be less then 8 characters")
     .matches(
@@ -80,6 +80,86 @@ export const myProfileSchema = Yup.object().shape({
   stream: Yup.string().required("Please enter stream"),
   theme: Yup.string().required("Please select theme colour code"),
 });
+export const basicDetailSchema = Yup.object().shape({
+  // file: Yup.mixed()
+  //   .test("fileType", "Invalid file type", (value) => {
+  //     if (!value) return true;
+  //     const validFileTypes = [
+  //       "image/jpeg",
+  //       "image/jpg",
+  //       "image/png",
+  //       "image/gif",
+  //     ];
+  //     return validFileTypes.includes(value.type);
+  //   })?.optional(),
+  theme: Yup.string().required("Please select theme colour code"),
+  coaching_classes_name: Yup.string().required("Please enter class name"),
+  contact_number: Yup.string()
+    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+      message: "Please enter valid contact number",
+      excludeEmptyString: true,
+    })
+    .required("Please enter contact number"),
+  stream: Yup.string().required("Please enter stream"),
+  address: Yup.string().required("Please enter address"),
+});
+
+export const secondStepSchema = Yup.object().shape({
+  max_student_headcount: Yup.number()
+    .typeError("Max Students Headcount must be a number")
+    .required("Max Students Headcount is required")
+    .positive("Max Students Headcount must be a positive number")
+    .integer("Max Students Headcount must be an integer"),
+  per_hour_pricing: Yup.number()
+    .typeError("Per Hour Pricing must be a number")
+    .required("Per Hour Pricing is required")
+    .positive("Per Hour Pricing must be a positive number"),
+});
+
+export const BankDetailSchema = Yup.object({
+  account_number: Yup.string()
+    .required("Please enter account number")
+    .matches(/^[0-9]{6,15}$/, "Account Number must be 6-15 digits"),
+  bank_name: Yup.string()
+    .required("Please enter bank name")
+    .matches(/^[a-zA-Z\s]+$/, "Bank Name must contain only letters"),
+  ifsc_code: Yup.string()
+    .matches(/^\d{6}$/, {
+      message: "Invalid BSB code. The BSB code must be exactly 6 digits.",
+      excludeEmptyString: true,
+    })
+    .required("Please enter BSB code"),
+});
+
+export const createStudentSchema = Yup.object().shape({
+  first_name: Yup.string().required("Please enter first name"),
+  last_name: Yup.string().required("Please enter last name"),
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Please enter a valid email address")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/,
+      "Please enter a valid email address"
+    ),
+  contact_number: Yup.string()
+    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+      message: "Please enter valid contact number",
+      excludeEmptyString: true,
+    })
+    .required("Please enter contact number"),
+  emergency_contact_number: Yup.string()
+    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+      message: "Please enter valid contact number",
+      excludeEmptyString: true,
+    })
+    .required("Please enter emergency contact number"),
+  date_of_birth: Yup.string()?.required("Please enter date of birth"),
+  grade: Yup.string()?.required("Please enter grade"),
+  school_name: Yup.string()?.required("Please enter school name"),
+  city: Yup.string()?.required("Please enter city"),
+  address: Yup.string()?.required("Please enter address"),
+  student_status: Yup.string().required("Please select student status"),
+});
 
 // Student Schemas
 
@@ -100,55 +180,53 @@ export const loginvalidationSchema = Yup.object({
 });
 
 export const editProfileValidationSchema = Yup.object().shape({
-  firstname: Yup.string()
+  first_name: Yup.string()
     .min(2, "First name must be at least 2 characters")
     .max(50, "First name cannot exceed 50 characters")
     .required("First name is required"),
-  lastname: Yup.string()
+  last_name: Yup.string()
     .min(2, "Last name must be at least 2 characters")
     .max(50, "Last name cannot exceed 50 characters")
     .required("Last name is required"),
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
-  contact: Yup.string()
+  contact_number: Yup.string()
     .matches(/^[0-9]{10}$/, "Contact number must be exactly 10 digits")
     .required("Contact number is required"),
-  emergencyContact: Yup.string()
+  emergency_contact_number: Yup.string()
     .matches(
-      /^[0-9]{10}$/,
-      "Emergency contact number must be exactly 10 digits"
+      /^(?:\+61|0)[2-9]\d{8}$/,
+      "Emergency contact number must be a valid"
     )
     .required("Emergency contact number is required"),
   address: Yup.string()
     .min(10, "Address must be at least 10 characters")
-    .max(100, "Address cannot exceed 120 characters")
+    .max(100, "Address cannot exceed 100 characters")
     .required("Address is required"),
-  dob: Yup.date().required("Date of birth is required"),
+  date_of_birth: Yup.date().required("Date of birth is required"),
   grade: Yup.string().required("Grade is required"),
-  chooseServices: Yup.string().required("Services are required"),
   subject: Yup.string().required("Subject is required"),
-  school: Yup.string().required("School is required"),
-  otherNotes: Yup.string().max(200, "Other notes cannot exceed 200 characters"),
-  parentFirstName: Yup.string()
+  city: Yup.string().required("City is required"),
+  school_name: Yup.string().required("School is required"),
+  other_notes: Yup.string().max(
+    200,
+    "Other notes cannot exceed 200 characters"
+  ),
+  parent_first_name: Yup.string()
     .min(2, "Parent first name must be at least 2 characters")
     .max(50, "Parent first name cannot exceed 50 characters")
     .required("Parent first name is required"),
-  parentLastName: Yup.string()
+  parent_last_name: Yup.string()
     .min(2, "Parent last name must be at least 2 characters")
     .max(50, "Parent last name cannot exceed 50 characters")
     .required("Parent last name is required"),
-  parentEmail: Yup.string()
+  parent_email: Yup.string()
     .email("Invalid parent email format")
     .required("Parent email is required"),
-  parentContact: Yup.string()
+  parent_contact_number: Yup.string()
     .matches(/^[0-9]{10}$/, "Parent contact number must be exactly 10 digits")
     .required("Parent contact number is required"),
-  parentAddress: Yup.string()
-    .min(10, "Parent address must be at least 10 characters")
-    .max(100, "Parent address cannot exceed 120 characters")
-    .required("Parent address is required"),
-  group: Yup.string().required("Group is required"),
 });
 
 export const changePasswordValidationSchema = Yup.object().shape({

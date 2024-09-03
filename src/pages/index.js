@@ -105,7 +105,7 @@ const Home = () => {
                   <div className="d-flex align-items-center gap-3 mt-4 ct_btn_group">
                     <a
                       href="javascript:void(0)"
-                      onClick={()=>navigate(pageRoutes?.studentlogin)}
+                      onClick={() => navigate(pageRoutes?.studentlogin)}
                       className="ct_gredent_btn ct_fw_600 ct_fs_18"
                     >
                       Start as student{" "}

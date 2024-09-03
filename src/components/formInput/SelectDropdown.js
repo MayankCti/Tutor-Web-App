@@ -16,13 +16,13 @@ const SelectDropdown = ({
       <select
         name=""
         className={
-          className ?? "form-control py-2 ct_purple_bg  text-white ct_select_bg"
+          className ?? "form-control py-2 ct_purple_bg  text-white ct_select_bg ct_fw_600"
         }
         id={id}
         value={selectedValue}
         onChange={handleChange}
       >
-        {options.map((option, index) => (
+        {options?.map((option, index) => (
           <option key={index} value={option.value}>
             {option.label}
           </option>

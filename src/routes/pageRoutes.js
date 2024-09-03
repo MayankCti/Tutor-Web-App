@@ -21,6 +21,10 @@ import StudentForgetPassword from "../pages/students/StudentForgetPassword";
 import StudentMessage from "../pages/students/StudentMessage";
 import StudentLogin from "../pages/students/StudentLogin";
 import StudentProfile from "../pages/students/StudentProfile";
+import CreateStudent from "../pages/teacher/CreateStudent";
+import EditStudentDetail from "../pages/teacher/EditStudentDetail";
+import CreateClass from "../pages/teacher/CreateClass";
+
 
 export const pageRoutes = {
   home: "/",
@@ -37,6 +41,9 @@ export const pageRoutes = {
   forgotPassword: "/forgot-password",
   changePassword: "/change-password",
   stepForm: "/step-form",
+  createStudent: "/add-student",
+  createClass: "/create-class",
+  editStudentDetail: "/edit-student-details",
   // studentProfie
   studentchangePassword: "/student/change-password",
   studenteditProfile: "/student/edit-profile",
@@ -131,6 +138,24 @@ export const AllRoutes = [
     name: "StepForm",
     path: pageRoutes?.stepForm,
     element: <StepForm />,
+    isPrivate: false,
+  },
+  {
+    name: "CreateStudent",
+    path: pageRoutes?.createStudent,
+    element: <CreateStudent />,
+    isPrivate: false,
+  },
+  {
+    name: "editStudentDetail",
+    path: pageRoutes?.editStudentDetail,
+    element: <EditStudentDetail />,
+    isPrivate: false,
+  },
+  {
+    name: "CreateClass",
+    path: pageRoutes?.createClass,
+    element: <CreateClass />,
     isPrivate: false,
   },
 

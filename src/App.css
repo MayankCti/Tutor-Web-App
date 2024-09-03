@@ -40,3 +40,91 @@
 .ct_pointer_curser {
   cursor: pointer;
 }
+
+.rdrCalendarWrapper,.rdrDefinedRangesWrapper,.rdrStaticRange {
+  background: #FAEAFF !important;
+ 
+}
+.ant-row.css-dev-only-do-not-override-11lehqq {
+  margin: auto;
+  justify-content: center;
+  margin-block: 0 !important;
+  margin-top: 5px !important;
+}
+button.ant-btn.css-dev-only-do-not-override-11lehqq.ant-btn-dashed {
+
+  display: block;
+}
+#range{
+  text-align: center;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-btn-dashed:not(:disabled):not(.ant-btn-disabled):hover{
+  color: #000;
+  border-color:var(--dark_purple)
+}
+span.rdrStartEdge.rdrEndEdge{
+  background-color: var(--dark_purple);
+}
+.rdrDayToday .rdrDayNumber span:after{
+  display: none;
+}
+
+.ant-col.css-dev-only-do-not-override-11lehqq {
+  display: flex;
+  align-items: center;
+}
+
+.ct_caldner_white_bg{
+  background-color: #fff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.09);
+  padding: 30px;
+  border-radius: 15px;
+
+}
+
+.rdrDateDisplayWrapper {
+  background-color: unset !important;
+}
+input.rmdp-input {
+  height: 48px;
+  padding-inline: 15px;
+  width: 100%;
+}
+.rmdp-container {
+  width: 100%;
+}
+.rmdp-panel-body li, .rmdp-panel-body li.bg-blue{
+  background-color: var(--dark_purple) !important;
+}
+.rmdp-panel-body li .b-deselect {
+  background-color:var(--dark_purple) !important;
+
+  padding-inline: 4px;
+  
+}
+.rmdp-day.rmdp-selected span:not(.highlight){
+  background-color:var(--dark_purple) !important;
+}
+.rmdp-day.rmdp-selected span:hover,.rmdp-day:not(.rmdp-disabled,.rmdp-day-hidden) span:hover{
+  background-color:var(--dark_purple) !important;
+}
+.rmdp-day.rmdp-today span {
+  background-color: #0098a885 !important;
+  color: #fff;
+}
+.rmdp-week-day{
+  color: var(--dark_purple) !important;
+}
+.rmdp-arrow{
+  border-color: var(--dark_purple) !important;
+}
+.rmdp-arrow-container:hover{
+  background-color: transparent!important;
+  border-color: transparent;
+  border: none !important;
+  box-shadow: unset !important;
+
+} 
+.rmdp-arrow:hover{
+  border-color: #fff;
+}

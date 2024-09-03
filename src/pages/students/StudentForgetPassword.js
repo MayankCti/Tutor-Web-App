@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorMessage, Formik } from "formik";
 import { forgetPasswordValidationSchema } from "../../utils/Schema";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { message } from "antd";
+import axios from "axios";
+import { BASE_URL, studentForgotPassword } from "../../routes/endPoints";
+import Loader from "../../components/other/Loader";
+
 
 function StudentForgetPassword() {
   const navigate = useNavigate();
+  const [loader,setLoader] = useState(false)
   const initialValues = {
     email : "",
   };
 
   const handleForgetPassword = (values) => {
     console.log(values);
-    message.success("check your mail")
-    navigate(pageRoutes?.studentlogin)
+    setLoader(true);
+    axios({
+      method : 'post',
+      url : BASE_URL + studentForgotPassword,
+      data : values,
+    })
+    .then((res)=>{
+      if(res?.data?.success){
+        message.success(res?.data?.message)
+        navigate(pageRoutes?.studentlogin)
+        setLoader(false);
+      }
+    })
+    .catch((err)=>{
+      console.log("An err",err);
+      message.error(err?.response?.data?.message)
+      setLoader(false);
+    })
   };
 
   return (
@@ -28,6 +49,9 @@ function StudentForgetPassword() {
           </div>
           <div class="row align-items-center">
             <div class="col-lg-7 mb-4 mb-lg-0">
+              {loader ? (
+                <Loader/>
+              ) : (
               <div class="ct_login_form">
                 <Formik
                   initialValues={initialValues}
@@ -48,8 +72,7 @@ function StudentForgetPassword() {
                         <div class="ct_mb_50">
                           <h2 class="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">
                             Forgot Password{" "}
-                          </h2>
-                          {/* <p class="ct_light_text mb-0 ct_ff_roboto">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> */}
+                          </h2>                        
                         </div>
 
                         <div class="form-group mb-4">
@@ -83,7 +106,7 @@ function StudentForgetPassword() {
                       <div class="mt-5">
                         <button
                           class="ct_purple_btn w-100 justify-content-center ct_line_height_44 ct_ff_roboto ct_extra_dark_btn_bg"
-                          type="submit"
+                          type="submit"                          
                         >
                           Continue
                         </button>
@@ -104,6 +127,7 @@ function StudentForgetPassword() {
                   )}
                 </Formik>
               </div>
+              )}
             </div>
             <div class="col-lg-5 mb-4 mb-lg-0 px-lg-0">
               <div class="ct_login_right_img">

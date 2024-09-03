@@ -6,6 +6,9 @@ import { pageRoutes } from "../../routes/pageRoutes";
 import { setAuthStudent } from "../../utils/pip";
 import { loginvalidationSchema } from "../../utils/Schema";
 import Loader from "../../components/other/Loader";
+import axios from "axios";
+import { BASE_URL, studentLoginAPI } from "../../routes/endPoints";
+import { message } from "antd";
 
 function StudentLogin() {
   const navigate = useNavigate();
@@ -19,21 +22,38 @@ function StudentLogin() {
   };
 
   const handleLogin = (values, { setSubmitting }) => {
-    setLoader(true);
-    setTimeout(() => {
-      // setAuth("newToken");
-      setAuthStudent("newToken");
-      if (values?.rememberMe) {
-        Cookies.set("user_email", values?.email, { expires: 365 });
-        Cookies.set("user_pass", values?.password, { expires: 365 });
-      } else {
-        Cookies.remove("user_email");
-        Cookies.remove("user_pass");
-      }
-      console.log({ values: pageRoutes?.studentmyClass });
-      navigate(pageRoutes?.studentmyClass);
-      setLoader(false);
-    }, 2000);
+    const data = {
+      email: values?.email,
+      password: values?.password,
+    };
+    setLoader(true);   
+      axios({
+        method : 'post',
+        url : BASE_URL + studentLoginAPI,      
+        data : data,        
+      })
+      .then((res)=>{
+        if(res?.data?.success){
+          setAuthStudent(res?.data?.data);  
+          console.log("object",res);    
+          if (values?.rememberMe) {
+            Cookies.set("user_email", values?.email, { expires: 365 });
+            Cookies.set("user_pass", values?.password, { expires: 365 });
+          } else {
+            Cookies.remove("user_email");
+            Cookies.remove("user_pass");
+          }
+          message.success(res?.data?.message)
+          navigate(pageRoutes?.studentmyClass)
+          setLoader(false)
+        } 
+      })
+      .catch((err)=>{
+        console.log("An error occur",err);
+          message?.error(err?.response?.data?.message);
+        setLoader(false)
+      })
+
   };
 
   return (
@@ -70,7 +90,6 @@ function StudentLogin() {
                       isSubmitting,
                     }) => (
                       <form onSubmit={handleSubmit}>
-                        {console.log(initialValues)}
                         <div className="ct_login_form_cnt">
                           <div className="ct_mb_50">
                             <h2 className="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">

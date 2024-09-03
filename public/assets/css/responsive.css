@@ -178,6 +178,18 @@
         width: 25px;
         height: 25px;
     }
+    .rdrDateRangePickerWrapper{
+        flex-direction: column;
+        display: flex;
+    }
+    .rdrDefinedRangesWrapper{
+        width: 100% !important;
+    }
+    :where(.css-dev-only-do-not-override-11lehqq).ant-btn.ant-btn-icon-only {
+        width: 25px !important;
+        padding-inline: 0;
+        height: 25px !important;
+    }
 }
 
 @media screen and (max-width:575px){

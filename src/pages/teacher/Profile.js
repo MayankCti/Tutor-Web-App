@@ -117,21 +117,19 @@ const Profile = () => {
                         <div className="position-relative">
                           <input
                             type="text"
-                            value={theme_color ?? "#0098a8"}
+                            value={theme_color}
                             className="ct_input ct_color_input form-control ct_input_h_52"
                             disabled
                           />
                           <input
                             type="color"
                             className="ct_color"
-                          value={theme_color}
+                            value={theme_color}
+                            disabled
                           />
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="text-center">
-                    <button className="ct_purple_btn px-5">Save</button>
                   </div>
                 </form>
               </div>
