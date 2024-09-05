@@ -24,7 +24,7 @@ import StudentProfile from "../pages/students/StudentProfile";
 import CreateStudent from "../pages/teacher/CreateStudent";
 import EditStudentDetail from "../pages/teacher/EditStudentDetail";
 import CreateClass from "../pages/teacher/CreateClass";
-
+import CreateStudentClass from "../pages/students/CreateStudentClass";
 
 export const pageRoutes = {
   home: "/",
@@ -53,6 +53,7 @@ export const pageRoutes = {
   studentmessages: "/student/messages",
   studentmyClass: "/student/myClass",
   studentprofile: "/student/profile",
+  createStudentClass: "/student/create-student-class",
 };
 
 export const AllRoutes = [
@@ -203,9 +204,9 @@ export const AllRoutes = [
     isPrivate: true,
   },
   {
-    name: "studentprofile",
-    path: pageRoutes?.studentprofile,
-    element: <StudentProfile />,
+    name: "CreateStudentClass",
+    path: pageRoutes?.createStudentClass,
+    element: <CreateStudentClass />,
     isPrivate: true,
   },
 ];

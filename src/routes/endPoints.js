@@ -19,9 +19,15 @@ export const teacherUploadFileAPI = "teacher/upload-csv-student";
 export const teacherUpdateStudentAPI = "teacher/update-student";
 export const teacherDeleteStudentAPI = "teacher/delete-student";
 
+// CLASSES
+export const teacherFetchClassListAPI = "teacher/get-all-class-type";
+export const teacherCreateClassAPI = "teacher/create-class";
+
 //Students
 
 export const studentLoginAPI = "student/login";
 export const studentForgotPassword = "student/forgot-password";
 export const studentUpdateProfile = "student/update-profile";
 export const studentProfile = "student/profile";
+export const getAllTeacherList = "student/get-teacher-list";
+export const getClassByTeacher = "student/get-class-by-teacher";

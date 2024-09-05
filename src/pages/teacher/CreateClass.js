@@ -6,11 +6,21 @@ import TimeInput from "../../components/formInput/TimeInput";
 import DateCalender from "../../components/DateCalender";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { TimePicker, Button, Row, Col } from "antd";
+import { TimePicker, Button, Row, Col, message } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
+import SelectDropdown from "../../components/formInput/SelectDropdown";
+import { createClass, fetchClasses } from "../../redux/actions/classFeeAction";
+import Loader from "../../components/other/Loader";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { useNavigate } from "react-router-dom";
+
 
 const CreateClass = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [selectedValue, setSelectedValue] = useState("");
+  const { options, isLoading } = useSelector((state) => state.classFeeReducer);
   const { isToggle } = useSelector((state) => state.authReducer);
   const [selectedDates, setSelectedDates] = useState([]);
 
@@ -19,13 +29,55 @@ const CreateClass = () => {
     addTimeRange,
     deleteTimeRange,
     handleTimeChange,
+    onHandleClickOnTime,
     errors,
   } = TimeInput();
 
   const handleDateChange = (dates) => {
-    console.log("Selected Dates in Parent:", dates);
     setSelectedDates(dates);
   };
+  useEffect(() => {
+    dispatch(fetchClasses());
+  }, []);
+
+  useEffect(() => {
+    console.log({ selectedDates, timeRanges, selectedValue, errors });
+  }, [selectedDates, timeRanges, selectedValue, errors]);
+
+  const handleSubmit = () => {
+    if (selectedDates?.length == 0) {
+      return message.error("Please select a dates");
+    }
+    if (!selectedValue) {
+      return message.error("Please select class type");
+    }
+    if (
+      errors?.some((err) => err == "Time range overlaps with another range.")
+    ) {
+      return message.error("Time ranges overlap with another range.");
+    } else {
+      if (timeRanges?.some((item) => item?.start == null || item.end == null)) {
+        return message.error(
+          "Please fill start and end time for all time ranges."
+        );
+      }
+    }
+    const callback = (response) => {
+      if (response.success) navigate(pageRoutes?.classes);
+    };
+    const data = [
+      {
+        class_dates: selectedDates,
+        class_times: timeRanges,
+        class_type: selectedValue,
+      },
+    ];
+    dispatch(createClass({ payload: data, callback }));
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
@@ -35,10 +87,8 @@ const CreateClass = () => {
         <div className="ct_inner_dashbaord_main">
           <div className="d-flex align-items-center justify-content-between">
             <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">Create Class</h4>
-
-            <button className="ct_purple_btn">+ Add New Date</button>
           </div>
-          <fieldset className="mt-3 ct_caldner_white_bg" >
+          <fieldset className="mt-3 ct_caldner_white_bg">
             <div>
               <div id="range">
                 <DateCalender
@@ -46,33 +96,70 @@ const CreateClass = () => {
                   onDatesChange={handleDateChange}
                 />
               </div>
-              <di className="d-flex align-items-end justify-content-center mt-3 gap-2">
-                <div>
+
+              <SelectDropdown
+                className={"form-control py-2   ct_fw_600 text-dark"}
+                id="floatingInputValue"
+                options={options}
+                selectedValue={selectedValue}
+                onChange={setSelectedValue}
+              />
+              <div className="d-flex align-items-end justify-content-start mt-3 gap-2">
+                <div className="ct_flex_1">
                   {timeRanges?.map((range, index) => (
-                    <div>
+                    <div className="w-100">
                       <Row key={index} gutter={10} style={{ marginBottom: 10 }}>
-                        <Col>
+                        <Col className="ct_flex_1">
                           <TimePicker
+                            className="ct_flex_1"
                             format="HH:mm"
                             value={
                               range.start ? moment(range.start, "HH:mm") : null
                             }
-                            onChange={(time, timeString) =>
-                              handleTimeChange(index, "start", timeString)
-                            }
+                            onClick={() => onHandleClickOnTime(index, "start")}
+                            onChange={(time, timeString) => {
+                              console.log({ timeString });
+                              handleTimeChange(index, "start", timeString);
+                            }}
                             placeholder="Start Time"
                           />
                         </Col>
-                        <Col>
+                        <Col className="ct_flex_1">
                           <TimePicker
+                            className="ct_flex_1"
                             format="HH:mm"
                             value={
                               range.end ? moment(range.end, "HH:mm") : null
                             }
+                            onClick={() => onHandleClickOnTime(index, "end")}
                             onChange={(time, timeString) =>
                               handleTimeChange(index, "end", timeString)
                             }
                             placeholder="End Time"
+                            disabledHours={() => {
+                              const startHour = range.start
+                                ? moment(range.start, "HH:mm").hour()
+                                : 0;
+                              return Array.from(
+                                { length: startHour },
+                                (_, i) => i
+                              );
+                            }}
+                            disabledMinutes={(selectedHour) => {
+                              const startHour = range.start
+                                ? moment(range.start, "HH:mm").hour()
+                                : -1;
+                              const startMinute = range.start
+                                ? moment(range.start, "HH:mm").minute()
+                                : -1;
+                              if (selectedHour === startHour) {
+                                return Array.from(
+                                  { length: startMinute + 1 },
+                                  (_, i) => i
+                                );
+                              }
+                              return [];
+                            }}
                           />
                         </Col>
                         <Col>
@@ -96,10 +183,14 @@ const CreateClass = () => {
                   onClick={addTimeRange}
                   icon={<PlusOutlined />}
                 ></Button>
-              </di>
+              </div>
+            </div>
+            <div>
+              <button class="ct_purple_btn mt-3" onClick={() => handleSubmit()}>
+                Save
+              </button>
             </div>
           </fieldset>
-
         </div>
       </div>
     </main>

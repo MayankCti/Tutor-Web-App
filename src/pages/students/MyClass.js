@@ -5,8 +5,12 @@ import Logout from "../../components/studentComponent/Logout";
 import moment from "moment";
 import { date } from "yup";
 import { pipViewDate, pipViewTime } from "../../utils/pip";
+import { useNavigate } from "react-router-dom";
+import { pageRoutes } from "../../routes/pageRoutes";
 
 function MyClass() {
+  const navigate = useNavigate();
+
   const [active, setActive] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -124,7 +128,12 @@ function MyClass() {
                         <option value="08">August</option>
                       </select>
                     </div>
-                    <button className="ct_purple_btn ct_py_12">
+                    <button
+                      className="ct_purple_btn ct_py_12"
+                      onClick={() => {
+                        navigate(pageRoutes.createStudentClass)
+                      }}
+                    >
                       Add Timing for New Class
                     </button>
                   </div>

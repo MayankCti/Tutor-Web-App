@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../components/other/Loader";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
 
 const Classes = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isToggle } = useSelector((state) => state.authReducer);
   const [selectedValue, setSelectedValue] = useState("option1");

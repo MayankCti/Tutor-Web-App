@@ -1524,3 +1524,6 @@ input.next.action-button,input.submit.action-button  {
     }
   }
   
+  .ct_flex_1{
+    flex: 1;
+  }

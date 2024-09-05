@@ -7,6 +7,11 @@
   pointer-events: none;
 }
 
+.rmdp-input:focus,:where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined:hover,:where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined:focus{
+  border-color: var(--dark_purple) !important;
+  box-shadow: unset !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
