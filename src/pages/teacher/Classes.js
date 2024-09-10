@@ -6,20 +6,24 @@ import { useDispatch, useSelector } from "react-redux";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
+import {
+  fetchClasses,
+  fetchClassesTypes,
+  filterClasses,
+} from "../../redux/actions/classFeeAction";
+import { getDayName, isPastClassTime, pipViewDate } from "../../utils/pip";
 
 const Classes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { isToggle } = useSelector((state) => state.authReducer);
-  const [selectedValue, setSelectedValue] = useState("option1");
-  const [selectedValue1, setSelectedValue1] = useState("option1");
-  const options = [
-    { value: "Class type", label: "Class type" },
-    { value: "1:1 Classes", label: "1:1 Classes" },
-    { value: "Group Class", label: "Group Class" },
-    { value: "School Readiness", label: "School Readiness" },
-    { value: "Homework Clubs", label: "Homework Clubs" },
-  ];
+  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue1, setSelectedValue1] = useState("");
+  const { classesList, options, isLoading } = useSelector(
+    (state) => state.classFeeReducer
+  );
+
   const options1 = [
     { value: "Month", label: "Month" },
     { value: "January", label: "January" },
@@ -27,45 +31,16 @@ const Classes = () => {
     { value: "March", label: "March" },
   ];
 
-  const classData = [
-    {
-      day: "Monday",
-      name: "Group Class",
-      date: "12-09-2024",
-      times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
-    },
-    {
-      day: "Tuesday",
-      name: "1:1 Classes",
-      date: "13-09-2024",
-      times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
-    },
-    {
-      day: "Wednesday",
-      name: "Group Class",
-      date: "14-09-2024",
-      times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
-    },
-    {
-      day: "Thursday",
-      name: "Group Class",
-      date: "15-09-2024",
-      times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
-    },
-    {
-      day: "Friday",
-      name: "1:1 Classes",
-      date: "16-09-2024",
-      times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
-    },
-    {
-      day: "Saturday",
-      name: "School Readiness",
-      date: "17-09-2024",
-      times: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM"],
-    },
-  ];
-  const isLoading = false;
+  useEffect(() => {
+    dispatch(fetchClassesTypes());
+    dispatch(fetchClasses());
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      filterClasses({ classType: selectedValue, month: selectedValue1 })
+    );
+  }, [selectedValue, selectedValue1]);
 
   if (isLoading) {
     return <Loader />;
@@ -101,12 +76,17 @@ const Classes = () => {
                       />
                     </div>
                     <div>
-                      <button className="ct_purple_btn" onClick={()=> navigate(pageRoutes?.createClass)}><i class="fa-solid fa-plus me-1"></i> Add Class</button>
+                      <button
+                        className="ct_purple_btn"
+                        onClick={() => navigate(pageRoutes?.createClass)}
+                      >
+                        <i class="fa-solid fa-plus me-1"></i> Add Class
+                      </button>
                     </div>
                   </div>
                 </div>
                 <div className="row">
-                  {classData?.map((classItem, index) => (
+                  {classesList?.map((classItem, index) => (
                     <div
                       key={index}
                       className="col-xl-3 col-lg-4 col-md-6 mb-4"
@@ -119,10 +99,10 @@ const Classes = () => {
                         <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
                           <span class="ct_fs_14 ct_fw_600 ct_ff_roboto">
                             {" "}
-                            {classItem?.day}
+                            {getDayName(classItem?.class_date)}
                           </span>
                           <span class="ct_fs_14 ct_fw_600 ct_ff_roboto">
-                            {classItem?.date}
+                            {pipViewDate(classItem?.class_date)}
                           </span>
                         </div>
 
@@ -134,12 +114,17 @@ const Classes = () => {
                             <div key={idx} className="col-xxl-6 mb-3">
                               <button
                                 className={`ct_purple_btn ct_border_radius_10 w-100 ct_extra_dark_btn_bg ${
-                                  time == "09:00 AM"
+                                  isPastClassTime(
+                                    classItem.class_date,
+                                    time?.start_time
+                                  )
                                     ? "ct_red_bg"
                                     : "ct_light_darkgreen_bg"
                                 }`}
                               >
-                                {time}
+                                {time?.start_time}
+                                {" to "}
+                                {time?.end_time}
                               </button>
                             </div>
                           ))}

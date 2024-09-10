@@ -1,19 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { pageRoutes } from "../../routes/pageRoutes";
 import {
   createStudent,
   deleteStudent,
+  fetchDashboard,
   fetchStudentList,
   fetchTeacherClasses,
   getTeacherList,
   updateStudent,
   uploadStudentFile,
 } from "../actions/studentAction";
+import { pageRoutes } from "../../routes/pageRoutes";
 
 const initialState = {
   isLoading: false,
   students: [],
-  cardData: [],
+  cardData: [
+    {
+      backgroundColor: "#D398E7",
+      iconSrc: "assets/img/student_icon.svg",
+      title: "Total classes this week",
+      value: "",
+      path: pageRoutes?.classes,
+    },
+    {
+      backgroundColor: "#F0C274",
+      iconSrc: "assets/img/user_icon.svg",
+      title: "Total enrolled students",
+      value: "2514",
+      path: pageRoutes?.student,
+    },
+    {
+      backgroundColor: "#70A1E5",
+      iconSrc: "assets/img/anount_icon.svg",
+      title: "Invoices due this week",
+      value: "",
+      path: pageRoutes?.feeDue,
+    },
+    {
+      backgroundColor: "#e570c8",
+      iconSrc: "assets/img/total_payment_icon.svg",
+      title: "Total payments this week",
+      value: "",
+      path: pageRoutes?.feeDue,
+    },
+  ],
   options: [
     { value: "all", label: "All" },
     { value: "Active", label: "Active" },
@@ -31,6 +61,21 @@ export const studentSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // fetch-dashboard
+    builder.addCase(fetchDashboard.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDashboard.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.cardData[0].value = data.total_classes_this_week ?? 0;
+      state.cardData[1].value = data.total_enrolled_students ?? 0;
+      state.cardData[2].value = data.total_due_amount ?? 0;
+      state.cardData[3].value = data.total_payment ?? 0;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchDashboard.rejected, (state, action) => {
+      state.isLoading = false;
+    });
     // fetch-student-list
     builder.addCase(fetchStudentList.pending, (state, action) => {
       state.isLoading = true;
@@ -83,36 +128,6 @@ export const studentSlice = createSlice({
     });
     builder.addCase(deleteStudent.pending, (state, action) => {
       state.isLoading = true;
-    });
-
-    // get-teacher-list
-    builder.addCase(getTeacherList?.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getTeacherList?.fulfilled, (state, action) => {
-      const { data } = action?.payload;
-      state.teacherList = data?.map((item, index) => {
-        return { value: item?.id, label: item?.full_name };
-      });
-      state.isLoading = false;
-    });
-    builder.addCase(getTeacherList?.rejected, (state, action) => {
-      state.isLoading = false;
-    });
-
-    // fetch-teacher-classes
-    builder.addCase(fetchTeacherClasses?.fulfilled, (state, action) => {
-      // const { data } = action?.payload;
-      // state.teacherList = data?.map((item, index) => {
-      //   return { value: item?.id, label: item?.full_name };
-      // });
-      state.isLoading = false;
-    });
-    builder.addCase(fetchTeacherClasses?.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchTeacherClasses?.rejected, (state, action) => {
-      state.isLoading = false;
     });
   },
 });

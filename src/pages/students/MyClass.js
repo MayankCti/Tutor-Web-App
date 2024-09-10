@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../../layout/studentLayout/SideBar";
 import Header from "../../layout/studentLayout/Header";
-import Logout from "../../components/studentComponent/Logout";
 import moment from "moment";
 import { date } from "yup";
 import { pipViewDate, pipViewTime } from "../../utils/pip";
@@ -10,7 +9,6 @@ import { pageRoutes } from "../../routes/pageRoutes";
 
 function MyClass() {
   const navigate = useNavigate();
-
   const [active, setActive] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -105,7 +103,6 @@ function MyClass() {
         <SideBar onToggleSidebar={sidebarActive} />
         <div className="ct_right_content">
           <Header onToggleSidebar={sidebarActive} />
-
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
@@ -131,7 +128,7 @@ function MyClass() {
                     <button
                       className="ct_purple_btn ct_py_12"
                       onClick={() => {
-                        navigate(pageRoutes.createStudentClass)
+                        navigate(pageRoutes.createStudentClass);
                       }}
                     >
                       Add Timing for New Class
@@ -195,7 +192,6 @@ function MyClass() {
           </div>
         </div>
       </main>
-      <Logout />
     </>
   );
 }

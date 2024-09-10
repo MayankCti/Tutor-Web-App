@@ -10,7 +10,7 @@ import { TimePicker, Button, Row, Col, message } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
-import { createClass, fetchClasses } from "../../redux/actions/classFeeAction";
+import { createClass, fetchClassesTypes } from "../../redux/actions/classFeeAction";
 import Loader from "../../components/other/Loader";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +37,7 @@ const CreateClass = () => {
     setSelectedDates(dates);
   };
   useEffect(() => {
-    dispatch(fetchClasses());
+    dispatch(fetchClassesTypes());
   }, []);
 
   useEffect(() => {

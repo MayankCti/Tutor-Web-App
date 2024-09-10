@@ -4,11 +4,26 @@ import {
   getAllTeacherList,
   getClassByTeacher,
   teacherCreateStudentAPI,
+  teacherDashboardAPI,
   teacherDeleteStudentAPI,
   teacherStudentListAPI,
   teacherUpdateStudentAPI,
   teacherUploadFileAPI,
 } from "../../routes/endPoints";
+
+// fetch-dashboard
+export const fetchDashboard = createAsyncThunk(
+  "fetch-dashboard",
+  async () => {
+    try {
+      const response = await API_REQUEST({
+        url: teacherDashboardAPI,
+        method: "GET",
+      });
+      return response;
+    } catch (error) {}
+  }
+);
 
 // fetch-student-list
 export const fetchStudentList = createAsyncThunk(
@@ -97,51 +112,6 @@ export const deleteStudent = createAsyncThunk(
       return response;
     } catch (error) {
       callback(null, error);
-    }
-  }
-);
-
-// get-teacher-list
-export const getTeacherList = createAsyncThunk("get-teacher-list", async () => {
-  try {
-    const response = await API_REQUEST({
-      url: getAllTeacherList,
-      method: "GET",
-    });
-    return response;
-  } catch (error) {}
-});
-
-// fetch-teacher-classes
-// export const fetchTeacherClasses = createAsyncThunk(
-//   "fetch-teacher-classes",
-//   async (props) => {
-//     try {
-//       const { payload, callback } = props;
-//       const response = await API_REQUEST({
-//         url: getClassByTeacher,
-//         method: "POST",
-//         payload: payload,
-//       });
-//       return response;
-//     } catch (error) {}
-//   }
-// );
-
-export const fetchTeacherClasses = createAsyncThunk(
-  "fetch-teacher-classes",
-  async (props, { rejectWithValue }) => {
-    try {
-      const { payload, callback } = props;
-      console.log(payload);
-      const response = await API_REQUEST({
-        url: getClassByTeacher,
-        method: "POST",
-        data: payload,
-      });
-      return response;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
     }
   }
 );
