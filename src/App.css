@@ -7,6 +7,11 @@
   pointer-events: none;
 }
 
+.rmdp-input:focus,:where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined:hover,:where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined:focus{
+  border-color: var(--dark_purple) !important;
+  box-shadow: unset !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -127,4 +132,55 @@ input.rmdp-input {
 } 
 .rmdp-arrow:hover{
   border-color: #fff;
+}
+
+
+.ct_created_class_card{
+  background-color: #eeeeee6b;
+  /* box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.09); */
+  padding: 30px 15px;
+  border-radius: 10px;
+}
+
+.ct_class_chck_bg {
+  background: #0098a8;
+  padding: 10px;
+  /* margin-bottom: 10px; */
+  border-radius: 10px;
+  color: #fff;
+  cursor: auto
+}
+
+.ct_class_chck_bg .form-check {
+  display: flex;
+  align-items: center;
+}
+.ct_class_chck_bg .form-check-input {
+  top: -2px;
+  position: relative;
+}
+
+.ct_class_chck_bg .form-check-input:checked[type=checkbox] {
+  --bs-form-check-bg-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e);
+}
+
+.ct_grid_2_col_2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  height: auto;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.ct_class_chck_bg p {
+  font-size: 14px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+@media screen and (max-width:1199px){
+  .ct_grid_2_col_2{
+    grid-template-columns: auto;
+    gap: 6px;
+  }
 }

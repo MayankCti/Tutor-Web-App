@@ -1,86 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { pageRoutes } from "../../routes/pageRoutes";
 import {
   createStudent,
   deleteStudent,
+  fetchDashboard,
   fetchStudentList,
+  fetchTeacherClasses,
+  getTeacherList,
   updateStudent,
   uploadStudentFile,
 } from "../actions/studentAction";
+import { pageRoutes } from "../../routes/pageRoutes";
 
 const initialState = {
   isLoading: false,
-  students: [
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Active",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Inactive",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Inactive",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Active",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Prospective",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Inactive",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Active",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Inactive",
-    },
-    {
-      name: "Alfonso Westervelt",
-      email: "Zoey.Boyle@gmail.com",
-      contactNo: "7896547857",
-      city: "Bauchmouth",
-      status: "Inactive",
-    },
-  ],
+  students: [],
   cardData: [
     {
       backgroundColor: "#D398E7",
       iconSrc: "assets/img/student_icon.svg",
       title: "Total classes this week",
-      value: "40",
+      value: "",
       path: pageRoutes?.classes,
     },
     {
@@ -94,15 +33,15 @@ const initialState = {
       backgroundColor: "#70A1E5",
       iconSrc: "assets/img/anount_icon.svg",
       title: "Invoices due this week",
-      value: "$26",
-      path: pageRoutes?.billing,
+      value: "",
+      path: pageRoutes?.feeDue,
     },
     {
       backgroundColor: "#e570c8",
       iconSrc: "assets/img/total_payment_icon.svg",
       title: "Total payments this week",
-      value: "$236",
-      path: pageRoutes?.billing,
+      value: "",
+      path: pageRoutes?.feeDue,
     },
   ],
   options: [
@@ -110,6 +49,7 @@ const initialState = {
     { value: "Active", label: "Active" },
     { value: "Inactive", label: "Inactive" },
   ],
+  teacherList: [],
 };
 
 export const studentSlice = createSlice({
@@ -117,6 +57,22 @@ export const studentSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // fetch-dashboard
+    builder.addCase(fetchDashboard.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDashboard.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.cardData[0].value = data?.total_classes_this_week ?? 0;
+      state.cardData[1].value = data?.total_enrolled_students ?? 0;
+      state.cardData[2].value = data?.total_due_amount ?? 0;
+      state.cardData[3].value = data?.total_payment ?? 0;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchDashboard.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    
     // fetch-student-list
     builder.addCase(fetchStudentList.pending, (state, action) => {
       state.isLoading = true;
@@ -129,6 +85,7 @@ export const studentSlice = createSlice({
     builder.addCase(fetchStudentList.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // create-student
     builder.addCase(createStudent.pending, (state, action) => {
       state.isLoading = true;
@@ -139,6 +96,7 @@ export const studentSlice = createSlice({
     builder.addCase(createStudent.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // upload-student-file
     builder.addCase(uploadStudentFile.pending, (state, action) => {
       state.isLoading = true;
@@ -149,6 +107,7 @@ export const studentSlice = createSlice({
     builder.addCase(uploadStudentFile.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // update-student
     builder.addCase(updateStudent.pending, (state, action) => {
       state.isLoading = true;
@@ -159,6 +118,7 @@ export const studentSlice = createSlice({
     builder.addCase(updateStudent.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // delete-student
     builder.addCase(deleteStudent.fulfilled, (state, action) => {
       state.isLoading = false;

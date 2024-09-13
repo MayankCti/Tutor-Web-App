@@ -1,8 +1,9 @@
 import React from "react";
 
 const SelectDropdown = ({
-  options,
-  selectedValue,
+  defaultOptions =" -- Select an option --",
+  options = [],
+  selectedValue = "",
   onChange,
   className,
   id,
@@ -14,19 +15,27 @@ const SelectDropdown = ({
   return (
     <div>
       <select
-        name=""
+        name={id || "id"}
         className={
-          className ?? "form-control py-2 ct_purple_bg  text-white ct_select_bg ct_fw_600"
+          className
+            ? className
+            : "form-control py-2 ct_purple_bg text-white ct_select_bg ct_fw_600"
         }
         id={id}
         value={selectedValue}
         onChange={handleChange}
       >
-        {options?.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.label}
-          </option>
-        ))}
+        <option value="" disabled>
+          {defaultOptions}
+        </option>
+        {options.map(
+          (option, index) =>
+            option.value !== null && (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            )
+        )}
       </select>
     </div>
   );

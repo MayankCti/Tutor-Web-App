@@ -1,12 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API_REQUEST } from ".";
 import {
+  getAllTeacherList,
+  getClassByTeacher,
   teacherCreateStudentAPI,
+  teacherDashboardAPI,
   teacherDeleteStudentAPI,
   teacherStudentListAPI,
   teacherUpdateStudentAPI,
   teacherUploadFileAPI,
 } from "../../routes/endPoints";
+
+// fetch-dashboard
+export const fetchDashboard = createAsyncThunk(
+  "fetch-dashboard",
+  async () => {
+    try {
+      const response = await API_REQUEST({
+        url: teacherDashboardAPI,
+        method: "GET",
+      });
+      return response;
+    } catch (error) {}
+  }
+);
 
 // fetch-student-list
 export const fetchStudentList = createAsyncThunk(
@@ -41,6 +58,7 @@ export const createStudent = createAsyncThunk(
     }
   }
 );
+
 // upload-student-file
 export const uploadStudentFile = createAsyncThunk(
   "upload-student-file",
@@ -60,6 +78,7 @@ export const uploadStudentFile = createAsyncThunk(
     }
   }
 );
+
 // update-student
 export const updateStudent = createAsyncThunk(
   "update-student",
@@ -80,8 +99,8 @@ export const updateStudent = createAsyncThunk(
   }
 );
 
- // delete-student
- export const deleteStudent = createAsyncThunk(
+// delete-student
+export const deleteStudent = createAsyncThunk(
   "delete-student",
   async (props) => {
     const { payload, callback } = props;
@@ -89,7 +108,7 @@ export const updateStudent = createAsyncThunk(
       const response = await API_REQUEST({
         url: teacherDeleteStudentAPI,
         method: "DELETE",
-        data:payload
+        data: payload,
       });
       callback(response);
       return response;

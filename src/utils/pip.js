@@ -91,3 +91,42 @@ export const pipGetRegisterStep = () => {
   if (step) return step;
 };
 
+
+// 
+export const isPastClassTime = (classDate, classTime) => {
+  if(!classDate || !classDate ) return ;
+  const currentTime = new Date();
+
+  // Parse class date and time
+  const [time, period] = classTime?.split(" ");
+  const [hours, minutes] = time?.split(":")?.map(Number);
+  let hours24Format = hours;
+
+  // Convert PM times to 24-hour format
+  if (period === "PM" && hours24Format !== 12) {
+    hours24Format += 12;
+  }
+  if (period === "AM" && hours24Format === 12) {
+    hours24Format = 0; // Handle 12 AM as 0 hours
+  }
+
+  // Create a Date object for the class with time set
+  const classDateTime = new Date(classDate);
+  classDateTime.setHours(hours24Format, minutes || 0, 0, 0); // Set hours and minutes
+
+  // Return true if the class time is in the past
+  return classDateTime < currentTime;
+};
+export const getDayName = (dateString) => {
+  const dateObject = new Date(dateString);
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[dateObject.getDay()];
+};

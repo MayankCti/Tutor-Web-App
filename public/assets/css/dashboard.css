@@ -1123,3 +1123,10 @@ button:focus {
   #student_detail .modal-body,#add_student .modal-body  {
       padding-inline: 30px;
   }
+
+
+  .ct_class_card_2{
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
+    height: 100%;
+  }

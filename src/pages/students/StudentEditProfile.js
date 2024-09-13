@@ -13,7 +13,7 @@ import {
   studentProfile,
   studentUpdateProfile,
 } from "../../routes/endPoints";
-import { getAuthStudent, pipViewDate } from "../../utils/pip";
+import { getAuthStudent } from "../../utils/pip";
 import Loader from "../../components/other/Loader";
 import moment from "moment";
 

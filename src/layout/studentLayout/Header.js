@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
+import Logout from "../../components/studentComponent/Logout";
 
 function Header({ onToggleSidebar }) {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ function Header({ onToggleSidebar }) {
           </div>
         </div>
       </div>
+      <Logout/>
     </>
   );
 }
