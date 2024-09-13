@@ -77,7 +77,7 @@ const StudentTable = ({ statusFilter }) => {
               }}
             ></i>
             <i
-              class="fa-solid fa-trash trash_icon_color ms-2"
+              class="fa-solid fa-trash trash_icon_color ms-3"
               data-bs-toggle="modal"
               data-bs-target="#ct_confirmation_modal"
               onClick={() => setStudentId(item?.id)}

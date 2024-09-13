@@ -1,101 +1,43 @@
-import React, { useEffect, useState } from "react";
-import SideBar from "../../layout/studentLayout/SideBar";
-import Header from "../../layout/studentLayout/Header";
-import moment from "moment";
 import { date } from "yup";
-import { pipViewDate, pipViewTime } from "../../utils/pip";
+import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { pageRoutes } from "../../routes/pageRoutes";
+import Header from "../../layout/studentLayout/Header";
+import SideBar from "../../layout/studentLayout/SideBar";
+import { pipViewDate, pipViewTime } from "../../utils/pip";
+import { fetchMyBookedClasses } from "../../redux/actions/classFeeAction";
+import { useDispatch, useSelector } from "react-redux";
 
 function MyClass() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
-
+  const { myclassData } = useSelector((state) => state?.classFeeReducer);
   const sidebarActive = () => {
     setActive(!active);
   };
 
   const today = new date();
-  const myclassData = [
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Completed",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-    {
-      teacherName: "Alfonso Westervelt",
-      streams: "Maths",
-      classDateTime: today,
-      duration: "1 Hour",
-      status: "Pending",
-    },
-  ];
-
-  useEffect(() => {
-    const filtered = myclassData.filter((item) => {
-      if (!selectedMonth) return true;
-      const itemMonth = moment(item?.classDateTime).format("MM");
-      return itemMonth === selectedMonth;
-    });
-    setFilteredData(filtered);
-  }, [selectedMonth]);
 
   const handleDateChange = (value) => {
     setSelectedMonth(value);
   };
+
+  useEffect(() => {
+    dispatch(fetchMyBookedClasses());
+  }, []);
+
+  useEffect(() => {
+    const filtered = myclassData?.filter((item) => {
+      if (!selectedMonth) return true;
+      const itemMonth = moment(item?.class?.class_date).format("MM");
+      return itemMonth === selectedMonth;
+    });
+    setFilteredData(filtered);
+  }, [selectedMonth]);
 
   return (
     <>
@@ -154,32 +96,38 @@ function MyClass() {
                           <td>
                             <div className="d-flex align-items-center gap-2">
                               <img
-                                src="../assets/img/user_profile.png"
+                                src={
+                                  item?.teacher?.profile_image ??
+                                  "../assets/img/user_profile.png"
+                                }
                                 alt=""
                                 className="ct_img_36"
                               />
                               <h5 className="ct_fs_14 ct_fw_600 mb-0">
-                                {item?.teacherName}
+                                {item?.teacher?.full_name}
                               </h5>
                             </div>
                           </td>
                           <td>{item?.streams}</td>
                           <td>
                             <span className="me-3 ct_fw_600">
-                              {pipViewDate(item?.classDateTime)}{" "}
-                              {pipViewTime(item?.classDateTime)}
+                              {pipViewDate(item?.class?.class_date)}
+                              {" | "}
+                              {item?.class?.start_time}
+                              {" to "}
+                              {item?.class?.end_time}
                             </span>
                           </td>
                           <td>{item?.duration}</td>
                           <td className="text-end">
                             <button
                               className={`ct_purple_btn py-1 px-3 ct_border_radius_10 ${
-                                item?.status === "Completed"
-                                  ? "ct_grey_bg"
-                                  : "ct_purple_bg"
+                                item?.class_status
+                                  ? "ct_purple_bg"
+                                  : "ct_grey_bg"
                               }`}
                             >
-                              {item?.status}
+                              {item?.class_status ? "Completed" : "Pending"}
                             </button>
                           </td>
                         </tr>

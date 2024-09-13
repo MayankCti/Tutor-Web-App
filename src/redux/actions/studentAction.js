@@ -58,6 +58,7 @@ export const createStudent = createAsyncThunk(
     }
   }
 );
+
 // upload-student-file
 export const uploadStudentFile = createAsyncThunk(
   "upload-student-file",
@@ -77,6 +78,7 @@ export const uploadStudentFile = createAsyncThunk(
     }
   }
 );
+
 // update-student
 export const updateStudent = createAsyncThunk(
   "update-student",

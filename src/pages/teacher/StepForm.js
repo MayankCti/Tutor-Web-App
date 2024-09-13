@@ -14,8 +14,6 @@ const StepForm = () => {
       case 2:
         return <SecondStep />;
       case 3:
-        return <ThirdStep />;
-      case 4:
         return <FourthStep />;
       default:
         break;
@@ -32,10 +30,15 @@ const StepForm = () => {
         </div>
         <div class="row align-items-center mt-5 pt-5">
           <div class="col-lg-11 mx-auto">
-            <form id="msform" action="dashboard.html">
+            <form
+              id="msform"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
               {/* <!-- progressbar --> */}
               <ul id="progressbar" class="mb-5">
-                {[1, 2, 3, 4]?.map((item, index) => (
+                {[1, 2, 3]?.map((item, index) => (
                   <li
                     key={index}
                     class={currentStep >= index + 1 ? "active" : ""}

@@ -8,6 +8,10 @@ import {
   fetchBillingStudent,
   fetchClasses,
   filterClasses,
+  deleteClassType,
+  createClassType,
+  updateClassType,
+  fetchMyBookedClasses,
 } from "../actions/classFeeAction";
 
 const initialState = {
@@ -17,6 +21,8 @@ const initialState = {
   students: [],
   feesandDuesData: [],
   classesList: [],
+  classTypes: [],
+  myclassData: [],
 };
 
 export const classFeeSlice = createSlice({
@@ -36,6 +42,7 @@ export const classFeeSlice = createSlice({
     builder.addCase(fetchClasses.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // fetch-classes
     builder.addCase(filterClasses.pending, (state, action) => {
       state.isLoading = true;
@@ -48,6 +55,7 @@ export const classFeeSlice = createSlice({
     builder.addCase(filterClasses.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // fetch-classes-types
     builder.addCase(fetchClassesTypes.pending, (state, action) => {
       state.isLoading = true;
@@ -59,10 +67,44 @@ export const classFeeSlice = createSlice({
       });
       arr.unshift({ value: "Class Type", label: "Class Type" });
       state.options = arr ?? [];
+      state.classTypes = data ?? [];
       state.isLoading = false;
     });
     builder.addCase(fetchClassesTypes.rejected, (state, action) => {
       state.isLoading = false;
+    });
+
+    // create-class-type
+    builder.addCase(createClassType.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createClassType.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(createClassType.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    // update-class-type
+    builder.addCase(updateClassType.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateClassType.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(updateClassType.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    // delete-class-type
+    builder.addCase(deleteClassType.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deleteClassType.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deleteClassType.pending, (state, action) => {
+      state.isLoading = true;
     });
 
     // create-class
@@ -114,6 +156,7 @@ export const classFeeSlice = createSlice({
     builder.addCase(fetchBilling.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // fetch-billing-student
     builder.addCase(fetchBillingStudent.pending, (state, action) => {
       state.isLoading = true;
@@ -124,6 +167,19 @@ export const classFeeSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchBillingStudent.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    // fetch-my-booked-classes
+    builder.addCase(fetchMyBookedClasses.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchMyBookedClasses.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.myclassData = data ?? [];
+      state.isLoading = false;
+    });
+    builder.addCase(fetchMyBookedClasses.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

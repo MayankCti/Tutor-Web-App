@@ -49,11 +49,7 @@ const initialState = {
     { value: "Active", label: "Active" },
     { value: "Inactive", label: "Inactive" },
   ],
-  teacherList: [
-    { value: "all", label: "All" },
-    { value: "Active", label: "Active" },
-    { value: "Inactive", label: "Inactive" },
-  ],
+  teacherList: [],
 };
 
 export const studentSlice = createSlice({
@@ -67,15 +63,16 @@ export const studentSlice = createSlice({
     });
     builder.addCase(fetchDashboard.fulfilled, (state, action) => {
       const { data } = action?.payload ?? {};
-      state.cardData[0].value = data.total_classes_this_week ?? 0;
-      state.cardData[1].value = data.total_enrolled_students ?? 0;
-      state.cardData[2].value = data.total_due_amount ?? 0;
-      state.cardData[3].value = data.total_payment ?? 0;
+      state.cardData[0].value = data?.total_classes_this_week ?? 0;
+      state.cardData[1].value = data?.total_enrolled_students ?? 0;
+      state.cardData[2].value = data?.total_due_amount ?? 0;
+      state.cardData[3].value = data?.total_payment ?? 0;
       state.isLoading = false;
     });
     builder.addCase(fetchDashboard.rejected, (state, action) => {
       state.isLoading = false;
     });
+    
     // fetch-student-list
     builder.addCase(fetchStudentList.pending, (state, action) => {
       state.isLoading = true;
@@ -88,6 +85,7 @@ export const studentSlice = createSlice({
     builder.addCase(fetchStudentList.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // create-student
     builder.addCase(createStudent.pending, (state, action) => {
       state.isLoading = true;
@@ -98,6 +96,7 @@ export const studentSlice = createSlice({
     builder.addCase(createStudent.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // upload-student-file
     builder.addCase(uploadStudentFile.pending, (state, action) => {
       state.isLoading = true;
@@ -108,6 +107,7 @@ export const studentSlice = createSlice({
     builder.addCase(uploadStudentFile.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     // update-student
     builder.addCase(updateStudent.pending, (state, action) => {
       state.isLoading = true;

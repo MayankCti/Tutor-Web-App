@@ -127,7 +127,7 @@ const FourthStep = () => {
               name="previous"
               class="previous action-button ct_fs_18 ct_fw_600"
               value="Previous"
-              onClick={() => dispatch(handleCurrentStep(3))}
+              onClick={() => dispatch(handleCurrentStep(2))}
             />
             <input
               type="button"

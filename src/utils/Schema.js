@@ -161,6 +161,15 @@ export const createStudentSchema = Yup.object().shape({
   student_status: Yup.string().required("Please select student status"),
 });
 
+export const createClassTypeSchema = Yup.object().shape({
+  class_type_name: Yup.string().required("Please enter class type"),
+  student_count: Yup.number()
+    .typeError("Student count must be a number")
+    .positive("Student count must be a positive number")
+    .integer("Student count must be an integer")
+    .min(1, "Student count must be at least 1")
+    .required("Please enter student count"),
+});
 // Student Schemas
 
 export const loginvalidationSchema = Yup.object({
@@ -196,7 +205,7 @@ export const editProfileValidationSchema = Yup.object().shape({
     .required("Contact number is required"),
   emergency_contact_number: Yup.string()
     .matches(
-      /^(?:\+61|0)[2-9]\d{8}$/,
+      /^[0-9]{10}$/,
       "Emergency contact number must be a valid"
     )
     .required("Emergency contact number is required"),

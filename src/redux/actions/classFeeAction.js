@@ -1,14 +1,17 @@
 import { API_REQUEST } from ".";
-
 import {
   getAllTeacherList,
   getClassByTeacher,
   studentBillingAPI,
+  studentMyBookedClasses,
   teacherBillingAPI,
   teacherClassesAPI,
   teacherClassesFilterAPI,
   teacherCreateClassAPI,
+  teacherCreateClassTypeAPI,
+  teacherDeleteClassTypeAPI,
   teacherFetchClassTypeListAPI,
+  teacherUpdateClassTypeAPI,
 } from "../../routes/endPoints";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -17,8 +20,8 @@ export const fetchClasses = createAsyncThunk("fetch-classes-", async () => {
   try {
     const response = await API_REQUEST({
       url: teacherClassesAPI,
-      method: "POST",
-      isErrorToast:false
+      method: "GET",
+      isErrorToast: false,
     });
     return response;
   } catch (error) {}
@@ -37,25 +40,84 @@ export const filterClasses = createAsyncThunk(
         url: teacherClassesFilterAPI,
         method: "GET",
         params: params,
-        
       });
       return response;
     } catch (error) {}
   }
 );
 
-
-
 // fetch-classes-types
-export const fetchClassesTypes = createAsyncThunk("fetch-classes-types", async () => {
-  try {
-    const response = await API_REQUEST({
-      url: teacherFetchClassTypeListAPI,
-      method: "GET",
-    });
-    return response;
-  } catch (error) {}
-});
+export const fetchClassesTypes = createAsyncThunk(
+  "fetch-classes-types",
+  async () => {
+    try {
+      const response = await API_REQUEST({
+        url: teacherFetchClassTypeListAPI,
+        method: "GET",
+      });
+      return response;
+    } catch (error) {}
+  }
+);
+
+// create-class-type
+export const createClassType = createAsyncThunk(
+  "create-class-type",
+  async (props) => {
+    const { payload, callback } = props;
+    try {
+      const response = await API_REQUEST({
+        url: teacherCreateClassTypeAPI,
+        method: "POST",
+        data: payload,
+        isErrorToast: true,
+      });
+      callback(response);
+      return response;
+    } catch (error) {
+      callback(null, error);
+    }
+  }
+);
+
+// update-class-type
+export const updateClassType = createAsyncThunk(
+  "update-class-type",
+  async (props) => {
+    const { payload, callback } = props;
+    try {
+      const response = await API_REQUEST({
+        url: teacherUpdateClassTypeAPI,
+        method: "POST",
+        data: payload,
+        isErrorToast: true,
+      });
+      callback(response);
+      return response;
+    } catch (error) {
+      callback(null, error);
+    }
+  }
+);
+
+// delete-class-type
+export const deleteClassType = createAsyncThunk(
+  "delete-class-type",
+  async (props) => {
+    const { payload, callback } = props;
+    try {
+      const response = await API_REQUEST({
+        url: teacherDeleteClassTypeAPI,
+        method: "DELETE",
+        data: payload,
+      });
+      callback(response);
+      return response;
+    } catch (error) {
+      callback(null, error);
+    }
+  }
+);
 
 // create-class
 export const createClass = createAsyncThunk("create-student", async (props) => {
@@ -93,8 +155,8 @@ export const fetchTeacherClasses = createAsyncThunk(
       const { payload, callback } = props;
       console.log(payload);
       const response = await API_REQUEST({
-        url: getClassByTeacher,
-        method: "POST",
+        url: getClassByTeacher + `/${payload}`,
+        method: "GET",
         data: payload,
       });
       return response;
@@ -116,12 +178,29 @@ export const fetchBilling = createAsyncThunk("fetch-billing", async () => {
 });
 
 // fetch-billing-student
-export const fetchBillingStudent = createAsyncThunk("fetch-billing-student", async () => {
-  try {
-    const response = await API_REQUEST({
-      url: studentBillingAPI,
-      method: "GET",
-    });
-    return response;
-  } catch (error) {}
-});
+export const fetchBillingStudent = createAsyncThunk(
+  "fetch-billing-student",
+  async () => {
+    try {
+      const response = await API_REQUEST({
+        url: studentBillingAPI,
+        method: "GET",
+      });
+      return response;
+    } catch (error) {}
+  }
+);
+
+// fetch-my-booked-classes
+export const fetchMyBookedClasses = createAsyncThunk(
+  "fetch-my-booked-classes",
+  async () => {
+    try {
+      const response = await API_REQUEST({
+        url: studentMyBookedClasses,
+        method: "GET",
+      });
+      return response;
+    } catch (error) {}
+  }
+);

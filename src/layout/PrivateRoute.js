@@ -4,7 +4,7 @@ import { getAuthStudent, pipGetAccessToken } from "../utils/pip";
 import { pageRoutes } from "../routes/pageRoutes";
 
 const PrivateRoute = ({ children }) => {
-  const urlSegment = window?.location?.pathname.split("/")[1];
+  const urlSegment = window?.location?.pathname?.split("/")[1];
   const isStudentRoute = urlSegment === "student";
   const isAuthenticated = isStudentRoute
     ? getAuthStudent()

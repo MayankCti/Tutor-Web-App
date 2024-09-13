@@ -1048,7 +1048,7 @@ footer{
     counter-reset: step;
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
   #progressbar li {

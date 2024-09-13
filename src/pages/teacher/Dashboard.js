@@ -8,7 +8,10 @@ import StudentTable from "../../components/StudentTable";
 import { fetchProfile } from "../../redux/actions/authAction";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { handleCurrentStep } from "../../redux/reducers/authReducer";
-import { fetchDashboard, fetchStudentList } from "../../redux/actions/studentAction";
+import {
+  fetchDashboard,
+  fetchStudentList,
+} from "../../redux/actions/studentAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();

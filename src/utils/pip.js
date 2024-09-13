@@ -94,11 +94,12 @@ export const pipGetRegisterStep = () => {
 
 // 
 export const isPastClassTime = (classDate, classTime) => {
+  if(!classDate || !classDate ) return ;
   const currentTime = new Date();
 
   // Parse class date and time
-  const [time, period] = classTime.split(" ");
-  const [hours, minutes] = time.split(":").map(Number);
+  const [time, period] = classTime?.split(" ");
+  const [hours, minutes] = time?.split(":")?.map(Number);
   let hours24Format = hours;
 
   // Convert PM times to 24-hour format

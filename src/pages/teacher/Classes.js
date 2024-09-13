@@ -18,8 +18,8 @@ const Classes = () => {
   const navigate = useNavigate();
 
   const { isToggle } = useSelector((state) => state.authReducer);
-  const [selectedValue, setSelectedValue] = useState("");
-  const [selectedValue1, setSelectedValue1] = useState("");
+  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue1, setSelectedValue1] = useState();
   const { classesList, options, isLoading } = useSelector(
     (state) => state.classFeeReducer
   );
@@ -32,14 +32,18 @@ const Classes = () => {
   ];
 
   useEffect(() => {
-    dispatch(fetchClassesTypes());
-    dispatch(fetchClasses());
+    setTimeout(() => {
+      dispatch(fetchClassesTypes());
+      dispatch(fetchClasses());
+    }, 1000);
   }, []);
 
   useEffect(() => {
-    dispatch(
-      filterClasses({ classType: selectedValue, month: selectedValue1 })
-    );
+    if (selectedValue && selectedValue1) {
+      dispatch(
+        filterClasses({ classType: selectedValue, month: selectedValue1 })
+      );
+    }
   }, [selectedValue, selectedValue1]);
 
   if (isLoading) {

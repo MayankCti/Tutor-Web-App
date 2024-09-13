@@ -11,28 +11,17 @@ function FeesAndDues() {
   const dispatch = useDispatch();
   const [active, setActive] = useState(true);
   const [selectedMonth, setSelectedMonth] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
   const { feesandDuesData, isLoading } = useSelector(
     (state) => state?.classFeeReducer
   );
 
-  useEffect(() => {
-    dispatch(fetchBillingStudent());
-  }, []);
   const sidebarActive = () => {
     setActive(!active);
   };
-
+  
   useEffect(() => {
-    const filtered = feesandDuesData.filter((item) => {
-      if (!selectedMonth) return true;
-      console.log("selected month", selectedMonth);
-      const itemMonth = moment(item?.dueDate, "DD-MM-YYYY").format("YYYY-MM");
-      return itemMonth === selectedMonth;
-    });
-
-    setFilteredData(filtered);
-  }, [selectedMonth]);
+    dispatch(fetchBillingStudent());
+  }, []);
 
   const renderStatusButton = (status) => {
     if (!status) {
@@ -96,7 +85,7 @@ function FeesAndDues() {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredData?.map((item, index) => (
+                      {feesandDuesData?.map((item, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>

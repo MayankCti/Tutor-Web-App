@@ -25,6 +25,9 @@ import CreateStudent from "../pages/teacher/CreateStudent";
 import EditStudentDetail from "../pages/teacher/EditStudentDetail";
 import CreateClass from "../pages/teacher/CreateClass";
 import CreateStudentClass from "../pages/students/CreateStudentClass";
+import Setting from "../pages/teacher/setting";
+import CreateClassType from "../pages/teacher/setting/CreateClassType";
+import UpdateClassType from "../pages/teacher/setting/UpdateClassType";
 
 export const pageRoutes = {
   home: "/",
@@ -44,6 +47,10 @@ export const pageRoutes = {
   createStudent: "/add-student",
   createClass: "/create-class",
   editStudentDetail: "/edit-student-details",
+  setting : "/setting",
+  createClassType : "/create-class-type",
+  updateClassType : "/Edit-class-type",
+  
   // studentProfie
   studentchangePassword: "/student/change-password",
   studenteditProfile: "/student/edit-profile",
@@ -52,7 +59,7 @@ export const pageRoutes = {
   studentlogin: "/student/login",
   studentmessages: "/student/messages",
   studentmyClass: "/student/myClass",
-  studentprofile: "/student/profile",
+  studentProfile: "/student/profile",
   createStudentClass: "/student/create-student-class",
 };
 
@@ -159,12 +166,36 @@ export const AllRoutes = [
     element: <CreateClass />,
     isPrivate: false,
   },
+  {
+    name: "Setting",
+    path: pageRoutes?.setting,
+    element: <Setting />,
+    isPrivate: false,
+  },
+  {
+    name: "createClassType",
+    path: pageRoutes?.createClassType,
+    element: <CreateClassType />,
+    isPrivate: false,
+  },
+  {
+    name: "UpdateClassType",
+    path: pageRoutes?.updateClassType,
+    element: <UpdateClassType />,
+    isPrivate: false,
+  },
 
   // Students
   {
     name: "studentchangePassword",
     path: pageRoutes?.studentchangePassword,
     element: <StudentChangePassword />,
+    isPrivate: true,
+  },
+  {
+    name: "StudentProfile",
+    path: pageRoutes?.studentProfile,
+    element: <StudentProfile />,
     isPrivate: true,
   },
   {
