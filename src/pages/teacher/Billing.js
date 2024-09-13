@@ -1,12 +1,15 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { curSym, pipViewDate } from "../../utils/pip";
 import NoRecord from "../../components/other/NoRecord";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
+import { fetchBilling } from "../../redux/actions/classFeeAction";
+import Loader from "../../components/other/Loader";
 
 const Billing = () => {
+  const dispatch = useDispatch();
   const [month, setMonth] = useState("");
   const options = [
     { value: "Month", label: "Month" },
@@ -15,7 +18,15 @@ const Billing = () => {
     { value: "March", label: "March" },
   ];
   const { isToggle } = useSelector((state) => state.authReducer);
-  const { students } = useSelector((state) => state?.classFeeReducer);
+  const { students,isLoading } = useSelector((state) => state?.classFeeReducer);
+
+  useEffect(() => {
+    dispatch(fetchBilling());
+  }, []);
+
+  if(isLoading){
+    return <Loader/>
+  }
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
@@ -58,25 +69,26 @@ const Billing = () => {
                                   className="ct_img_36"
                                 />
                                 <h5 className="ct_fs_14 ct_fw_600 mb-0">
-                                  {item?.name ?? ""}
+                                  {item?.student?.first_name ?? ""}{" "}
+                                  {item?.student?.last_name ?? ""}
                                 </h5>
                               </div>
                             </td>
-                            <td>{item?.email ?? ""}</td>
+                            <td>{item?.student?.email ?? ""}</td>
                             <td>
                               {curSym + " "}
-                              {item?.totalDue ?? ""}
+                              {item?.total_due ?? ""}
                             </td>
-                            <td>{pipViewDate(item?.dueDate) ?? ""}</td>
+                            <td>{pipViewDate(item?.due_date) ?? ""}</td>
                             <td className="text-end">
                               <button
                                 className={`ct_purple_btn py-1 ct_border_radius_10 ${
-                                  item?.status == "Due"
-                                    ? "ct_red_bg"
-                                    : "ct_green_bg"
+                                  item?.payment_status
+                                    ? "ct_green_bg"
+                                    : "ct_red_bg"
                                 }`}
                               >
-                                {item?.status}
+                                {item?.payment_status ? "Paid" : "Due"}
                               </button>
                             </td>
                           </tr>

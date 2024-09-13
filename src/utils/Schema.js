@@ -132,6 +132,48 @@ export const BankDetailSchema = Yup.object({
     .required("Please enter BSB code"),
 });
 
+<<<<<<< Updated upstream
+=======
+export const createStudentSchema = Yup.object().shape({
+  first_name: Yup.string().required("Please enter first name"),
+  last_name: Yup.string().required("Please enter last name"),
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Please enter a valid email address")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/,
+      "Please enter a valid email address"
+    ),
+  contact_number: Yup.string()
+    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+      message: "Please enter valid contact number",
+      excludeEmptyString: true,
+    })
+    .required("Please enter contact number"),
+  emergency_contact_number: Yup.string()
+    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+      message: "Please enter valid contact number",
+      excludeEmptyString: true,
+    })
+    .required("Please enter emergency contact number"),
+  date_of_birth: Yup.string()?.required("Please enter date of birth"),
+  grade: Yup.string()?.required("Please enter grade"),
+  school_name: Yup.string()?.required("Please enter school name"),
+  city: Yup.string()?.required("Please enter city"),
+  address: Yup.string()?.required("Please enter address"),
+  student_status: Yup.string().required("Please select student status"),
+});
+
+export const createClassTypeSchema = Yup.object().shape({
+  class_type_name: Yup.string().required("Please enter class type"),
+  student_count: Yup.number()
+    .typeError("Student count must be a number")
+    .positive("Student count must be a positive number")
+    .integer("Student count must be an integer")
+    .min(1, "Student count must be at least 1")
+    .required("Please enter student count"),
+});
+>>>>>>> Stashed changes
 // Student Schemas
 
 export const loginvalidationSchema = Yup.object({
@@ -168,7 +210,7 @@ export const editProfileValidationSchema = Yup.object().shape({
     .required("Contact number is required"),
   emergency_contact_number: Yup.string()
     .matches(
-      /^(?:\+61|0)[2-9]\d{8}$/,
+      /^[0-9]{10}$/,
       "Emergency contact number must be a valid"
     )
     .required("Emergency contact number is required"),

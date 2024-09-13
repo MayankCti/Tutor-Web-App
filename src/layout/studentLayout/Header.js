@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
+import Logout from "../../components/studentComponent/Logout";
 
 function Header({ onToggleSidebar }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Header({ onToggleSidebar }) {
           <div className="ct_user_profile_head">
             <a
               href="javascript:void(0)"
-              onClick={() => navigate(pageRoutes?.studentprofile)}
+              onClick={() => navigate(pageRoutes?.studentProfile)}
             >
               <img
                 src="../assets/img/user_profile.png"
@@ -43,6 +44,7 @@ function Header({ onToggleSidebar }) {
           </div>
         </div>
       </div>
+      <Logout/>
     </>
   );
 }

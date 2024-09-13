@@ -166,8 +166,8 @@ export const authSlice = createSlice({
     builder.addCase(bankDetail.fulfilled, (state, action) => {
       const { success } = action?.payload ?? {};
       if (success) {
-        pipSetRegisterStep(5);
-        state.currentStep = 5;
+        pipSetRegisterStep(4);
+        state.currentStep = 4;
       }
       state.isLoading = false;
     });

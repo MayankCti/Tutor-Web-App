@@ -39,8 +39,23 @@ const StudentTable = ({ statusFilter }) => {
           <td>{item?.city ?? ""}</td>
           <td>{item?.status}</td>
           <td className="text-end">
+<<<<<<< Updated upstream
             <button
               className="ct_purple_btn py-1 ct_border_radius_10"
+=======
+            <i
+              class="fa-regular fa-pen-to-square ms-2"
+              onClick={() => {
+                navigate(pageRoutes?.editStudentDetail, {
+                  state: {
+                    studentDetails: item,
+                  },
+                });
+              }}
+            ></i>
+            <i
+              class="fa-solid fa-trash trash_icon_color ms-3"
+>>>>>>> Stashed changes
               data-bs-toggle="modal"
               data-bs-target="#student_detail"
             >

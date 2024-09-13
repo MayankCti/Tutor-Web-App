@@ -36,13 +36,14 @@ function StudentProfile() {
       .then((res) => {
         if (res?.data?.success) {
           setProfile(res?.data?.data);
-          setLoader(false);
         }
       })
       .catch((err) => {
         console.log("An error", err);
+      })
+      .finally(()=>{
         setLoader(false);
-      });
+      })
   };
 
   return (

@@ -21,6 +21,16 @@ import StudentForgetPassword from "../pages/students/StudentForgetPassword";
 import StudentMessage from "../pages/students/StudentMessage";
 import StudentLogin from "../pages/students/StudentLogin";
 import StudentProfile from "../pages/students/StudentProfile";
+<<<<<<< Updated upstream
+=======
+import CreateStudent from "../pages/teacher/CreateStudent";
+import EditStudentDetail from "../pages/teacher/EditStudentDetail";
+import CreateClass from "../pages/teacher/CreateClass";
+import CreateStudentClass from "../pages/students/CreateStudentClass";
+import Setting from "../pages/teacher/setting";
+import CreateClassType from "../pages/teacher/setting/CreateClassType";
+import UpdateClassType from "../pages/teacher/setting/UpdateClassType";
+>>>>>>> Stashed changes
 
 export const pageRoutes = {
   home: "/",
@@ -37,6 +47,16 @@ export const pageRoutes = {
   forgotPassword: "/forgot-password",
   changePassword: "/change-password",
   stepForm: "/step-form",
+<<<<<<< Updated upstream
+=======
+  createStudent: "/add-student",
+  createClass: "/create-class",
+  editStudentDetail: "/edit-student-details",
+  setting : "/setting",
+  createClassType : "/create-class-type",
+  updateClassType : "/Edit-class-type",
+  
+>>>>>>> Stashed changes
   // studentProfie
   studentchangePassword: "/student/change-password",
   studenteditProfile: "/student/edit-profile",
@@ -45,7 +65,8 @@ export const pageRoutes = {
   studentlogin: "/student/login",
   studentmessages: "/student/messages",
   studentmyClass: "/student/myClass",
-  studentprofile: "/student/profile",
+  studentProfile: "/student/profile",
+  createStudentClass: "/student/create-student-class",
 };
 
 export const AllRoutes = [
@@ -133,12 +154,57 @@ export const AllRoutes = [
     element: <StepForm />,
     isPrivate: false,
   },
+<<<<<<< Updated upstream
+=======
+  {
+    name: "CreateStudent",
+    path: pageRoutes?.createStudent,
+    element: <CreateStudent />,
+    isPrivate: false,
+  },
+  {
+    name: "editStudentDetail",
+    path: pageRoutes?.editStudentDetail,
+    element: <EditStudentDetail />,
+    isPrivate: false,
+  },
+  {
+    name: "CreateClass",
+    path: pageRoutes?.createClass,
+    element: <CreateClass />,
+    isPrivate: false,
+  },
+  {
+    name: "Setting",
+    path: pageRoutes?.setting,
+    element: <Setting />,
+    isPrivate: false,
+  },
+  {
+    name: "createClassType",
+    path: pageRoutes?.createClassType,
+    element: <CreateClassType />,
+    isPrivate: false,
+  },
+  {
+    name: "UpdateClassType",
+    path: pageRoutes?.updateClassType,
+    element: <UpdateClassType />,
+    isPrivate: false,
+  },
+>>>>>>> Stashed changes
 
   // Students
   {
     name: "studentchangePassword",
     path: pageRoutes?.studentchangePassword,
     element: <StudentChangePassword />,
+    isPrivate: true,
+  },
+  {
+    name: "StudentProfile",
+    path: pageRoutes?.studentProfile,
+    element: <StudentProfile />,
     isPrivate: true,
   },
   {
@@ -178,9 +244,9 @@ export const AllRoutes = [
     isPrivate: true,
   },
   {
-    name: "studentprofile",
-    path: pageRoutes?.studentprofile,
-    element: <StudentProfile />,
+    name: "CreateStudentClass",
+    path: pageRoutes?.createStudentClass,
+    element: <CreateStudentClass />,
     isPrivate: true,
   },
 ];

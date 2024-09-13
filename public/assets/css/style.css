@@ -1048,7 +1048,7 @@ footer{
     counter-reset: step;
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
   #progressbar li {
@@ -1524,3 +1524,6 @@ input.next.action-button,input.submit.action-button  {
     }
   }
   
+  .ct_flex_1{
+    flex: 1;
+  }

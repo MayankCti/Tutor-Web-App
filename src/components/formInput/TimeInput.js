@@ -21,12 +21,25 @@ const TimeInput = () => {
 
   // Function to handle time changes
   const handleTimeChange = (index, type, value) => {
+    console.log(index, "<<<", type, "<<<", value, "<<<");
     const updatedTimeRanges = [...timeRanges];
     updatedTimeRanges[index][type] = value;
     setTimeRanges(updatedTimeRanges);
 
     // Validate overlapping times
     validateTimeRanges(updatedTimeRanges);
+  };
+
+  const onHandleClickOnTime = (index, type) => {
+    const updatedTimeRanges = [...timeRanges];
+
+    updatedTimeRanges[index] = {
+      ...updatedTimeRanges[index],
+      [type]: null,
+    };
+
+    setTimeRanges(updatedTimeRanges);
+    // Add validation logic for overlapping times here if needed
   };
 
   // Validation function for overlapping times
@@ -40,7 +53,6 @@ const TimeInput = () => {
           const range1End = moment(ranges[i].end, "HH:mm");
           const range2Start = moment(ranges[j].start, "HH:mm");
           const range2End = moment(ranges[j].end, "HH:mm");
-
           if (
             range1Start.isValid() &&
             range1End.isValid() &&
@@ -59,13 +71,25 @@ const TimeInput = () => {
         newErrors[i] = null;
       }
     }
+    console.log({ newErrors }, "newErrors");
     setErrors(newErrors);
     if (newErrors.every((error) => error === null)) {
       message.success("Valid time ranges!");
     }
   };
 
+<<<<<<< Updated upstream
   return { timeRanges, addTimeRange, deleteTimeRange, handleTimeChange, errors };
+=======
+  return {
+    timeRanges,
+    addTimeRange,
+    deleteTimeRange,
+    handleTimeChange,
+    onHandleClickOnTime,
+    errors,
+  };
+>>>>>>> Stashed changes
 };
 
 export default TimeInput;

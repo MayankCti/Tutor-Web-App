@@ -8,16 +8,34 @@ import StudentTable from "../../components/StudentTable";
 import { fetchProfile } from "../../redux/actions/authAction";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { handleCurrentStep } from "../../redux/reducers/authReducer";
+<<<<<<< Updated upstream
+=======
+import {
+  fetchDashboard,
+  fetchStudentList,
+} from "../../redux/actions/studentAction";
+>>>>>>> Stashed changes
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+<<<<<<< Updated upstream
   const { isToggle } = useSelector((state) => state.authReducer);
   const { isLoading, cardData } = useSelector((state) => state?.studentReducer);
 
   useEffect(() => {
+=======
+  const { isToggle, isLoading } = useSelector((state) => state.authReducer);
+  const { cardData } = useSelector((state) => state?.studentReducer);
+
+  useEffect(() => {
+    dispatch(fetchStudentList());
+    dispatch(fetchDashboard());
+  }, []);
+  useEffect(() => {
+>>>>>>> Stashed changes
     dispatch(fetchProfile()).then((profile) => {
-      const formStatus = profile?.payload?.data?.form_completed
+      const formStatus = profile?.payload?.data?.form_completed;
       if (formStatus <= 4) {
         dispatch(handleCurrentStep(formStatus));
         navigate(pageRoutes?.stepForm);

@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
-import Chatbar from "../../components/chat/Chatbar";
-import Chatbody from "../../components/chat/Chatbody";
+// import Chatbar from "../../components/chat/Chatbar";
+// import Chatbody from "../../components/chat/Chatbody";
 
 const Messages = () => {
-const { isToggle } = useSelector((state) => state.authReducer);
-return (
+  const { isToggle } = useSelector((state) => state.authReducer);
+  return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
         <Sidebar />
@@ -21,8 +21,8 @@ return (
                 </div>
                 <section className="message-area">
                   <div className="chat-area row">
-                    <Chatbar />
-                    <Chatbody />
+                    {/* <Chatbar />                    
+                    <Chatbody /> */}
                   </div>
                 </section>
               </div>

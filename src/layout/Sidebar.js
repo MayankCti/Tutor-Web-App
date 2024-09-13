@@ -59,7 +59,7 @@ const Sidebar = () => {
             Billing
           </a>
         </li>
-        {/* <li onClick={() => navigate(pageRoutes.messages)}>
+        <li onClick={() => navigate(pageRoutes.messages)}>
           <a
             href="javascript:void(0)"
             className={pathname == pageRoutes?.messages ? "active" : ""}
@@ -67,7 +67,7 @@ const Sidebar = () => {
             <img src="assets/img/message_icon.svg" alt="" />
             Messages
           </a>
-        </li> */}
+        </li>
         <li onClick={() => navigate(pageRoutes.calendar)}>
           <a
             href="javascript:void(0)"
@@ -77,6 +77,16 @@ const Sidebar = () => {
             Calendar
           </a>
         </li>
+        <li onClick={() => navigate(pageRoutes?.setting)}>
+          <a
+            href="javascript:void(0)"
+            className={pathname == pageRoutes?.setting ? "active" : ""}
+          >
+            <img src="assets/img/gear-solid.svg" alt="" />
+            Setting
+          </a>
+        </li>
+
       </ul>
     </div>
   );
