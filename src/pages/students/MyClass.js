@@ -13,31 +13,17 @@ function MyClass() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
-  const [filteredData, setFilteredData] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState();
   const { myclassData } = useSelector((state) => state?.classFeeReducer);
+  const [filteredData, setFilteredData] = useState(myclassData);
+
   const sidebarActive = () => {
     setActive(!active);
-  };
-
-  const today = new date();
-
-  const handleDateChange = (value) => {
-    setSelectedMonth(value);
   };
 
   useEffect(() => {
     dispatch(fetchMyBookedClasses());
   }, []);
-
-  useEffect(() => {
-    const filtered = myclassData?.filter((item) => {
-      if (!selectedMonth) return true;
-      const itemMonth = moment(item?.class?.class_date).format("MM");
-      return itemMonth === selectedMonth;
-    });
-    setFilteredData(filtered);
-  }, [selectedMonth]);
 
   return (
     <>
@@ -58,7 +44,7 @@ function MyClass() {
                         name=""
                         class="form-control py-2 ct_purple_bg text-white ct_select_bg"
                         id="floatingInputValue"
-                        onChange={(e) => handleDateChange(e.target.value)}
+                        onChange={setSelectedMonth}
                       >
                         <option value="">Month</option>
                         <option value="01">January</option>
@@ -90,7 +76,7 @@ function MyClass() {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredData?.map((item, index) => (
+                      {myclassData?.map((item, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>

@@ -78,18 +78,20 @@ function StudentEditProfile() {
     parent_email: profile?.parent_email || "",
     parent_contact_number: profile?.parent_contact_number || "",
   };
-
+  
 
   const handleImageChange = (event, setFieldValue) => {
     const file = event.target.files[0];
     if (file) {
       setImagePreview(URL.createObjectURL(file));
-      setFieldValue("file", file);
+      setFieldValue("file", file); 
     }
+    
   };
 
   const handleUpdate = (values) => {
     const formdata = new FormData();
+    console.log("value",values);
     formdata.append("first_name", values?.first_name);
     formdata.append("last_name", values?.last_name);
     formdata.append("contact_number", values?.contact_number);
@@ -109,7 +111,9 @@ function StudentEditProfile() {
     formdata.append("parent_email", values?.parent_email);
     formdata.append("parent_contact_number", values?.parent_contact_number);
     if (values?.file) {
-      formdata.append("file", values?.file);
+      // formdata.append("file", values?.file);
+      formdata.append("file", new Blob([values?.file]));
+
     }
 
     const token = getAuthStudent();
@@ -124,11 +128,13 @@ function StudentEditProfile() {
       .then((res) => {
         if (res?.data?.success) {
           message.success(res?.data?.message);
-          navigate(pageRoutes?.studentprofile);
+          navigate(pageRoutes?.studentProfile);
         }
       })
       .catch((err) => {
         console.log("An error occured", err);
+        message.error(err?.response?.data?.message);
+
       });
   };
 
@@ -191,7 +197,14 @@ function StudentEditProfile() {
                                   className="d-none"
                                   onChange={(event) =>
                                     handleImageChange(event, setFieldValue)
-                                  }
+                                  }     
+                                  // onChange={(event) => {
+                                  //   const file = event.target.files[0];
+                                  //   if (file) {
+                                  //     setImagePreview(URL.createObjectURL(file));
+                                  //     setFieldValue("profile_images", file);
+                                  //   }
+                                  // }}                            
                                 />
                                 <div className="ct_edit_profile_icon">
                                   <i className="fa-solid fa-pen"></i>

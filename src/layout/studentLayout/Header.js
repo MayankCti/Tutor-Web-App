@@ -18,7 +18,7 @@ function Header({ onToggleSidebar }) {
           <div className="ct_user_profile_head">
             <a
               href="javascript:void(0)"
-              onClick={() => navigate(pageRoutes?.studentprofile)}
+              onClick={() => navigate(pageRoutes?.studentProfile)}
             >
               <img
                 src="../assets/img/user_profile.png"
@@ -44,7 +44,7 @@ function Header({ onToggleSidebar }) {
           </div>
         </div>
       </div>
-      <Logout/>
+      <Logout />
     </>
   );
 }
