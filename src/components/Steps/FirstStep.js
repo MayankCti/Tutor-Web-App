@@ -21,9 +21,11 @@ const FirstStep = () => {
     stream,
     address,
     file,
+    full_name,
   } = pipGetTeacherProfile();
 
   const initialState = {
+    full_name: full_name ?? "",
     theme: theme ?? "",
     coaching_classes_name: coaching_classes_name ?? "",
     contact_number: contact_number ?? "",
@@ -35,6 +37,7 @@ const FirstStep = () => {
   useEffect(() => {
     dispatch(fetchProfile()).then((profile) => {
       const formStatus = profile?.payload?.data?.form_completed;
+      console.log({ object: formStatus });
       setStep(formStatus);
     });
   }, []);
@@ -108,6 +111,27 @@ const FirstStep = () => {
                   touched={touched}
                   fieldName="file"
                 />
+                <div class="form-group text-start mb-4">
+                  <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                    Full Name
+                  </label>
+                  <div class="position-relative">
+                    <input
+                      type="text"
+                       class="ct_input form-control ct_input_40"
+                      value={values.full_name}
+                      id="full_name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+
+                    <ErrorMessage
+                      errors={errors}
+                      touched={touched}
+                      fieldName="full_name"
+                    />
+                  </div>
+                </div>
                 <div class="form-group text-start mb-4">
                   <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
                     Theme color code
