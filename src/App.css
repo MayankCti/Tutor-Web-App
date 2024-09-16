@@ -11,7 +11,26 @@
   border-color: var(--dark_purple) !important;
   box-shadow: unset !important;
 }
+.ct_add_member_popup {
+  position: absolute;
+  z-index: 999;
+  background: #fff;
+  width: 100%;
+  top: 0px;
+}
+.ct_add_member_popup {
+  position: absolute;
+  z-index: 999;
+  background: #fff;
+  width: 100%;
+  top: 0px;
+  left: -100%;
+  transition: 0.4s ease all;
 
+}
+.ct_add_member_popup.ct_add_popup_active{
+  left: 0px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

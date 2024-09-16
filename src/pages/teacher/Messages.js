@@ -14,7 +14,7 @@ return (
         <div className="ct_right_content">
           <Headers />
           <div className="ct_inner_dashbaord_main">
-            <div className="ct_white_bg ct_mt_28">
+            <div className="ct_white_bg  ct_message_scroll_h_remove">
               <div className=" px-xxl-4">
                 <div className="d-flex align-items-center justify-content-between gap-2 mb-4 flex-wrap">
                   <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">Messages</h4>
@@ -22,7 +22,9 @@ return (
                 <section className="message-area">
                   <div className="chat-area row">
                     <Chatbar />
-                    <Chatbody />
+                    <Chatbody /> 
+                   
+                    
                   </div>
                 </section>
               </div>

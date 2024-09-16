@@ -22,6 +22,7 @@ section{
     --red:#A1001D;
     --dark_green:#115C18;
     --grey_text:#999999;
+    --light_purple_bg:hsl(185.71deg 100% 32.94% / 16%);
 }
 .ct_light_darkgreen_bg{
     background-color: var(--green) !important;
@@ -1526,4 +1527,16 @@ input.next.action-button,input.submit.action-button  {
   
   .ct_flex_1{
     flex: 1;
+  }
+
+  .ct_add_user{
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark_purple);
+    color: #fff;
+    border-radius: 100px;
+    cursor: pointer;
   }
