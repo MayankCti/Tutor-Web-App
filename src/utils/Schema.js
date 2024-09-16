@@ -92,10 +92,11 @@ export const basicDetailSchema = Yup.object().shape({
   //     ];
   //     return validFileTypes.includes(value.type);
   //   })?.optional(),
+  full_name: Yup.string().required("Please enter full name"),
   theme: Yup.string().required("Please select theme colour code"),
   coaching_classes_name: Yup.string().required("Please enter class name"),
   contact_number: Yup.string()
-    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+    .matches(/^(0\d{9}|[1-9]\d{9})$/, {
       message: "Please enter valid contact number",
       excludeEmptyString: true,
     })
@@ -142,13 +143,13 @@ export const createStudentSchema = Yup.object().shape({
       "Please enter a valid email address"
     ),
   contact_number: Yup.string()
-    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+    .matches(/^(0\d{9}|[1-9]\d{9})$/, {
       message: "Please enter valid contact number",
       excludeEmptyString: true,
     })
     .required("Please enter contact number"),
   emergency_contact_number: Yup.string()
-    .matches(/^(\+?61|0)?(4\d{8}|[2-9]\d{8})$/, {
+    .matches(/^(0\d{9}|[1-9]\d{9})$/, {
       message: "Please enter valid contact number",
       excludeEmptyString: true,
     })
@@ -204,10 +205,7 @@ export const editProfileValidationSchema = Yup.object().shape({
     .matches(/^[0-9]{10}$/, "Contact number must be exactly 10 digits")
     .required("Contact number is required"),
   emergency_contact_number: Yup.string()
-    .matches(
-      /^[0-9]{10}$/,
-      "Emergency contact number must be a valid"
-    )
+    .matches(/^[0-9]{10}$/, "Emergency contact number must be a valid")
     .required("Emergency contact number is required"),
   address: Yup.string()
     .min(10, "Address must be at least 10 characters")

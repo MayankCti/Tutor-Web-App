@@ -12,6 +12,7 @@ import {
   filterClasses,
 } from "../../redux/actions/classFeeAction";
 import { getDayName, isPastClassTime, pipViewDate } from "../../utils/pip";
+import NoRecord from "../../components/other/NoRecord";
 
 const Classes = () => {
   const dispatch = useDispatch();
@@ -89,6 +90,9 @@ const Classes = () => {
                     </div>
                   </div>
                 </div>
+                {
+                  classesList?.length !=0 ?
+               
                 <div className="row">
                   {classesList?.map((classItem, index) => (
                     <div
@@ -137,6 +141,9 @@ const Classes = () => {
                     </div>
                   ))}
                 </div>
+                :
+                <NoRecord/>
+                 }
               </div>
             </div>
           </div>
