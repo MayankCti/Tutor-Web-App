@@ -106,7 +106,7 @@ const Headers = () => {
                   className="bg-danger ct_purple_btn justify-content-center"
                   style={{ borderColor: "rgb(220, 53, 69)" }}
                 >
-                  Yes Logout!
+                  Logout
                 </a>
               </div>
               <div></div>
