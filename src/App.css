@@ -13,10 +13,17 @@
 }
 .ct_add_member_popup {
   position: absolute;
-  z-index: 999;
+  z-index: 99;
   background: #fff;
   width: 100%;
   top: 0px;
+  
+}
+.ct_add_user_message_list_34 {
+  height: calc(100vh - 336px);
+  /* max-height: calc(100vh - 200px); */
+  overflow-y: auto;
+  min-height: calc(100vh - 336px);
 }
 .ct_add_member_popup {
   position: absolute;

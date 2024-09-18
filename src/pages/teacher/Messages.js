@@ -1,13 +1,34 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import socketIO from "socket.io-client";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import Chatbar from "../../components/Chat/Chatbar";
 import Chatbody from "../../components/Chat/Chatbody";
+import {
+  fetchAllStudentChatList,
+  fetchChatList,
+} from "../../redux/actions/messagesActions";
+import { BASE_URL } from "../../routes/endPoints";
+import { pipGetAccessToken } from "../../utils/pip";
+const socket = socketIO.connect(`${BASE_URL}`, {
+  auth: {
+    token: pipGetAccessToken(), // Send the token here
+  },
+});
+console.log({ socket });
 
 const Messages = () => {
-const { isToggle } = useSelector((state) => state.authReducer);
-return (
+  const dispatch = useDispatch();
+  const { isToggle } = useSelector((state) => state.authReducer);
+
+  useEffect(() => {
+    dispatch(fetchAllStudentChatList());
+    dispatch(fetchChatList());
+  }, []);
+
+
+  return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
         <Sidebar />
@@ -22,9 +43,7 @@ return (
                 <section className="message-area">
                   <div className="chat-area row">
                     <Chatbar />
-                    <Chatbody /> 
-                   
-                    
+                    <Chatbody socket={socket} />
                   </div>
                 </section>
               </div>

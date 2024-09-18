@@ -130,3 +130,13 @@ export const getDayName = (dateString) => {
   ];
   return days[dateObject.getDay()];
 };
+
+
+// Get Time View
+
+export const getTimeView = (time)=>{
+  if(!time)return;
+  return  moment(time).format(
+    "hh:mm A"
+  )
+}

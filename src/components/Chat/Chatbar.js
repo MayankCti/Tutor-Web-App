@@ -1,11 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { debounce } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleChatBar,toggleSlider } from "../../redux/reducers/messageReducer";
+import {
+  setActiveChatDetail,
+  toggleSlider,
+} from "../../redux/reducers/messageReducer";
 import ChatList from "./ChatList";
+import {
+  chatMessages,
+  fetchAllStudentChatList,
+  fetchChatList,
+  startChat,
+} from "../../redux/actions/messagesActions";
+import { pipGetTeacherProfile } from "../../utils/pip";
 
 const Chatbar = () => {
   const dispatch = useDispatch();
-  const { isSlider } = useSelector((state) => state?.messageReducer);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const { isSlider, allStudentList, chatList } = useSelector(
+    (state) => state?.messageReducer
+  );
+
+  const debouncedSetSearchTerm = debounce((value) => {
+    setSearchTerm(value);
+  }, 500);
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setInputValue(value);
+    debouncedSetSearchTerm(value);
+  };
+
+  useEffect(() => {
+    dispatch(fetchAllStudentChatList(searchTerm));
+  }, [searchTerm]);
+
+  const handleStartChat = (id) => {
+    const callback = (response) => {
+      if (response.success) {
+        dispatch(fetchChatList());
+        dispatch(setActiveChatDetail(response?.data));
+        dispatch(
+          chatMessages({
+            payload: {
+              chat_id: response?.data?.id,
+            },
+          })
+        );
+        console.log({ response: response?.data });
+      }
+    };
+    dispatch(
+      startChat({
+        payload: {
+          student_id: id,
+          teacher_id: pipGetTeacherProfile()?.id,
+        },
+        callback,
+      })
+    );
+  };
+
+  const handleGetChatMessages = (item) => {
+    dispatch(setActiveChatDetail(item));
+    dispatch(
+      chatMessages({
+        payload: {
+          chat_id: item?.id,
+        },
+      })
+    );
+  };
+
+  const [searchTerm1, setSearchTerm1] = useState("");
   return (
     <>
       <div class=" col-xl-4">
@@ -20,7 +88,8 @@ const Chatbar = () => {
                 <div className="mb-3 d-flex align-items-center justify-content-between">
                   <h4 className="ct_fs_24 ct_fw_700 mb-0 ">Add Member</h4>
                   <h4
-                    className="ct_fs_24 ct_fw_700 mb-0" style={{cursor:"pointer"}}
+                    className="ct_fs_24 ct_fw_700 mb-0"
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       dispatch(toggleSlider(false));
                     }}
@@ -31,14 +100,20 @@ const Chatbar = () => {
                 <div class="msg-search mb-4" style={{ flex: "1 " }}>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="inlineFormInputGroup"
-                    placeholder="Search"
-                    aria-label="search"
+                    onChange={handleChange}
+                    value={inputValue}
                   />
                   <i class="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
                 </div>
-                <ChatList />
+                <div className="ct_add_user_message_list_34">
+                  <ChatList
+                    isDisplay={false}
+                    data={allStudentList}
+                    handleClick={handleStartChat}
+                  />
+                </div>
               </div>
               <div class="chat-header">
                 <div className="d-flex align-items-center gap-2">
@@ -49,6 +124,8 @@ const Chatbar = () => {
                       id="inlineFormInputGroup"
                       placeholder="Search"
                       aria-label="search"
+                      onChange={(e)=>setSearchTerm1(e.target.value)}
+                      value={searchTerm1}
                     />
                     <i class="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
                   </div>
@@ -64,9 +141,7 @@ const Chatbar = () => {
               </div>
 
               <div class="modal-body mt-4">
-                {/* chat-list */}
-                <ChatList />
-                {/* chat-list */}
+                <ChatList data={chatList} handleClick={handleGetChatMessages} searchTerm1={searchTerm1}/>
               </div>
             </div>
           </div>

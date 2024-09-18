@@ -1,12 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ChatFooter from "./ChatFooter";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleChatBar } from "../../redux/reducers/messageReducer";
+import {
+  setFilterChatList,
+  toggleChatBar,
+} from "../../redux/reducers/messageReducer";
 import BlankMessage from "../other/BlankMessage";
+import moment from "moment";
+import { getTimeView, pipGetTeacherProfile } from "../../utils/pip";
 
-const Chatbody = () => {
+const Chatbody = ({ socket }) => {
   const dispatch = useDispatch();
-  const { isToggle } = useSelector((state) => state?.messageReducer);
+  let lastMessageDate = null;
+  const [isOnline, setIsOnline] = useState(false);
+  const { isToggle, chats, activeChatDetail } = useSelector(
+    (state) => state?.messageReducer
+  );
+
+  const [messages, setMessages] = useState([...chats]);
+
+  useEffect(() => {
+    setMessages([...chats]);
+  }, [chats]);
+
+  useEffect(() => {
+    socket.on("chat message", (data) => {
+      setMessages([...messages, data]);
+      if (activeChatDetail) {
+        dispatch(setFilterChatList());
+      }
+    });
+  }, [socket, messages]);
+
+  const formatDate = (date) => {
+    const messageDate = moment(date);
+    const today = moment().startOf("day");
+    const yesterday = moment().subtract(1, "days").startOf("day");
+
+    if (messageDate.isSame(today, "d")) {
+      return "Today";
+    } else if (messageDate.isSame(yesterday, "d")) {
+      return "Yesterday";
+    } else {
+      return messageDate.format("MMMM D, YYYY"); // Display full date
+    }
+  };
+
+  const studentId = activeChatDetail?.student?.id ?? null;
+  const teacherId = pipGetTeacherProfile().id ?? null;
+
+  const roomId = `${studentId}-${teacherId}`;
+
+  useEffect(() => {
+    if (!activeChatDetail || activeChatDetail.length <= 0 || !roomId) {
+      return;
+    }
+    socket.emit("join_room", { roomId });
+
+    const handleUserStatusChange = (status) => {
+      const { userId, is_online, last_seen } = status;
+      setIsOnline(is_online);
+      console.log("User status change detected:", {
+        userId,
+        is_online,
+        last_seen,
+      });
+    };
+    socket.on("user-status-change", handleUserStatusChange);
+
+    setMessages([]);
+
+    return () => {
+      socket.off("user-status-change", handleUserStatusChange);
+      socket.emit("leave_room", { roomId });
+    };
+  }, [activeChatDetail, roomId, socket]);
+
   return (
     <>
       <div class=" col-xl-8">
@@ -30,16 +99,19 @@ const Chatbody = () => {
                         <div class="flex-shrink-0">
                           <img
                             class="img-fluid ct_img_36"
-                            src="assets/img/user_profile.png"
+                            src={
+                              activeChatDetail?.student?.profile_image ??
+                              "assets/img/user_profile.png"
+                            }
                             alt="user img"
                           />
                         </div>
                         <div class="flex-grow-1 ms-3">
-                          <h3 class="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600">
-                            Mehedi Hasan
+                          <h3 class="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600 text-capitalize">
+                            {`${activeChatDetail?.student?.first_name} ${activeChatDetail?.student?.last_name}`}
                           </h3>
                           <p class="mb-0 ct_fs_12 ct_ff_roboto">
-                            Pesquisar chat
+                            {isOnline ? "Online" : "Offline"}
                           </p>
                         </div>
                       </div>
@@ -71,104 +143,61 @@ const Chatbody = () => {
                 <div class="modal-body">
                   <div class="msg-body">
                     <ul>
-                      <li class="sender">
-                        <img
-                          src="assets/img/user_profile.png"
-                          alt=""
-                          class="ct_img_30"
-                        />
-                        <div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s,{" "}
-                          </p>
-                          <span class="time">10:06 am</span>
-                        </div>
-                      </li>
-                      <li class="repaly">
-                        <div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s,
-                          </p>
-                          <span class="time">10:20 am</span>
-                        </div>
-                        <img
-                          src="assets/img/user_profile.png"
-                          alt=""
-                          class="ct_img_30"
-                        />
-                      </li>
-                      <li class="sender">
-                        <img
-                          src="assets/img/user_profile.png"
-                          alt=""
-                          class="ct_img_30"
-                        />
-                        <div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s,{" "}
-                          </p>
-                          <span class="time">10:06 am</span>
-                        </div>
-                      </li>
-                      <li class="repaly">
-                        <div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s,
-                          </p>
-                          <span class="time">10:20 am</span>
-                        </div>
-                        <img
-                          src="assets/img/user_profile.png"
-                          alt=""
-                          class="ct_img_30"
-                        />
-                      </li>
-                      <li>
-                        <div class="divider">
-                          <h6>Today</h6>
-                        </div>
-                      </li>
+                      {messages?.length != 0 ? (
+                        messages?.map((item, index) => {
+                          const messageDate = formatDate(item.created_at);
+                          const isSenderTeacher =
+                            item.sender_teacher_id !== null;
 
-                      <li class="repaly">
-                        <div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s,
-                          </p>
-                          <span class="time">10:20 am</span>
-                        </div>
-                        <img
-                          src="assets/img/user_profile.png"
-                          alt=""
-                          class="ct_img_30"
-                        />
-                      </li>
-                      <li class="repaly">
-                        <div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s,
-                          </p>
-                          <span class="time">10:20 am</span>
-                        </div>
-                        <img
-                          src="assets/img/user_profile.png"
-                          alt=""
-                          class="ct_img_30"
-                        />
-                      </li>
+                          const showDateDivider =
+                            messageDate !== lastMessageDate;
+                          lastMessageDate = messageDate;
+
+                          return (
+                            <>
+                              {showDateDivider && (
+                                <li>
+                                  <div className="divider">
+                                    <h6>{messageDate}</h6>
+                                  </div>
+                                </li>
+                              )}
+                              {item?.sender_teacher_id ? (
+                                <li class="repaly">
+                                  <div>
+                                    <p>{item?.content}</p>
+                                    <span class="time">
+                                      {getTimeView(item?.created_at)}
+                                    </span>
+                                  </div>
+                                </li>
+                              ) : (
+                                <li class="sender">
+                                  <div>
+                                    <p>{item?.content}</p>
+                                    <span class="time">
+                                      {getTimeView(item?.created_at)}
+                                    </span>
+                                  </div>
+                                </li>
+                              )}
+                            </>
+                          );
+                        })
+                      ) : (
+                        <BlankMessage />
+                      )}
                     </ul>
                   </div>
                 </div>
-                <ChatFooter />
+                <ChatFooter socket={socket} />
               </div>
             </div>
           ) : (
-           <BlankMessage/>
+            <BlankMessage
+              lable="Please select
+                User"
+            />
           )}
         </div>
       </div>

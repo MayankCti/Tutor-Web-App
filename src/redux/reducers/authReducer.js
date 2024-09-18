@@ -92,6 +92,7 @@ export const authSlice = createSlice({
         contact_number,
         per_hour_pricing,
         max_student_headcount,
+        id,
       } = teacher ?? {};
       const { theme_color } = theme ?? {};
       const { stream_name } = stream ?? {};
@@ -110,6 +111,7 @@ export const authSlice = createSlice({
         contact_number,
         max_student_headcount: max_student_headcount,
         per_hour_pricing: per_hour_pricing,
+        id,
       };
       if (success) {
         const root = document.documentElement;

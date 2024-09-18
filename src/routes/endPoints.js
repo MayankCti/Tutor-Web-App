@@ -1,4 +1,4 @@
-export const BASE_URL = "http://192.168.29.105:4002/";
+export const BASE_URL = "http://192.168.29.2:4002/";
 
 // TEACHER API ENDPOINTS :
 
@@ -23,7 +23,7 @@ export const teacherDeleteStudentAPI = "teacher/delete-student";
 // CLASSES
 export const teacherClassesAPI = "teacher/get-classes";
 export const teacherCreateClassAPI = "teacher/create-class";
-export const teacherClassesFilterAPI = "filter-by-class-type-and-month";
+export const teacherClassesFilterAPI = "teacher/filter-by-class-type-and-month";
 
 export const teacherFetchClassTypeListAPI = "teacher/get-all-class-type";
 export const teacherDeleteClassTypeAPI = "teacher/delete-class-type";
@@ -32,6 +32,12 @@ export const teacherUpdateClassTypeAPI = "teacher/update-class-type";
 
 //Billing
 export const teacherBillingAPI = "teacher/billing-details";
+
+// Message
+export const teacherStudentsListAPI = "chat/chat-student-list";
+export const teacherStartChatAPI = "chat/start-chat";
+export const teacherChatListAPI = "chat/teacher-chats";
+export const teacherChatMessagesAPI = "chat/messages";
 
 //STUDENT
 

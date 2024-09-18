@@ -1,60 +1,125 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { toggleChatBar } from '../../redux/reducers/messageReducer'
+import React, { useEffect, useState } from "react";
+import NoRecord from "../other/NoRecord";
+import { useSelector } from "react-redux";
 
-const ChatList = () => {
-    const dispatch = useDispatch()
-  const {toggleSlider}= useSelector(state=>state?.messageReducer);
+const ChatList = ({
+  isDisplay = true,
+  data = [],
+  handleClick,
+  searchTerm1 = "",
+}) => {
+  const { activeChatDetail } = useSelector((state) => state?.messageReducer);
+  const [filterData, setFilterData] = useState(data);
+
+  useEffect(() => {
+    if (searchTerm1 === "") {
+      setFilterData(data);
+      return;
+    }
+    let temp = data?.filter((item) => {
+      const name = `${item?.student?.first_name?.toLowerCase()} ${item?.student?.last_name?.toLowerCase()}`;
+      return name.includes(searchTerm1?.toLowerCase());
+    });
+    setFilterData(temp);
+  }, [searchTerm1, data]);
+
+
+
+  const NewChatList = () => {
+    return (
+      <>
+        {data?.map((item, index) => (
+          <div>
+            <a
+              href="#"
+              class={`ct_chat_user`}
+              onClick={() => {
+                handleClick(item?.id);
+              }}
+            >
+              <div class="flex-shrink-0 position-relative ct_img_44">
+                <img
+                  class="ct_img_44"
+                  src={item?.profile_image ?? "assets/img/user_profile.png"}
+                  alt="user img"
+                />
+              </div>
+              <div class="flex-grow-1">
+                <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
+                  {`${item?.first_name} ${item?.last_name}`}
+                </h3>
+                <p class="mb-0 ct_fs_12 ct_ff_roboto">Pesquisar chat</p>
+              </div>
+            </a>
+          </div>
+        ))}
+      </>
+    );
+  };
+
+  const OldChatlist = () => {
+    return (
+      <>
+        {filterData?.length != 0 ? (
+          filterData?.map((item, index) => (
+            <div>
+              <a
+                href="#"
+                class={`ct_chat_user ${
+                  activeChatDetail?.id == item?.id ? "ct_user_active" : ""
+                }`}
+                onClick={() => {
+                  handleClick(item);
+                }}
+              >
+                <div class="flex-shrink-0 position-relative ct_img_44">
+                  <img
+                    class="ct_img_44"
+                    src={
+                      item?.student?.profile_image ??
+                      "assets/img/user_profile.png"
+                    }
+                    alt="user img"
+                  />
+                  {isDisplay && <span class="active"></span>}
+                </div>
+                <div class="flex-grow-1">
+                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
+                    {`${item?.student?.first_name} ${item?.student?.last_name}`}
+                  </h3>
+                  <p class="mb-0 ct_fs_12 ct_ff_roboto">Pesquisar chat</p>
+                </div>
+                {isDisplay && (
+                  <div class="ct_mesg_num_1 ms-auto">
+                    <span>1</span>
+                  </div>
+                )}
+              </a>
+            </div>
+          ))
+        ) : (
+          <NoRecord />
+        )}
+      </>
+    );
+  };
   return (
     <>
-         <div class="chat-lists">
-                  <div class="chat-list">
-                    {['','','','']?.map((item, index) => (
-                      <div>
-                        <a href="#" class={`ct_chat_user ${index==0 ? "ct_user_active" : ""}`} onClick={()=>{dispatch(toggleChatBar(true))}}>
-                          <div class="flex-shrink-0 position-relative ct_img_44">
-                            <img
-                              class="ct_img_44"
-                              src="assets/img/user_profile.png"
-                              alt="user img"
-                            />
-                            <span class="active"></span>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                              Ms. Lynda Bradtke
-                            </h3>
-                            <p class="mb-0 ct_fs_12 ct_ff_roboto">
-                              Pesquisar chat
-                            </p>
-                          </div>
-                          <div class="ct_mesg_num_1 ms-auto">
-                            <span>1</span>
-                          </div>
-                        </a>
-                        <a href="#" class="ct_chat_user" onClick={()=>{dispatch(toggleChatBar(true))}}>
-                          <div class="flex-shrink-0 position-relative ct_img_44">
-                            <img
-                              class="ct_img_44"
-                              src="assets/img/user_profile.png"
-                              alt="user img"
-                            />
-                          </div>
-                          <div class="flex-grow-1">
-                            <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                              Ms. Lynda Bradtke
-                            </h3>
-                            <p class="mb-0 ct_fs_12 ct_ff_roboto">
-                              Pesquisar chat
-                            </p>
-                          </div>
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                </div> 
+      <div class="chat-lists">
+        <div class="chat-list">
+          {data?.length != 0 ? (
+            isDisplay ? (
+              <OldChatlist />
+            ) : (
+              <NewChatList />
+            )
+          ) : (
+            <NoRecord />
+          )}
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default ChatList
+export default ChatList;

@@ -65,7 +65,6 @@ export const classFeeSlice = createSlice({
       const arr = data?.map((item, index) => {
         return { value: item?.class_type_name, label: item?.class_type_name };
       });
-      arr.unshift({ value: "Class Type", label: "Class Type" });
       state.options = arr ?? [];
       state.classTypes = data ?? [];
       state.isLoading = false;

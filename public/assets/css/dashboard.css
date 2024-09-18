@@ -458,7 +458,9 @@ message-area
 }
 .modal-dialog-scrollable .modal-body {
   overflow-y: auto;
-  height: 380px;
+  /* height: 380px; */
+  height: calc(100vh - 336px);
+  min-height: calc(100vh - 336px);
   /* min-height: 380px; */
   /* max-height: 380px; */
 }
@@ -1148,7 +1150,7 @@ button:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    height: calc(100vh - 225px);
     justify-content: center;
     text-align: center;
 }
