@@ -189,6 +189,7 @@ function StudentLogin() {
                             <a
                               href="javascript:void(0)"
                               onClick={() => navigate(pageRoutes?.login)}
+                              style={{textDecoration: 'none'}}
                               className="ct_purple_text ct_fw_700 ms-3"
                             >
                               Teacher Login

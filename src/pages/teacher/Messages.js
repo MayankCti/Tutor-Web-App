@@ -27,7 +27,6 @@ const Messages = () => {
     dispatch(fetchChatList());
   }, []);
 
-
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
@@ -42,7 +41,7 @@ const Messages = () => {
                 </div>
                 <section className="message-area">
                   <div className="chat-area row">
-                    <Chatbar />
+                    <Chatbar socket={socket}/>
                     <Chatbody socket={socket} />
                   </div>
                 </section>

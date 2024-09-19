@@ -18,6 +18,7 @@ const FormInput = ({
       onBlur={onBlur}
       value={value}
       {...rest}
+      
     />
   );
 };

@@ -11,21 +11,22 @@ import Loader from "../../components/other/Loader";
 const Billing = () => {
   const dispatch = useDispatch();
   const [month, setMonth] = useState("");
-  const options = [
-    { value: "Month", label: "Month" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-  ];
+
   const { isToggle } = useSelector((state) => state.authReducer);
-  const { students,isLoading } = useSelector((state) => state?.classFeeReducer);
+  const { students, isLoading, options1 } = useSelector(
+    (state) => state?.classFeeReducer
+  );
 
   useEffect(() => {
     dispatch(fetchBilling());
   }, []);
 
-  if(isLoading){
-    return <Loader/>
+  useEffect(() => {
+    if (month) dispatch(fetchBilling(month));
+  }, [month]);
+
+  if (isLoading) {
+    return <Loader />;
   }
   return (
     <>
@@ -40,7 +41,8 @@ const Billing = () => {
                   <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">Billing</h4>
                   <SelectDropdown
                     id="floatingInputValue"
-                    options={options}
+                    options={options1}
+                    defaultOptions="Month"
                     selectedValue={month}
                     onChange={setMonth}
                   />
@@ -50,14 +52,14 @@ const Billing = () => {
                     <thead>
                       <tr>
                         <th> Students Name</th>
-                        <th>Email Address</th>
+                        <th>Email </th>
                         <th>Total Due </th>
                         <th>Due Date</th>
                         <th className="text-end">Status</th>
+                        {/* <th className="text-end">Update Status</th> */}
                       </tr>
                     </thead>
                     <tbody>
-                      {students?.length <= 0 && <NoRecord />}
                       {students?.map((item) => {
                         return (
                           <tr key={item.name}>
@@ -91,11 +93,28 @@ const Billing = () => {
                                 {item?.payment_status ? "Paid" : "Due"}
                               </button>
                             </td>
+                            {/* <td className="text-end">
+                             {
+                             !item?.payment_status &&
+                             <button
+                                className={`ct_purple_btn py-1 ct_border_radius_10 ${
+                                  item?.payment_status
+                                    ? "ct_green_bg"
+                                    : "ct_red_bg"
+                                }`}
+                              >
+                                {item?.payment_status ? "Paid" : "Change Paid Status"}
+                              </button>
+                              }
+                            </td> */}
+                            {/* {!item?.payment_status && <td>Update as Paid</td>}
+                            {item?.payment_status && <td>Already Paid</td>} */}
                           </tr>
                         );
                       })}
                     </tbody>
                   </table>
+                  {students?.length <= 0 && <NoRecord />}
                 </div>
               </div>
             </div>

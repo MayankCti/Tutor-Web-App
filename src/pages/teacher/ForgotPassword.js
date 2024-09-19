@@ -100,7 +100,7 @@ const ForgotPassword = () => {
                         <a
                           href="javascript:void(0)"
                           onClick={() => navigate(pageRoutes.login)}
-                          className="ct_purple_text ct_fw_700 ms-3"
+                          className="ct_purple_text ct_fw_700 ms-1"
                         >
                           Login
                         </a>

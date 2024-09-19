@@ -7,9 +7,11 @@ const ChatList = ({
   data = [],
   handleClick,
   searchTerm1 = "",
+  socket,
 }) => {
   const { activeChatDetail } = useSelector((state) => state?.messageReducer);
   const [filterData, setFilterData] = useState(data);
+  const [unreadMessageCounts, setUnreadMessageCounts] = useState({});
 
   useEffect(() => {
     if (searchTerm1 === "") {
@@ -23,7 +25,19 @@ const ChatList = ({
     setFilterData(temp);
   }, [searchTerm1, data]);
 
+  // Listen for unread message count from the server
+  useEffect(() => {
+    socket.on("unread-message-count", (messageData) => {
+      setUnreadMessageCounts((prevCounts) => ({
+        ...prevCounts,
+        [messageData.chatId]: messageData.unreadCount, // Update unread count for the specific chat
+      }));
+    });
 
+    return () => {
+      socket.off("unread-message-count"); // Clean up the listener on unmount
+    };
+  }, []);
 
   const NewChatList = () => {
     return (
@@ -87,11 +101,14 @@ const ChatList = ({
                   <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
                     {`${item?.student?.first_name} ${item?.student?.last_name}`}
                   </h3>
-                  <p class="mb-0 ct_fs_12 ct_ff_roboto">Pesquisar chat</p>
+                  <p class="mb-0 ct_fs_12 ct_ff_roboto">
+                    {item?.latestMessage}
+                  </p>
                 </div>
-                {isDisplay && (
-                  <div class="ct_mesg_num_1 ms-auto">
-                    <span>1</span>
+                {unreadMessageCounts[item?.id] > 0 && (
+                  <div className="ct_mesg_num_1 ms-auto">
+                    <span>{unreadMessageCounts[item?.id]}</span>{" "}
+                    {/* Display unread count */}
                   </div>
                 )}
               </a>

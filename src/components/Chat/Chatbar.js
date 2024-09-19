@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
+import ChatList from "./ChatList";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveChatDetail,
   toggleSlider,
 } from "../../redux/reducers/messageReducer";
-import ChatList from "./ChatList";
 import {
   chatMessages,
   fetchAllStudentChatList,
@@ -14,7 +14,7 @@ import {
 } from "../../redux/actions/messagesActions";
 import { pipGetTeacherProfile } from "../../utils/pip";
 
-const Chatbar = () => {
+const Chatbar = ({ socket }) => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -102,6 +102,7 @@ const Chatbar = () => {
                     type="text"
                     className="form-control"
                     id="inlineFormInputGroup"
+                    placeholder="Search"
                     onChange={handleChange}
                     value={inputValue}
                   />
@@ -109,6 +110,7 @@ const Chatbar = () => {
                 </div>
                 <div className="ct_add_user_message_list_34">
                   <ChatList
+                  socket={socket}
                     isDisplay={false}
                     data={allStudentList}
                     handleClick={handleStartChat}
@@ -124,7 +126,7 @@ const Chatbar = () => {
                       id="inlineFormInputGroup"
                       placeholder="Search"
                       aria-label="search"
-                      onChange={(e)=>setSearchTerm1(e.target.value)}
+                      onChange={(e) => setSearchTerm1(e.target.value)}
                       value={searchTerm1}
                     />
                     <i class="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
@@ -141,7 +143,12 @@ const Chatbar = () => {
               </div>
 
               <div class="modal-body mt-4">
-                <ChatList data={chatList} handleClick={handleGetChatMessages} searchTerm1={searchTerm1}/>
+                <ChatList
+                  socket={socket}
+                  data={chatList}
+                  handleClick={handleGetChatMessages}
+                  searchTerm1={searchTerm1}
+                />
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ export const pageRoutes = {
   profile: "/profile",
   messages: "/messages",
   calendar: "/calendar",
-  billing: "/fee-and-due",
+  billing: "/billing",
   dashboard: "/dashboard",
   editProfile: "/editProfile",
   forgotPassword: "/forgot-password",
@@ -54,7 +54,7 @@ export const pageRoutes = {
   // studentProfie
   studentchangePassword: "/student/change-password",
   studenteditProfile: "/student/edit-profile",
-  studentfeesAndDues: "/student/fees-and-dues",
+  studentfeesAndDues: "/student/billing",
   studentforgetPassword: "/student/forget-password",
   studentlogin: "/student/login",
   studentmessages: "/student/messages",

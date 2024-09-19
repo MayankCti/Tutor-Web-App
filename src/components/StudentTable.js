@@ -46,9 +46,10 @@ const StudentTable = ({ statusFilter }) => {
   };
 
   const tableBody = () => {
-    return students?.map((item) => {
+    return students?.map((item, index) => {
       return (
         <tr key={item.name}>
+          <td>{index + 1}</td>
           <td>
             <div className="d-flex align-items-center gap-2">
               <img
@@ -93,8 +94,9 @@ const StudentTable = ({ statusFilter }) => {
         <table className="table ct_custom_table">
           <thead>
             <tr>
+              <th>S.No.</th>
               <th>Name</th>
-              <th>Email Address</th>
+              <th>Email</th>
               <th>Contact No.</th>
               <th>City</th>
               <th>Status</th>
@@ -102,12 +104,12 @@ const StudentTable = ({ statusFilter }) => {
             </tr>
           </thead>
           <tbody>
-            {students?.length <= 0 && <NoRecord />}
             {pathname === pageRoutes?.dashboard
               ? tableBody()?.slice(0, 5)
               : tableBody()}
           </tbody>
         </table>
+              {students?.length <= 0 && <NoRecord />}
       </div>
 
       {/* DELETE STUDENT CONFIRMATION */}

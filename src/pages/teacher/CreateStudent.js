@@ -120,7 +120,7 @@ const CreateStudent = () => {
                                   for="email"
                                   class="ct_ff_roboto mb-2 ct_fw_500"
                                 >
-                                  Email Address <AstrickMark />
+                                  Email  <AstrickMark />
                                 </label>
                                 <FormInput
                                   id="email"

@@ -270,7 +270,7 @@ function StudentEditProfile() {
                                     htmlFor=""
                                     className="ct_ff_roboto mb-2 ct_fw_500 "
                                   >
-                                    Email Address
+                                    Email 
                                   </label>
                                   <input
                                     type="email"
@@ -587,7 +587,7 @@ function StudentEditProfile() {
                                     htmlFor=""
                                     className="ct_ff_roboto mb-2 ct_fw_500 "
                                   >
-                                    Parent Email Address
+                                    Parent Email 
                                   </label>
                                   <input
                                     type="email"

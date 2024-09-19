@@ -12,17 +12,36 @@ import {
   createClassType,
   updateClassType,
   fetchMyBookedClasses,
+  BookClass,
+  payBilling,
+  fetchClassesStudents,
 } from "../actions/classFeeAction";
 
 const initialState = {
   isLoading: false,
   options: [],
+  options1: [
+    { value: "January", label: "January" },
+    { value: "February", label: "February" },
+    { value: "March", label: "March" },
+    { value: "April", label: "April" },
+    { value: "May", label: "May" },
+    { value: "June", label: "June" },
+    { value: "July", label: "July" },
+    { value: "August", label: "August" },
+    { value: "September", label: "September" },
+    { value: "October", label: "October" },
+    { value: "November", label: "November" },
+    { value: "December", label: "December" },
+  ],
   teacherList: [],
   students: [],
   feesandDuesData: [],
   classesList: [],
+  teacherClassesList: [],
   classTypes: [],
   myclassData: [],
+  classesStudents: [],
 };
 
 export const classFeeSlice = createSlice({
@@ -119,21 +138,37 @@ export const classFeeSlice = createSlice({
 
     // get-teacher-list
     builder.addCase(getTeacherList?.pending, (state, action) => {
+      state.teacherClassesList = [];
       state.isLoading = true;
     });
     builder.addCase(getTeacherList?.fulfilled, (state, action) => {
-      const { data } = action?.payload;
+      const { data } = action?.payload ?? {};
+      state.teacherClassesList = [];
       state.teacherList = data?.map((item, index) => {
         return { value: item?.id, label: item?.full_name };
       });
       state.isLoading = false;
     });
     builder.addCase(getTeacherList?.rejected, (state, action) => {
+      state.teacherClassesList = [];
+      state.isLoading = false;
+    });
+
+    // book-class
+    builder.addCase(BookClass.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(BookClass.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(BookClass.rejected, (state, action) => {
       state.isLoading = false;
     });
 
     // fetch-teacher-classes
     builder.addCase(fetchTeacherClasses?.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.teacherClassesList = data ?? [];
       state.isLoading = false;
     });
     builder.addCase(fetchTeacherClasses?.pending, (state, action) => {
@@ -179,6 +214,30 @@ export const classFeeSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchMyBookedClasses.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    //pay-Billing
+    builder.addCase(payBilling.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(payBilling.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(payBilling.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    //fetch-classes-students
+    builder.addCase(fetchClassesStudents.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchClassesStudents.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.classesStudents = data ?? [];
+      state.isLoading = false;
+    });
+    builder.addCase(fetchClassesStudents.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

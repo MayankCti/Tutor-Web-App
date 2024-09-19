@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import moment from "moment";
 import ChatFooter from "./ChatFooter";
+import BlankMessage from "../other/BlankMessage";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setFilterChatList,
   toggleChatBar,
 } from "../../redux/reducers/messageReducer";
-import BlankMessage from "../other/BlankMessage";
-import moment from "moment";
 import { getTimeView, pipGetTeacherProfile } from "../../utils/pip";
 
 const Chatbody = ({ socket }) => {

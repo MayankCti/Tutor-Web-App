@@ -55,9 +55,9 @@ const Student = () => {
     }
   };
 
-  // if (isLoading) {
-  //   return <Loader />;
-  // }
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>

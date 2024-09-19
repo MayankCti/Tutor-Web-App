@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NoRecord from "../../components/other/NoRecord";
 import {
   fetchClasses,
+  fetchClassesStudents,
   fetchClassesTypes,
   filterClasses,
 } from "../../redux/actions/classFeeAction";
@@ -31,13 +32,19 @@ const Classes = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedValue && selectedValue1) {
+    if (selectedValue || selectedValue1) {
       dispatch(
-        filterClasses({ classType: selectedValue, month: selectedValue1 })
+        filterClasses({
+          classType: selectedValue ?? "",
+          month: selectedValue1 ?? "",
+        })
       );
     }
   }, [selectedValue, selectedValue1]);
 
+  const handleClassClick = (id) => {
+    dispatch(fetchClassesStudents(id));
+  };
   if (isLoading) {
     return <Loader />;
   }
@@ -120,6 +127,7 @@ const Classes = () => {
                                       ? "ct_red_bg"
                                       : "ct_light_darkgreen_bg"
                                   }`}
+                                  onClick={()=>handleClassClick(time?.id)}
                                 >
                                   {time?.start_time}
                                   {" to "}

@@ -3,10 +3,13 @@ import {
   getAllTeacherList,
   getClassByTeacher,
   studentBillingAPI,
+  studentBookClasses,
   studentMyBookedClasses,
+  studentPayFee,
   teacherBillingAPI,
   teacherClassesAPI,
   teacherClassesFilterAPI,
+  teacherClassStudentListAPI,
   teacherCreateClassAPI,
   teacherCreateClassTypeAPI,
   teacherDeleteClassTypeAPI,
@@ -147,6 +150,23 @@ export const getTeacherList = createAsyncThunk("get-teacher-list", async () => {
   } catch (error) {}
 });
 
+// book-class
+export const BookClass = createAsyncThunk("book-class", async (props) => {
+  const { payload, callback } = props;
+  try {
+    const response = await API_REQUEST({
+      url: studentBookClasses,
+      method: "POST",
+      data: payload,
+      isErrorToast: true,
+    });
+    callback(response);
+    return response;
+  } catch (error) {
+    callback(null, error);
+  }
+});
+
 // fetch-teacher-classes
 export const fetchTeacherClasses = createAsyncThunk(
   "fetch-teacher-classes",
@@ -167,11 +187,14 @@ export const fetchTeacherClasses = createAsyncThunk(
 );
 
 // fetch-billing
-export const fetchBilling = createAsyncThunk("fetch-billing", async () => {
+export const fetchBilling = createAsyncThunk("fetch-billing", async (props) => {
   try {
+    const params = {};
+    params.month = props;
     const response = await API_REQUEST({
       url: teacherBillingAPI,
       method: "GET",
+      params,
     });
     return response;
   } catch (error) {}
@@ -180,11 +203,14 @@ export const fetchBilling = createAsyncThunk("fetch-billing", async () => {
 // fetch-billing-student
 export const fetchBillingStudent = createAsyncThunk(
   "fetch-billing-student",
-  async () => {
+  async (props) => {
     try {
+      const params = {};
+      params.month = props;
       const response = await API_REQUEST({
         url: studentBillingAPI,
         method: "GET",
+        params,
       });
       return response;
     } catch (error) {}
@@ -194,10 +220,43 @@ export const fetchBillingStudent = createAsyncThunk(
 // fetch-my-booked-classes
 export const fetchMyBookedClasses = createAsyncThunk(
   "fetch-my-booked-classes",
-  async () => {
+  async (props) => {
     try {
+      const params = {};
+      params.month = props;
       const response = await API_REQUEST({
         url: studentMyBookedClasses,
+        method: "GET",
+        params,
+      });
+      return response;
+    } catch (error) {}
+  }
+);
+
+// pay-billing
+export const payBilling = createAsyncThunk("pay-billing", async (props) => {
+  const { payload, callback } = props;
+  try {
+    const response = await API_REQUEST({
+      url: studentPayFee,
+      method: "POST",
+      data: payload,
+    });
+    callback(response);
+    return response;
+  } catch (error) {
+    callback(null, error);
+  }
+});
+
+// fetch-classes-students
+export const fetchClassesStudents = createAsyncThunk(
+  "fetch-classes-students",
+  async (props) => {
+    try {
+      const response = await API_REQUEST({
+        url: teacherClassStudentListAPI + `/${props}`,
         method: "GET",
       });
       return response;
