@@ -51,18 +51,18 @@ const ChatList = ({
                 handleClick(item?.id);
               }}
             >
-              <div class="flex-shrink-0 position-relative ct_img_44">
+              <div className="flex-shrink-0 position-relative ct_img_44">
                 <img
-                  class="ct_img_44"
+                  className="ct_img_44"
                   src={item?.profile_image ?? "assets/img/user_profile.png"}
                   alt="user img"
                 />
               </div>
-              <div class="flex-grow-1">
-                <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
+              <div className="flex-grow-1">
+                <h3 className="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
                   {`${item?.first_name} ${item?.last_name}`}
                 </h3>
-                <p class="mb-0 ct_fs_12 ct_ff_roboto">Pesquisar chat</p>
+                <p className="mb-0 ct_fs_12 ct_ff_roboto">Pesquisar chat</p>
               </div>
             </a>
           </div>
@@ -86,22 +86,22 @@ const ChatList = ({
                   handleClick(item);
                 }}
               >
-                <div class="flex-shrink-0 position-relative ct_img_44">
+                <div className="flex-shrink-0 position-relative ct_img_44">
                   <img
-                    class="ct_img_44"
+                    className="ct_img_44"
                     src={
                       item?.student?.profile_image ??
                       "assets/img/user_profile.png"
                     }
                     alt="user img"
                   />
-                  {isDisplay && <span class="active"></span>}
+                  {isDisplay && <span className="active"></span>}
                 </div>
-                <div class="flex-grow-1">
-                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
+                <div className="flex-grow-1">
+                  <h3 className="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
                     {`${item?.student?.first_name} ${item?.student?.last_name}`}
                   </h3>
-                  <p class="mb-0 ct_fs_12 ct_ff_roboto">
+                  <p className="mb-0 ct_fs_12 ct_ff_roboto">
                     {item?.latestMessage}
                   </p>
                 </div>
@@ -122,8 +122,8 @@ const ChatList = ({
   };
   return (
     <>
-      <div class="chat-lists">
-        <div class="chat-list">
+      <div className="chat-lists">
+        <div className="chat-list">
           {data?.length != 0 ? (
             isDisplay ? (
               <OldChatlist />

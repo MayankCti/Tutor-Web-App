@@ -67,9 +67,9 @@ const Student = () => {
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
-                <div class="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
-                  <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">All Students</h4>
-                  <div class="d-flex align-items-center gap-3 flex-wrap">
+                <div className="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
+                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">All Students</h4>
+                  <div className="d-flex align-items-center gap-3 flex-wrap">
                     <div>
                       <SelectDropdown
                         id="floatingInputValue"
@@ -108,7 +108,7 @@ const Student = () => {
                       Bulk upload
                     </button>
                     <button
-                      class="ct_purple_btn "
+                      className="ct_purple_btn "
                       title="Download demo csv file for reference"
                       onClick={() => {
                         const csv = convertArrayToCSV(demoCSVFileObj);
@@ -122,10 +122,10 @@ const Student = () => {
                         document.body.removeChild(link);
                       }}
                     >
-                      <i class="fa-solid fa-download me-1"></i> Demo CSV
+                      <i className="fa-solid fa-download me-1"></i> Demo CSV
                     </button>
                     <button
-                      class="ct_purple_btn "
+                      className="ct_purple_btn "
                       onClick={() => navigate(pageRoutes?.createStudent)}
                     >
                       Add Student

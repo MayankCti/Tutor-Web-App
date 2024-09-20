@@ -53,7 +53,7 @@ const Headers = () => {
       <div
         className="modal fade ct_assets_modal"
         id="ct_logout_modal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="ct_logout_modalLabel"
         aria-hidden="true"
       >

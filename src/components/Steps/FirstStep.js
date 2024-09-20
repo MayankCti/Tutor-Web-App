@@ -76,7 +76,7 @@ const FirstStep = () => {
           <form onSubmit={handleSubmit}>
             <fieldset>
               <div>
-                <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4">
+                <h4 className="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4">
                   Basic Details
                 </h4>
                 <div className="ct_profile_img">
@@ -111,14 +111,14 @@ const FirstStep = () => {
                   touched={touched}
                   fieldName="file"
                 />
-                <div class="form-group text-start mb-4">
-                  <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                <div className="form-group text-start mb-4">
+                  <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                     Full Name
                   </label>
-                  <div class="position-relative">
+                  <div className="position-relative">
                     <input
                       type="text"
-                       class="ct_input form-control ct_input_40"
+                       className="ct_input form-control ct_input_40"
                       value={values.full_name}
                       id="full_name"
                       onChange={handleChange}
@@ -132,14 +132,14 @@ const FirstStep = () => {
                     />
                   </div>
                 </div>
-                <div class="form-group text-start mb-4">
-                  <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                <div className="form-group text-start mb-4">
+                  <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                     Theme color code
                   </label>
-                  <div class="position-relative">
+                  <div className="position-relative">
                     <input
                       type="text"
-                      class="ct_input ct_color_input form-control"
+                      className="ct_input ct_color_input form-control"
                       value={values.theme}
                       id="theme"
                       onChange={handleChange}
@@ -147,7 +147,7 @@ const FirstStep = () => {
                     />
                     <input
                       type="color"
-                      class="ct_color"
+                      className="ct_color"
                       id="theme"
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -160,13 +160,13 @@ const FirstStep = () => {
                     />
                   </div>
                 </div>
-                <div class="form-group text-start mb-4">
-                  <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                <div className="form-group text-start mb-4">
+                  <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                     Classes Name
                   </label>
                   <input
                     type="text"
-                    class="ct_input form-control ct_input_40"
+                    className="ct_input form-control ct_input_40"
                     id="coaching_classes_name"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -179,13 +179,13 @@ const FirstStep = () => {
                   />
                 </div>
 
-                <div class="form-group text-start mb-4">
-                  <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                <div className="form-group text-start mb-4">
+                  <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                     Contact No.
                   </label>
                   <input
                     type="text"
-                    class="ct_input form-control ct_input_40"
+                    className="ct_input form-control ct_input_40"
                     id="contact_number"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -197,13 +197,13 @@ const FirstStep = () => {
                     fieldName="contact_number"
                   />
                 </div>
-                <div class="form-group text-start mb-4">
-                  <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                <div className="form-group text-start mb-4">
+                  <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                     Stream
                   </label>
                   <input
                     type="text"
-                    class="ct_input form-control ct_input_40"
+                    className="ct_input form-control ct_input_40"
                     id="stream"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -215,12 +215,12 @@ const FirstStep = () => {
                     fieldName="stream"
                   />
                 </div>
-                <div class="form-group text-start mb-4">
-                  <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                <div className="form-group text-start mb-4">
+                  <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                     Address
                   </label>
                   <textarea
-                    class="ct_input form-control h-auto ct_input_40"
+                    className="ct_input form-control h-auto ct_input_40"
                     rows="4"
                     id="address"
                     onChange={handleChange}
@@ -237,7 +237,7 @@ const FirstStep = () => {
               <input
                 type="button"
                 name="next"
-                class="next action-button ct_purple_btn text-white ct_fs_18 ms-0  ct_first_next_full"
+                className="next action-button ct_purple_btn text-white ct_fs_18 ms-0  ct_first_next_full"
                 value="Next"
                 onClick={handleSubmit}
               />

@@ -78,27 +78,27 @@ const Chatbody = ({ socket }) => {
 
   return (
     <>
-      <div class=" col-xl-8">
+      <div className=" col-xl-8">
         {/* chatbox */}
         <div class={`chatbox ${isToggle ? "showbox" : ""}`}>
           {isToggle ? (
-            <div class="modal-dialog-scrollable">
-              <div class="modal-content">
-                <div class="msg-head">
-                  <div class="row">
-                    <div class="col-8">
-                      <div class="d-flex align-items-center">
+            <div className="modal-dialog-scrollable">
+              <div className="modal-content">
+                <div className="msg-head">
+                  <div className="row">
+                    <div className="col-8">
+                      <div className="d-flex align-items-center">
                         <span
-                          class="chat-icon"
+                          className="chat-icon"
                           onClick={() => {
                             dispatch(toggleChatBar(false));
                           }}
                         >
-                          <i class="fa-solid fa-chevron-left"></i>
+                          <i className="fa-solid fa-chevron-left"></i>
                         </span>
-                        <div class="flex-shrink-0">
+                        <div className="flex-shrink-0">
                           <img
-                            class="img-fluid ct_img_36"
+                            className="img-fluid ct_img_36"
                             src={
                               activeChatDetail?.student?.profile_image ??
                               "assets/img/user_profile.png"
@@ -106,31 +106,31 @@ const Chatbody = ({ socket }) => {
                             alt="user img"
                           />
                         </div>
-                        <div class="flex-grow-1 ms-3">
-                          <h3 class="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600 text-capitalize">
+                        <div className="flex-grow-1 ms-3">
+                          <h3 className="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600 text-capitalize">
                             {`${activeChatDetail?.student?.first_name} ${activeChatDetail?.student?.last_name}`}
                           </h3>
-                          <p class="mb-0 ct_fs_12 ct_ff_roboto">
+                          <p className="mb-0 ct_fs_12 ct_ff_roboto">
                             {isOnline ? "Online" : "Offline"}
                           </p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-4">
-                      <ul class="moreoption">
-                        <li class="navbar nav-item dropdown">
+                    <div className="col-4">
+                      <ul className="moreoption">
+                        <li className="navbar nav-item dropdown">
                           <a
-                            class="nav-link dropdown-toggle"
+                            className="nav-link dropdown-toggle"
                             href="#"
                             role="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                           >
-                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                           </a>
-                          <ul class="dropdown-menu">
+                          <ul className="dropdown-menu">
                             <li>
-                              <a class="dropdown-item" href="#">
+                              <a className="dropdown-item" href="#">
                                 Delete Chat
                               </a>
                             </li>
@@ -140,8 +140,8 @@ const Chatbody = ({ socket }) => {
                     </div>
                   </div>
                 </div>
-                <div class="modal-body">
-                  <div class="msg-body">
+                <div className="modal-body">
+                  <div className="msg-body">
                     <ul>
                       {messages?.length != 0 ? (
                         messages?.map((item, index) => {
@@ -163,19 +163,19 @@ const Chatbody = ({ socket }) => {
                                 </li>
                               )}
                               {item?.sender_teacher_id ? (
-                                <li class="repaly">
+                                <li className="repaly">
                                   <div>
                                     <p>{item?.content}</p>
-                                    <span class="time">
+                                    <span className="time">
                                       {getTimeView(item?.created_at)}
                                     </span>
                                   </div>
                                 </li>
                               ) : (
-                                <li class="sender">
+                                <li className="sender">
                                   <div>
                                     <p>{item?.content}</p>
-                                    <span class="time">
+                                    <span className="time">
                                       {getTimeView(item?.created_at)}
                                     </span>
                                   </div>

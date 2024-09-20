@@ -55,8 +55,8 @@ const Setting = () => {
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
-                <div class="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
-                  <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">Setting</h4>
+                <div className="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
+                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">Setting</h4>
                   <button
                     className="ct_purple_btn"
                     type="button"
@@ -66,13 +66,13 @@ const Setting = () => {
                   </button>
                 </div>
 
-                <div class="table-responsive">
-                  <table class="table ct_custom_table">
+                <div className="table-responsive">
+                  <table className="table ct_custom_table">
                     <thead>
                       <tr>
                         <th>Class Type</th>
                         <th>Student Count</th>
-                        <th class="text-end">Action</th>
+                        <th className="text-end">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -82,13 +82,13 @@ const Setting = () => {
                             <tr>
                               <td>{classType?.class_type_name}</td>
                               <td>
-                                <div class="d-flex align-items-center gap-2">
+                                <div className="d-flex align-items-center gap-2">
                                   {classType?.student_count}
                                 </div>
                               </td>
-                              <td class="text-end">
+                              <td className="text-end">
                                 <i
-                                  class="fa-regular fa-pen-to-square ms-2"
+                                  className="fa-regular fa-pen-to-square ms-2"
                                   onClick={() => {
                                     navigate(pageRoutes?.updateClassType, {
                                       state: {
@@ -101,7 +101,7 @@ const Setting = () => {
                                 ></i>
                                 {/* <i
                                   onClick={() => setClassId(classType?.id)}
-                                  class="fa-solid fa-trash trash_icon_color ms-3"
+                                  className="fa-solid fa-trash trash_icon_color ms-3"
                                   data-bs-toggle="modal"
                                   data-bs-target="#ct_confirmation_modal"
                                 ></i> */}
@@ -125,7 +125,7 @@ const Setting = () => {
       <div
         className="modal fade ct_assets_modal"
         id="ct_confirmation_modal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="ct_logout_modalLabel"
         aria-hidden="true"
       >

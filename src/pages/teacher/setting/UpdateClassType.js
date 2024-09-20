@@ -39,8 +39,8 @@ const UpdateClassType = () => {
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
-                <div class="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
-                  <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">
+                <div className="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
+                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">
                     Update Class Type
                   </h4>
                 </div>
@@ -60,23 +60,23 @@ const UpdateClassType = () => {
                     handleSubmit,
                   }) => (
                     <form onSubmit={handleSubmit}>
-                      <div class="row">
-                        <div class="col-lg-6 mx-auto">
-                          <div class="form-group  mb-4">
+                      <div className="row">
+                        <div className="col-lg-6 mx-auto">
+                          <div className="form-group  mb-4">
                             <label
                               for=""
-                              class="d-flex align-items-center justify-content-between mb-2"
+                              className="d-flex align-items-center justify-content-between mb-2"
                             >
-                              <span class="ct_fw_600 ct_fs_20">Class Type</span>
+                              <span className="ct_fw_600 ct_fs_20">Class Type</span>
                             </label>
-                            <div class="position-relative">
+                            <div className="position-relative">
                               <input
                                 type="text"
                                 value={values?.class_type_name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 id="class_type_name"
-                                class="form-control ct_input ct_ff_roboto"
+                                className="form-control ct_input ct_ff_roboto"
                                 placeholder="Enter class type"
                                 disabled
                               />
@@ -87,23 +87,23 @@ const UpdateClassType = () => {
                               fieldName="class_type_name"
                             />
                           </div>
-                          <div class="form-group  mb-4">
+                          <div className="form-group  mb-4">
                             <label
                               for=""
-                              class="d-flex align-items-center justify-content-between mb-2"
+                              className="d-flex align-items-center justify-content-between mb-2"
                             >
-                              <span class="ct_fw_600 ct_fs_20">
+                              <span className="ct_fw_600 ct_fs_20">
                                 Student Count
                               </span>
                             </label>
-                            <div class="position-relative">
+                            <div className="position-relative">
                               <input
                                 type="text"
                                 id="student_count"
                                 value={values?.student_count}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                class="form-control ct_input ct_ff_roboto"
+                                className="form-control ct_input ct_ff_roboto"
                                 placeholder="Enter student count"
                               />
                             </div>
@@ -115,9 +115,9 @@ const UpdateClassType = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="text-center mt-4">
+                      <div className="text-center mt-4">
                         <button
-                          class="ct_purple_btn px-5"
+                          className="ct_purple_btn px-5"
                           onClick={handleSubmit}
                         >
                           Update

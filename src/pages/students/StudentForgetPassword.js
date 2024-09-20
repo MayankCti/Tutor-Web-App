@@ -39,19 +39,19 @@ function StudentForgetPassword() {
 
   return (
     <>
-      <section class="">
-        <div class="container-fluid">
-          <div class="ct_logo ct_login_logo">
+      <section className="">
+        <div className="container-fluid">
+          <div className="ct_logo ct_login_logo">
             <a href="index.html">
               <img src="assets/img/logo.svg" alt="" />
             </a>
           </div>
-          <div class="row align-items-center">
-            <div class="col-lg-7 mb-4 mb-lg-0">
+          <div className="row align-items-center">
+            <div className="col-lg-7 mb-4 mb-lg-0">
               {loader ? (
                 <Loader />
               ) : (
-                <div class="ct_login_form">
+                <div className="ct_login_form">
                   <Formik
                     initialValues={initialValues}
                     validationSchema={forgetPasswordValidationSchema}
@@ -67,24 +67,24 @@ function StudentForgetPassword() {
                       isSubmitting,
                     }) => (
                       <form onSubmit={handleSubmit}>
-                        <div class="ct_login_form_cnt">
-                          <div class="ct_mb_50">
-                            <h2 class="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">
+                        <div className="ct_login_form_cnt">
+                          <div className="ct_mb_50">
+                            <h2 className="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">
                               Forgot Password{" "}
                             </h2>
                           </div>
 
-                          <div class="form-group mb-4">
+                          <div className="form-group mb-4">
                             <label
                               for=""
-                              class="d-flex align-items-center justify-content-between mb-3 ct_ff_roboto"
+                              className="d-flex align-items-center justify-content-between mb-3 ct_ff_roboto"
                             >
-                              <span class="ct_fw_700 ct_fs_20">Email</span>
+                              <span className="ct_fw_700 ct_fs_20">Email</span>
                             </label>
-                            <div class="position-relative">
+                            <div className="position-relative">
                               <input
                                 type="email"
-                                class="form-control ct_input ct_ff_roboto"
+                                className="form-control ct_input ct_ff_roboto"
                                 placeholder="Enter Email"
                                 id="email"
                                 name="email"
@@ -100,21 +100,21 @@ function StudentForgetPassword() {
                           </div>
                         </div>
 
-                        <div class="mt-5">
+                        <div className="mt-5">
                           <button
-                            class="ct_purple_btn w-100 justify-content-center ct_line_height_44 ct_ff_roboto ct_extra_dark_btn_bg"
+                            className="ct_purple_btn w-100 justify-content-center ct_line_height_44 ct_ff_roboto ct_extra_dark_btn_bg"
                             type="submit"
                           >
                             Continue
                           </button>
                         </div>
-                        <div class="mt-4">
-                          <p class="mb-0 ct_color_8E8E8E ct_ff_roboto text-center">
+                        <div className="mt-4">
+                          <p className="mb-0 ct_color_8E8E8E ct_ff_roboto text-center">
                             Already have an account?
                             <a
                               href="javascript:void(0)"
                               onClick={() => navigate(pageRoutes?.studentlogin)}
-                              class="ct_purple_text ct_fw_700 ms-1"
+                              className="ct_purple_text ct_fw_700 ms-1"
                             >
                               Login
                             </a>
@@ -126,8 +126,8 @@ function StudentForgetPassword() {
                 </div>
               )}
             </div>
-            <div class="col-lg-5 mb-4 mb-lg-0 px-lg-0">
-              <div class="ct_login_right_img">
+            <div className="col-lg-5 mb-4 mb-lg-0 px-lg-0">
+              <div className="ct_login_right_img">
                 <img src="assets/img/login_right_img.png" alt="" />
               </div>
             </div>

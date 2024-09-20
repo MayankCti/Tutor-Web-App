@@ -88,7 +88,7 @@ const CreateClass = () => {
         <Headers />
         <div className="ct_inner_dashbaord_main">
           <div className="d-flex align-items-center justify-content-between">
-            <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">Create Class</h4>
+            <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">Create Class</h4>
           </div>
           <fieldset className="mt-3 ct_caldner_white_bg">
             <div>
@@ -189,7 +189,7 @@ const CreateClass = () => {
               </div>
             </div>
             <div>
-              <button class="ct_purple_btn mt-3" onClick={() => handleSubmit()}>
+              <button className="ct_purple_btn mt-3" onClick={() => handleSubmit()}>
                 Save
               </button>
             </div>

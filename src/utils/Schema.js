@@ -108,12 +108,12 @@ export const basicDetailSchema = Yup.object().shape({
 export const secondStepSchema = Yup.object().shape({
   max_student_headcount: Yup.number()
     .typeError("Max Students Headcount must be a number")
-    .required("Max Students Headcount is required")
+    .required("Please enter Max Students Headcount")
     .positive("Max Students Headcount must be a positive number")
     .integer("Max Students Headcount must be an integer"),
   per_hour_pricing: Yup.number()
     .typeError("Per Hour Pricing must be a number")
-    .required("Per Hour Pricing is required")
+    .required("Please enter Per Hour Pricing")
     .positive("Per Hour Pricing must be a positive number"),
 });
 

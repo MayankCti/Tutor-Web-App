@@ -125,10 +125,10 @@ const CreateStudentClass = () => {
                                   {pipViewDate(item?.class_date)}
                                 </p>
 
-                                <div class="ct_grid_2_col_2 mt-3">
+                                <div className="ct_grid_2_col_2 mt-3">
                                   {item?.times?.map((times, index) => (
                                     <div className="ct_class_chck_bg">
-                                      <div class="form-check">
+                                      <div className="form-check">
                                         <label
                                           className="form-check-label d-flex"
                                           htmlFor={`flexCheckDefault-${times.id}`}

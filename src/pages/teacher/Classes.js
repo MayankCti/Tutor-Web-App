@@ -57,11 +57,11 @@ const Classes = () => {
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
-                <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
-                  <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">
+                <div className="d-flex align-items-center justify-content-between gap-2 mb-3">
+                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">
                     Classes This Month
                   </h4>
-                  <div class="d-flex align-items-center gap-2">
+                  <div className="d-flex align-items-center gap-2">
                     <div>
                       <SelectDropdown
                         id="floatingInputValue"
@@ -85,7 +85,7 @@ const Classes = () => {
                         className="ct_purple_btn"
                         onClick={() => navigate(pageRoutes?.createClass)}
                       >
-                        <i class="fa-solid fa-plus me-1"></i> Add Class
+                        <i className="fa-solid fa-plus me-1"></i> Add Class
                       </button>
                     </div>
                   </div>
@@ -102,12 +102,12 @@ const Classes = () => {
                           data-bs-toggle="modal"
                           data-bs-target="#class_detail_modal"
                         >
-                          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-                            <span class="ct_fs_14 ct_fw_600 ct_ff_roboto">
+                          <div className="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                            <span className="ct_fs_14 ct_fw_600 ct_ff_roboto">
                               {" "}
                               {getDayName(classItem?.class_date)}
                             </span>
-                            <span class="ct_fs_14 ct_fw_600 ct_ff_roboto">
+                            <span className="ct_fs_14 ct_fw_600 ct_ff_roboto">
                               {pipViewDate(classItem?.class_date)}
                             </span>
                           </div>
@@ -127,7 +127,7 @@ const Classes = () => {
                                       ? "ct_red_bg"
                                       : "ct_light_darkgreen_bg"
                                   }`}
-                                  onClick={()=>handleClassClick(time?.id)}
+                                  onClick={()=>handleClassClick(time?.class_id)}
                                 >
                                   {time?.start_time}
                                   {" to "}
@@ -153,7 +153,7 @@ const Classes = () => {
       <div
         className="modal fade"
         id="class_detail_modal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="class_detail_modalLabel"
         aria-hidden="true"
       >
@@ -165,24 +165,24 @@ const Classes = () => {
                   Class Details
                 </h4>
                 <div>
-                  <ul class="ct_class_detail_time_btn mb-5">
+                  <ul className="ct_class_detail_time_btn mb-5">
                     <li>
-                      <button class="ct_purple_btn ct_outline_btn_purple active">
+                      <button className="ct_purple_btn ct_outline_btn_purple active">
                         09:00 AM
                       </button>
                     </li>
                     <li>
-                      <button class="ct_outline_btn_purple ct_purple_btn">
+                      <button className="ct_outline_btn_purple ct_purple_btn">
                         10:00 AM
                       </button>
                     </li>
                     <li>
-                      <button class="ct_outline_btn_purple ct_purple_btn">
+                      <button className="ct_outline_btn_purple ct_purple_btn">
                         11:00 AM
                       </button>
                     </li>
                     <li>
-                      <button class="ct_outline_btn_purple ct_purple_btn">
+                      <button className="ct_outline_btn_purple ct_purple_btn">
                         12:00 AM
                       </button>
                     </li>

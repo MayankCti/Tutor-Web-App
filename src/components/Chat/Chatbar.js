@@ -76,10 +76,10 @@ const Chatbar = ({ socket }) => {
   const [searchTerm1, setSearchTerm1] = useState("");
   return (
     <>
-      <div class=" col-xl-4">
-        <div class="chatlist">
-          <div class="modal-dialog-scrollable">
-            <div class="modal-content">
+      <div className=" col-xl-4">
+        <div className="chatlist">
+          <div className="modal-dialog-scrollable">
+            <div className="modal-content">
               <div
                 className={`ct_add_member_popup ${
                   isSlider ? "ct_add_popup_active" : ""
@@ -94,10 +94,10 @@ const Chatbar = ({ socket }) => {
                       dispatch(toggleSlider(false));
                     }}
                   >
-                    <i class="fa-solid fa-xmark"></i>
+                    <i className="fa-solid fa-xmark"></i>
                   </h4>
                 </div>
-                <div class="msg-search mb-4" style={{ flex: "1 " }}>
+                <div className="msg-search mb-4" style={{ flex: "1 " }}>
                   <input
                     type="text"
                     className="form-control"
@@ -106,7 +106,7 @@ const Chatbar = ({ socket }) => {
                     onChange={handleChange}
                     value={inputValue}
                   />
-                  <i class="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
+                  <i className="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
                 </div>
                 <div className="ct_add_user_message_list_34">
                   <ChatList
@@ -117,19 +117,19 @@ const Chatbar = ({ socket }) => {
                   />
                 </div>
               </div>
-              <div class="chat-header">
+              <div className="chat-header">
                 <div className="d-flex align-items-center gap-2">
-                  <div class="msg-search" style={{ flex: "1 " }}>
+                  <div className="msg-search" style={{ flex: "1 " }}>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="inlineFormInputGroup"
                       placeholder="Search"
                       aria-label="search"
                       onChange={(e) => setSearchTerm1(e.target.value)}
                       value={searchTerm1}
                     />
-                    <i class="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
+                    <i className="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
                   </div>
                   <div
                     className="ct_add_user"
@@ -137,12 +137,12 @@ const Chatbar = ({ socket }) => {
                       dispatch(toggleSlider(true));
                     }}
                   >
-                    <i class="fa-solid fa-plus"></i>
+                    <i className="fa-solid fa-plus"></i>
                   </div>
                 </div>
               </div>
 
-              <div class="modal-body mt-4">
+              <div className="modal-body mt-4">
                 <ChatList
                   socket={socket}
                   data={chatList}
