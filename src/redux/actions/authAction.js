@@ -9,6 +9,7 @@ import {
   teachRegisterAPI,
   teachUpdateProfileAPI,
   teacherBankDetailAPI,
+  studentProfile,
 } from "../../routes/endPoints";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { pipSetAccessToken } from "../../utils/pip";
@@ -157,6 +158,17 @@ export const bankDetail = createAsyncThunk("Bank-details", async (props) => {
       isErrorToast: false,
     });
     callback(response);
+    return response;
+  } catch (error) {}
+});
+
+// fetch-student-profile
+export const fetchStudentProfile = createAsyncThunk("fetch-student-profile", async () => {
+  try {
+    const response = await API_REQUEST({
+      url: studentProfile,
+      method: "GET",
+    });
     return response;
   } catch (error) {}
 });

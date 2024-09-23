@@ -7,9 +7,14 @@ import {
   setFilterChatList,
   toggleChatBar,
 } from "../../redux/reducers/messageReducer";
-import { getTimeView, pipGetTeacherProfile } from "../../utils/pip";
+import {
+  checkPage,
+  getTimeView,
+  pipGetStudentProfile,
+  pipGetTeacherProfile,
+} from "../../utils/pip";
 
-const Chatbody = ({ socket }) => {
+const Chatbody = ({ socket, pageName = "" }) => {
   const dispatch = useDispatch();
   let lastMessageDate = null;
   const [isOnline, setIsOnline] = useState(false);
@@ -21,6 +26,7 @@ const Chatbody = ({ socket }) => {
 
   useEffect(() => {
     setMessages([...chats]);
+    console.log({ messages, chats });
   }, [chats]);
 
   useEffect(() => {
@@ -46,8 +52,12 @@ const Chatbody = ({ socket }) => {
     }
   };
 
-  const studentId = activeChatDetail?.student?.id ?? null;
-  const teacherId = pipGetTeacherProfile().id ?? null;
+  const studentId = checkPage(pageName)
+    ? pipGetStudentProfile()?.id
+    : activeChatDetail?.student?.id ?? null;
+  const teacherId = checkPage(pageName)
+    ? activeChatDetail?.teacher?.id ?? null
+    : pipGetTeacherProfile()?.id;
 
   const roomId = `${studentId}-${teacherId}`;
 
@@ -67,8 +77,6 @@ const Chatbody = ({ socket }) => {
       });
     };
     socket.on("user-status-change", handleUserStatusChange);
-
-    setMessages([]);
 
     return () => {
       socket.off("user-status-change", handleUserStatusChange);
@@ -100,15 +108,20 @@ const Chatbody = ({ socket }) => {
                           <img
                             className="img-fluid ct_img_36"
                             src={
-                              activeChatDetail?.student?.profile_image ??
-                              "assets/img/user_profile.png"
+                              checkPage(pageName)
+                                ? activeChatDetail?.teacher?.profile_image ??
+                                  "../assets/img/user_profile.png"
+                                : activeChatDetail?.student?.profile_image ??
+                                  "../assets/img/user_profile.png"
                             }
                             alt="user img"
                           />
                         </div>
                         <div className="flex-grow-1 ms-3">
                           <h3 className="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600 text-capitalize">
-                            {`${activeChatDetail?.student?.first_name} ${activeChatDetail?.student?.last_name}`}
+                            {checkPage(pageName)
+                              ? `${activeChatDetail?.teacher?.full_name}`
+                              : `${activeChatDetail?.student?.first_name} ${activeChatDetail?.student?.last_name}`}
                           </h3>
                           <p className="mb-0 ct_fs_12 ct_ff_roboto">
                             {isOnline ? "Online" : "Offline"}
@@ -116,38 +129,15 @@ const Chatbody = ({ socket }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-4">
-                      <ul className="moreoption">
-                        <li className="navbar nav-item dropdown">
-                          <a
-                            className="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-                          </a>
-                          <ul className="dropdown-menu">
-                            <li>
-                              <a className="dropdown-item" href="#">
-                                Delete Chat
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
                 <div className="modal-body">
                   <div className="msg-body">
                     <ul>
+                      {console.log(messages)}
                       {messages?.length != 0 ? (
                         messages?.map((item, index) => {
                           const messageDate = formatDate(item.created_at);
-                          const isSenderTeacher =
-                            item.sender_teacher_id !== null;
 
                           const showDateDivider =
                             messageDate !== lastMessageDate;
@@ -162,7 +152,11 @@ const Chatbody = ({ socket }) => {
                                   </div>
                                 </li>
                               )}
-                              {item?.sender_teacher_id ? (
+                              {(
+                                checkPage(pageName)
+                                  ? item?.sender_student_id
+                                  : item?.sender_teacher_id
+                              ) ? (
                                 <li className="repaly">
                                   <div>
                                     <p>{item?.content}</p>
@@ -190,7 +184,7 @@ const Chatbody = ({ socket }) => {
                     </ul>
                   </div>
                 </div>
-                <ChatFooter socket={socket} />
+                <ChatFooter socket={socket} pageName={pageName} />
               </div>
             </div>
           ) : (

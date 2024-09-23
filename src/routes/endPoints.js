@@ -1,4 +1,4 @@
-export const BASE_URL = "http://192.168.29.68:4002/";
+export const BASE_URL = "http://192.168.29.183:4002/";
 
 // TEACHER API ENDPOINTS :
 
@@ -40,6 +40,9 @@ export const teacherStudentsListAPI = "chat/chat-student-list";
 export const teacherStartChatAPI = "chat/start-chat";
 export const teacherChatListAPI = "chat/teacher-chats";
 export const teacherChatMessagesAPI = "chat/messages";
+
+export const studentTeacherChatListAPI = "chat/chat-teacher-list";
+export const studentChatListAPI = "chat/student-chats";
 
 //STUDENT
 

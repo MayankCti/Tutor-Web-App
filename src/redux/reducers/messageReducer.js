@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   chatMessages,
   fetchAllStudentChatList,
+  fetchAllTeacherChatList,
   fetchChatList,
+  fetchOutsideChatList,
   startChat,
 } from "../actions/messagesActions";
 
@@ -71,7 +73,9 @@ export const messageSlice = createSlice({
     builder.addCase(fetchAllStudentChatList.fulfilled, (state, action) => {
       const { data } = action?.payload ?? {};
       state.allStudentList = data ?? [];
+      state.activeChatDetail = {};
       state.isLoading = false;
+      state.isToggle = false;
     });
     builder.addCase(fetchAllStudentChatList.rejected, (state, action) => {
       state.isLoading = false;
@@ -79,7 +83,7 @@ export const messageSlice = createSlice({
 
     // start-chat
     builder.addCase(startChat.pending, (state, action) => {
-      state.isLoading = true;
+      // state.isLoading = true;
     });
     builder.addCase(startChat.fulfilled, (state, action) => {
       const { success } = action?.payload ?? {};
@@ -88,10 +92,10 @@ export const messageSlice = createSlice({
       }
       state.isToggle = true;
       state.isSlider = false;
-      state.isLoading = false;
+      // state.isLoading = false;
     });
     builder.addCase(startChat.rejected, (state, action) => {
-      state.isLoading = false;
+      // state.isLoading = false;
     });
 
     // fetch-chat-list
@@ -118,6 +122,34 @@ export const messageSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(chatMessages.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    // fetch-all-teacher-chat-list
+    builder.addCase(fetchAllTeacherChatList.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchAllTeacherChatList.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.allStudentList = data ?? [];
+      state.activeChatDetail = {};
+      state.isLoading = false;
+      state.isToggle = false;
+    });
+    builder.addCase(fetchAllTeacherChatList.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    // fetch-all-teacher-chat-list
+    builder.addCase(fetchOutsideChatList.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchOutsideChatList.fulfilled, (state, action) => {
+      const { data } = action?.payload ?? {};
+      state.chatList = data ?? [];
+      state.isLoading = false;
+    });
+    builder.addCase(fetchOutsideChatList.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

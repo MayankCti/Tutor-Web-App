@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import { pageRoutes } from "../../routes/pageRoutes";
 import Header from "../../layout/studentLayout/Header";
 import SideBar from "../../layout/studentLayout/SideBar";
-import { pipViewDate } from "../../utils/pip";
+import { pipGetStudentProfile, pipViewDate } from "../../utils/pip";
 import { fetchMyBookedClasses } from "../../redux/actions/classFeeAction";
 import { useDispatch, useSelector } from "react-redux";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
 import Loader from "../../components/other/Loader";
 import NoRecord from "../../components/other/NoRecord";
+import { fetchStudentProfile } from "../../redux/actions/authAction";
 
 function MyClass() {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ function MyClass() {
   };
 
   useEffect(() => {
+    if (!pipGetStudentProfile()) {
+      dispatch(fetchStudentProfile());
+    }
     dispatch(fetchMyBookedClasses());
   }, []);
 
@@ -80,8 +84,7 @@ function MyClass() {
                       </tr>
                     </thead>
                     <tbody>
-                      {
-                        myclassData?.length!=0 && 
+                      {myclassData?.length != 0 &&
                         myclassData?.map((item, index) => (
                           <tr key={index}>
                             <td>{index + 1}</td>
@@ -123,13 +126,10 @@ function MyClass() {
                               </button>
                             </td>
                           </tr>
-                        ))
-                      }
+                        ))}
                     </tbody>
                   </table>
-                      {
-                        myclassData?.length == 0 && <NoRecord/>
-                      }
+                  {myclassData?.length == 0 && <NoRecord />}
                 </div>
               </div>
             </div>

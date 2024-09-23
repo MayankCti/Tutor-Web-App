@@ -9,12 +9,18 @@ import {
 import {
   chatMessages,
   fetchAllStudentChatList,
+  fetchAllTeacherChatList,
   fetchChatList,
+  fetchOutsideChatList,
   startChat,
 } from "../../redux/actions/messagesActions";
-import { pipGetTeacherProfile } from "../../utils/pip";
+import {
+  checkPage,
+  pipGetStudentProfile,
+  pipGetTeacherProfile,
+} from "../../utils/pip";
 
-const Chatbar = ({ socket }) => {
+const Chatbar = ({ socket, pageName = "" }) => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -33,13 +39,21 @@ const Chatbar = ({ socket }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchAllStudentChatList(searchTerm));
+    if(searchTerm){
+      if (checkPage(pageName)) {
+        dispatch(fetchAllTeacherChatList(searchTerm));
+      } else {
+        dispatch(fetchAllStudentChatList(searchTerm));
+      }
+    }
   }, [searchTerm]);
 
   const handleStartChat = (id) => {
     const callback = (response) => {
       if (response.success) {
-        dispatch(fetchChatList());
+        dispatch(
+          checkPage(pageName) ? fetchOutsideChatList() : fetchChatList()
+        );
         dispatch(setActiveChatDetail(response?.data));
         dispatch(
           chatMessages({
@@ -51,12 +65,19 @@ const Chatbar = ({ socket }) => {
         console.log({ response: response?.data });
       }
     };
-    dispatch(
-      startChat({
-        payload: {
+
+    const data = checkPage(pageName)
+      ? {
+          student_id: pipGetStudentProfile()?.id,
+          teacher_id: id,
+        }
+      : {
           student_id: id,
           teacher_id: pipGetTeacherProfile()?.id,
-        },
+        };
+    dispatch(
+      startChat({
+        payload: data,
         callback,
       })
     );
@@ -110,10 +131,11 @@ const Chatbar = ({ socket }) => {
                 </div>
                 <div className="ct_add_user_message_list_34">
                   <ChatList
-                  socket={socket}
+                    socket={socket}
                     isDisplay={false}
                     data={allStudentList}
                     handleClick={handleStartChat}
+                    pageName={pageName}
                   />
                 </div>
               </div>
@@ -148,6 +170,7 @@ const Chatbar = ({ socket }) => {
                   data={chatList}
                   handleClick={handleGetChatMessages}
                   searchTerm1={searchTerm1}
+                  pageName={pageName}
                 />
               </div>
             </div>

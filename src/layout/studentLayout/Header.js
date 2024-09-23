@@ -2,10 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
 import Logout from "../../components/studentComponent/Logout";
+import { pipGetStudentProfile } from "../../utils/pip";
 
 function Header({ onToggleSidebar }) {
   const navigate = useNavigate();
-
+  const { first_name, last_name, profile_image } = pipGetStudentProfile();
   return (
     <>
       <div className="ct_right_header">
@@ -21,13 +22,13 @@ function Header({ onToggleSidebar }) {
               onClick={() => navigate(pageRoutes?.studentProfile)}
             >
               <img
-                src="../assets/img/user_profile.png"
+                src={profile_image ?? "../assets/img/user_profile.png"}
                 alt=""
                 className="ct_img_44"
               />
               <div>
                 <h6 className="ct_fs_14 ct_fw_700 mb-0 ct_ff_roboto mb-1">
-                  Aris Lomen
+                  {`${first_name ?? ""} ${last_name ?? ""}`}
                 </h6>
                 <p className="mb-0 ct_fs_12 ct_fw_500 ct_ff_roboto ">Student</p>
               </div>

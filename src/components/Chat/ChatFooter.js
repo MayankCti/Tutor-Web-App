@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { pipGetAccessToken, pipGetTeacherProfile } from "../../utils/pip";
+import {
+  checkPage,
+  pipGetAccessToken,
+  pipGetStudentProfile,
+  pipGetTeacherProfile,
+} from "../../utils/pip";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilterChatList } from "../../redux/reducers/messageReducer";
 
-const ChatFooter = ({ socket }) => {
+const ChatFooter = ({ socket, pageName = "" }) => {
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const { activeChatDetail, chatList } = useSelector(
@@ -14,13 +19,21 @@ const ChatFooter = ({ socket }) => {
     e.preventDefault();
 
     if (message) {
-      const data = {
-        content: message,
-        sender_teacher_id: pipGetTeacherProfile().id,
-        sender_student_id: null,
-        student_id: activeChatDetail?.student?.id,
-        teacher_id: pipGetTeacherProfile().id,
-      };
+      const data = checkPage(pageName)
+        ? {
+            content: message,
+            sender_teacher_id: null,
+            sender_student_id: pipGetStudentProfile()?.id,
+            student_id: pipGetStudentProfile()?.id,
+            teacher_id: activeChatDetail?.teacher?.id,
+          }
+        : {
+            content: message,
+            sender_teacher_id: pipGetTeacherProfile().id,
+            sender_student_id: null,
+            student_id: activeChatDetail?.student?.id,
+            teacher_id: pipGetTeacherProfile().id,
+          };
       console.log({ socketObj: data });
       socket.emit("chat message", data);
     }
@@ -40,23 +53,6 @@ const ChatFooter = ({ socket }) => {
             onChange={(e) => setMessage(e.target.value)}
           />
           <div className="d-flex align-items-center ct_send_btn_position">
-            {/* <div className="send-btns">
-              <div className="attach">
-                <div className="button-wrapper">
-                  <span className="label">
-                    <i className="fa-solid fa-link"></i>
-                  </span>
-                  <input
-                    type="file"
-                    name="upload"
-                    id="upload"
-                    className="upload-box"
-                    placeholder="Upload File"
-                    aria-label="Upload File"
-                  />
-                </div>
-              </div>
-            </div> */}
             <button type="submit" onClick={handleSendMessage}>
               <i className="fa fa-paper-plane" aria-hidden="true"></i>
             </button>

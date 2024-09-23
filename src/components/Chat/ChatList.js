@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NoRecord from "../other/NoRecord";
 import { useSelector } from "react-redux";
+import { checkPage, getSubstring } from "../../utils/pip";
 
 const ChatList = ({
   isDisplay = true,
@@ -8,6 +9,7 @@ const ChatList = ({
   handleClick,
   searchTerm1 = "",
   socket,
+  pageName = "",
 }) => {
   const { activeChatDetail } = useSelector((state) => state?.messageReducer);
   const [filterData, setFilterData] = useState(data);
@@ -19,7 +21,9 @@ const ChatList = ({
       return;
     }
     let temp = data?.filter((item) => {
-      const name = `${item?.student?.first_name?.toLowerCase()} ${item?.student?.last_name?.toLowerCase()}`;
+      const name = checkPage(pageName)
+        ? `${item?.teacher?.full_name?.toLowerCase()}`
+        : `${item?.student?.first_name?.toLowerCase()} ${item?.student?.last_name?.toLowerCase()}`;
       return name.includes(searchTerm1?.toLowerCase());
     });
     setFilterData(temp);
@@ -54,15 +58,16 @@ const ChatList = ({
               <div className="flex-shrink-0 position-relative ct_img_44">
                 <img
                   className="ct_img_44"
-                  src={item?.profile_image ?? "assets/img/user_profile.png"}
+                  src={item?.profile_image ?? "../assets/img/user_profile.png"}
                   alt="user img"
                 />
               </div>
               <div className="flex-grow-1">
                 <h3 className="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                  {`${item?.first_name} ${item?.last_name}`}
+                  {checkPage(pageName)
+                    ? item?.full_name
+                    : `${item?.first_name} ${item?.last_name}`}
                 </h3>
-                <p className="mb-0 ct_fs_12 ct_ff_roboto">Pesquisar chat</p>
               </div>
             </a>
           </div>
@@ -90,8 +95,11 @@ const ChatList = ({
                   <img
                     className="ct_img_44"
                     src={
-                      item?.student?.profile_image ??
-                      "assets/img/user_profile.png"
+                      checkPage(pageName)
+                        ? item?.teacher?.profile_image ??
+                          "../assets/img/user_profile.png"
+                        : item?.student?.profile_image ??
+                          "../assets/img/user_profile.png"
                     }
                     alt="user img"
                   />
@@ -99,18 +107,22 @@ const ChatList = ({
                 </div>
                 <div className="flex-grow-1">
                   <h3 className="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                    {`${item?.student?.first_name} ${item?.student?.last_name}`}
+                    {checkPage(pageName)
+                      ? `${item?.teacher?.full_name}`
+                      : `${item?.student?.first_name} ${item?.student?.last_name}`}
                   </h3>
                   <p className="mb-0 ct_fs_12 ct_ff_roboto">
-                    {item?.latestMessage}
+                  {getSubstring(item?.latestMessage,15)}
+                    
                   </p>
                 </div>
-                {unreadMessageCounts[item?.id] > 0 && (
-                  <div className="ct_mesg_num_1 ms-auto">
-                    <span>{unreadMessageCounts[item?.id]}</span>{" "}
-                    {/* Display unread count */}
-                  </div>
-                )}
+                {activeChatDetail?.id != item?.id &&
+                  unreadMessageCounts[item?.id] > 0 && (
+                    <div className="ct_mesg_num_1 ms-auto">
+                      <span>{unreadMessageCounts[item?.id]}</span>{" "}
+                      {/* Display unread count */}
+                    </div>
+                  )}
               </a>
             </div>
           ))

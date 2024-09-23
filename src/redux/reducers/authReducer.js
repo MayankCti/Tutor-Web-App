@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   pipGetRegisterStep,
+  pipSaveStudentProfile,
   pipSaveTeacherProfile,
   pipSetRegisterStep,
 } from "../../utils/pip";
@@ -8,6 +9,7 @@ import {
   bankDetail,
   createBasicDetail,
   fetchProfile,
+  fetchStudentProfile,
   studentAndPricing,
   teacherChangePassword,
   teacherForgotPassword,
@@ -201,6 +203,19 @@ export const authSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(bankDetail.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(fetchStudentProfile.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchStudentProfile.fulfilled, (state, action) => {
+      const { data, success } = action?.payload ?? {};
+
+      if (success) pipSaveStudentProfile(data ?? {});
+      state.isLoading = false;
+    });
+    builder.addCase(fetchStudentProfile.rejected, (state, action) => {
       state.isLoading = false;
     });
   },
