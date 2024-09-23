@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   pipGetRegisterStep,
+  pipSaveStudentProfile,
   pipSaveTeacherProfile,
   pipSetRegisterStep,
 } from "../../utils/pip";
@@ -8,6 +9,7 @@ import {
   bankDetail,
   createBasicDetail,
   fetchProfile,
+  fetchStudentProfile,
   studentAndPricing,
   teacherChangePassword,
   teacherForgotPassword,
@@ -92,6 +94,7 @@ export const authSlice = createSlice({
         contact_number,
         per_hour_pricing,
         max_student_headcount,
+        id,
       } = teacher ?? {};
       const { theme_color } = theme ?? {};
       const { stream_name } = stream ?? {};
@@ -110,10 +113,35 @@ export const authSlice = createSlice({
         contact_number,
         max_student_headcount: max_student_headcount,
         per_hour_pricing: per_hour_pricing,
+        id,
       };
       if (success) {
         const root = document.documentElement;
+
+        const lightenColor = (color, percent) => {
+          const num = parseInt(color.slice(1), 16),
+            amt = Math.round(2.55 * percent),
+            R = (num >> 16) + amt,
+            G = ((num >> 8) & 0x00ff) + amt,
+            B = (num & 0x0000ff) + amt;
+          return (
+            "#" +
+            (
+              0x1000000 +
+              (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+              (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+              (B < 255 ? (B < 1 ? 0 : B) : 255)
+            )
+              .toString(16)
+              .slice(1)
+              .toUpperCase()
+          );
+        };
+
+        const lighterTheme = lightenColor(theme_color, 40);
+
         root.style.setProperty("--dark_purple", theme_color);
+        root.style.setProperty("--light_purple_bg", lighterTheme);
         state.profile = profile;
         pipSaveTeacherProfile(profile ?? {});
       }
@@ -175,6 +203,19 @@ export const authSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(bankDetail.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(fetchStudentProfile.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchStudentProfile.fulfilled, (state, action) => {
+      const { data, success } = action?.payload ?? {};
+
+      if (success) pipSaveStudentProfile(data ?? {});
+      state.isLoading = false;
+    });
+    builder.addCase(fetchStudentProfile.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

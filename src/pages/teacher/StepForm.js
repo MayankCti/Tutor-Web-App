@@ -21,15 +21,15 @@ const StepForm = () => {
   };
 
   return (
-    <section class="">
-      <div class="container">
-        <div class="ct_logo ct_login_logo">
+    <section className="">
+      <div className="container">
+        <div className="ct_logo ct_login_logo">
           <a href="javascript:void(0)">
             <img src="assets/img/logo.svg" alt="" />
           </a>
         </div>
-        <div class="row align-items-center mt-5 pt-5">
-          <div class="col-lg-11 mx-auto">
+        <div className="row align-items-center mt-5 pt-5">
+          <div className="col-lg-11 mx-auto">
             <form
               id="msform"
               onSubmit={(e) => {
@@ -37,7 +37,7 @@ const StepForm = () => {
               }}
             >
               {/* <!-- progressbar --> */}
-              <ul id="progressbar" class="mb-5">
+              <ul id="progressbar" className="mb-5">
                 {[1, 2, 3]?.map((item, index) => (
                   <li
                     key={index}
@@ -47,7 +47,7 @@ const StepForm = () => {
                   </li>
                 ))}
               </ul>
-              <div class="ct_step_form_inner">{CurrentPage(currentStep)}</div>
+              <div className="ct_step_form_inner">{CurrentPage(currentStep)}</div>
             </form>
           </div>
         </div>

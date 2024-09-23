@@ -50,9 +50,9 @@ const CreateStudent = () => {
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
-                <div class="modal-content  py-5">
-                  <div class="modal-body py-0">
-                    <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center">
+                <div className="modal-content  py-5">
+                  <div className="modal-body py-0">
+                    <h4 className="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center">
                       Add Student Details
                     </h4>
                     <Formik
@@ -71,12 +71,12 @@ const CreateStudent = () => {
                         handleSubmit,
                       }) => (
                         <form onSubmit={handleSubmit}>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for="first_name"
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   First Name <AstrickMark />
                                 </label>
@@ -93,11 +93,11 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for="last_name"
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   Last Name
                                 </label>
@@ -114,13 +114,13 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-12">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-12">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for="email"
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
-                                  Email Address <AstrickMark />
+                                  Email  <AstrickMark />
                                 </label>
                                 <FormInput
                                   id="email"
@@ -136,11 +136,11 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for="contact_number"
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   Contact No.
                                 </label>
@@ -157,11 +157,11 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for=""
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   Emergency Contact No.
                                 </label>
@@ -178,12 +178,12 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-12 mb-4">
-                              <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+                            <div className="col-md-12 mb-4">
+                              <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                                 Student Status
                               </label>
-                              <div class="d-flex align-items-center flex-wrap gap-3">
-                                <div class="form-check">
+                              <div className="d-flex align-items-center flex-wrap gap-3">
+                                <div className="form-check">
                                   <FormInput
                                     id="student_status1"
                                     className="form-check-input"
@@ -196,7 +196,7 @@ const CreateStudent = () => {
                                   />
 
                                   <label
-                                    class="form-check-label ct_fs_14 ct_ff_roboto"
+                                    className="form-check-label ct_fs_14 ct_ff_roboto"
                                     for="student_status1"
                                     style={{
                                       backgroundColor:
@@ -208,7 +208,7 @@ const CreateStudent = () => {
                                   </label>
                                 </div>
 
-                                <div class="form-check">
+                                <div className="form-check">
                                   <FormInput
                                     id="student_status5"
                                     className="form-check-input"
@@ -223,7 +223,7 @@ const CreateStudent = () => {
                                   />
 
                                   <label
-                                    class="form-check-label ct_fs_14 ct_ff_roboto"
+                                    className="form-check-label ct_fs_14 ct_ff_roboto"
                                     for="flexRadioDefault5"
                                     style={{
                                       backgroundColor:
@@ -241,16 +241,16 @@ const CreateStudent = () => {
                                 fieldName="student_status"
                               />
                             </div>
-                            <div class="col-md-12">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-12">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for="address"
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   Address
                                 </label>
                                 <textarea
-                                  class="ct_input form-control ct_input_40 h-auto"
+                                  className="ct_input form-control ct_input_40 h-auto"
                                   rows="4"
                                   placeholder="Type here...."
                                   id="address"
@@ -265,11 +265,11 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for="date_of_birth"
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   DOB
                                 </label>
@@ -289,11 +289,11 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for="grade"
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   Grade
                                 </label>
@@ -311,11 +311,11 @@ const CreateStudent = () => {
                               </div>
                             </div>
 
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for=""
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   School Name
                                 </label>
@@ -332,11 +332,11 @@ const CreateStudent = () => {
                                 />
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-group text-start mb-4">
+                            <div className="col-md-6">
+                              <div className="form-group text-start mb-4">
                                 <label
                                   for=""
-                                  class="ct_ff_roboto mb-2 ct_fw_500"
+                                  className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
                                   City
                                 </label>
@@ -354,17 +354,17 @@ const CreateStudent = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="d-flex align-items-center gap-3">
+                          <div className="d-flex align-items-center gap-3">
                             <button
                               type="button"
-                              class="ct_purple_btn ct_outline_btn_purple  w-50"
+                              className="ct_purple_btn ct_outline_btn_purple  w-50"
                               onClick={() => navigate(-1)}
                             >
                               Cancel
                             </button>
                             <button
                               type="submit"
-                              class="ct_purple_btn w-50"
+                              className="ct_purple_btn w-50"
                               onClick={handleSubmit}
                             >
                               Save

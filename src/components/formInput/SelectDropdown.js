@@ -1,7 +1,7 @@
 import React from "react";
 
 const SelectDropdown = ({
-  defaultOptions =" -- Select an option --",
+  defaultOptions = null,
   options = [],
   selectedValue = "",
   onChange,
@@ -25,9 +25,11 @@ const SelectDropdown = ({
         value={selectedValue}
         onChange={handleChange}
       >
-        <option value="" disabled>
-          {defaultOptions}
-        </option>
+        {defaultOptions && (
+          <option value="" disabled>
+            {defaultOptions}
+          </option>
+        )}
         {options.map(
           (option, index) =>
             option.value !== null && (

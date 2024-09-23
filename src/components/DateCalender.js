@@ -20,16 +20,20 @@ const DateCalender = ({ initialDates = [], onDatesChange }) => {
     <>
       <div className="">
         <div className="">
-          <div className="   position-relative mb-3" style={{maxWidth: "100%",width: "100%"}}>
+          <div
+            className="   position-relative mb-3"
+            style={{ maxWidth: "100%", width: "100%" }}
+          >
             <p className="mb-0 text-start ct_fw_600 mb-2">Select Dates</p>
             <DatePicker
               multiple
               value={values}
               onChange={handleDateChange}
               plugins={[<DatePanel />]}
-              format="DD MMM YYYY"
+              format="DD-MM-YYYY"
               className="w-100"
               placeholder="Select Dates"
+              minDate={new Date()}
             />
           </div>
         </div>

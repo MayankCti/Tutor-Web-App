@@ -35,7 +35,7 @@ function StudentChangePassword() {
     <>
       <main className={active ? "" : "ct_collapsed_sidebar"}>
         <SideBar onToggleSidebar={sidebarActive} />
-        <div class="ct_right_content">
+        <div className="ct_right_content">
           <Header onToggleSidebar={sidebarActive} />
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28 py-4">

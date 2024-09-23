@@ -1,4 +1,4 @@
-export const BASE_URL = "http://192.168.29.105:4002/";
+export const BASE_URL = "http://192.168.29.183:4002/";
 
 // TEACHER API ENDPOINTS :
 
@@ -23,15 +23,26 @@ export const teacherDeleteStudentAPI = "teacher/delete-student";
 // CLASSES
 export const teacherClassesAPI = "teacher/get-classes";
 export const teacherCreateClassAPI = "teacher/create-class";
-export const teacherClassesFilterAPI = "filter-by-class-type-and-month";
+export const teacherClassesFilterAPI = "teacher/filter-by-class-type-and-month";
 
 export const teacherFetchClassTypeListAPI = "teacher/get-all-class-type";
 export const teacherDeleteClassTypeAPI = "teacher/delete-class-type";
 export const teacherCreateClassTypeAPI = "teacher/create-class-type";
 export const teacherUpdateClassTypeAPI = "teacher/update-class-type";
 
+export const teacherClassStudentListAPI = "teacher/get-booked-student";
 //Billing
 export const teacherBillingAPI = "teacher/billing-details";
+export const teacherPayFeeAPI = "student/change-payment-status";
+
+// Message
+export const teacherStudentsListAPI = "chat/chat-student-list";
+export const teacherStartChatAPI = "chat/start-chat";
+export const teacherChatListAPI = "chat/teacher-chats";
+export const teacherChatMessagesAPI = "chat/messages";
+
+export const studentTeacherChatListAPI = "chat/chat-teacher-list";
+export const studentChatListAPI = "chat/student-chats";
 
 //STUDENT
 
@@ -43,3 +54,8 @@ export const getAllTeacherList = "student/get-teacher-list";
 export const getClassByTeacher = "student/get-class-by-teacher";
 export const studentBillingAPI = "student/billing-details";
 export const studentMyBookedClasses = "student/get-all-booked-classes";
+
+export const studentBookClasses = "student/book-class"
+
+export const studentPayFee = "student/change-payment-status"
+

@@ -2,11 +2,11 @@ import * as Yup from "yup";
 
 export const signInSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Please enter a valid email address")
+    .email("Please enter a valid email")
+    .required("Please enter email")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/,
-      "Please enter a valid email address"
+      "Please enter a valid email"
     ),
   password: Yup.string()
     .required("Please enter password")
@@ -19,22 +19,22 @@ export const signInSchema = Yup.object().shape({
 
 export const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Please enter a valid email address")
+    .email("Please enter a valid email")
+    .required("Please enter email")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/,
-      "Please enter a valid email address"
+      "Please enter a valid email"
     ),
 });
 
 export const signUpSchema = Yup.object().shape({
   username: Yup.string().required("Please enter user name"),
   email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Please enter a valid email address")
+    .email("Please enter a valid email")
+    .required("Please enter email")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/,
-      "Please enter a valid email address"
+      "Please enter a valid email"
     ),
   password: Yup.string()
     .required("Please enter password")
@@ -71,11 +71,11 @@ export const changePasswordSchema = Yup.object().shape({
 export const myProfileSchema = Yup.object().shape({
   full_name: Yup.string().required("Please enter full name"),
   email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Please enter a valid email address")
+    .email("Please enter a valid email")
+    .required("Please enter email")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/,
-      "Please enter a valid email address"
+      "Please enter a valid email"
     ),
   stream: Yup.string().required("Please enter stream"),
   theme: Yup.string().required("Please select theme colour code"),
@@ -108,12 +108,12 @@ export const basicDetailSchema = Yup.object().shape({
 export const secondStepSchema = Yup.object().shape({
   max_student_headcount: Yup.number()
     .typeError("Max Students Headcount must be a number")
-    .required("Max Students Headcount is required")
+    .required("Please enter Max Students Headcount")
     .positive("Max Students Headcount must be a positive number")
     .integer("Max Students Headcount must be an integer"),
   per_hour_pricing: Yup.number()
     .typeError("Per Hour Pricing must be a number")
-    .required("Per Hour Pricing is required")
+    .required("Please enter Per Hour Pricing")
     .positive("Per Hour Pricing must be a positive number"),
 });
 
@@ -136,11 +136,11 @@ export const createStudentSchema = Yup.object().shape({
   first_name: Yup.string().required("Please enter first name"),
   last_name: Yup.string().required("Please enter last name"),
   email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Please enter a valid email address")
+    .email("Please enter a valid email")
+    .required("Please enter email")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/,
-      "Please enter a valid email address"
+      "Please enter a valid email"
     ),
   contact_number: Yup.string()
     .matches(/^(0\d{9}|[1-9]\d{9})$/, {
@@ -175,8 +175,8 @@ export const createClassTypeSchema = Yup.object().shape({
 
 export const loginvalidationSchema = Yup.object({
   email: Yup.string()
-    .email("Email address is not correct , please enter a valid email address")
-    .required("Please enter email address"),
+    .email("Please enter a valid email")
+    .required("Please enter email"),
   password: Yup.string()
     .required("Please enter your password")
     .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
@@ -199,7 +199,7 @@ export const editProfileValidationSchema = Yup.object().shape({
     .max(50, "Last name cannot exceed 50 characters")
     .required("Last name is required"),
   email: Yup.string()
-    .email("Invalid email format")
+    .email("Please enter a valid email")
     .required("Email is required"),
   contact_number: Yup.string()
     .matches(/^[0-9]{10}$/, "Contact number must be exactly 10 digits")
@@ -229,8 +229,8 @@ export const editProfileValidationSchema = Yup.object().shape({
     .max(50, "Parent last name cannot exceed 50 characters")
     .required("Parent last name is required"),
   parent_email: Yup.string()
-    .email("Invalid parent email format")
-    .required("Parent email is required"),
+    .email("Please enter parent email")
+    .required("Please enter parent email"),
   parent_contact_number: Yup.string()
     .matches(/^[0-9]{10}$/, "Parent contact number must be exactly 10 digits")
     .required("Parent contact number is required"),
@@ -267,6 +267,6 @@ export const changePasswordValidationSchema = Yup.object().shape({
 
 export const forgetPasswordValidationSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Email address is not correct , please enter a valid email address")
-    .required("Please enter email address"),
+    .email("Please enter a valid email")
+    .required("Please enter email "),
 });

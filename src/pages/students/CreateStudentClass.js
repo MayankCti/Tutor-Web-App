@@ -4,16 +4,24 @@ import Header from "../../layout/studentLayout/Header";
 import { useDispatch, useSelector } from "react-redux";
 import SelectDropdown from "../../components/formInput/SelectDropdown";
 import {
+  BookClass,
   fetchTeacherClasses,
   getTeacherList,
 } from "../../redux/actions/classFeeAction";
+import NoRecord from "../../components/other/NoRecord";
+import { getDayName, pipGetTeacherProfile, pipViewDate } from "../../utils/pip";
+import { pageRoutes } from "../../routes/pageRoutes";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../components/other/Loader";
 
 const CreateStudentClass = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedTeacher, setSelectedTeacher] = useState("");
-  const { teacherList, teacherClasses, isLoading, error } = useSelector(
+  const [selectedClassIds, setSelectedClassIds] = useState([]);
+  const { teacherList, isLoading, teacherClassesList } = useSelector(
     (state) => state?.classFeeReducer
   );
-  const dispatch = useDispatch();
 
   const [active, setActive] = useState(true);
 
@@ -23,7 +31,7 @@ const CreateStudentClass = () => {
 
   useEffect(() => {
     dispatch(getTeacherList());
-  }, [dispatch]);
+  }, []);
 
   const handleTeacherChange = (value) => {
     setSelectedTeacher(Number(value));
@@ -33,8 +41,43 @@ const CreateStudentClass = () => {
     if (selectedTeacher) {
       dispatch(fetchTeacherClasses({ payload: selectedTeacher }));
     }
-  }, [selectedTeacher, dispatch]);
+  }, [selectedTeacher]);
 
+  const handleCheckboxChange = (event, id) => {
+    if (event.target.checked) {
+      setSelectedClassIds((prevIds) => [...prevIds, id]);
+    } else {
+      setSelectedClassIds((prevIds) =>
+        prevIds?.filter((classId) => classId !== id)
+      );
+    }
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (selectedClassIds?.length == 0) return;
+    const callback = (response) => {
+      if (response.success) navigate(pageRoutes.studentmyClass);
+    };
+    const data = {
+      teacher_id: pipGetTeacherProfile()?.id,
+      class_ids: selectedClassIds,
+    };
+    dispatch(BookClass({ payload: data, callback }));
+  };
+
+  const getMatchedTeacherValue = (teacherList, selectedTeacher) => {
+    const matchedTeacher = teacherList?.find(
+      (item) => item?.value === selectedTeacher
+    );
+    console.log({ matchedTeacher, teacherList, selectedTeacher });
+    // Return the value if a match is found, otherwise return an empty string
+    return matchedTeacher ? matchedTeacher?.label : "";
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <main className={active ? "" : "ct_collapsed_sidebar"}>
       <SideBar onToggleSidebar={sidebarActive} />
@@ -66,287 +109,71 @@ const CreateStudentClass = () => {
                           onChange={handleTeacherChange}
                         />
                       </div>
-
+                      <h3 className="ct_fw_700 ct_fs_24 mb-4 ms-2">
+                        {getMatchedTeacherValue(teacherList, selectedTeacher) ??
+                          ""}
+                      </h3>
                       <div className="row">
-                        <div className="col-lg-4 mb-4">
-                          <div className="ct_classes_card ct_class_card_2 py-3">
-                            <h4 className="ct_fs_20 ct_fw_700 text-center mb-2">
-                              Monday
-                            </h4>
-                            <p className="mb-0 ct_fw_700">12-09-2024</p>
+                        {teacherClassesList?.length != 0 ? (
+                          teacherClassesList?.map((item, index) => (
+                            <div className="col-lg-4 mb-4">
+                              <div className="ct_classes_card ct_class_card_2 py-3">
+                                <h4 className="ct_fs_20 ct_fw_700 text-center mb-2">
+                                  {getDayName(item?.class_date)}
+                                </h4>
+                                <p className="mb-0 ct_fw_700">
+                                  {pipViewDate(item?.class_date)}
+                                </p>
 
-                            <div class="ct_grid_2_col_2 mt-3">
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault2"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault2"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault3"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault3"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault4"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault4"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
+                                <div className="ct_grid_2_col_2 mt-3">
+                                  {item?.times?.map((times, index) => (
+                                    <div className="ct_class_chck_bg">
+                                      <div className="form-check">
+                                        <label
+                                          className="form-check-label d-flex"
+                                          htmlFor={`flexCheckDefault-${times.id}`}
+                                        >
+                                          <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id={`flexCheckDefault-${times.id}`}
+                                            checked={selectedClassIds.includes(
+                                              times.id
+                                            )} // Check if ID is in the selected list
+                                            onChange={(e) =>
+                                              handleCheckboxChange(e, times.id)
+                                            } // Handle change
+                                          />
+                                          <p className="mb-0">
+                                            {" "}
+                                            {times?.start_time}
+                                            {" to "}
+                                            {times?.end_time}
+                                          </p>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-4 mb-4">
-                          <div className="ct_classes_card ct_class_card_2 py-3">
-                            <h4 className="ct_fs_20 ct_fw_700 text-center mb-2">
-                              Monday
-                            </h4>
-                            <p className="mb-0 ct_fw_700">12-09-2024</p>
-
-                            <div class="ct_grid_2_col_2 mt-3">
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault5"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault5"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault6"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault6"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault7"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault7"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault4"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault4"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-4 mb-4">
-                          <div className="ct_classes_card ct_class_card_2 py-3">
-                            <h4 className="ct_fs_20 ct_fw_700 text-center mb-2">
-                              Monday
-                            </h4>
-                            <p className="mb-0 ct_fw_700">12-09-2024</p>
-
-                            <div class="ct_grid_2_col_2 mt-3">
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault9"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault9"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault10"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault10"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault11"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault11"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                              <div className="ct_class_chck_bg">
-                                <div class="form-check">
-                                  <label
-                                    class="form-check-label d-flex"
-                                    for="flexCheckDefault12"
-                                  >
-                                    <input
-                                      class="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault12"
-                                    />
-                                    <p className="mb-0"> 9 - 10Am</p>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          ))
+                        ) : (
+                          <NoRecord />
+                        )}
                       </div>
-                      {/* <h4 className="ct_fw_700 mb-4 text-center">Select Class Period</h4> */}
-                      {/* <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                <label class="form-check-label d-flex justify-content-between" for="flexCheckDefault">
-                <p className="mb-0"> 29 July 2024</p>
-                <p className="mb-0"> 9 - 10Am</p>
-                </label>
-                </div>
-                <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                <label class="form-check-label d-flex justify-content-between" for="flexCheckDefault">
-                <p className="mb-0"> 29 July 2024</p>
-                <p className="mb-0"> 9 - 10Am</p>
-                </label>
-                </div>
-                <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                <label class="form-check-label d-flex justify-content-between" for="flexCheckDefault">
-                <p className="mb-0"> 29 July 2024</p>
-                <p className="mb-0"> 9 - 10Am</p>
-                </label>
-                </div>
-                <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                <label class="form-check-label d-flex justify-content-between" for="flexCheckDefault">
-                <p className="mb-0"> 29 July 2024</p>
-                <p className="mb-0"> 9 - 10Am</p>
-                </label>
-                </div> */}
 
-                      {/* <div className="text-center mt-4">
-               <button className="ct_purple_btn px-5">Save</button>
-               </div> */}
+                      <div className="text-center mt-4">
+                        <button
+                          className="ct_purple_btn px-5"
+                          onClick={(e) => handleSave(e)}
+                        >
+                          Save
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                {isLoading && <p>Loading classes...</p>}
-                {error && (
-                  <p style={{ color: "red" }}>
-                    Failed to load classes: {error}
-                  </p>
-                )}
-                {!isLoading && teacherClasses && (
-                  <div className="class-list">
-                    {/* Render classes for the selected teacher */}
-                    {teacherClasses.map((classItem) => (
-                      <div key={classItem.id}>
-                        <p>{classItem.className}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
           </div>

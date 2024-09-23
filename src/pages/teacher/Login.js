@@ -151,7 +151,7 @@ const Login = () => {
                         Don’t have any account?{" "}
                         <a
                           href="javascript:void(0)"
-                          className="ct_purple_text ct_fw_700 ms-3"
+                          className="ct_purple_text ct_fw_700 ms-1"
                           onClick={() => navigate(pageRoutes.sign_up)}
                         >
                           Sign up
@@ -163,6 +163,7 @@ const Login = () => {
                         <a
                           href="javascript:void(0)"
                           onClick={() => navigate(pageRoutes?.studentlogin)}
+                          style={{textDecoration: 'none'}}
                           className="ct_purple_text ct_fw_700 ms-3"
                         >
                           Student Login

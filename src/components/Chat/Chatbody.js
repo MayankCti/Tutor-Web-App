@@ -1,159 +1,198 @@
-import React from "react";
+import moment from "moment";
 import ChatFooter from "./ChatFooter";
+import BlankMessage from "../other/BlankMessage";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setFilterChatList,
+  toggleChatBar,
+} from "../../redux/reducers/messageReducer";
+import {
+  checkPage,
+  getTimeView,
+  pipGetStudentProfile,
+  pipGetTeacherProfile,
+} from "../../utils/pip";
 
-const Chatbody = () => {
+const Chatbody = ({ socket, pageName = "" }) => {
+  const dispatch = useDispatch();
+  let lastMessageDate = null;
+  const [isOnline, setIsOnline] = useState(false);
+  const { isToggle, chats, activeChatDetail } = useSelector(
+    (state) => state?.messageReducer
+  );
+
+  const [messages, setMessages] = useState([...chats]);
+
+  useEffect(() => {
+    setMessages([...chats]);
+    console.log({ messages, chats });
+  }, [chats]);
+
+  useEffect(() => {
+    socket.on("chat message", (data) => {
+      setMessages([...messages, data]);
+      if (activeChatDetail) {
+        dispatch(setFilterChatList());
+      }
+    });
+  }, [socket, messages]);
+
+  const formatDate = (date) => {
+    const messageDate = moment(date);
+    const today = moment().startOf("day");
+    const yesterday = moment().subtract(1, "days").startOf("day");
+
+    if (messageDate.isSame(today, "d")) {
+      return "Today";
+    } else if (messageDate.isSame(yesterday, "d")) {
+      return "Yesterday";
+    } else {
+      return messageDate.format("MMMM D, YYYY"); // Display full date
+    }
+  };
+
+  const studentId = checkPage(pageName)
+    ? pipGetStudentProfile()?.id
+    : activeChatDetail?.student?.id ?? null;
+  const teacherId = checkPage(pageName)
+    ? activeChatDetail?.teacher?.id ?? null
+    : pipGetTeacherProfile()?.id;
+
+  const roomId = `${studentId}-${teacherId}`;
+
+  useEffect(() => {
+    if (!activeChatDetail || activeChatDetail.length <= 0 || !roomId) {
+      return;
+    }
+    socket.emit("join_room", { roomId });
+
+    const handleUserStatusChange = (status) => {
+      const { userId, is_online, last_seen } = status;
+      setIsOnline(is_online);
+      console.log("User status change detected:", {
+        userId,
+        is_online,
+        last_seen,
+      });
+    };
+    socket.on("user-status-change", handleUserStatusChange);
+
+    return () => {
+      socket.off("user-status-change", handleUserStatusChange);
+      socket.emit("leave_room", { roomId });
+    };
+  }, [activeChatDetail, roomId, socket]);
+
   return (
     <>
-      <div class=" col-xl-8">
+      <div className=" col-xl-8">
         {/* chatbox */}
-        <div class="chatbox ">
-          <div class="modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="msg-head">
-                <div class="row">
-                  <div class="col-8">
-                    <div class="d-flex align-items-center">
-                      <span class="chat-icon">
-                        <i class="fa-solid fa-chevron-left"></i>
-                      </span>
-                      <div class="flex-shrink-0">
-                        <img
-                          class="img-fluid ct_img_36"
-                          src="assets/img/user_profile.png"
-                          alt="user img"
-                        />
-                      </div>
-                      <div class="flex-grow-1 ms-3">
-                        <h3 class="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600">
-                          Mehedi Hasan
-                        </h3>
-                        <p class="mb-0 ct_fs_12 ct_ff_roboto">Pesquisar chat</p>
+        <div class={`chatbox ${isToggle ? "showbox" : ""}`}>
+          {isToggle ? (
+            <div className="modal-dialog-scrollable">
+              <div className="modal-content">
+                <div className="msg-head">
+                  <div className="row">
+                    <div className="col-8">
+                      <div className="d-flex align-items-center">
+                        <span
+                          className="chat-icon"
+                          onClick={() => {
+                            dispatch(toggleChatBar(false));
+                          }}
+                        >
+                          <i className="fa-solid fa-chevron-left"></i>
+                        </span>
+                        <div className="flex-shrink-0">
+                          <img
+                            className="img-fluid ct_img_36"
+                            src={
+                              checkPage(pageName)
+                                ? activeChatDetail?.teacher?.profile_image ??
+                                  "../assets/img/user_profile.png"
+                                : activeChatDetail?.student?.profile_image ??
+                                  "../assets/img/user_profile.png"
+                            }
+                            alt="user img"
+                          />
+                        </div>
+                        <div className="flex-grow-1 ms-3">
+                          <h3 className="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600 text-capitalize">
+                            {checkPage(pageName)
+                              ? `${activeChatDetail?.teacher?.full_name}`
+                              : `${activeChatDetail?.student?.first_name} ${activeChatDetail?.student?.last_name}`}
+                          </h3>
+                          <p className="mb-0 ct_fs_12 ct_ff_roboto">
+                            {isOnline ? "Online" : "Offline"}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4">
-                    <ul class="moreoption">
-                      <li class="navbar nav-item dropdown">
-                        <a
-                          class="nav-link dropdown-toggle"
-                          href="#"
-                          role="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li>
-                            <a class="dropdown-item" href="#">
-                              Delete Chat
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
+                </div>
+                <div className="modal-body">
+                  <div className="msg-body">
+                    <ul>
+                      {console.log(messages)}
+                      {messages?.length != 0 ? (
+                        messages?.map((item, index) => {
+                          const messageDate = formatDate(item.created_at);
+
+                          const showDateDivider =
+                            messageDate !== lastMessageDate;
+                          lastMessageDate = messageDate;
+
+                          return (
+                            <>
+                              {showDateDivider && (
+                                <li>
+                                  <div className="divider">
+                                    <h6>{messageDate}</h6>
+                                  </div>
+                                </li>
+                              )}
+                              {(
+                                checkPage(pageName)
+                                  ? item?.sender_student_id
+                                  : item?.sender_teacher_id
+                              ) ? (
+                                <li className="repaly">
+                                  <div>
+                                    <p>{item?.content}</p>
+                                    <span className="time">
+                                      {getTimeView(item?.created_at)}
+                                    </span>
+                                  </div>
+                                </li>
+                              ) : (
+                                <li className="sender">
+                                  <div>
+                                    <p>{item?.content}</p>
+                                    <span className="time">
+                                      {getTimeView(item?.created_at)}
+                                    </span>
+                                  </div>
+                                </li>
+                              )}
+                            </>
+                          );
+                        })
+                      ) : (
+                        <BlankMessage />
+                      )}
                     </ul>
                   </div>
                 </div>
+                <ChatFooter socket={socket} pageName={pageName} />
               </div>
-              <div class="modal-body">
-                <div class="msg-body">
-                  <ul>
-                    <li class="sender">
-                      <img
-                        src="assets/img/user_profile.png"
-                        alt=""
-                        class="ct_img_30"
-                      />
-                      <div>
-                        <p>
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s,{" "}
-                        </p>
-                        <span class="time">10:06 am</span>
-                      </div>
-                    </li>
-                    <li class="repaly">
-                      <div>
-                        <p>
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s,
-                        </p>
-                        <span class="time">10:20 am</span>
-                      </div>
-                      <img
-                        src="assets/img/user_profile.png"
-                        alt=""
-                        class="ct_img_30"
-                      />
-                    </li>
-                    <li class="sender">
-                      <img
-                        src="assets/img/user_profile.png"
-                        alt=""
-                        class="ct_img_30"
-                      />
-                      <div>
-                        <p>
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s,{" "}
-                        </p>
-                        <span class="time">10:06 am</span>
-                      </div>
-                    </li>
-                    <li class="repaly">
-                      <div>
-                        <p>
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s,
-                        </p>
-                        <span class="time">10:20 am</span>
-                      </div>
-                      <img
-                        src="assets/img/user_profile.png"
-                        alt=""
-                        class="ct_img_30"
-                      />
-                    </li>
-                    <li>
-                      <div class="divider">
-                        <h6>Today</h6>
-                      </div>
-                    </li>
-
-                    <li class="repaly">
-                      <div>
-                        <p>
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s,
-                        </p>
-                        <span class="time">10:20 am</span>
-                      </div>
-                      <img
-                        src="assets/img/user_profile.png"
-                        alt=""
-                        class="ct_img_30"
-                      />
-                    </li>
-                    <li class="repaly">
-                      <div>
-                        <p>
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s,
-                        </p>
-                        <span class="time">10:20 am</span>
-                      </div>
-                      <img
-                        src="assets/img/user_profile.png"
-                        alt=""
-                        class="ct_img_30"
-                      />
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <ChatFooter />
             </div>
-          </div>
+          ) : (
+            <BlankMessage
+              lable="Please select
+                User"
+            />
+          )}
         </div>
       </div>
     </>

@@ -44,18 +44,18 @@ const ChangePassword = () => {
         <Sidebar />
         <div className="ct_right_content">
           <Headers />
-          <div class="ct_inner_dashbaord_main">
-            <div class="ct_white_bg ct_mt_28 py-4">
-              <div class="ct_px_46">
-                <div class="d-flex align-items-center justify-content-between gap-2 mb-5 flex-wrap">
+          <div className="ct_inner_dashbaord_main">
+            <div className="ct_white_bg ct_mt_28 py-4">
+              <div className="ct_px_46">
+                <div className="d-flex align-items-center justify-content-between gap-2 mb-5 flex-wrap">
                   <a
                     href="javascript:void(0)"
                     onClick={() => navigate(-1)}
-                    class="ct_back_text ct_fs_18"
+                    className="ct_back_text ct_fs_18"
                   >
-                    <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
+                    <i className="fa-solid fa-arrow-left"></i> <span>Back</span>
                   </a>
-                  <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600 mx-auto mb-0">
+                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600 mx-auto mb-0">
                     Change Password
                   </h4>
                 </div>
@@ -75,25 +75,25 @@ const ChangePassword = () => {
                     handleSubmit,
                   }) => (
                     <form onSubmit={handleSubmit}>
-                      <div class="row">
-                        <div class="col-lg-6 mx-auto">
-                          <div class="form-group  mb-4">
+                      <div className="row">
+                        <div className="col-lg-6 mx-auto">
+                          <div className="form-group  mb-4">
                             <label
                               for=""
-                              class="d-flex align-items-center justify-content-between mb-2"
+                              className="d-flex align-items-center justify-content-between mb-2"
                             >
-                              <span class="ct_fw_600 ct_fs_20">
+                              <span className="ct_fw_600 ct_fs_20">
                                 Current Password
                               </span>
                             </label>
-                            <div class="position-relative">
+                            <div className="position-relative">
                               <input
                                 type={eyes.eye1 ? "text" : "password"}
                                 value={values?.currentPassword}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 id="currentPassword"
-                                class="form-control ct_input ct_ff_roboto"
+                                className="form-control ct_input ct_ff_roboto"
                                 placeholder="Enter Current Password"
                               />
                               <Eye
@@ -109,23 +109,23 @@ const ChangePassword = () => {
                               fieldName="currentPassword"
                             />
                           </div>
-                          <div class="form-group  mb-4">
+                          <div className="form-group  mb-4">
                             <label
                               for=""
-                              class="d-flex align-items-center justify-content-between mb-2"
+                              className="d-flex align-items-center justify-content-between mb-2"
                             >
-                              <span class="ct_fw_600 ct_fs_20">
+                              <span className="ct_fw_600 ct_fs_20">
                                 New Password
                               </span>
                             </label>
-                            <div class="position-relative">
+                            <div className="position-relative">
                               <input
                                 type={eyes.eye2 ? "text" : "password"}
                                 id="newPassword"
                                 value={values?.newPassword}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                class="form-control ct_input ct_ff_roboto"
+                                className="form-control ct_input ct_ff_roboto"
                                 placeholder="Enter New Password"
                               />
                               <Eye
@@ -141,23 +141,23 @@ const ChangePassword = () => {
                               fieldName="newPassword"
                             />
                           </div>
-                          <div class="form-group">
+                          <div className="form-group">
                             <label
                               for=""
-                              class="d-flex align-items-center justify-content-between mb-2"
+                              className="d-flex align-items-center justify-content-between mb-2"
                             >
-                              <span class="ct_fw_600 ct_fs_20">
+                              <span className="ct_fw_600 ct_fs_20">
                                 Confirm Password
                               </span>
                             </label>
-                            <div class="position-relative">
+                            <div className="position-relative">
                               <input
                                 type={eyes.eye3 ? "text" : "password"}
                                 value={values?.confirmPassword}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 id="confirmPassword"
-                                class="form-control ct_input ct_ff_roboto"
+                                className="form-control ct_input ct_ff_roboto"
                                 placeholder="Enter Confirm Password"
                               />
                               <Eye
@@ -175,9 +175,9 @@ const ChangePassword = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="text-center mt-4">
+                      <div className="text-center mt-4">
                         <button
-                          class="ct_purple_btn px-5"
+                          className="ct_purple_btn px-5"
                           onClick={handleSubmit}
                         >
                           Save

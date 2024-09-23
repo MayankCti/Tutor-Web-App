@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import "react-date-range/dist/styles.css";
 import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
-import TimeInput from "../../components/formInput/TimeInput";
-import DateCalender from "../../components/DateCalender";
-import "react-date-range/dist/styles.css";
+import { useNavigate } from "react-router-dom";
 import "react-date-range/dist/theme/default.css";
-import { TimePicker, Button, Row, Col, message } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import moment from "moment";
-import SelectDropdown from "../../components/formInput/SelectDropdown";
-import { createClass, fetchClassesTypes } from "../../redux/actions/classFeeAction";
+import React, { useEffect, useState } from "react";
 import Loader from "../../components/other/Loader";
 import { pageRoutes } from "../../routes/pageRoutes";
-import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import DateCalender from "../../components/DateCalender";
+import TimeInput from "../../components/formInput/TimeInput";
+import { TimePicker, Button, Row, Col, message } from "antd";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import SelectDropdown from "../../components/formInput/SelectDropdown";
+import {
+  createClass,
+  fetchClassesTypes,
+} from "../../redux/actions/classFeeAction";
 
 const CreateClass = () => {
   const navigate = useNavigate();
@@ -86,7 +88,7 @@ const CreateClass = () => {
         <Headers />
         <div className="ct_inner_dashbaord_main">
           <div className="d-flex align-items-center justify-content-between">
-            <h4 class="ct_fs_22 ct_ff_roboto ct_fw_600">Create Class</h4>
+            <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">Create Class</h4>
           </div>
           <fieldset className="mt-3 ct_caldner_white_bg">
             <div>
@@ -102,6 +104,7 @@ const CreateClass = () => {
                 id="floatingInputValue"
                 options={options}
                 selectedValue={selectedValue}
+                  defaultOptions="Class Type"
                 onChange={setSelectedValue}
               />
               <div className="d-flex align-items-end justify-content-start mt-3 gap-2">
@@ -186,7 +189,7 @@ const CreateClass = () => {
               </div>
             </div>
             <div>
-              <button class="ct_purple_btn mt-3" onClick={() => handleSubmit()}>
+              <button className="ct_purple_btn mt-3" onClick={() => handleSubmit()}>
                 Save
               </button>
             </div>

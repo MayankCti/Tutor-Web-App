@@ -61,18 +61,18 @@ const FourthStep = () => {
         <form onSubmit={handleSubmit}>
           <fieldset>
             <div>
-              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4">
+              <h4 className="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4">
                 Banking Details
               </h4>
 
-              <div class="form-group text-start mb-4">
-                <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+              <div className="form-group text-start mb-4">
+                <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                   Bank Name
                   <AstrickMark />
                 </label>
                 <input
                   type="text"
-                  class="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40"
                   id="bank_name"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -84,14 +84,14 @@ const FourthStep = () => {
                   fieldName="bank_name"
                 />
               </div>
-              <div class="form-group text-start mb-4">
-                <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+              <div className="form-group text-start mb-4">
+                <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                   Account No.
                   <AstrickMark />
                 </label>
                 <input
-                 type="number"
-                  class="ct_input form-control ct_input_40"
+                  type="text"
+                  className="ct_input form-control ct_input_40"
                   id="account_number"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -103,13 +103,13 @@ const FourthStep = () => {
                   fieldName="account_number"
                 />
               </div>
-              <div class="form-group text-start mb-4">
-                <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+              <div className="form-group text-start mb-4">
+                <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                   BSB Number <AstrickMark />
                 </label>
                 <input
                   type="text"
-                  class="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40"
                   id="ifsc_code"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -125,14 +125,14 @@ const FourthStep = () => {
             <input
               type="button"
               name="previous"
-              class="previous action-button ct_fs_18 ct_fw_600"
+              className="previous action-button ct_fs_18 ct_fw_600"
               value="Previous"
               onClick={() => dispatch(handleCurrentStep(2))}
             />
             <input
               type="button"
               name="submit"
-              class="submit  action-button ct_purple_btn text-white ct_fs_18 "
+              className="submit  action-button ct_purple_btn text-white ct_fs_18 "
               value="Submit"
               onClick={handleSubmit}
             />

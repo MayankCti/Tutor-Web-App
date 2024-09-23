@@ -45,11 +45,14 @@ function StudentProfile() {
       });
   };
 
+  if (loader) {
+    return <Loader />;
+  }
   return (
     <>
       <main className={active ? "" : "ct_collapsed_sidebar"}>
         <SideBar onToggleSidebar={sidebarActive} />
-        <div class="ct_right_content">
+        <div className="ct_right_content">
           <Header onToggleSidebar={sidebarActive} />
           <div className="ct_inner_dashbaord_main">
             <div className="ct_white_bg ct_mt_28">
@@ -147,7 +150,7 @@ function StudentProfile() {
                                 htmlFor=""
                                 className="ct_ff_roboto mb-2 ct_fw_500 "
                               >
-                                Email Address
+                                Email
                               </label>
                               <input
                                 type="email"
@@ -359,7 +362,7 @@ function StudentProfile() {
                                 htmlFor=""
                                 className="ct_ff_roboto mb-2 ct_fw_500 "
                               >
-                                Parent Email Address
+                                Parent Email
                               </label>
                               <input
                                 type="email"

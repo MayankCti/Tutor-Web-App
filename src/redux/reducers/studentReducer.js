@@ -4,8 +4,6 @@ import {
   deleteStudent,
   fetchDashboard,
   fetchStudentList,
-  fetchTeacherClasses,
-  getTeacherList,
   updateStudent,
   uploadStudentFile,
 } from "../actions/studentAction";

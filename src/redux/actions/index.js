@@ -5,7 +5,15 @@ import { clearAuth, getAuthStudent, pipGetAccessToken } from "../../utils/pip";
 import { pageRoutes } from "../../routes/pageRoutes";
 
 export const API_REQUEST = async (props) => {
-  const { url, method, data, headers, params, isErrorToast = true } = props;
+  const {
+    url,
+    method,
+    data,
+    headers,
+    params,
+    isErrorToast = true,
+    isSuccessToast = true,
+  } = props;
   const urlSegment = window?.location?.pathname.split("/")[1];
   const isStudentRoute = urlSegment === "student";
   const token = isStudentRoute ? getAuthStudent() : pipGetAccessToken();
@@ -22,11 +30,12 @@ export const API_REQUEST = async (props) => {
   };
   try {
     const response = await axios(requestOptions);
-
-    if (method !== "GET" && response?.data?.success == true) {
-      toast.success(response?.data?.message);
-    } else if (response?.data?.success == false && method !== "GET") {
-      toast.error(response?.data?.message);
+    if (isSuccessToast) {
+      if (method !== "GET" && response?.data?.success == true) {
+        toast.success(response?.data?.message);
+      } else if (response?.data?.success == false && method !== "GET") {
+        toast.error(response?.data?.message);
+      }
     }
     return response?.data;
   } catch (error) {

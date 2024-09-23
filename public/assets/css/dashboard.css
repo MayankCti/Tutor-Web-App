@@ -419,19 +419,20 @@ message-area
 ******************************** */
 
 .message-area {
-  /* height: 100vh; */
+  height: calc(100vh - 232px);
   overflow: hidden;
   overflow-y: auto;
   /* padding: 30px 0; */
-
 }
-
+.ct_message_scroll_h_remove {
+  height: calc(100vh - 146px);
+}
 .chat-area {
   position: relative;
   /* width: 100%; */
   /* background-color: #fff; */
   border-radius: 0.3rem;
-  height: 70vh;
+  height: calc(100vh - 232px);
   overflow: hidden;
   min-height: calc(100% - 1rem);
 }
@@ -457,17 +458,27 @@ message-area
 }
 .modal-dialog-scrollable .modal-body {
   overflow-y: auto;
-  height: 380px;
+  /* height: 380px; */
+  height: calc(100vh - 336px);
+  min-height: calc(100vh - 336px);
   /* min-height: 380px; */
   /* max-height: 380px; */
+}
+.chatbox .modal-dialog-scrollable .modal-body {
+  overflow-y: auto;
+  height: calc(100vh - 472px) !important;
+  /* min-height: 380px; */
+  /* max-height: 380px; */
+  min-height: calc(100vh - 424px);
+  max-height: calc(100vh - 472px);
 }
 .chatbox {
   width: auto;
   overflow: hidden;
   height: 100%;
-  background-color: #FAEBFF;
+  background-color: var(--light_purple_bg);
   border-radius: 15px;
-  border: 1px solid #E1E2FF;
+  border: 1px solid var(--light_purple_bg);
   padding: 0px 0px 25px;
 }
 
@@ -495,7 +506,7 @@ message-area
   font-weight: 400;
   line-height: 1.5;
   color: #222;
-  background-color: #FAEBFF;
+  background-color: var(--light_purple_bg);
   background-clip: padding-box;
   border: 1px solid #ccc;
   -webkit-appearance: none;
@@ -685,7 +696,7 @@ a.add img {
   background: #fff;
   display: inline-block;
   margin-bottom: 0;
-  border: 1px solid #A5A6F6;
+  border: 1px solid var(--dark_purple);
   padding: 8px 12px;
   border-radius: 10px;
   max-width: 500px;
@@ -718,7 +729,7 @@ a.add img {
   line-height: 26px;
   font-weight: 400;
   padding: 15px;
-  background: #4A115C;
+  background: var(--dark_purple);
   display: inline-block;
   padding: 8px 12px;
   border-radius: 10px;
@@ -768,7 +779,7 @@ li.repaly .time {
   font-size: 14px;
   line-height: 1.5;
   color: #222;
-  background: #faebff;
+  background: var(--light_purple_bg);
   display: inline-block;
   padding: 0 5px;
   margin-bottom: 0;
@@ -819,12 +830,12 @@ li.repaly .time {
   border-radius: 0.25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   border-radius: 10px;
-  border: 1px solid #A5A6F6;
+  border: 1px solid var(--dark_purple);
 }
 
 .send-box button {
   border: none;
-  background: #4A115C;
+  background: var(--dark_purple);
   padding: 0.375rem 5px;
   color: #fff;
   border-radius: 0.25rem;
@@ -995,9 +1006,9 @@ button:focus {
   top: 50%;
   transform: translateY(-50%);
 }
-.ct_chat_user{
+.ct_chat_user {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 44px auto auto;
   align-items: center;
   gap: 15px;
 }
@@ -1130,3 +1141,16 @@ button:focus {
     border: 1px solid #eee;
     height: 100%;
   }
+  .ct_empty_chat_box124 img{
+    max-width: 200px;
+    object-fit: contain;
+  }
+
+  .ct_empty_chat_box124 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 225px);
+    justify-content: center;
+    text-align: center;
+}

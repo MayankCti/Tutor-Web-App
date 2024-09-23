@@ -51,17 +51,17 @@ const SecondStep = () => {
         <form onSubmit={handleSubmit}>
           <fieldset>
             <div>
-              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4">
+              <h4 className="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4">
                 Students and Pricing
               </h4>
 
-              <div class="form-group text-start mb-4">
-                <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+              <div className="form-group text-start mb-4">
+                <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                   Max Students Headcount
                 </label>
                 <input
                   type="text"
-                  class="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40"
                   id="max_student_headcount"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -73,13 +73,13 @@ const SecondStep = () => {
                   fieldName="max_student_headcount"
                 />
               </div>
-              <div class="form-group text-start mb-4">
-                <label for="" class="ct_ff_roboto mb-2 ct_fw_500">
+              <div className="form-group text-start mb-4">
+                <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
                   Per Hour Pricing
                 </label>
                 <input
-                  type="number"
-                  class="ct_input form-control ct_input_40"
+                  type="text"
+                  className="ct_input form-control ct_input_40"
                   id="per_hour_pricing"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -96,14 +96,14 @@ const SecondStep = () => {
             <input
               type="button"
               name="previous"
-              class="previous action-button ct_fs_18 ct_fw_600"
+              className="previous action-button ct_fs_18 ct_fw_600"
               value="Previous"
               onClick={() => dispatch(handleCurrentStep(1))}
             />
             <input
               type="button"
               name="next"
-              class="next action-button ct_purple_btn text-white ct_fs_18 "
+              className="next action-button ct_purple_btn text-white ct_fs_18 "
               value="Next"
               onClick={handleSubmit}
             />

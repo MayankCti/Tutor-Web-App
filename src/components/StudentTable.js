@@ -46,9 +46,10 @@ const StudentTable = ({ statusFilter }) => {
   };
 
   const tableBody = () => {
-    return students?.map((item) => {
+    return students?.map((item, index) => {
       return (
         <tr key={item.name}>
+          <td>{index + 1}</td>
           <td>
             <div className="d-flex align-items-center gap-2">
               <img
@@ -67,7 +68,7 @@ const StudentTable = ({ statusFilter }) => {
           <td>{item?.student_status}</td>
           <td className="text-end">
             <i
-              class="fa-regular fa-pen-to-square ms-2"
+              className="fa-regular fa-pen-to-square ms-2"
               onClick={() => {
                 navigate(pageRoutes?.editStudentDetail, {
                   state: {
@@ -77,7 +78,7 @@ const StudentTable = ({ statusFilter }) => {
               }}
             ></i>
             <i
-              class="fa-solid fa-trash trash_icon_color ms-3"
+              className="fa-solid fa-trash trash_icon_color ms-3"
               data-bs-toggle="modal"
               data-bs-target="#ct_confirmation_modal"
               onClick={() => setStudentId(item?.id)}
@@ -93,8 +94,9 @@ const StudentTable = ({ statusFilter }) => {
         <table className="table ct_custom_table">
           <thead>
             <tr>
+              <th>S.No.</th>
               <th>Name</th>
-              <th>Email Address</th>
+              <th>Email</th>
               <th>Contact No.</th>
               <th>City</th>
               <th>Status</th>
@@ -102,19 +104,19 @@ const StudentTable = ({ statusFilter }) => {
             </tr>
           </thead>
           <tbody>
-            {students?.length <= 0 && <NoRecord />}
             {pathname === pageRoutes?.dashboard
               ? tableBody()?.slice(0, 5)
               : tableBody()}
           </tbody>
         </table>
+        {students?.length <= 0 && <NoRecord />}
       </div>
 
       {/* DELETE STUDENT CONFIRMATION */}
       <div
         className="modal fade ct_assets_modal"
         id="ct_confirmation_modal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="ct_logout_modalLabel"
         aria-hidden="true"
       >

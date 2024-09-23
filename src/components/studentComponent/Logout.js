@@ -11,25 +11,25 @@ function Logout() {
   return (
     <>
       <div
-        class="modal fade ct_assets_modal"
+        className="modal fade ct_assets_modal"
         id="ct_logout_modal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="ct_logout_modalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header border-0 pt-0">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header border-0 pt-0">
               <button
                 type="button"
-                class="btn-close ct_cloose_btn"
+                className="btn-close ct_cloose_btn"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
-                <i class="fa-solid fa-xmark"></i>
+                <i className="fa-solid fa-xmark"></i>
               </button>
             </div>
-            <div class="modal-body border-0 ">
+            <div className="modal-body border-0 ">
               <svg
                 width="21"
                 height="20"
@@ -42,15 +42,15 @@ function Logout() {
                   fill="#DC0202"
                 ></path>
               </svg>
-              <h4 class="text-center mb-4 ct_fw_600">Log Out Account</h4>
-              <p class="text-center ct_grey_text">
+              <h4 className="text-center mb-4 ct_fw_600">Log Out Account</h4>
+              <p className="text-center ct_grey_text">
                 Are you sure, you want to logout? once you logout <br /> you
                 need to login again.
               </p>
-              <div class="modal-footer border-0 justify-content-center">
+              <div className="modal-footer border-0 justify-content-center">
                 <button
                   type="button"
-                  class="ct_purple_btn ct_outline_blue"
+                  className="ct_purple_btn ct_outline_blue"
                   data-bs-dismiss="modal"
                 >
                   Cancel
@@ -59,7 +59,7 @@ function Logout() {
                   href="javascript:void(0)"
                   data-bs-dismiss="modal"
                   type="button"
-                  class=" bg-danger  ct_purple_btn  justify-content-center"
+                  className=" bg-danger  ct_purple_btn  justify-content-center"
                   style={{ borderColor: "rgb(220, 53, 69)" }}
                   onClick={handleLogout}
                 >
