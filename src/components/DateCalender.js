@@ -3,16 +3,14 @@ import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 
 const DateCalender = ({ initialDates = [], onDatesChange }) => {
-  const [values, setValues] = useState(
-    initialDates.length > 0 ? initialDates.map((date) => new Date(date)) : []
-  );
+  const [values, setValues] = useState([]);
 
   useEffect(() => {
     if (onDatesChange) onDatesChange(values);
   }, [values, onDatesChange]);
 
   const handleDateChange = (dates) => {
-    const updatedDates = dates.map((date) => new Date(date));
+    const updatedDates = dates?.map((date) => new Date(date));
     setValues(updatedDates);
   };
 

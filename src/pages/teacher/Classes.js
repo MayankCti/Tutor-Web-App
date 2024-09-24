@@ -99,8 +99,8 @@ const Classes = () => {
                       >
                         <div
                           className="ct_classes_card"
-                          data-bs-toggle="modal"
-                          data-bs-target="#class_detail_modal"
+                          // data-bs-toggle="modal"
+                          // data-bs-target="#class_detail_modal"
                         >
                           <div className="d-flex align-items-center justify-content-between flex-wrap gap-2">
                             <span className="ct_fs_14 ct_fw_600 ct_ff_roboto">
@@ -120,18 +120,19 @@ const Classes = () => {
                               <div key={idx} className="col-xxl-6 mb-3">
                                 <button
                                   className={`ct_purple_btn ct_border_radius_10 w-100 ct_extra_dark_btn_bg ${
-                                    isPastClassTime(
-                                      classItem.class_date,
-                                      time?.start_time
-                                    )
+                                    time?.is_booked
                                       ? "ct_red_bg"
                                       : "ct_light_darkgreen_bg"
                                   }`}
-                                  onClick={()=>handleClassClick(time?.class_id)}
+                                  // onClick={() =>
+                                  //   handleClassClick(time?.class_id)
+                                  // }
                                 >
                                   {time?.start_time}
                                   {" to "}
                                   {time?.end_time}
+                                  <br/>
+                                  ({time?.class_type})
                                 </button>
                               </div>
                             ))}

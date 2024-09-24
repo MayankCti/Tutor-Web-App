@@ -76,7 +76,7 @@ const Setting = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {classTypes?.length != 0 ? (
+                      {classTypes?.length != 0 && (
                         classTypes?.map((classType) => {
                           return (
                             <tr>
@@ -88,7 +88,7 @@ const Setting = () => {
                               </td>
                               <td className="text-end">
                                 <i
-                                  className="fa-regular fa-pen-to-square ms-2"
+                                  className="fa-regular fa-pen-to-square ms-2 cursorPointer"
                                   onClick={() => {
                                     navigate(pageRoutes?.updateClassType, {
                                       state: {
@@ -109,11 +109,11 @@ const Setting = () => {
                             </tr>
                           );
                         })
-                      ) : (
-                        <NoRecord />
-                      )}
+                      ) 
+                    }
                     </tbody>
                   </table>
+                      {classTypes?.length <= 0 && <NoRecord />}
                 </div>
               </div>
             </div>

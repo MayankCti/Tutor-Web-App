@@ -7,39 +7,35 @@ import {
   updateStudent,
   uploadStudentFile,
 } from "../actions/studentAction";
-import { pageRoutes } from "../../routes/pageRoutes";
 
 const initialState = {
   isLoading: false,
   students: [],
+  studentDetail: {},
   cardData: [
     {
       backgroundColor: "#D398E7",
       iconSrc: "assets/img/student_icon.svg",
       title: "Total classes this week",
       value: "",
-      path: pageRoutes?.classes,
     },
     {
       backgroundColor: "#F0C274",
       iconSrc: "assets/img/user_icon.svg",
       title: "Total enrolled students",
       value: "2514",
-      path: pageRoutes?.student,
     },
     {
       backgroundColor: "#70A1E5",
       iconSrc: "assets/img/anount_icon.svg",
       title: "Invoices due this week",
       value: "",
-      path: pageRoutes?.feeDue,
     },
     {
       backgroundColor: "#e570c8",
       iconSrc: "assets/img/total_payment_icon.svg",
       title: "Total payments this week",
       value: "",
-      path: pageRoutes?.feeDue,
     },
   ],
   options: [
@@ -53,7 +49,11 @@ const initialState = {
 export const studentSlice = createSlice({
   name: "student",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setUserDetails: (state, action) => {
+      state.studentDetail = action?.payload;
+    },
+  },
   extraReducers: (builder) => {
     // fetch-dashboard
     builder.addCase(fetchDashboard.pending, (state, action) => {
@@ -70,7 +70,7 @@ export const studentSlice = createSlice({
     builder.addCase(fetchDashboard.rejected, (state, action) => {
       state.isLoading = false;
     });
-    
+
     // fetch-student-list
     builder.addCase(fetchStudentList.pending, (state, action) => {
       state.isLoading = true;
@@ -130,4 +130,5 @@ export const studentSlice = createSlice({
   },
 });
 
+export const { setUserDetails } = studentSlice.actions;
 export default studentSlice.reducer;

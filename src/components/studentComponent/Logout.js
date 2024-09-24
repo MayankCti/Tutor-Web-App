@@ -63,7 +63,7 @@ function Logout() {
                   style={{ borderColor: "rgb(220, 53, 69)" }}
                   onClick={handleLogout}
                 >
-                  Yes Logout!
+                  Logout
                 </a>
               </div>
               <div></div>

@@ -3,136 +3,59 @@ import Sidebar from "../../layout/Sidebar";
 import Headers from "../../layout/Headers";
 import { useSelector } from "react-redux";
 
-const Calendar = () => {
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
+// Example events list
+const myEventsList = [
+  {
+    title: "Meeting",
+    start: new Date(2024, 8, 23, 10, 0), // September 23, 2024, 10:00 AM
+    end: new Date(2024, 8, 23, 11, 0), // September 23, 2024, 11:00 AM
+  },
+  {
+    title: "Lunch",
+    start: new Date(2024, 8, 24, 12, 0), // September 24, 2024, 12:00 PM
+    end: new Date(2024, 8, 24, 13, 0), // September 24, 2024, 1:00 PM
+  },
+  {
+    title: "Conference",
+    start: new Date(2024, 8, 25, 9, 0), // September 25, 2024, 9:00 AM
+    end: new Date(2024, 8, 25, 17, 0), // September 25, 2024, 5:00 PM
+  },
+];
+
+const CalendarPage = () => {
   const { isToggle } = useSelector((state) => state.authReducer);
+  const localizer = momentLocalizer(moment); // Set the localizer with moment
+
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
         <Sidebar />
         <div className="ct_right_content">
           <Headers />
-      <div className="ct_inner_dashbaord_main">
-        <div className="ct_white_bg ct_mt_28">
-          <div className="px-3">
-            <div className="mb-5 pt-4">
-              <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600 mx-auto mb-0">
-                Calendar
-              </h4>
-            </div>
-            <div className="row">
-              <div className="col-xl-3 mb-4">
-                <div className="ct_current_calendar-container">
-                  <div className="ct_current_calendar-month-arrow-container">
-                    <div className="ct_currentcalendar-month-year-container">
-                      <select className="ct_current_calendar-years"></select>
-                      <select className="ct_current_calendar-months"></select>
-                    </div>
-                    <div className="calendar-month-year"></div>
-                    <div className="calendar-arrow-container">
-                      <button className="calendar-today-button"></button>
-                    </div>
-                  </div>
-                  <ul className="calendar-week "></ul>
-                  <ul className="calendar-days"></ul>
-                </div>
-
-                <div className="ct_event_detail_list mt-4">
-                  <div className="d-flex align-items-center gap-3">
-                    <img
-                      src="assets/img/calendar_img_12.png"
-                      alt=""
-                      className="ct_img_18"
-                    />
-                    <h4 className="ct_ff_roboto ct_fw_600 ct_fs_16 mb-0">
-                      02-01-2024
-                    </h4>
-                  </div>
-                  <ul className="mt-4">
-                    <li>
-                      <p className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1 ct_green_text_dark ct_fw_600">
-                        <span className="ct_event_dot ct_dot_clr"></span>Groups
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">08:00</p>
-                    </li>
-                    <li>
-                      <p className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1 ct_red_text ct_fw_600">
-                        <span className="ct_event_dot ct_red_bg"></span>1:1 sessions
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">09:00</p>
-                    </li>
-                    <li>
-                      <p className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1 ct_yellow_text">
-                        <span className="ct_event_dot ct_yellow_bg"></span>School
-                        Readiness
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">10:00</p>
-                    </li>
-                    <li>
-                      <p
-                        className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1"
-                        style={{ color: "#55D28F" }}
-                      >
-                        <span
-                          className="ct_event_dot ct_dot_clr"
-                          style={{ backgroundColor: "#55D28F" }}
-                        ></span>
-                        Homework Clubs
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">11:00</p>
-                    </li>
-                    <li>
-                      <p className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1 ct_red_text ct_fw_600">
-                        <span className="ct_event_dot ct_red_bg"></span>1:1 sessions
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">09:00</p>
-                    </li>
-                  </ul>
-                </div>
-                <div className="ct_event_detail_list mt-5">
-                  <div className="d-flex align-items-center gap-3">
-                    <img
-                      src="assets/img/calendar_img_12.png"
-                      alt=""
-                      className="ct_img_18"
-                    />
-                    <h4 className="ct_ff_roboto ct_fw_600 ct_fs_16 mb-0">
-                      03-01-2024
-                    </h4>
-                  </div>
-                  <ul className="mt-4">
-                    <li>
-                      <p className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1 ct_green_text_dark ct_fw_600">
-                        <span className="ct_event_dot ct_dot_clr"></span>Groups
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">13:00</p>
-                    </li>
-                    <li>
-                      <p className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1 ct_red_text ct_fw_600">
-                        <span className="ct_event_dot ct_red_bg"></span>1:1 sessions
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">14:00</p>
-                    </li>
-                    <li>
-                      <p className="mb-0 ct_fs_14 ct_fw_600 d-flex align-items-center gap-1 ct_yellow_text">
-                        <span className="ct_event_dot ct_yellow_bg"></span>School
-                        Readiness
-                      </p>
-                      <p className="mb-0 ct_fs_14 ct_fw_600">15:00</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-xl-9 mb-4">
-                <div id="ec"></div>
+          <div className="ct_inner_dashboard_main">
+            <div className="ct_white_bg ct_mt_28">
+              <div className="myCustomHeight">
+                <Calendar
+                  localizer={localizer}
+                  events={myEventsList}
+                  startAccessor="start"
+                  endAccessor="end"
+                  style={{ height: 500 }} // Set the height for the calendar
+                  defaultView="month" // Default view can be 'month', 'week', 'day'
+                  popup // Enable popup for multi-day events
+                  selectable // Allow event selection
+                />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      </div>
       </main>
     </>
   );
 };
 
-export default Calendar;
+export default CalendarPage;

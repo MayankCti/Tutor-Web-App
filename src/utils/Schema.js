@@ -70,6 +70,9 @@ export const changePasswordSchema = Yup.object().shape({
 
 export const myProfileSchema = Yup.object().shape({
   full_name: Yup.string().required("Please enter full name"),
+  username: Yup.string().required("Please enter username"),
+  max_student_headcount: Yup.string().required("Please enter max student headcount"),
+  per_hour_pricing: Yup.string().required("Please enter per hour price"),
   email: Yup.string()
     .email("Please enter a valid email")
     .required("Please enter email")

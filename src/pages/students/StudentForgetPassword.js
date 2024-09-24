@@ -110,7 +110,7 @@ function StudentForgetPassword() {
                         </div>
                         <div className="mt-4">
                           <p className="mb-0 ct_color_8E8E8E ct_ff_roboto text-center">
-                            Already have an account?
+                          Already know your password?
                             <a
                               href="javascript:void(0)"
                               onClick={() => navigate(pageRoutes?.studentlogin)}

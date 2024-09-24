@@ -28,7 +28,13 @@ const FirstStep = () => {
     full_name: full_name ?? "",
     theme: theme ?? "",
     coaching_classes_name: coaching_classes_name ?? "",
-    contact_number: contact_number ?? "",
+    contact_number: contact_number
+      ? contact_number[0] === "0"
+        ? contact_number
+        : contact_number?.length == 10
+        ? contact_number
+        : `0${contact_number}`
+      : "",
     stream: stream ?? "",
     address: address ?? "",
     file: file ?? "",
@@ -118,7 +124,7 @@ const FirstStep = () => {
                   <div className="position-relative">
                     <input
                       type="text"
-                       className="ct_input form-control ct_input_40"
+                      className="ct_input form-control ct_input_40"
                       value={values.full_name}
                       id="full_name"
                       onChange={handleChange}

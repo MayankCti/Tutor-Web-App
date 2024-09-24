@@ -16,14 +16,25 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const { isToggle, isLoading } = useSelector((state) => state.authReducer);
   const [changeProfile, setChangeProfile] = useState();
-  const { profile_image, full_name, email, stream_name, theme_color } =
-    pipGetTeacherProfile() ?? {};
+  const {
+    profile_image,
+    full_name,
+    email,
+    stream_name,
+    theme_color,
+    per_hour_pricing,
+    username,
+    max_student_headcount,
+  } = pipGetTeacherProfile() ?? {};
 
   const initialState = {
     full_name: full_name ?? "",
     email: email ?? "",
     stream: stream_name ?? "",
     theme: theme_color ?? "",
+    per_hour_pricing: per_hour_pricing ?? "",
+    username: username ?? "",
+    max_student_headcount: max_student_headcount ?? "",
   };
 
   const onHandleChangeImage = (e) => {
@@ -38,6 +49,9 @@ const EditProfile = () => {
     data.append("full_name", values?.full_name);
     data.append("stream", values?.stream);
     data.append("theme", values?.theme);
+    data.append("per_hour_pricing", values?.per_hour_pricing);
+    data.append("username", values?.username);
+    data.append("max_student_headcount", values?.max_student_headcount);
     {
       changeProfile && data.append("file", changeProfile);
     }
@@ -64,7 +78,7 @@ const EditProfile = () => {
                     className="ct_back_text ct_fs_18"
                   >
                     <i className="fa-solid fa-arrow-left"></i>
-                    <span>Back</span>
+                    <span>&nbsp;Back</span>
                   </a>
                   <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600 mx-auto mb-0">
                     Edit Profile
@@ -109,6 +123,25 @@ const EditProfile = () => {
                                 <i className="fa-solid fa-pen"></i>
                               </div>
                             </label>
+                          </div>
+                          <div className="form-group text-start mb-4">
+                            <label className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text">
+                              Username{" "}
+                            </label>
+
+                            <input
+                              id="username"
+                              type="text"
+                              className="ct_input form-control ct_input_40 ct_input_h_52"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.username}
+                            />
+                            <ErrorMessage
+                              errors={errors}
+                              touched={touched}
+                              fieldName="username"
+                            />
                           </div>
                           <div className="form-group text-start mb-4">
                             <label className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text">
@@ -164,6 +197,45 @@ const EditProfile = () => {
                               errors={errors}
                               touched={touched}
                               fieldName="stream"
+                            />
+                          </div>
+                          <div className="form-group text-start mb-4">
+                            <label className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text">
+                              Per Hour Price
+                            </label>
+                            <input
+                              type="text"
+                              className="ct_input form-control ct_input_40 ct_input_h_52"
+                              id="per_hour_pricing"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.per_hour_pricing}
+                            />
+                            <ErrorMessage
+                              errors={errors}
+                              touched={touched}
+                              fieldName="per_hour_pricing"
+                            />
+                          </div>
+                          <div className="form-group text-start mb-4">
+                            <label
+                              for=""
+                              className="ct_ff_roboto mb-2 ct_fw_500"
+                            >
+                              Max Students Headcount
+                            </label>
+                            <input
+                              type="text"
+                              className="ct_input form-control ct_input_40"
+                              id="max_student_headcount"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.max_student_headcount}
+                            />
+                            <ErrorMessage
+                              errors={errors}
+                              touched={touched}
+                              fieldName="max_student_headcount"
                             />
                           </div>
                           <div className="form-group text-start mb-4">

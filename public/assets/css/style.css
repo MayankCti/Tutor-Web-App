@@ -1540,3 +1540,7 @@ input.next.action-button,input.submit.action-button  {
     border-radius: 100px;
     cursor: pointer;
   }
+
+  .cursorPointer{
+    cursor: pointer;
+  }

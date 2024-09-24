@@ -19,7 +19,7 @@ const SelectDropdown = ({
         className={
           className
             ? className
-            : "form-control py-2 ct_purple_bg text-white ct_select_bg ct_fw_600"
+            : "form-control py-2 ct_purple_bg text-white ct_select_bg ct_fw_600 cursorPointer"
         }
         id={id}
         value={selectedValue}
