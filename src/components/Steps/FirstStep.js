@@ -93,7 +93,7 @@ const FirstStep = () => {
                         ? typeof values?.file == "string"
                           ? values?.file
                           : URL.createObjectURL(values?.file)
-                        : "assets/img/user_profile.png"
+                        : "../assets/img/user_profile.png"
                     }
                     className="ct_img_148"
                   />

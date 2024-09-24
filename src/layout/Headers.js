@@ -28,7 +28,7 @@ const Headers = () => {
           >
             <a href="javascript:void(0)">
               <img
-                src={profile_image ?? "assets/img/user_profile.png"}
+                src={profile_image ?? "../assets/img/user_profile.png"}
                 alt=""
                 className="ct_img_44"
               />

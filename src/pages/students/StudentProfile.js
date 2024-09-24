@@ -92,7 +92,7 @@ function StudentProfile() {
                             src={
                               profile?.profile_image
                                 ? profile.profile_image
-                                : "assets/img/user_profile.png"
+                                : "../assets/img/user_profile.png"
                             }
                             // src="../assets/img/user_profile.png"
                             alt=""

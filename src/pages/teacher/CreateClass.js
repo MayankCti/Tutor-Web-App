@@ -104,12 +104,12 @@ const CreateClass = () => {
                 id="floatingInputValue"
                 options={options}
                 selectedValue={selectedValue}
-                  defaultOptions="Class Type"
+                defaultOptions="Class Type"
                 onChange={setSelectedValue}
               />
               <div className="d-flex align-items-end justify-content-start mt-3 gap-2">
                 <div className="ct_flex_1">
-                  {timeRanges?.map((range, index) => (
+                  {/* {timeRanges?.map((range, index) => (
                     <div className="w-100">
                       <Row key={index} gutter={10} style={{ marginBottom: 10 }}>
                         <Col className="ct_flex_1">
@@ -178,6 +178,103 @@ const CreateClass = () => {
                         <div style={{ color: "red" }}>{errors[index]}</div>
                       )}
                     </div>
+                  ))} */}
+
+                  {timeRanges?.map((range, index) => (
+                    <div className="w-100" key={index}>
+                      <Row gutter={10} style={{ marginBottom: 10 }}>
+                        <Col className="ct_flex_1">
+                          <TimePicker
+                            className="ct_flex_1"
+                            format="HH:mm"
+                            value={
+                              range.start ? moment(range.start, "HH:mm") : null
+                            }
+                            onClick={() => onHandleClickOnTime(index, "start")}
+                            onChange={(time, timeString) =>
+                              handleTimeChange(index, "start", timeString)
+                            }
+                            placeholder="Start Time"
+                            // Disable hours and minutes if the end time is set and is before the start time
+                            disabledHours={() => {
+                              const endHour = range.end
+                                ? moment(range.end, "HH:mm").hour()
+                                : 24;
+                              return Array.from(
+                                { length: 24 },
+                                (_, i) => i
+                              ).filter((hour) => hour >= endHour);
+                            }}
+                            disabledMinutes={(selectedHour) => {
+                              const endHour = range.end
+                                ? moment(range.end, "HH:mm").hour()
+                                : -1;
+                              const endMinute = range.end
+                                ? moment(range.end, "HH:mm").minute()
+                                : -1;
+
+                              if (selectedHour === endHour) {
+                                return Array.from(
+                                  { length: endMinute },
+                                  (_, i) => i + endMinute
+                                );
+                              }
+                              return [];
+                            }}
+                          />
+                        </Col>
+                        <Col className="ct_flex_1">
+                          <TimePicker
+                            className="ct_flex_1"
+                            format="HH:mm"
+                            value={
+                              range.end ? moment(range.end, "HH:mm") : null
+                            }
+                            onClick={() => onHandleClickOnTime(index, "end")}
+                            onChange={(time, timeString) =>
+                              handleTimeChange(index, "end", timeString)
+                            }
+                            placeholder="End Time"
+                            disabledHours={() => {
+                              const startHour = range.start
+                                ? moment(range.start, "HH:mm").hour()
+                                : 0;
+                              return Array.from(
+                                { length: startHour },
+                                (_, i) => i
+                              );
+                            }}
+                            disabledMinutes={(selectedHour) => {
+                              const startHour = range.start
+                                ? moment(range.start, "HH:mm").hour()
+                                : -1;
+                              const startMinute = range.start
+                                ? moment(range.start, "HH:mm").minute()
+                                : -1;
+
+                              if (selectedHour === startHour) {
+                                return Array.from(
+                                  { length: startMinute + 1 },
+                                  (_, i) => i
+                                );
+                              }
+                              return [];
+                            }}
+                          />
+                        </Col>
+                        <Col>
+                          <Button
+                            type="danger"
+                            icon={<DeleteOutlined />}
+                            onClick={() => deleteTimeRange(index)}
+                            disabled={timeRanges.length === 1}
+                          />
+                        </Col>
+                      </Row>
+                      {errors[index] && (
+                        <div style={{ color: "red" }}>{errors[index]}</div>
+                      )}
+                    </div>
                   ))}
                 </div>
                 <Button
@@ -189,7 +286,10 @@ const CreateClass = () => {
               </div>
             </div>
             <div>
-              <button className="ct_purple_btn mt-3" onClick={() => handleSubmit()}>
+              <button
+                className="ct_purple_btn mt-3"
+                onClick={() => handleSubmit()}
+              >
                 Save
               </button>
             </div>

@@ -108,7 +108,7 @@ const EditProfile = () => {
                                 changeProfile
                                   ? URL.createObjectURL(changeProfile)
                                   : profile_image ??
-                                    "assets/img/user_profile.png"
+                                    "../assets/img/user_profile.png"
                               }
                               className="ct_img_148"
                             />

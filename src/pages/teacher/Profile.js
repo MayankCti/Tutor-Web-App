@@ -68,7 +68,7 @@ const Profile = () => {
                     <div className="col-lg-6 mx-auto">
                       <div className="ct_profile_img">
                         <img
-                          src={profile_image ?? "assets/img/user_profile.png"}
+                          src={profile_image ?? "../assets/img/user_profile.png"}
                           alt=""
                           className="ct_img_148"
                         />

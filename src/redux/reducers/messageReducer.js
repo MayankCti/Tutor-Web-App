@@ -83,7 +83,7 @@ export const messageSlice = createSlice({
 
     // start-chat
     builder.addCase(startChat.pending, (state, action) => {
-      // state.isLoading = true;
+
     });
     builder.addCase(startChat.fulfilled, (state, action) => {
       const { success } = action?.payload ?? {};
@@ -92,10 +92,8 @@ export const messageSlice = createSlice({
       }
       state.isToggle = true;
       state.isSlider = false;
-      // state.isLoading = false;
     });
     builder.addCase(startChat.rejected, (state, action) => {
-      // state.isLoading = false;
     });
 
     // fetch-chat-list

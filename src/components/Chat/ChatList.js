@@ -34,14 +34,14 @@ const ChatList = ({
     socket.on("unread-message-count", (messageData) => {
       setUnreadMessageCounts((prevCounts) => ({
         ...prevCounts,
-        [messageData.chatId]: messageData.unreadCount, // Update unread count for the specific chat
+        [messageData.chatId]: messageData, // Update unread count for the specific chat
       }));
     });
 
     return () => {
       socket.off("unread-message-count"); // Clean up the listener on unmount
     };
-  }, []);
+  }, [activeChatDetail]);
 
   const NewChatList = () => {
     return (
@@ -108,18 +108,24 @@ const ChatList = ({
                 <div className="flex-grow-1">
                   <h3 className="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
                     {checkPage(pageName)
-                      ? `${item?.teacher?.full_name}`
-                      : `${item?.student?.first_name} ${item?.student?.last_name}`}
+                      ? `${item?.teacher?.full_name ?? ""}`
+                      : `${item?.student?.first_name ?? ""} ${
+                          item?.student?.last_name ?? ""
+                        }`}
                   </h3>
                   <p className="mb-0 ct_fs_12 ct_ff_roboto">
-                  {getSubstring(item?.latestMessage,15)}
-                    
+                    {
+                      getSubstring(
+                        unreadMessageCounts[item?.id]?.lastMessage,
+                        15
+                      )}
                   </p>
                 </div>
+                {console.log(unreadMessageCounts[item?.id])}
                 {activeChatDetail?.id != item?.id &&
-                  unreadMessageCounts[item?.id] > 0 && (
+                  unreadMessageCounts[item?.id]?.unreadCount > 0 && (
                     <div className="ct_mesg_num_1 ms-auto">
-                      <span>{unreadMessageCounts[item?.id]}</span>{" "}
+                      <span>{unreadMessageCounts[item?.id]?.unreadCount}</span>{" "}
                       {/* Display unread count */}
                     </div>
                   )}

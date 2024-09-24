@@ -73,7 +73,7 @@ const Chatbody = ({ socket, pageName = "" }) => {
       console.log("User status change detected:", {
         userId,
         is_online,
-        last_seen,
+        last_seen
       });
     };
     socket.on("user-status-change", handleUserStatusChange);
@@ -134,7 +134,6 @@ const Chatbody = ({ socket, pageName = "" }) => {
                 <div className="modal-body">
                   <div className="msg-body">
                     <ul>
-                      {console.log(messages)}
                       {messages?.length != 0 ? (
                         messages?.map((item, index) => {
                           const messageDate = formatDate(item.created_at);

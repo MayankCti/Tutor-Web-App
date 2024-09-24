@@ -66,7 +66,7 @@ const Billing = () => {
                             <td>
                               <div className="d-flex align-items-center gap-2">
                                 <img
-                                  src="assets/img/user_profile.png"
+                                  src="../assets/img/user_profile.png"
                                   alt=""
                                   className="ct_img_36"
                                 />

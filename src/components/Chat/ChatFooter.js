@@ -18,7 +18,10 @@ const ChatFooter = ({ socket, pageName = "" }) => {
   const handleSendMessage = (e) => {
     e.preventDefault();
 
-    if (message) {
+    // Trim the message to remove leading and trailing spaces
+    if (message.trim() === "") {
+      return;
+    } else {
       const data = checkPage(pageName)
         ? {
             content: message,
@@ -34,10 +37,9 @@ const ChatFooter = ({ socket, pageName = "" }) => {
             student_id: activeChatDetail?.student?.id,
             teacher_id: pipGetTeacherProfile().id,
           };
-      console.log({ socketObj: data });
       socket.emit("chat message", data);
+      setMessage("");
     }
-    setMessage("");
   };
 
   return (
