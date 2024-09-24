@@ -25,6 +25,7 @@ function MyClass() {
   };
 
   useEffect(() => {
+    console.log(pipGetStudentProfile)
     if (!pipGetStudentProfile()) {
       dispatch(fetchStudentProfile());
     }

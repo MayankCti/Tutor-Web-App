@@ -6,7 +6,7 @@ import { pipGetStudentProfile } from "../../utils/pip";
 
 function Header({ onToggleSidebar }) {
   const navigate = useNavigate();
-  const { first_name, last_name, profile_image } = pipGetStudentProfile();
+  const { first_name, last_name, profile_image } = pipGetStudentProfile() ?? {};
   return (
     <>
       <div className="ct_right_header">

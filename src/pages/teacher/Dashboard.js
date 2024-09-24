@@ -18,7 +18,12 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { isToggle, isLoading } = useSelector((state) => state.authReducer);
   const { cardData } = useSelector((state) => state?.studentReducer);
-
+  const route = [
+    { path: pageRoutes?.classes },
+    { path: pageRoutes?.student },
+    { path: pageRoutes?.feeDue },
+    { path: pageRoutes?.feeDue },
+  ];
   useEffect(() => {
     dispatch(fetchStudentList());
     dispatch(fetchDashboard());
@@ -50,7 +55,7 @@ const Dashboard = () => {
                 <div
                   key={index}
                   className="col-xxl-3 col-xl-6 col-lg-6 col-md-6 mb-4 mb-xxl-0 ct_pointer_curser"
-                  onClick={() => navigate(card?.path)}
+                  onClick={() => navigate(route[index]?.path)}
                 >
                   <div className="ct_dashboard_card">
                     <div

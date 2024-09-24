@@ -121,39 +121,48 @@ const CreateStudentClass = () => {
                                 <h4 className="ct_fs_20 ct_fw_700 text-center mb-2">
                                   {getDayName(item?.class_date)}
                                 </h4>
+
                                 <p className="mb-0 ct_fw_700">
                                   {pipViewDate(item?.class_date)}
                                 </p>
 
                                 <div className="ct_grid_2_col_2 mt-3">
                                   {item?.times?.map((times, index) => (
-                                    <div className="ct_class_chck_bg">
-                                      <div className="form-check">
+                                    <div className={`ct_class_chck_bg `}>
+                                      <div className={`form-check ${
+                                      times?.is_booked
+                                        ? "ct_red_bg"
+                                        : ""
+                                    }`}>
                                         <label
                                           className="form-check-label d-flex"
-                                          htmlFor={`flexCheckDefault-${times.id}`}
+                                          htmlFor={`flexCheckDefault-${times?.id}`}
                                         >
                                           <input
-                                            className="form-check-input"
+                                            className={`form-check-input`}
                                             type="checkbox"
-                                            id={`flexCheckDefault-${times.id}`}
+                                            id={`flexCheckDefault-${times?.id}`}
                                             checked={selectedClassIds.includes(
-                                              times.id
+                                              times?.id
                                             )} // Check if ID is in the selected list
                                             onChange={(e) =>
-                                              handleCheckboxChange(e, times.id)
+                                              handleCheckboxChange(e, times?.id)
                                             } // Handle change
+                                            disabled={times?.is_booked ? true : false}
                                           />
                                           <p className="mb-0">
                                             {" "}
                                             {times?.start_time}
                                             {" to "}
-                                            {times?.end_time}
+                                            {times?.end_time} (
+                                            {times?.class_type})
                                           </p>
                                         </label>
                                       </div>
                                     </div>
                                   ))}
+
+                               
                                 </div>
                               </div>
                             </div>

@@ -1,4 +1,4 @@
-export const BASE_URL = "http://192.168.29.183:4002/";
+export const BASE_URL = "http://192.168.29.55:4002/";
 
 // TEACHER API ENDPOINTS :
 

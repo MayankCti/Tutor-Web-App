@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { fetchProfile } from "../../redux/actions/authAction";
 import Loader from "../../components/other/Loader";
+import { curSym } from "../../utils/pip";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -13,8 +14,16 @@ const Profile = () => {
   const { isToggle, isLoading } = useSelector((state) => state.authReducer);
   const { profile } = useSelector((state) => state?.authReducer);
   console.log({ object: profile });
-  const { full_name, email, stream_name, theme_color, profile_image } =
-    profile ?? {};
+  const {
+    full_name,
+    email,
+    stream_name,
+    theme_color,
+    profile_image,
+    per_hour_pricing,
+    username,
+    max_student_headcount
+  } = profile ?? {};
   console.log({ profile });
   useEffect(() => {
     dispatch(fetchProfile());
@@ -64,7 +73,20 @@ const Profile = () => {
                           className="ct_img_148"
                         />
                       </div>
-
+                      <div className="form-group text-start mb-4">
+                        <label
+                          for=""
+                          className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text"
+                        >
+                          Username{" "}
+                        </label>
+                        <input
+                          type="text"
+                          className="ct_input form-control ct_input_40 ct_input_h_52"
+                          value={username ?? ""}
+                          disabled
+                        />
+                      </div>
                       <div className="form-group text-start mb-4">
                         <label
                           for=""
@@ -79,6 +101,7 @@ const Profile = () => {
                           disabled
                         />
                       </div>
+
                       <div className="form-group text-start mb-4">
                         <label
                           for=""
@@ -98,12 +121,40 @@ const Profile = () => {
                           for=""
                           className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text"
                         >
-                          stream_name
+                          Stream
                         </label>
                         <input
                           type="text"
                           className="ct_input form-control ct_input_40 ct_input_h_52"
                           value={stream_name ?? ""}
+                          disabled
+                        />
+                      </div>
+                      <div className="form-group text-start mb-4">
+                        <label
+                          for=""
+                          className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text"
+                        >
+                          Per Hour Price{" "}
+                        </label>
+                        <input
+                          type="text"
+                          className="ct_input form-control ct_input_40 ct_input_h_52"
+                          value={`${curSym} ${per_hour_pricing}` ?? "0"}
+                          disabled
+                        />
+                      </div>
+                      <div className="form-group text-start mb-4">
+                        <label
+                          for=""
+                          className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text"
+                        >
+                          Max Students Headcount{" "}
+                        </label>
+                        <input
+                          type="text"
+                          className="ct_input form-control ct_input_40 ct_input_h_52"
+                          value={`${max_student_headcount}` ?? "0"}
                           disabled
                         />
                       </div>

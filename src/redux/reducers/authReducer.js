@@ -119,7 +119,7 @@ export const authSlice = createSlice({
         const root = document.documentElement;
 
         const lightenColor = (color, percent) => {
-          const num = parseInt(color.slice(1), 16),
+          const num = parseInt(color?.slice(1), 16),
             amt = Math.round(2.55 * percent),
             R = (num >> 16) + amt,
             G = ((num >> 8) & 0x00ff) + amt,
@@ -212,7 +212,7 @@ export const authSlice = createSlice({
     builder.addCase(fetchStudentProfile.fulfilled, (state, action) => {
       const { data, success } = action?.payload ?? {};
 
-      if (success) pipSaveStudentProfile(data ?? {});
+      if (success) pipSaveStudentProfile(data);
       state.isLoading = false;
     });
     builder.addCase(fetchStudentProfile.rejected, (state, action) => {
