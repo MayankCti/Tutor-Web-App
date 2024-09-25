@@ -173,7 +173,6 @@ export const fetchTeacherClasses = createAsyncThunk(
   async (props, { rejectWithValue }) => {
     try {
       const { payload, callback } = props;
-      console.log(payload);
       const response = await API_REQUEST({
         url: getClassByTeacher + `/${payload}`,
         method: "GET",

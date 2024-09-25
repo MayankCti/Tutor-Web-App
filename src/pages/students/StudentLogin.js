@@ -35,7 +35,6 @@ function StudentLogin() {
       .then((res)=>{
         if(res?.data?.success){
           setAuthStudent(res?.data?.data);  
-          console.log("object",res);    
           if (values?.rememberMe) {
             Cookies.set("user_email", values?.email, { expires: 365 });
             Cookies.set("user_pass", values?.password, { expires: 365 });
@@ -49,7 +48,6 @@ function StudentLogin() {
         } 
       })
       .catch((err)=>{
-        console.log("An error occur",err);
           message?.error(err?.response?.data?.message);
         setLoader(false)
       })

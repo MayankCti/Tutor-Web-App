@@ -51,7 +51,6 @@ const EditStudentDetail = () => {
     student_id: id,
   };
 
-  console.log(initialState);
   const handleCreateStudent = async (values, { setSubmitting }) => {
     const callback = (response) => {
       if (response.success) navigate(pageRoutes?.student);

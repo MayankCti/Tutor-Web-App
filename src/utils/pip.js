@@ -71,7 +71,6 @@ export const pipErrorMessage = (message) => {
 
 // Register form step
 export const pipSetRegisterStep = (step) => {
-  console.log({ step });
   localStorage.setItem("register_step", step);
 };
 

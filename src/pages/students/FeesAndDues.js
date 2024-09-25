@@ -144,7 +144,6 @@ function FeesAndDues() {
   };
 
   const updatePayment = (item) => {
-    console.log({ item });
     const callback = (response) => {
       if (response?.success) {
         dispatch(fetchBillingStudent());

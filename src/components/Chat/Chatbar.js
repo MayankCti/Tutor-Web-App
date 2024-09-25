@@ -71,7 +71,6 @@ const Chatbar = ({ socket, pageName = "" }) => {
             },
           })
         );
-        console.log({ response: response?.data });
       }
     };
 

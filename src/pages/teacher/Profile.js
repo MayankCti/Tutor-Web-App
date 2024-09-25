@@ -13,7 +13,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const { isToggle, isLoading } = useSelector((state) => state.authReducer);
   const { profile } = useSelector((state) => state?.authReducer);
-  console.log({ object: profile });
   const {
     full_name,
     email,
@@ -24,7 +23,6 @@ const Profile = () => {
     username,
     max_student_headcount
   } = profile ?? {};
-  console.log({ profile });
   useEffect(() => {
     dispatch(fetchProfile());
   }, []);

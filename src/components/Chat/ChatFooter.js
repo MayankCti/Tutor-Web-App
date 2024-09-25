@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
   checkPage,
-  pipGetAccessToken,
   pipGetStudentProfile,
   pipGetTeacherProfile,
 } from "../../utils/pip";
-import { useDispatch, useSelector } from "react-redux";
-import { setFilterChatList } from "../../redux/reducers/messageReducer";
+import { useSelector } from "react-redux";
 
 const ChatFooter = ({ socket, pageName = "" }) => {
   const [message, setMessage] = useState("");
-  const dispatch = useDispatch();
-  const { activeChatDetail, chatList } = useSelector(
-    (state) => state?.messageReducer
-  );
+  const { activeChatDetail } = useSelector((state) => state?.messageReducer);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-
-    // Trim the message to remove leading and trailing spaces
     if (message.trim() === "") {
       return;
     } else {

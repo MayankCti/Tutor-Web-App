@@ -16,7 +16,6 @@ function StudentForgetPassword() {
   };
 
   const handleForgetPassword = (values) => {
-    console.log(values);
     setLoader(true);
     axios({
       method: "post",
@@ -31,7 +30,6 @@ function StudentForgetPassword() {
         }
       })
       .catch((err) => {
-        console.log("An err", err);
         message.error(err?.response?.data?.message);
         setLoader(false);
       });

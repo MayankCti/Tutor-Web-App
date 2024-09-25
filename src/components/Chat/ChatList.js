@@ -29,19 +29,25 @@ const ChatList = ({
     setFilterData(temp);
   }, [searchTerm1, data]);
 
-  // Listen for unread message count from the server
   useEffect(() => {
-    socket.on("unread-message-count", (messageData) => {
+    const handleUnreadMessageCount = (messageData) => {
       setUnreadMessageCounts((prevCounts) => ({
         ...prevCounts,
-        [messageData.chatId]: messageData, // Update unread count for the specific chat
+        [messageData?.chatId]: messageData,
       }));
-    });
+    };
+
+    setUnreadMessageCounts((prevCounts) => ({
+      ...prevCounts,
+      [activeChatDetail?.id]: { ...prevCounts, unreadCount: 0 },
+    }));
+
+    socket.on("unread-message-count", handleUnreadMessageCount);
 
     return () => {
-      socket.off("unread-message-count"); // Clean up the listener on unmount
+      socket.off("unread-message-count", handleUnreadMessageCount); // Cleanup on unmount
     };
-  }, [activeChatDetail]);
+  }, [activeChatDetail, socket]);
 
   const NewChatList = () => {
     return (
@@ -103,7 +109,6 @@ const ChatList = ({
                     }
                     alt="user img"
                   />
-                  {isDisplay && <span className="active"></span>}
                 </div>
                 <div className="flex-grow-1">
                   <h3 className="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
@@ -114,14 +119,13 @@ const ChatList = ({
                         }`}
                   </h3>
                   <p className="mb-0 ct_fs_12 ct_ff_roboto">
-                    {
-                      getSubstring(
-                        unreadMessageCounts[item?.id]?.lastMessage,
-                        15
-                      )}
+                    {getSubstring(
+                      unreadMessageCounts[item?.id]?.lastMessage,
+                      15
+                    )}
                   </p>
                 </div>
-                {console.log(unreadMessageCounts[item?.id])}
+
                 {activeChatDetail?.id != item?.id &&
                   unreadMessageCounts[item?.id]?.unreadCount > 0 && (
                     <div className="ct_mesg_num_1 ms-auto">

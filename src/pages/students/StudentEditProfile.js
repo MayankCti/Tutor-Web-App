@@ -46,7 +46,6 @@ function StudentEditProfile() {
     })
       .then((res) => {
         if (res?.data?.success) {
-          console.log("profile data",res?.data?.data);
           setProfile(res?.data?.data);
           setLoader(false);
           setImagePreview(res?.data?.data?.profile_image)
@@ -54,7 +53,6 @@ function StudentEditProfile() {
         }
       })
       .catch((err) => {
-        console.log("An error", err);
         setLoader(false);
       });
   };
@@ -91,7 +89,6 @@ function StudentEditProfile() {
 
   const handleUpdate = (values) => {
     const formdata = new FormData();
-    console.log("value",values);
     formdata.append("first_name", values?.first_name);
     formdata.append("last_name", values?.last_name);
     formdata.append("contact_number", values?.contact_number);
@@ -132,7 +129,6 @@ function StudentEditProfile() {
         }
       })
       .catch((err) => {
-        console.log("An error occured", err);
         message.error(err?.response?.data?.message);
 
       });

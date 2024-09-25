@@ -40,7 +40,6 @@ function StudentProfile() {
         }
       })
       .catch((err) => {
-        console.log("An error", err);
         setLoader(false);
       });
   };

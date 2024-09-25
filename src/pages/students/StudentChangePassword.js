@@ -26,7 +26,6 @@ function StudentChangePassword() {
   };
 
   const passwordChanged = (values) => {
-    console.log(values);
     message.success("password has been updated");
     navigate(pageRoutes?.studentprofile);
   };

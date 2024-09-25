@@ -42,9 +42,6 @@ const CreateClass = () => {
     dispatch(fetchClassesTypes());
   }, []);
 
-  useEffect(() => {
-    console.log({ selectedDates, timeRanges, selectedValue, errors });
-  }, [selectedDates, timeRanges, selectedValue, errors]);
 
   const handleSubmit = () => {
     if (selectedDates?.length == 0) {

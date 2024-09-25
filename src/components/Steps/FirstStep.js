@@ -43,7 +43,6 @@ const FirstStep = () => {
   useEffect(() => {
     dispatch(fetchProfile()).then((profile) => {
       const formStatus = profile?.payload?.data?.form_completed;
-      console.log({ object: formStatus });
       setStep(formStatus);
     });
   }, []);
@@ -86,7 +85,6 @@ const FirstStep = () => {
                   Basic Details
                 </h4>
                 <div className="ct_profile_img">
-                  {console.log(typeof values?.file == "string")}
                   <img
                     src={
                       values?.file

@@ -70,7 +70,6 @@ const CreateStudentClass = () => {
     const matchedTeacher = teacherList?.find(
       (item) => item?.value === selectedTeacher
     );
-    console.log({ matchedTeacher, teacherList, selectedTeacher });
     // Return the value if a match is found, otherwise return an empty string
     return matchedTeacher ? matchedTeacher?.label : "";
   };

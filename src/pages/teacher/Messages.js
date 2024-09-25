@@ -16,7 +16,6 @@ const socket = socketIO.connect(`${BASE_URL}`, {
     token: pipGetAccessToken(), // Send the token here
   },
 });
-console.log({ socket });
 
 const Messages = () => {
   const dispatch = useDispatch();
@@ -41,7 +40,7 @@ const Messages = () => {
                 </div>
                 <section className="message-area">
                   <div className="chat-area row">
-                    <Chatbar socket={socket}/>
+                    <Chatbar socket={socket} />
                     <Chatbody socket={socket} />
                   </div>
                 </section>
