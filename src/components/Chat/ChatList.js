@@ -119,10 +119,12 @@ const ChatList = ({
                         }`}
                   </h3>
                   <p className="mb-0 ct_fs_12 ct_ff_roboto">
-                    {getSubstring(
-                      unreadMessageCounts[item?.id]?.lastMessage,
-                      15
-                    )}
+                    {unreadMessageCounts[item?.id] != null
+                      ? getSubstring(
+                          unreadMessageCounts[item?.id]?.lastMessage,
+                          15
+                        )
+                      : getSubstring(activeChatDetail?.latestMessage)}
                   </p>
                 </div>
 

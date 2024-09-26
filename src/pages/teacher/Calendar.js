@@ -9,21 +9,21 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 // Example events list
 const myEventsList = [
-  {
-    title: "Meeting",
-    start: new Date(2024, 8, 23, 10, 0), // September 23, 2024, 10:00 AM
-    end: new Date(2024, 8, 23, 11, 0), // September 23, 2024, 11:00 AM
-  },
-  {
-    title: "Lunch",
-    start: new Date(2024, 8, 24, 12, 0), // September 24, 2024, 12:00 PM
-    end: new Date(2024, 8, 24, 13, 0), // September 24, 2024, 1:00 PM
-  },
-  {
-    title: "Conference",
-    start: new Date(2024, 8, 25, 9, 0), // September 25, 2024, 9:00 AM
-    end: new Date(2024, 8, 25, 17, 0), // September 25, 2024, 5:00 PM
-  },
+  // {
+  //   title: "Meeting",
+  //   start: new Date(2024, 8, 23, 10, 0), // September 23, 2024, 10:00 AM
+  //   end: new Date(2024, 8, 23, 11, 0), // September 23, 2024, 11:00 AM
+  // },
+  // {
+  //   title: "Lunch",
+  //   start: new Date(2024, 8, 24, 12, 0), // September 24, 2024, 12:00 PM
+  //   end: new Date(2024, 8, 24, 13, 0), // September 24, 2024, 1:00 PM
+  // },
+  // {
+  //   title: "Conference",
+  //   start: new Date(2024, 8, 25, 9, 0), // September 25, 2024, 9:00 AM
+  //   end: new Date(2024, 8, 25, 17, 0), // September 25, 2024, 5:00 PM
+  // },
 ];
 
 const CalendarPage = () => {

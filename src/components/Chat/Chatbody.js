@@ -18,6 +18,7 @@ const Chatbody = ({ socket, pageName = "" }) => {
   const dispatch = useDispatch();
   let lastMessageDate = null;
   const [isOnline, setIsOnline] = useState(false);
+  const [ActiveId, setActiveId] = useState();
   const { isToggle, chats, activeChatDetail } = useSelector(
     (state) => state?.messageReducer
   );
@@ -40,7 +41,6 @@ const Chatbody = ({ socket, pageName = "" }) => {
     };
   }, [socket, activeChatDetail, dispatch]);
 
-  
   const formatDate = (date) => {
     const messageDate = moment(date);
     const today = moment().startOf("day");
@@ -69,7 +69,11 @@ const Chatbody = ({ socket, pageName = "" }) => {
       return;
     }
     socket.emit("join_room", { roomId });
+
     const handleUserStatusChange = (status) => {
+      {
+        console.log(status);
+      }
       const { is_online } = status;
       setIsOnline(is_online);
     };
@@ -78,7 +82,7 @@ const Chatbody = ({ socket, pageName = "" }) => {
       socket.off("user-status-change", handleUserStatusChange);
       socket.emit("leave_room", { roomId });
     };
-  }, [activeChatDetail?.id, roomId]);
+  }, [activeChatDetail, roomId]);
 
   return (
     <>
@@ -120,7 +124,13 @@ const Chatbody = ({ socket, pageName = "" }) => {
                               : `${activeChatDetail?.student?.first_name} ${activeChatDetail?.student?.last_name}`}
                           </h3>
                           <p className="mb-0 ct_fs_12 ct_ff_roboto">
-                            {isOnline ? "Online" : "Offline"}
+                            {checkPage(pageName)
+                              ? activeChatDetail?.teacher?.is_online
+                                ? "Online"
+                                : "Offline"
+                              : activeChatDetail?.student?.is_online
+                              ? "Online"
+                              : "Offline"}
                           </p>
                         </div>
                       </div>
@@ -141,7 +151,7 @@ const Chatbody = ({ socket, pageName = "" }) => {
                           return (
                             <>
                               {showDateDivider && (
-                                <li>
+                                <li key={index}>
                                   <div className="divider">
                                     <h6>{messageDate}</h6>
                                   </div>

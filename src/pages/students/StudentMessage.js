@@ -1,12 +1,14 @@
 import socketIO from "socket.io-client";
+import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../../routes/endPoints";
 import React, { useEffect, useState } from "react";
-import { checkPage, pipGetAccessToken } from "../../utils/pip";
+import Loader from "../../components/other/Loader";
 import Chatbar from "../../components/Chat/Chatbar";
 import Chatbody from "../../components/Chat/Chatbody";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../layout/studentLayout/Header";
 import SideBar from "../../layout/studentLayout/SideBar";
+import { checkPage, getAuthStudent } from "../../utils/pip";
 import Logout from "../../components/studentComponent/Logout";
 import {
   fetchAllStudentChatList,
@@ -14,13 +16,11 @@ import {
   fetchChatList,
   fetchOutsideChatList,
 } from "../../redux/actions/messagesActions";
-import { useLocation } from "react-router-dom";
-import Loader from "../../components/other/Loader";
 
 // Socket connection
-const socket = socketIO.connect(`${BASE_URL}`, {
+export const socket = socketIO.connect(`${BASE_URL}`, {
   auth: {
-    token: pipGetAccessToken(), // Shared access token
+    token: getAuthStudent(),
   },
 });
 
@@ -33,7 +33,6 @@ function StudentMessage() {
   const sidebarActive = () => {
     setActive(!active);
   };
-
 
   useEffect(() => {
     if (checkPage(pageName)) {

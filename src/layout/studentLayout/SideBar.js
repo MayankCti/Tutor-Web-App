@@ -29,7 +29,11 @@ function SideBar({ onToggleSidebar }) {
     <>
       <div className="ct_side_bar">
         <div className="ct_close_menu">
-          <i className="fa-solid fa-xmark" style={{ cursor: "pointer" }} onClick={onToggleSidebar}></i>
+          <i
+            className="fa-solid fa-xmark"
+            style={{ cursor: "pointer" }}
+            onClick={onToggleSidebar}
+          ></i>
         </div>
         <div className="ct_logo">
           <img src="../assets/img/white_logo.svg" alt="Logo" />
@@ -39,11 +43,17 @@ function SideBar({ onToggleSidebar }) {
             <li key={index}>
               <a
                 href="javascript:void(0)"
-                className={isActive(item.path) ? "active" : ""}
-                onClick={() => navigate(item.path)}
+                className={isActive(item?.path) ? "active" : ""}
+                onClick={() => {
+                  if (item?.label == "Messages") {
+                    window.location.href = item?.path;
+                  } else {
+                    navigate(item?.path);
+                  }
+                }}
               >
-                <img src={item.images} alt={item.label} />
-                {item.label}
+                <img src={item?.images} alt={item?.label} />
+                {item?.label}
               </a>
             </li>
           ))}

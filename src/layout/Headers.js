@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { pageRoutes } from "../routes/pageRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleChange } from "../redux/reducers/authReducer";
+import { socket } from "../pages/teacher/Messages";
 
 const Headers = () => {
   const { username, profile_image } = pipGetTeacherProfile();
@@ -97,6 +98,7 @@ const Headers = () => {
                 </button>
                 <a
                   onClick={() => {
+                    socket.disconnect();
                     clearAuth();
                     navigate(pageRoutes?.login);
                   }}

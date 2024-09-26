@@ -5,6 +5,7 @@ import { pageRoutes } from "../../routes/pageRoutes";
 function Logout() {
   const navigate = useNavigate();
   const handleLogout = () => {
+    // socket.disconnect();
     localStorage.clear();
     navigate(pageRoutes?.studentlogin);
   };
