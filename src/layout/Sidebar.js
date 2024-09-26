@@ -26,7 +26,7 @@ const Sidebar = () => {
       icon: "calendar_icon.svg",
       label: "Calendar",
     },
-    { route: pageRoutes.setting, icon: "gear-solid.svg", label: "Setting" },
+    { route: pageRoutes.setting, icon: "gear-solid.svg", label: "Settings" },
   ];
 
   return (

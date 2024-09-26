@@ -107,7 +107,7 @@ function StudentLogin() {
                                 id="email"
                                 name="email"
                                 className="form-control ct_input ct_ff_roboto"
-                                placeholder="Enter Email"
+                                placeholder="Enter email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values?.email}

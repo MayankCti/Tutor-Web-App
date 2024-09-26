@@ -41,7 +41,7 @@ function StudentForgetPassword() {
         <div className="container-fluid">
           <div className="ct_logo ct_login_logo">
             <a href="index.html">
-              <img src="assets/img/logo.svg" alt="" />
+              <img src="https://i.ibb.co/RYnQRq8/tutor-logo.png" alt="" />
             </a>
           </div>
           <div className="row align-items-center">
@@ -83,7 +83,7 @@ function StudentForgetPassword() {
                               <input
                                 type="email"
                                 className="form-control ct_input ct_ff_roboto"
-                                placeholder="Enter Email"
+                                placeholder="Enter email"
                                 id="email"
                                 name="email"
                                 onChange={handleChange}

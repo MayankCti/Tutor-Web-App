@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 import ErrorMessage from "../ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { secondStepSchema } from "../../utils/Schema";
-import { pipGetTeacherProfile } from "../../utils/pip";
+import { curSym, pipGetTeacherProfile } from "../../utils/pip";
 import { handleCurrentStep } from "../../redux/reducers/authReducer";
 
 const SecondStep = () => {
@@ -75,7 +75,7 @@ const SecondStep = () => {
               </div>
               <div className="form-group text-start mb-4">
                 <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
-                  Per Hour Pricing
+                  {curSym}{" "}Per Hour Price
                 </label>
                 <input
                   type="text"

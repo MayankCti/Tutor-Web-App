@@ -45,7 +45,7 @@ const Login = () => {
           onClick={() => navigate(pageRoutes.home)}
         >
           <a href="javascript:void(0)">
-            <img src="assets/img/logo.svg" alt="" />
+            <img src="https://i.ibb.co/RYnQRq8/tutor-logo.png" alt="" />
           </a>
         </div>
         <div className="row align-items-center">
@@ -85,7 +85,7 @@ const Login = () => {
                             onBlur={handleBlur}
                             value={values.email}
                             className="form-control ct_input ct_ff_roboto"
-                            placeholder="Enter Email"
+                            placeholder="Enter email"
                           />
                           <ErrorMessage
                             errors={errors}

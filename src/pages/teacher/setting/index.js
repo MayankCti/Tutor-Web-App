@@ -56,7 +56,7 @@ const Setting = () => {
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
                 <div className="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
-                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">Setting</h4>
+                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">Settings</h4>
                   <button
                     className="ct_purple_btn"
                     type="button"

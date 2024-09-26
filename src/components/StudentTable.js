@@ -8,6 +8,7 @@ import {
   fetchStudentList,
 } from "../redux/actions/studentAction";
 import { setUserDetails } from "../redux/reducers/studentReducer";
+import { pipViewDate } from "../utils/pip";
 
 const StudentTable = ({ statusFilter }) => {
   const dispatch = useDispatch();
@@ -55,12 +56,12 @@ const StudentTable = ({ statusFilter }) => {
   const tableBody = () => {
     return students?.map((item, index) => {
       return (
-        <tr key={item.name}>
+        <tr key={item?.name}>
           <td>{index + 1}</td>
           <td>
             <div className="d-flex align-items-center gap-2">
               <img
-                src="../assets/img/user_profile.png"
+                src={item?.profile_image ?? "../assets/img/user_profile.png"}
                 alt=""
                 className="ct_img_36"
               />
@@ -248,8 +249,15 @@ const StudentTable = ({ statusFilter }) => {
                           <strong>Student Status</strong>
                         </p>
 
-                        <p className="col-md-6 ct_green_text">Active</p>
-                        {/* <p className="col-md-6 ct_grey_text">Inactive</p> */}
+                        <p
+                          className={`col-md-6 ${
+                            studentDetail?.student_status == "Active"
+                              ? "ct_green_text"
+                              : "ct_grey_text"
+                          }`}
+                        >
+                          {studentDetail?.student_status}
+                        </p>
                       </div>
                       <div className="row">
                         <p className="col-md-6">
@@ -262,7 +270,7 @@ const StudentTable = ({ statusFilter }) => {
                           <strong>DOB</strong>
                         </p>
                         <p className="col-md-6">
-                          {studentDetail?.date_of_birth}{" "}
+                          {pipViewDate(studentDetail?.date_of_birth)}{" "}
                         </p>
                       </div>
                       <div className="row">

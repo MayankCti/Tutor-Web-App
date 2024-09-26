@@ -148,6 +148,7 @@ const FirstStep = () => {
                       id="theme"
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={true}
                     />
                     <input
                       type="color"
@@ -166,7 +167,7 @@ const FirstStep = () => {
                 </div>
                 <div className="form-group text-start mb-4">
                   <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
-                    Classes Name
+                    Class Name
                   </label>
                   <input
                     type="text"

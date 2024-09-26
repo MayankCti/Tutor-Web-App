@@ -126,35 +126,35 @@ const CreateStudentClass = () => {
                                 </p>
 
                                 <div className="ct_grid_2_col_2 mt-3">
-                                  {item?.times?.map((times, index) => (
+                                  {item?.times?.map((obj, index) => (
                                     <div className={`ct_class_chck_bg `}>
                                       <div className={`form-check ${
-                                      times?.is_booked
+                                      obj?.is_booked
                                         ? "ct_red_bg"
                                         : ""
                                     }`}>
                                         <label
                                           className="form-check-label d-flex"
-                                          htmlFor={`flexCheckDefault-${times?.id}`}
+                                          htmlFor={`flexCheckDefault-${obj?.id}`}
                                         >
                                           <input
                                             className={`form-check-input`}
                                             type="checkbox"
-                                            id={`flexCheckDefault-${times?.id}`}
+                                            id={`flexCheckDefault-${obj?.id}`}
                                             checked={selectedClassIds.includes(
-                                              times?.id
+                                              obj?.id
                                             )} // Check if ID is in the selected list
                                             onChange={(e) =>
-                                              handleCheckboxChange(e, times?.id)
+                                              handleCheckboxChange(e, obj?.id)
                                             } // Handle change
-                                            disabled={times?.is_booked ? true : false}
+                                            disabled={obj?.is_booked ? true : false}
                                           />
                                           <p className="mb-0">
                                             {" "}
-                                            {times?.start_time}
+                                            {obj?.start_time}
                                             {" to "}
-                                            {times?.end_time} (
-                                            {times?.class_type})
+                                            {obj?.end_time} (
+                                            {obj?.class_type})
                                           </p>
                                         </label>
                                       </div>

@@ -51,7 +51,7 @@ const Billing = () => {
                   <table className="table ct_custom_table">
                     <thead>
                       <tr>
-                        <th> Students Name</th>
+                        <th> Student Name</th>
                         <th>Email </th>
                         <th>Total Due </th>
                         <th>Due Date</th>

@@ -145,6 +145,7 @@ export const getTeacherList = createAsyncThunk("get-teacher-list", async () => {
     const response = await API_REQUEST({
       url: getAllTeacherList,
       method: "GET",
+      isErrorToast:false
     });
     return response;
   } catch (error) {}

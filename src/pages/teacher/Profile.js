@@ -133,7 +133,7 @@ const Profile = () => {
                           for=""
                           className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text"
                         >
-                          Per Hour Price{" "}
+                         {curSym}{" "}Per Hour Price 
                         </label>
                         <input
                           type="text"
