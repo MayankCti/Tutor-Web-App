@@ -76,7 +76,7 @@ export const myProfileSchema = Yup.object().shape({
   username: Yup.string().required("Please enter username").trim(),
   max_student_headcount: Yup.string()
     .required("Please enter max student headcount")
-    .min(1000, "max student headcount must be at least 1000 characters"),
+    .max(1000, "max student headcount must be less then 1000 "),
   per_hour_pricing: Yup.string().required("Please enter per hour price"),
   email: Yup.string()
     .trim()
@@ -122,7 +122,7 @@ export const secondStepSchema = Yup.object().shape({
     .required("Please enter Max Students Headcount")
     .positive("Max Students Headcount must be a positive number")
     .integer("Max Students Headcount must be an integer")
-    .min(1000, "max student headcount must be at least 1000 characters"),
+    .max(1000, "max student headcount must be less then 1000 "),
   per_hour_pricing: Yup.number()
     .typeError("Per hour pricing must be a number")
     .required("Please enter per hour pricing")

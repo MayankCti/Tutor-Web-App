@@ -37,8 +37,9 @@ const Sidebar = () => {
       >
         <i className="fa-solid fa-xmark"></i>
       </div>
-      <div className="ct_logo">
-        <img src="assets/img/white_logo.svg" alt="" />
+      <div className="ct_logo justify-content-center">
+        <img src="
+        ../assets/img/tutor-logo.png" alt="" />
       </div>
       <ul className="ct_side_menu">
         {menuItems?.map((item, index) => (

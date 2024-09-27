@@ -60,7 +60,7 @@ const CreateStudentClass = () => {
       if (response.success) navigate(pageRoutes.studentmyClass);
     };
     const data = {
-      teacher_id: pipGetTeacherProfile()?.id,
+      teacher_id: selectedTeacher,
       class_ids: selectedClassIds,
     };
     dispatch(BookClass({ payload: data, callback }));

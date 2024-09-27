@@ -89,6 +89,15 @@ const CreateClass = () => {
           </div>
           <fieldset className="mt-3 ct_caldner_white_bg">
             <div>
+            <p class="mb-0 text-start ct_fw_600 mb-2">Select Class Type</p>
+            <SelectDropdown
+                className={"form-control py-2  mb-3   ct_fw_600 text-dark"}
+                id="floatingInputValue"
+                options={options}
+                selectedValue={selectedValue}
+                defaultOptions="Class Type"
+                onChange={setSelectedValue}
+              />
               <div id="range">
                 <DateCalender
                   initialDates={selectedDates}
@@ -96,14 +105,7 @@ const CreateClass = () => {
                 />
               </div>
 
-              <SelectDropdown
-                className={"form-control py-2   ct_fw_600 text-dark"}
-                id="floatingInputValue"
-                options={options}
-                selectedValue={selectedValue}
-                defaultOptions="Class Type"
-                onChange={setSelectedValue}
-              />
+             
               <div className="d-flex align-items-end justify-content-start mt-3 gap-2">
                 <div className="ct_flex_1">
                   {/* {timeRanges?.map((range, index) => (

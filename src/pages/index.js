@@ -58,11 +58,11 @@ const Home = () => {
 
   return (
     <div>
-      <section className="ct_hero_banner">
+      <section className="ct_hero_banner" style={{overflowY:"hidden"}}>
         <header className="ct_header">
           <div className="ct_logo" onClick={() => navigate(pageRoutes.home)}>
             <a href="javascript:void(0)">
-              <img src="https://i.ibb.co/RYnQRq8/tutor-logo.png" alt="" />
+              <img src="assets/img/tutor-logo.png" alt="" />
             </a>
           </div>
           <nav>
@@ -1983,7 +1983,7 @@ const Home = () => {
               <div className="ct_footer_left_dtl_cnt">
                 <div className="ct_logo">
                   <a href="javascript:void(0)">
-                    <img src="assets/img/white_logo.svg" alt="" />
+                    <img src="assets/img/tutor-logo.png" alt="" />
                   </a>
                 </div>
                 <p

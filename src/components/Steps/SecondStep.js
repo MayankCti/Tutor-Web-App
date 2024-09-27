@@ -61,7 +61,7 @@ const SecondStep = () => {
                 </label>
                 <input
                   type="text"
-                  className="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40" placeholder="Enter max students headcount"
                   id="max_student_headcount"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -79,7 +79,7 @@ const SecondStep = () => {
                 </label>
                 <input
                   type="text"
-                  className="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40" placeholder="Enter per hour price"
                   id="per_hour_pricing"
                   onChange={handleChange}
                   onBlur={handleBlur}

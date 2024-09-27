@@ -81,7 +81,7 @@ const CreateStudent = () => {
                                   First Name <AstrickMark />
                                 </label>
                                 <FormInput
-                                  id="first_name"
+                                  id="first_name" placeholder="Enter first name"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.first_name}
@@ -102,7 +102,7 @@ const CreateStudent = () => {
                                   Last Name
                                 </label>
                                 <FormInput
-                                  id="last_name"
+                                  id="last_name" placeholder="Enter  last name"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.last_name}
@@ -123,7 +123,7 @@ const CreateStudent = () => {
                                   Email  <AstrickMark />
                                 </label>
                                 <FormInput
-                                  id="email"
+                                  id="email" placeholder="Enter email"
                                   type="email"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
@@ -145,7 +145,7 @@ const CreateStudent = () => {
                                   Contact No.
                                 </label>
                                 <FormInput
-                                  id="contact_number"
+                                  id="contact_number" placeholder="Enter contact no."
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.contact_number}
@@ -166,7 +166,7 @@ const CreateStudent = () => {
                                   Emergency Contact No.
                                 </label>
                                 <FormInput
-                                  id="emergency_contact_number"
+                                  id="emergency_contact_number" placeholder="Enter emergency contact no."
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.emergency_contact_number}
@@ -298,7 +298,7 @@ const CreateStudent = () => {
                                   Grade
                                 </label>
                                 <FormInput
-                                  id="grade"
+                                  id="grade" placeholder="Enter grade"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.grade}
@@ -320,7 +320,7 @@ const CreateStudent = () => {
                                   School Name
                                 </label>
                                 <FormInput
-                                  id="school_name"
+                                  id="school_name" placeholder="Enter school name"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.school_name}
@@ -341,7 +341,7 @@ const CreateStudent = () => {
                                   City
                                 </label>
                                 <FormInput
-                                  id="city"
+                                  id="city" placeholder="Enter city"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.city}

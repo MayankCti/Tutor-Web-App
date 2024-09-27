@@ -737,6 +737,7 @@ a.add img {
   text-align: left;
   font-family: "Roboto", sans-serif;
   margin-bottom: 0;
+  word-break: break-word;
 }
 
 .msg-body ul li.repaly p b {

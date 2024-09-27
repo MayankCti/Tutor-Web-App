@@ -41,7 +41,7 @@ const ChatFooter = ({ socket, pageName = "" }) => {
         <form action="" className="position-relative">
           <input
             type="text"
-            className="form-control ct_text_indent_15 w-100"
+            className="form-control ct_text_indent_15 w-100" style={{paddingRight: "70px"}}
             aria-label="message…"
             placeholder="Type message"
             value={message}

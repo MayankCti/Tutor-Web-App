@@ -72,7 +72,7 @@ const FourthStep = () => {
                 </label>
                 <input
                   type="text"
-                  className="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40" placeholder="Enter bank name"
                   id="bank_name"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -91,7 +91,7 @@ const FourthStep = () => {
                 </label>
                 <input
                   type="text"
-                  className="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40" placeholder="Enter account no."
                   id="account_number"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -109,7 +109,7 @@ const FourthStep = () => {
                 </label>
                 <input
                   type="text"
-                  className="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40" placeholder="Enter BSB number"
                   id="ifsc_code"
                   onChange={handleChange}
                   onBlur={handleBlur}
