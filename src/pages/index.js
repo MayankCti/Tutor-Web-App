@@ -62,7 +62,7 @@ const Home = () => {
         <header className="ct_header">
           <div className="ct_logo" onClick={() => navigate(pageRoutes.home)}>
             <a href="javascript:void(0)">
-              <img src="assets/img/tutor-logo.png" alt="" />
+              <img src="../assets/img/tutor-logo.png" alt="" />
             </a>
           </div>
           <nav>
@@ -1983,7 +1983,7 @@ const Home = () => {
               <div className="ct_footer_left_dtl_cnt">
                 <div className="ct_logo">
                   <a href="javascript:void(0)">
-                    <img src="assets/img/tutor-logo.png" alt="" />
+                    <img src="../assets/img/tutor-logo.png" alt="" />
                   </a>
                 </div>
                 <p

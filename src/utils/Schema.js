@@ -232,7 +232,9 @@ export const editProfileValidationSchema = Yup.object().shape({
     .min(10, "Address must be at least 10 characters")
     .max(100, "Address cannot exceed 100 characters")
     .required("Address is required"),
-  date_of_birth: Yup.date().required("Date of birth is required"),
+  date_of_birth: Yup.date()
+    .max(new Date(), "Date of birth must be a past date")
+    .required("Please enter date of birth"),
   grade: Yup.string().required("Grade is required").trim(),
   subject: Yup.string().required("Subject is required").trim(),
   city: Yup.string().required("City is required").trim(),

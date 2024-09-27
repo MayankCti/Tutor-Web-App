@@ -114,6 +114,8 @@ function StudentEditProfile() {
     }
 
     const token = getAuthStudent();
+    setLoader(true);
+
     axios({
       method: "post",
       url: BASE_URL + studentUpdateProfile,
@@ -131,9 +133,15 @@ function StudentEditProfile() {
       .catch((err) => {
         message.error(err?.response?.data?.message);
 
-      });
+      }).finally(()=>{
+        setLoader(false);
+
+      })
   };
 
+  if(loader){
+    return <Loader/>
+  }
   return (
     <>
       <main className={active ? "" : "ct_collapsed_sidebar"}>
@@ -277,6 +285,7 @@ function StudentEditProfile() {
                                     placeholder="Enter email"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    disabled
                                   />
                                   <ErrorMessage
                                     name="email"

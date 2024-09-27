@@ -36,7 +36,7 @@ function SideBar({ onToggleSidebar }) {
           ></i>
         </div>
         <div className="ct_logo">
-          <img src="../assets/img/white_logo.svg" alt="Logo" />
+          <img src="../assets/img/tutor-logo.png" alt="Logo" />
         </div>
         <ul className="ct_side_menu">
           {sidebarList?.map((item, index) => (

@@ -63,7 +63,7 @@ function StudentLogin() {
             onClick={() => navigate(pageRoutes.home)}
           >
             <a href="javascript:void(0)">
-              <img src="../assets/img/logo.svg" alt="" />
+              <img src="../assets/img/tutor-logo.png" alt="" />
             </a>
           </div>
 

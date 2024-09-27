@@ -360,7 +360,7 @@ main{
 }
 .ct_outline_btn_purple:hover{
 background-color: var(--dark_purple) !important;
-color: #fff;
+color: #fff !important;
 }
 .ct_outline_btn_purple:before,.ct_outline_btn_purple:after{
   display: none;
