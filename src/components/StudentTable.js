@@ -263,7 +263,9 @@ const StudentTable = ({ statusFilter }) => {
                         <p className="col-md-6">
                           <strong>Address</strong>
                         </p>
-                        <p className="col-md-6 ct_address_overflow">{studentDetail?.address} </p>
+                        <p className="col-md-6 ct_address_overflow">
+                          {studentDetail?.address}{" "}
+                        </p>
                       </div>
                       <div className="row">
                         <p className="col-md-6">

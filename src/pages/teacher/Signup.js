@@ -103,11 +103,11 @@ const Signup = () => {
                           <input
                             id="email"
                             type="email"
-                            className="form-control ct_input ct_ff_roboto"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
                             placeholder="Enter email "
+                            className="form-control ct_input ct_ff_roboto"
                           />
                           <ErrorMessage
                             errors={errors}

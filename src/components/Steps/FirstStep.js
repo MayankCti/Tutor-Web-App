@@ -122,7 +122,8 @@ const FirstStep = () => {
                   <div className="position-relative">
                     <input
                       type="text"
-                      className="ct_input form-control ct_input_40" placeholder="Enter full name"
+                      className="ct_input form-control ct_input_40"
+                      placeholder="Enter full name"
                       value={values.full_name}
                       id="full_name"
                       onChange={handleChange}
@@ -171,7 +172,8 @@ const FirstStep = () => {
                   </label>
                   <input
                     type="text"
-                    className="ct_input form-control ct_input_40" placeholder="Enter class name"
+                    className="ct_input form-control ct_input_40"
+                    placeholder="Enter class name"
                     id="coaching_classes_name"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -191,7 +193,8 @@ const FirstStep = () => {
                   <input
                     type="text"
                     className="ct_input form-control ct_input_40"
-                    id="contact_number" placeholder="Enter contact no."
+                    id="contact_number"
+                    placeholder="Enter contact no."
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.contact_number}
@@ -208,7 +211,8 @@ const FirstStep = () => {
                   </label>
                   <input
                     type="text"
-                    className="ct_input form-control ct_input_40" placeholder="Enter stream"
+                    className="ct_input form-control ct_input_40"
+                    placeholder="Enter stream"
                     id="stream"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -225,7 +229,8 @@ const FirstStep = () => {
                     Address
                   </label>
                   <textarea
-                    className="ct_input form-control h-auto ct_input_40" placeholder="Enter address"
+                    className="ct_input form-control h-auto ct_input_40"
+                    placeholder="Enter address"
                     rows="4"
                     id="address"
                     onChange={handleChange}

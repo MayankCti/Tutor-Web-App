@@ -28,8 +28,8 @@ const Messages = () => {
     dispatch(fetchChatList());
   }, []);
 
-  if(isLoading){
-    return <Loader/>
+  if (isLoading) {
+    return <Loader />;
   }
   return (
     <>
