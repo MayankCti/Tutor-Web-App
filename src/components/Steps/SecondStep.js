@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 import ErrorMessage from "../ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { secondStepSchema } from "../../utils/Schema";
-import { pipGetTeacherProfile } from "../../utils/pip";
+import { curSym, pipGetTeacherProfile } from "../../utils/pip";
 import { handleCurrentStep } from "../../redux/reducers/authReducer";
 
 const SecondStep = () => {
@@ -61,7 +61,7 @@ const SecondStep = () => {
                 </label>
                 <input
                   type="text"
-                  className="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40" placeholder="Enter max students headcount"
                   id="max_student_headcount"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -75,11 +75,11 @@ const SecondStep = () => {
               </div>
               <div className="form-group text-start mb-4">
                 <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
-                  Per Hour Pricing
+                  {curSym}{" "}Per Hour Price
                 </label>
                 <input
                   type="text"
-                  className="ct_input form-control ct_input_40"
+                  className="ct_input form-control ct_input_40" placeholder="Enter per hour price"
                   id="per_hour_pricing"
                   onChange={handleChange}
                   onBlur={handleBlur}

@@ -34,12 +34,18 @@ const Chatbar = ({ socket, pageName = "" }) => {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setInputValue(value);
-    debouncedSetSearchTerm(value);
+    if (value[0] === " ") {
+      const trimmedValue = value.trim();
+      setInputValue(trimmedValue);
+      debouncedSetSearchTerm(trimmedValue);
+    } else {
+      setInputValue(value);
+      debouncedSetSearchTerm(value);
+    }
   };
 
   useEffect(() => {
-    if(searchTerm){
+    if (searchTerm) {
       if (checkPage(pageName)) {
         dispatch(fetchAllTeacherChatList(searchTerm));
       } else {
@@ -49,6 +55,9 @@ const Chatbar = ({ socket, pageName = "" }) => {
   }, [searchTerm]);
 
   const handleStartChat = (id) => {
+    checkPage(pageName)
+      ? dispatch(fetchOutsideChatList())
+      : dispatch(fetchChatList());
     const callback = (response) => {
       if (response.success) {
         dispatch(
@@ -62,7 +71,6 @@ const Chatbar = ({ socket, pageName = "" }) => {
             },
           })
         );
-        console.log({ response: response?.data });
       }
     };
 
@@ -84,6 +92,9 @@ const Chatbar = ({ socket, pageName = "" }) => {
   };
 
   const handleGetChatMessages = (item) => {
+    checkPage(pageName)
+      ? dispatch(fetchOutsideChatList())
+      : dispatch(fetchChatList());
     dispatch(setActiveChatDetail(item));
     dispatch(
       chatMessages({
@@ -113,6 +124,8 @@ const Chatbar = ({ socket, pageName = "" }) => {
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                       dispatch(toggleSlider(false));
+                      setInputValue("");
+                      debouncedSetSearchTerm("");
                     }}
                   >
                     <i className="fa-solid fa-xmark"></i>
@@ -148,7 +161,14 @@ const Chatbar = ({ socket, pageName = "" }) => {
                       id="inlineFormInputGroup"
                       placeholder="Search"
                       aria-label="search"
-                      onChange={(e) => setSearchTerm1(e.target.value)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (value[0] === " ") {
+                          setSearchTerm1(value.trim());
+                        } else {
+                          setSearchTerm1(value);
+                        }
+                      }}
                       value={searchTerm1}
                     />
                     <i className="fa-solid fa-magnifying-glass ct_search_icon_top"></i>

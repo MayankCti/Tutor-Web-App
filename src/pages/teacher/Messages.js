@@ -11,22 +11,26 @@ import {
 } from "../../redux/actions/messagesActions";
 import { BASE_URL } from "../../routes/endPoints";
 import { pipGetAccessToken } from "../../utils/pip";
-const socket = socketIO.connect(`${BASE_URL}`, {
+import Loader from "../../components/other/Loader";
+export const socket = socketIO.connect(`${BASE_URL}`, {
   auth: {
     token: pipGetAccessToken(), // Send the token here
   },
 });
-console.log({ socket });
 
 const Messages = () => {
   const dispatch = useDispatch();
   const { isToggle } = useSelector((state) => state.authReducer);
+  const { isLoading } = useSelector((state) => state.messageReducer);
 
   useEffect(() => {
     dispatch(fetchAllStudentChatList());
     dispatch(fetchChatList());
   }, []);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <main className={isToggle ? "ct_collapsed_sidebar" : ""}>
@@ -41,7 +45,7 @@ const Messages = () => {
                 </div>
                 <section className="message-area">
                   <div className="chat-area row">
-                    <Chatbar socket={socket}/>
+                    <Chatbar socket={socket} />
                     <Chatbody socket={socket} />
                   </div>
                 </section>

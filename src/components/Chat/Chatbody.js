@@ -18,6 +18,7 @@ const Chatbody = ({ socket, pageName = "" }) => {
   const dispatch = useDispatch();
   let lastMessageDate = null;
   const [isOnline, setIsOnline] = useState(false);
+  const [ActiveId, setActiveId] = useState();
   const { isToggle, chats, activeChatDetail } = useSelector(
     (state) => state?.messageReducer
   );
@@ -26,17 +27,19 @@ const Chatbody = ({ socket, pageName = "" }) => {
 
   useEffect(() => {
     setMessages([...chats]);
-    console.log({ messages, chats });
   }, [chats]);
-
   useEffect(() => {
-    socket.on("chat message", (data) => {
-      setMessages([...messages, data]);
+    const handleNewMessage = (data) => {
+      setMessages((prevMessages) => [...prevMessages, data]); // Use functional state update
       if (activeChatDetail) {
         dispatch(setFilterChatList());
       }
-    });
-  }, [socket, messages]);
+    };
+    socket.on("chat message", handleNewMessage);
+    return () => {
+      socket.off("chat message", handleNewMessage);
+    };
+  }, [socket, activeChatDetail, dispatch]);
 
   const formatDate = (date) => {
     const messageDate = moment(date);
@@ -48,7 +51,7 @@ const Chatbody = ({ socket, pageName = "" }) => {
     } else if (messageDate.isSame(yesterday, "d")) {
       return "Yesterday";
     } else {
-      return messageDate.format("MMMM D, YYYY"); // Display full date
+      return messageDate.format("MMMM D, YYYY");
     }
   };
 
@@ -62,27 +65,24 @@ const Chatbody = ({ socket, pageName = "" }) => {
   const roomId = `${studentId}-${teacherId}`;
 
   useEffect(() => {
-    if (!activeChatDetail || activeChatDetail.length <= 0 || !roomId) {
+    if (!activeChatDetail || !roomId) {
       return;
     }
     socket.emit("join_room", { roomId });
 
     const handleUserStatusChange = (status) => {
-      const { userId, is_online, last_seen } = status;
+      {
+        console.log(status);
+      }
+      const { is_online } = status;
       setIsOnline(is_online);
-      console.log("User status change detected:", {
-        userId,
-        is_online,
-        last_seen,
-      });
     };
     socket.on("user-status-change", handleUserStatusChange);
-
     return () => {
       socket.off("user-status-change", handleUserStatusChange);
       socket.emit("leave_room", { roomId });
     };
-  }, [activeChatDetail, roomId, socket]);
+  }, [activeChatDetail, roomId]);
 
   return (
     <>
@@ -124,7 +124,13 @@ const Chatbody = ({ socket, pageName = "" }) => {
                               : `${activeChatDetail?.student?.first_name} ${activeChatDetail?.student?.last_name}`}
                           </h3>
                           <p className="mb-0 ct_fs_12 ct_ff_roboto">
-                            {isOnline ? "Online" : "Offline"}
+                            {checkPage(pageName)
+                              ? activeChatDetail?.teacher?.is_online
+                                ? "Online"
+                                : "Offline"
+                              : activeChatDetail?.student?.is_online
+                              ? "Online"
+                              : "Offline"}
                           </p>
                         </div>
                       </div>
@@ -134,7 +140,6 @@ const Chatbody = ({ socket, pageName = "" }) => {
                 <div className="modal-body">
                   <div className="msg-body">
                     <ul>
-                      {console.log(messages)}
                       {messages?.length != 0 ? (
                         messages?.map((item, index) => {
                           const messageDate = formatDate(item.created_at);
@@ -146,7 +151,7 @@ const Chatbody = ({ socket, pageName = "" }) => {
                           return (
                             <>
                               {showDateDivider && (
-                                <li>
+                                <li key={index}>
                                   <div className="divider">
                                     <h6>{messageDate}</h6>
                                   </div>

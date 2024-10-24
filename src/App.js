@@ -8,6 +8,7 @@ import PrivateRoute from "./layout/PrivateRoute";
 
 function App() {
   const pathname = useLocation()?.pathname;
+
   useEffect(() => {
     saveTheme();
   }, [pathname]);
@@ -34,3 +35,4 @@ function App() {
 }
 
 export default App;
+

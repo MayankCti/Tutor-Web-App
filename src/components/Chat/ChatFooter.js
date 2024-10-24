@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {
   checkPage,
-  pipGetAccessToken,
   pipGetStudentProfile,
   pipGetTeacherProfile,
 } from "../../utils/pip";
-import { useDispatch, useSelector } from "react-redux";
-import { setFilterChatList } from "../../redux/reducers/messageReducer";
+import { useSelector } from "react-redux";
 
 const ChatFooter = ({ socket, pageName = "" }) => {
   const [message, setMessage] = useState("");
-  const dispatch = useDispatch();
-  const { activeChatDetail, chatList } = useSelector(
-    (state) => state?.messageReducer
-  );
+  const { activeChatDetail } = useSelector((state) => state?.messageReducer);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-
-    if (message) {
+    if (message.trim() === "") {
+      return;
+    } else {
       const data = checkPage(pageName)
         ? {
             content: message,
@@ -34,10 +30,9 @@ const ChatFooter = ({ socket, pageName = "" }) => {
             student_id: activeChatDetail?.student?.id,
             teacher_id: pipGetTeacherProfile().id,
           };
-      console.log({ socketObj: data });
       socket.emit("chat message", data);
+      setMessage("");
     }
-    setMessage("");
   };
 
   return (
@@ -46,7 +41,7 @@ const ChatFooter = ({ socket, pageName = "" }) => {
         <form action="" className="position-relative">
           <input
             type="text"
-            className="form-control ct_text_indent_15 w-100"
+            className="form-control ct_text_indent_15 w-100" style={{paddingRight: "70px"}}
             aria-label="message…"
             placeholder="Type message"
             value={message}

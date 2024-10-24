@@ -16,7 +16,6 @@ function StudentForgetPassword() {
   };
 
   const handleForgetPassword = (values) => {
-    console.log(values);
     setLoader(true);
     axios({
       method: "post",
@@ -31,7 +30,6 @@ function StudentForgetPassword() {
         }
       })
       .catch((err) => {
-        console.log("An err", err);
         message.error(err?.response?.data?.message);
         setLoader(false);
       });
@@ -43,7 +41,7 @@ function StudentForgetPassword() {
         <div className="container-fluid">
           <div className="ct_logo ct_login_logo">
             <a href="index.html">
-              <img src="assets/img/logo.svg" alt="" />
+              <img src="https://i.ibb.co/RYnQRq8/tutor-logo.png" alt="" />
             </a>
           </div>
           <div className="row align-items-center">
@@ -85,7 +83,7 @@ function StudentForgetPassword() {
                               <input
                                 type="email"
                                 className="form-control ct_input ct_ff_roboto"
-                                placeholder="Enter Email"
+                                placeholder="Enter email"
                                 id="email"
                                 name="email"
                                 onChange={handleChange}
@@ -128,7 +126,7 @@ function StudentForgetPassword() {
             </div>
             <div className="col-lg-5 mb-4 mb-lg-0 px-lg-0">
               <div className="ct_login_right_img">
-                <img src="assets/img/login_right_img.png" alt="" />
+                <img src="../assets/img/login_right_img.png" alt="" />
               </div>
             </div>
           </div>

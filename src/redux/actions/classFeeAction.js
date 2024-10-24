@@ -145,6 +145,7 @@ export const getTeacherList = createAsyncThunk("get-teacher-list", async () => {
     const response = await API_REQUEST({
       url: getAllTeacherList,
       method: "GET",
+      isErrorToast:false
     });
     return response;
   } catch (error) {}
@@ -173,7 +174,6 @@ export const fetchTeacherClasses = createAsyncThunk(
   async (props, { rejectWithValue }) => {
     try {
       const { payload, callback } = props;
-      console.log(payload);
       const response = await API_REQUEST({
         url: getClassByTeacher + `/${payload}`,
         method: "GET",

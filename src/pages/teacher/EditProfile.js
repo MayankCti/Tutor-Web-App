@@ -7,7 +7,7 @@ import Loader from "../../components/other/Loader";
 import { myProfileSchema } from "../../utils/Schema";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { useDispatch, useSelector } from "react-redux";
-import { pipGetTeacherProfile } from "../../utils/pip";
+import { curSym, pipGetTeacherProfile } from "../../utils/pip";
 import ErrorMessage from "../../components/ErrorMessage";
 import { updateProfile } from "../../redux/actions/authAction";
 
@@ -108,7 +108,7 @@ const EditProfile = () => {
                                 changeProfile
                                   ? URL.createObjectURL(changeProfile)
                                   : profile_image ??
-                                    "assets/img/user_profile.png"
+                                    "../assets/img/user_profile.png"
                               }
                               className="ct_img_148"
                             />
@@ -132,6 +132,7 @@ const EditProfile = () => {
                             <input
                               id="username"
                               type="text"
+                              placeholder="Enter username"
                               className="ct_input form-control ct_input_40 ct_input_h_52"
                               onChange={handleChange}
                               onBlur={handleBlur}
@@ -151,6 +152,7 @@ const EditProfile = () => {
                             <input
                               id="full_name"
                               type="text"
+                              placeholder="Enter full name"
                               className="ct_input form-control ct_input_40 ct_input_h_52"
                               onChange={handleChange}
                               onBlur={handleBlur}
@@ -169,6 +171,7 @@ const EditProfile = () => {
                             <input
                               id="email"
                               type="email"
+                              placeholder="Enter email"
                               className="ct_input form-control ct_input_40 ct_input_h_52"
                               onChange={handleChange}
                               onBlur={handleBlur}
@@ -189,6 +192,7 @@ const EditProfile = () => {
                               type="text"
                               className="ct_input form-control ct_input_40 ct_input_h_52"
                               id="stream"
+                              placeholder="Enter stream"
                               onChange={handleChange}
                               onBlur={handleBlur}
                               value={values.stream}
@@ -201,12 +205,13 @@ const EditProfile = () => {
                           </div>
                           <div className="form-group text-start mb-4">
                             <label className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text">
-                              Per Hour Price
+                            {curSym}{" "}Per Hour Price 
                             </label>
                             <input
                               type="text"
                               className="ct_input form-control ct_input_40 ct_input_h_52"
                               id="per_hour_pricing"
+                              placeholder="Enter per hour price"
                               onChange={handleChange}
                               onBlur={handleBlur}
                               value={values.per_hour_pricing}
@@ -228,6 +233,7 @@ const EditProfile = () => {
                               type="text"
                               className="ct_input form-control ct_input_40"
                               id="max_student_headcount"
+                              placeholder="Enter max students headcount"
                               onChange={handleChange}
                               onBlur={handleBlur}
                               value={values.max_student_headcount}
@@ -248,6 +254,7 @@ const EditProfile = () => {
                             <div className="position-relative">
                               <input
                                 type="text"
+                                placeholder="Pick colour code"
                                 className="ct_input ct_color_input form-control ct_input_h_52"
                                 value={values.theme}
                                 readOnly

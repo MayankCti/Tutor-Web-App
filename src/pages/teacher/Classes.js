@@ -131,8 +131,7 @@ const Classes = () => {
                                   {time?.start_time}
                                   {" to "}
                                   {time?.end_time}
-                                  <br/>
-                                  ({time?.class_type})
+                                  <br />({time?.class_type})
                                 </button>
                               </div>
                             ))}
@@ -192,7 +191,7 @@ const Classes = () => {
                     <div className="d-flex align-items-center justify-content-between gap-3 ">
                       <div className="d-flex align-items-center gap-2">
                         <img
-                          src="assets/img/user_profile.png"
+                          src="../assets/img/user_profile.png"
                           alt=""
                           className="ct_img_36"
                         />
@@ -205,7 +204,7 @@ const Classes = () => {
                     <div className="d-flex align-items-center justify-content-between gap-3 mt-4">
                       <div className="d-flex align-items-center gap-2">
                         <img
-                          src="assets/img/user_profile.png"
+                          src="../assets/img/user_profile.png"
                           alt=""
                           className="ct_img_36"
                         />
@@ -218,7 +217,7 @@ const Classes = () => {
                     <div className="d-flex align-items-center justify-content-between gap-3 mt-4">
                       <div className="d-flex align-items-center gap-2">
                         <img
-                          src="assets/img/user_profile.png"
+                          src="../assets/img/user_profile.png"
                           alt=""
                           className="ct_img_36"
                         />
@@ -231,7 +230,7 @@ const Classes = () => {
                     <div className="d-flex align-items-center justify-content-between gap-3 mt-4">
                       <div className="d-flex align-items-center gap-2">
                         <img
-                          src="assets/img/user_profile.png"
+                          src="../assets/img/user_profile.png"
                           alt=""
                           className="ct_img_36"
                         />
@@ -244,7 +243,7 @@ const Classes = () => {
                     <div className="d-flex align-items-center justify-content-between gap-3 mt-4">
                       <div className="d-flex align-items-center gap-2">
                         <img
-                          src="assets/img/user_profile.png"
+                          src="../assets/img/user_profile.png"
                           alt=""
                           className="ct_img_36"
                         />

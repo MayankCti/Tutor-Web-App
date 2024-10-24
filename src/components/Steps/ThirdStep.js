@@ -24,9 +24,7 @@ const ThirdStep = () => {
     startDate: new Date(),
     endDate: new Date(),
   });
-  useEffect(() => {
-    console.log({ object: timeRanges });
-  }, [timeRanges]);
+
   return (
     <fieldset>
       <div>

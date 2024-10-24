@@ -13,7 +13,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const { isToggle, isLoading } = useSelector((state) => state.authReducer);
   const { profile } = useSelector((state) => state?.authReducer);
-  console.log({ object: profile });
   const {
     full_name,
     email,
@@ -24,7 +23,6 @@ const Profile = () => {
     username,
     max_student_headcount
   } = profile ?? {};
-  console.log({ profile });
   useEffect(() => {
     dispatch(fetchProfile());
   }, []);
@@ -68,7 +66,7 @@ const Profile = () => {
                     <div className="col-lg-6 mx-auto">
                       <div className="ct_profile_img">
                         <img
-                          src={profile_image ?? "assets/img/user_profile.png"}
+                          src={profile_image ?? "../assets/img/user_profile.png"}
                           alt=""
                           className="ct_img_148"
                         />
@@ -135,7 +133,7 @@ const Profile = () => {
                           for=""
                           className="ct_ff_roboto mb-2 ct_fw_500 ct_purple_text"
                         >
-                          Per Hour Price{" "}
+                         {curSym}{" "}Per Hour Price 
                         </label>
                         <input
                           type="text"

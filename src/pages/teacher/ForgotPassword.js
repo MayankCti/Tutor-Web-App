@@ -35,7 +35,7 @@ const ForgotPassword = () => {
           onClick={() => navigate(pageRoutes.home)}
         >
           <a href="javascript:void(0)">
-            <img src="assets/img/logo.svg" alt="" />
+            <img src="https://i.ibb.co/RYnQRq8/tutor-logo.png" alt="" />
           </a>
         </div>
         <div className="row align-items-center">

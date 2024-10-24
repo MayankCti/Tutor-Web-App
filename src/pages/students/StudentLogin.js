@@ -35,7 +35,6 @@ function StudentLogin() {
       .then((res)=>{
         if(res?.data?.success){
           setAuthStudent(res?.data?.data);  
-          console.log("object",res);    
           if (values?.rememberMe) {
             Cookies.set("user_email", values?.email, { expires: 365 });
             Cookies.set("user_pass", values?.password, { expires: 365 });
@@ -49,7 +48,6 @@ function StudentLogin() {
         } 
       })
       .catch((err)=>{
-        console.log("An error occur",err);
           message?.error(err?.response?.data?.message);
         setLoader(false)
       })
@@ -65,7 +63,7 @@ function StudentLogin() {
             onClick={() => navigate(pageRoutes.home)}
           >
             <a href="javascript:void(0)">
-              <img src="../assets/img/logo.svg" alt="" />
+              <img src="../assets/img/tutor-logo.png" alt="" />
             </a>
           </div>
 
@@ -109,7 +107,7 @@ function StudentLogin() {
                                 id="email"
                                 name="email"
                                 className="form-control ct_input ct_ff_roboto"
-                                placeholder="Enter Email"
+                                placeholder="Enter email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values?.email}

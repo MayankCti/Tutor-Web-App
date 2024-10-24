@@ -21,7 +21,6 @@ const TimeInput = () => {
 
   // Function to handle time changes
   const handleTimeChange = (index, type, value) => {
-    console.log(index, "<<<", type, "<<<", value, "<<<");
     const updatedTimeRanges = [...timeRanges];
     updatedTimeRanges[index][type] = value;
     setTimeRanges(updatedTimeRanges);
@@ -71,7 +70,6 @@ const TimeInput = () => {
         newErrors[i] = null;
       }
     }
-    console.log({ newErrors }, "newErrors");
     setErrors(newErrors);
     // if (newErrors.every((error) => error === null)) {
     //   message.success("Valid time ranges!");

@@ -360,7 +360,7 @@ main{
 }
 .ct_outline_btn_purple:hover{
 background-color: var(--dark_purple) !important;
-color: #fff;
+color: #fff !important;
 }
 .ct_outline_btn_purple:before,.ct_outline_btn_purple:after{
   display: none;
@@ -388,7 +388,7 @@ color: #fff;
   transition: 0.4s ease;
   z-index: 1;
   text-align: center;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .ct_classes_card:hover{
   transform: translateY(-15px);
@@ -737,6 +737,7 @@ a.add img {
   text-align: left;
   font-family: "Roboto", sans-serif;
   margin-bottom: 0;
+  word-break: break-word;
 }
 
 .msg-body ul li.repaly p b {

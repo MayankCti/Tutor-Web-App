@@ -43,7 +43,6 @@ const FirstStep = () => {
   useEffect(() => {
     dispatch(fetchProfile()).then((profile) => {
       const formStatus = profile?.payload?.data?.form_completed;
-      console.log({ object: formStatus });
       setStep(formStatus);
     });
   }, []);
@@ -86,14 +85,13 @@ const FirstStep = () => {
                   Basic Details
                 </h4>
                 <div className="ct_profile_img">
-                  {console.log(typeof values?.file == "string")}
                   <img
                     src={
                       values?.file
                         ? typeof values?.file == "string"
                           ? values?.file
                           : URL.createObjectURL(values?.file)
-                        : "assets/img/user_profile.png"
+                        : "../assets/img/user_profile.png"
                     }
                     className="ct_img_148"
                   />
@@ -125,6 +123,7 @@ const FirstStep = () => {
                     <input
                       type="text"
                       className="ct_input form-control ct_input_40"
+                      placeholder="Enter full name"
                       value={values.full_name}
                       id="full_name"
                       onChange={handleChange}
@@ -150,6 +149,7 @@ const FirstStep = () => {
                       id="theme"
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={true}
                     />
                     <input
                       type="color"
@@ -168,11 +168,12 @@ const FirstStep = () => {
                 </div>
                 <div className="form-group text-start mb-4">
                   <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
-                    Classes Name
+                    Class Name
                   </label>
                   <input
                     type="text"
                     className="ct_input form-control ct_input_40"
+                    placeholder="Enter class name"
                     id="coaching_classes_name"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -193,6 +194,7 @@ const FirstStep = () => {
                     type="text"
                     className="ct_input form-control ct_input_40"
                     id="contact_number"
+                    placeholder="Enter contact no."
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.contact_number}
@@ -210,6 +212,7 @@ const FirstStep = () => {
                   <input
                     type="text"
                     className="ct_input form-control ct_input_40"
+                    placeholder="Enter stream"
                     id="stream"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -227,6 +230,7 @@ const FirstStep = () => {
                   </label>
                   <textarea
                     className="ct_input form-control h-auto ct_input_40"
+                    placeholder="Enter address"
                     rows="4"
                     id="address"
                     onChange={handleChange}

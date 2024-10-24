@@ -31,7 +31,6 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(fetchProfile()).then((profile) => {
       const formStatus = profile?.payload?.data?.form_completed;
-      console.log({ formStatus });
       if (formStatus < 4) {
         dispatch(handleCurrentStep(formStatus));
         navigate(pageRoutes?.stepForm);

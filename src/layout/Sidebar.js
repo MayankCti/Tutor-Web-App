@@ -11,6 +11,24 @@ const Sidebar = () => {
   const pathname = useLocation()?.pathname;
   const { isToggle } = useSelector((state) => state.authReducer);
 
+  const menuItems = [
+    {
+      route: pageRoutes.dashboard,
+      icon: "dashboard_icon.svg",
+      label: "Dashboard",
+    },
+    { route: pageRoutes.student, icon: "student_icon.svg", label: "Students" },
+    { route: pageRoutes.classes, icon: "classes_icon.svg", label: "Classes" },
+    { route: pageRoutes.billing, icon: "fee-due_icon.svg", label: "Billing" },
+    { route: pageRoutes.messages, icon: "message_icon.svg", label: "Messages" },
+    {
+      route: pageRoutes.calendar,
+      icon: "calendar_icon.svg",
+      label: "Calendar",
+    },
+    { route: pageRoutes.setting, icon: "gear-solid.svg", label: "Settings" },
+  ];
+
   return (
     <div className="ct_side_bar">
       <div
@@ -19,74 +37,29 @@ const Sidebar = () => {
       >
         <i className="fa-solid fa-xmark"></i>
       </div>
-      <div className="ct_logo">
-        <img src="assets/img/white_logo.svg" alt="" />
+      <div className="ct_logo justify-content-center">
+        <img src="../assets/img/tutor-logo.png" alt="" />
       </div>
       <ul className="ct_side_menu">
-        <li onClick={() => navigate(pageRoutes.dashboard)}>
-          <a
-            href="javascript:void(0)"
-            className={pathname == pageRoutes?.dashboard ? "active" : ""}
+        {menuItems?.map((item, index) => (
+          <li
+            key={index}
+            onClick={() => {
+              if (item?.label === "Messages") {
+                return (window.location.href = item?.route);
+              }
+              navigate(item?.route);
+            }}
           >
-            <img src="assets/img/dashboard_icon.svg" alt="" />
-            Dashboard
-          </a>
-        </li>
-        <li onClick={() => navigate(pageRoutes.student)}>
-          <a
-            href="javascript:void(0)"
-            className={pathname == pageRoutes?.student ? "active" : ""}
-          >
-            <img src="assets/img/student_icon.svg" alt="" />
-            Students
-          </a>
-        </li>
-        <li onClick={() => navigate(pageRoutes.classes)}>
-          <a
-            href="javascript:void(0)"
-            className={pathname == pageRoutes?.classes ? "active" : ""}
-          >
-            <img src="assets/img/classes_icon.svg" alt="" />
-            Classes
-          </a>
-        </li>
-        <li onClick={() => navigate(pageRoutes.billing)}>
-          <a
-            href="javascript:void(0)"
-            className={pathname == pageRoutes?.billing ? "active" : ""}
-          >
-            <img src="assets/img/fee-due_icon.svg" alt="" />
-            Billing
-          </a>
-        </li>
-        <li onClick={() => navigate(pageRoutes.messages)}>
-          <a
-            href="javascript:void(0)"
-            className={pathname == pageRoutes?.messages ? "active" : ""}
-          >
-            <img src="assets/img/message_icon.svg" alt="" />
-            Messages
-          </a>
-        </li>
-        <li onClick={() => navigate(pageRoutes.calendar)}>
-          <a
-            href="javascript:void(0)"
-            className={pathname == pageRoutes?.calendar ? "active" : ""}
-          >
-            <img src="assets/img/calendar_icon.svg" alt="" />
-            Calendar
-          </a>
-        </li>
-        <li onClick={() => navigate(pageRoutes?.setting)}>
-          <a
-            href="javascript:void(0)"
-            className={pathname == pageRoutes?.setting ? "active" : ""}
-          >
-            <img src="assets/img/gear-solid.svg" alt="" />
-            Setting
-          </a>
-        </li>
-
+            <a
+              href="javascript:void(0)"
+              className={pathname === item?.route ? "active" : ""}
+            >
+              <img src={`assets/img/${item?.icon}`} alt={item?.label} />
+              {item?.label}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   );
