@@ -4,6 +4,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { useNavigate } from "react-router";
 import { pageRoutes } from "../routes/pageRoutes";
+import ImageComparijan from "../components/ImageComparijan";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -84,23 +85,23 @@ const Home = () => {
               <div className="col-lg-7 mb-4 mb-lg-0">
                 <div className="ct_banner_left_cnt">
                   <h2 className="ct_fs_52 ct_fw_700 ct_ff_Outfit mb-3">
-                    A solid{" "}
-                    <span className="ct_sky_blue_text">#education </span>serves
-                    as the foundation for
+                  Stop Juggling,{" "}
+                    <span className="ct_sky_blue_text"> Start  </span>Teaching
+         
                   </h2>
                   <h3>
                     <a
                       href=""
                       className="typewrite ct_animated_text ct_ff_Outfit ct_fw_700 ct_fs_52 ct_res_fs_30 text-white"
                       data-period="2000"
-                      data-type='[ "A promising future", "Self confidence" ]'
+                      data-type='[ "Let Hank Handle the Rest!"]'
                     >
                       <span className="wrap"></span>
                     </a>
                   </h3>
                   <p className="mt-4 ct_fw_500">
-                    Consectur adipiscing elitsedo eiusmod tempor incididuntem
-                    utaborate dolore magna aliqua ad minim veniamque.
+                  Your All-in-One Automation Tool for Tutoring Businesses. Focus on What You Love—Let Hank Take Care of the Rest!
+
                   </p>
                   <div className="d-flex align-items-center gap-3 mt-4 ct_btn_group">
                     <a
@@ -108,7 +109,7 @@ const Home = () => {
                       onClick={() => navigate(pageRoutes?.studentlogin)}
                       className="ct_gredent_btn ct_fw_600 ct_fs_18"
                     >
-                      Start as student{" "}
+                      Book a Demo{" "}
                       <i className="fa-solid fa-chevron-right"></i>
                     </a>
                     <a
@@ -119,15 +120,15 @@ const Home = () => {
                         borderRadius: "5px",
                       }}
                     >
-                      Join as Tutor{" "}
-                      <span className="ct_sky_blue_text">It’s Free!</span>
+                      Start Your 21-Day  {" "}
+                      <span className="ct_sky_blue_text">Free Trial</span>
                     </a>
                   </div>
                 </div>
               </div>
               <div className="col-lg-5 mb-4 mb-lg-0">
                 <div className="ct_banner_right_img">
-                  <img src="assets/img/banner_right_girl.png" alt="" />
+                  <img src="assets/img/banner_right_girl2.png" alt="" />
                 </div>
               </div>
             </div>
@@ -150,17 +151,16 @@ const Home = () => {
                   alt=""
                 />
                 <h4 className="ct_fs_22 ct_ff_Outfit ct_fw_400 mb-0">
-                  Better Learning. Better Results
+                Problem Statement
                 </h4>
                 <h3 className="ct_ff_Outfit ct_fs_36 ct_fw_600">
-                  Online education platform for all
+                Running a Tutoring Business isn’t Just Tutoring
+
                 </h3>
                 <p className="mb-0 mt-4">
-                  Accusamus et iusidio dignissimos ducimus blanditiis
-                  praesentium voluptatum deleniti atque corrupti quos dolores
-                  etmquasa molestias epturi sint occaecati cupiditate non
-                  providente mikume.
+                You're also handling endless admin tasks like managing inquiries, onboarding new students, invoicing, scheduling, collecting payments and keeping parents and staff in the loop. It can be exhausting and keeps you from doing what you actually love: tutoring and helping your students.
                 </p>
+                <h6 className="mt-4 ct_fw_600 ct_line_h_25">Imagine if you could free up hours each week, reduce errors and enhance your business efficiency effortlessly.</h6>
                 <div className="mt-4">
                   <a
                     href="javascript:void(0)"
@@ -184,6 +184,50 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section className="ct_py_136 pt-0">
+        <div className="container">
+          <div className="row align-items-center">
+          <div
+              className="col-lg-5  mb-4 mb-lg-0"
+              data-aos="fade-right"
+              data-aos-duration="1000"
+            >
+              <div className="ct_about_right">
+                <img src="assets/img/about_212.jpg" alt="" className="ct_img_450 ct_border_10" />
+              </div>
+            </div>
+            <div
+              className="col-lg-6 offset-lg-1 mb-4 mb-lg-0"
+              data-aos="fade-left"
+              data-aos-duration="1000"
+            >
+              <div className="ct_about_section_left">
+                <img
+                  src="assets/img/curve_line_orange.svg"
+                  className="ct_img_56 mb-4"
+                  alt=""
+                />
+                <h4 className="ct_fs_22 ct_ff_Outfit ct_fw_400 mb-0">
+                Introducing Hank Systems
+                </h4>
+                <h3 className="ct_ff_Outfit ct_fs_36 ct_fw_600">
+                Say Hello to Hank – Your 8-Tentacled Multitasker!
+
+
+                </h3>
+                <p className="mb-0 mt-4">
+                That’s where Hank comes in. Hank's 8 tentacles (like the multitasker you wish you had!) will take care of all the admin so you can focus on growing your business and helping students thrive.
+
+                </p>
+                <p className="mb-0 mt-4">
+                Hank Systems is the ultimate automation tool designed exclusively for independent tutors and larger tutoring businesses in Australia and beyond. With Hank by your side, managing your tutoring operations becomes a breeze, allowing you to focus on what truly matters—teaching and growing your business.
+                </p>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </section>
 
       <section className="ct_py_106 ct_our_success_bg">
         <div className="container">
@@ -193,84 +237,86 @@ const Home = () => {
               data-aos="fade-down"
               data-aos-duration="1000"
             >
-              <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                <h3 className="ct_fs_36 ct_ff_Outfit ct_fw_700 mb-0">
-                  Stats that explain everything <br />
-                  about <span className="ct_sky_blue_text">#Our success</span>
-                </h3>
-                <a
-                  href="javascript:void(0)"
-                  className="ct_purple_btn ct_ff_Outfit ct_fw_600 ct_py_12 "
-                >
-                  See how it works{" "}
-                  <i className="fa-solid fa-chevron-right ms-2"></i>
-                </a>
+              <div className="text-center">
+              <h4 class="ct_fs_22 ct_ff_Outfit ct_fw_400 mb-0">   Key Features</h4>
+              <h3 class="ct_ff_Outfit ct_fs_36 ct_fw_600">Why Hank Stands Out:
+              </h3>
+              
               </div>
             </div>
           </div>
           <div className="row">
             <div
-              className="col-lg-3 col-md-6 mb-4 mb-lg-0"
+              className="col-lg-4 col-md-6 mb-4"
               data-aos="fade-up"
               data-aos-duration="1000"
             >
               <div className="ct_success_box">
                 <div className="ct_success_icon">
-                  <img src="assets/img/success_icon_1.png" alt="" />
+                  <img src="assets/img/Seamless_icon.png" alt="" />
                 </div>
                 <div className="ct_success_cnt mt-3">
                   <h3
-                    className="ct_fs_22 ct_fw_700 mb-1 countup"
-                    data-to="157,673"
+                    className="ct_fs_22 ct_fw_700 mb-3 "
+                   
                   >
-                    157,673
+                  Seamless Automation
                   </h3>
-                  <p>Subjects available for verified and top tutors</p>
+                  <p className="mb-3"><span className="ct_fw_600 ">Effortless Inquiries Handling:</span> Automatically capture and respond to student inquiries, ensuring no lead is ever missed.
+                  </p>
+                  <p className="mb-0"><span className="ct_fw_600 ">Streamlined Onboarding:</span> Simplify the process of enrolling new students with automated workflows, saving you so much time!
+                  </p>
                 </div>
               </div>
             </div>
             <div
-              className="col-lg-3 col-md-6 mb-4 mb-lg-0 "
+              className="col-lg-4 col-md-6 mb-4 "
               data-aos="fade-up"
               data-aos-duration="1500"
             >
               <div className="ct_success_box">
                 <div className="ct_success_icon">
-                  <img src="assets/img/success_icon_2.png" alt="" />
+                  <img src="assets/img/Scheduling_icon.png" alt="" />
                 </div>
                 <div className="ct_success_cnt mt-3">
                   <h3
-                    className="ct_fs_22 ct_fw_700 mb-1 countup"
-                    data-to="182,386"
+                    className="ct_fs_22 ct_fw_700 mb-3"
+                  
                   >
-                    182,386
+                  Simplified Scheduling
                   </h3>
-                  <p>Total tuition completed on the platform till date</p>
+                  <p className="mb-3"><span className="ct_fw_600">Smart Calendar Integration:</span> Easily manage tutoring schedules, avoiding conflicts and optimising your time.
+                  </p>
+                  <p className="mb-0"><span className="ct_fw_600">Automated Reminders:</span>Reduce no-shows with automated session reminders sent directly to families.
+                  </p>
                 </div>
               </div>
             </div>
             <div
-              className="col-lg-3 col-md-6 mb-4 mb-lg-0 "
+              className="col-lg-4 col-md-6 mb-4 "
               data-aos="fade-up"
               data-aos-duration="2000"
             >
               <div className="ct_success_box">
                 <div className="ct_success_icon">
-                  <img src="assets/img/success_icon_3.png" alt="" />
+                  <img src="assets/img/invoice_icon_1.png" alt="" />
                 </div>
                 <div className="ct_success_cnt mt-3">
-                  <h3 className="ct_fs_22 ct_fw_700 mb-1 countup">
-                    <span className="countup" data-to="+6">
-                      6+
-                    </span>
-                    Hours
+                  <h3 className="ct_fs_22 ct_fw_700 mb-3">
+                  Comprehensive Invoicing & Payments
+
                   </h3>
-                  <p>User daily average time spent on the platform</p>
+                  <p className="mb-3"><span className="ct_fw_600">Automated Invoicing:</span> Generate and send invoices without lifting a finger.
+
+                  </p>
+                  <p className="mb-0"><span className="ct_fw_600">Secure Payment Collection:</span>Ensure timely payments with integrated payment gateways.
+
+                  </p>
                 </div>
               </div>
             </div>
             <div
-              className="col-lg-3 col-md-6 mb-4 mb-lg-0"
+              className="col-lg-4 col-md-6 mb-4"
               data-aos="fade-up"
               data-aos-duration="2500"
             >
@@ -279,15 +325,53 @@ const Home = () => {
                   <img src="assets/img/success_icon_4.png" alt="" />
                 </div>
                 <div className="ct_success_cnt mt-3">
-                  <h3 className="ct_fs_22 ct_fw_700 mb-1">
-                    <span className="countup" data-to="+2">
-                      2+
-                    </span>{" "}
-                    Million
+                  <h3 className="ct_fs_22 ct_fw_700 mb-3">
+                  Centralised Communication
                   </h3>
-                  <p>
-                    Active instructor and students available on the platform
+                  <p className="mb-3"><span className="ct_fw_600">Family Messaging Hub:</span> Communicate effortlessly with parents and students through a unified platform.
                   </p>
+                  <p className="mb-0"><span className="ct_fw_600">Automated Notifications: </span>Keep families informed with updates and announcements.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              className="col-lg-4 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-duration="2500"
+            >
+              <div className="ct_success_box">
+                <div className="ct_success_icon">
+                  <img src="assets/img/Renewal_ixon.png" alt="" />
+                </div>
+                <div className="ct_success_cnt mt-3">
+                  <h3 className="ct_fs_22 ct_fw_700 mb-3">
+                  Efficient Re-Enrolment
+
+                  </h3>
+                  <p className="mb-0"><span className="ct_fw_600">Automated Renewal Processes: </span> Simplify the re-enrolment of existing students each term, boosting retention rates.
+
+                  </p>
+                
+                </div>
+              </div>
+            </div>
+            <div
+              className="col-lg-4 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-duration="2500"
+            >
+              <div className="ct_success_box">
+                <div className="ct_success_icon">
+                  <img src="assets/img/Integrations_ixon.png" alt="" />
+                  
+                </div>
+                <div className="ct_success_cnt mt-3">
+                  <h3 className="ct_fs_22 ct_fw_700 mb-3">
+                  Seamless Integrations
+
+                  </h3>
+                  <p className="mb-0"><span className="ct_fw_600">Xero Integration:</span>Sync effortlessly with your accounting software for streamlined financial management. </p>
                 </div>
               </div>
             </div>
@@ -295,7 +379,162 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="ct_py_80">
+      <section className="ct_py_136">
+        <div className="container">
+          <div className="row align-items-center">
+          <div
+              className="col-lg-5  mb-4 mb-lg-0"
+              data-aos="fade-right"
+              data-aos-duration="1000"
+            >
+              <ImageComparijan />
+              {/* <div className="ct_about_right">
+                <img src="assets/img/about_212.jpg" alt="" className="ct_img_450" />
+              </div> */}
+            </div>
+            <div
+              className="col-lg-6 offset-lg-1 mb-4 mb-lg-0"
+              data-aos="fade-left"
+              data-aos-duration="1000"
+            >
+              <div className="ct_about_section_left">
+                <img
+                  src="assets/img/curve_line_orange.svg"
+                  className="ct_img_56 mb-4"
+                  alt=""
+                />
+                <h4 className="ct_fs_22 ct_ff_Outfit ct_fw_400 mb-0">
+               Benefits
+
+                </h4>
+                <h3 className="ct_ff_Outfit ct_fs_36 ct_fw_600 mb-4">
+                Transform Your Tutoring Business with Hank:
+                </h3>
+                <div className="mt-3">
+                      <h5 className="ct_fw_600 mb-2">Save Time & Reduce Stress</h5>
+                      <ul className="ct_list_style_dot ps-3">
+                        <li>Automate tedious admin tasks and reclaim your valuable time to invest back into tutoring.</li>
+                      </ul>
+                </div>
+                <div className="mt-3">
+                      <h5 className="ct_fw_600 mb-2">Increase Conversion Rates
+                      </h5>
+                      <ul className="ct_list_style_dot ps-3">
+                        <li>Smooth and automated onboarding processes ensure higher student acquisition and retention.
+                        </li>
+                      </ul>
+                </div>
+                <div className="mt-3">
+                      <h5 className="ct_fw_600 mb-2">Enhance Organisation
+                      </h5>
+                      <ul className="ct_list_style_dot ps-3">
+                        <li>Keep all your business operations centralised, reducing errors and improving efficiency.
+                        </li>
+                      </ul>
+                </div>
+                <div className="mt-3">
+                      <h5 className="ct_fw_600 mb-2">Boost Revenue
+
+                      </h5>
+                      <ul className="ct_list_style_dot ps-3">
+                        <li>By minimising missed payments and optimising scheduling, watch your revenue grow effortlessly.
+
+                        </li>
+                      </ul>
+                </div>
+                <div className="mt-3">
+                      <h5 className="ct_fw_600 mb-2">Focus on What You Love
+
+
+                      </h5>
+                      <ul className="ct_list_style_dot ps-3">
+                        <li>Let Hank handle the logistics while you concentrate on inspiring, supporting and educating your students.
+
+
+                        </li>
+                      </ul>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </section>
+
+
+      <section className="ct_py_106 ct_our_success_bg">
+        <div className="container">
+          <div className="row">
+            <div
+              className="col-md-12 mb-5"
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
+              <div className="text-center">
+              <h4 class="ct_fs_22 ct_ff_Outfit ct_fw_400 mb-0"> How It Works</h4>
+              <h3 class="ct_ff_Outfit ct_fs_36 ct_fw_600">Hank’s 3-Step Automation Process:
+              </h3>
+              
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-4 mb-4 mb-md-0" data-aos="fade-down"
+              data-aos-duration="1000">
+                <div className="ct_round_work_card">
+                  <div className="ct_step_num_12">
+                      <h4 className="mb-0">
+                        01
+                      </h4>
+                  </div>
+                  <div className="ct_round_work_cnt">
+                    <h4>Capture & Convert</h4>
+                    <p className="mb-0">Automatically handle incoming inquiries and convert them into enrolled students with minimal effort.
+                    </p>
+                  </div>
+                </div>
+            </div>
+            <div className="col-md-4 mb-4 mb-md-0 "   data-aos="fade-down"
+              data-aos-duration="1000">
+                <div className="ct_round_work_card">
+                  <div className="ct_step_num_12">
+                      <h4 className="mb-0">
+                        02
+                      </h4>
+                  </div>
+                  <div className="ct_round_work_cnt">
+                    <h4>Manage & Communicate
+                    </h4>
+                    <p className="mb-0">Organise schedules, send invoices, collect payments and communicate with families—all from one platform.
+
+                    </p>
+                  </div>
+                </div>
+            </div>
+            <div className="col-md-4 mb-4 mb-md-0"   data-aos="fade-down"
+              data-aos-duration="1000">
+                <div className="ct_round_work_card">
+                  <div className="ct_step_num_12">
+                      <h4 className="mb-0">
+                        03
+                      </h4>
+                  </div>
+                  <div className="ct_round_work_cnt">
+                    <h4>Retain & Grow
+                    </h4>
+                    <p className="mb-0">Simplify re-enrolment processes and maintain strong relationships with families to ensure continued growth.
+                    </p>
+                  </div>
+                </div>
+            </div>
+          </div>
+       
+        </div>
+      </section>
+
+
+      {/* <section className="ct_py_80">
         <div className="container">
           <div className="row">
             <div
@@ -1067,9 +1306,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="ct_py_80 pt-0">
+      {/* <section className="ct_py_80 pt-0">
         <div className="container">
           <div className="row">
             <div
@@ -1104,7 +1343,7 @@ const Home = () => {
               data-aos="fade-left"
               data-aos-duration="1000"
             >
-              {/* <div className="owl-carousel owl-theme ct_category_slider mb-4"> */}
+          
               <OwlCarousel
                 className="owl-carousel owl-theme ct_category_slider mb-4"
                 {...options}
@@ -1395,7 +1634,7 @@ const Home = () => {
                   </div>
                 </div>
               </OwlCarousel>
-              {/* </div> */}
+           
               <div className="text-center mt-5">
                 <a
                   href="javascript:void(0)"
@@ -1406,6 +1645,59 @@ const Home = () => {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </section> */}
+          <section className="ct_py_136 ">
+        <div className="container">
+          <div className="row align-items-center">
+          <div
+              className="col-lg-5  mb-4 mb-lg-0"
+              data-aos="fade-right"
+              data-aos-duration="1000"
+            >
+              <div className="ct_about_right">
+                <img src="assets/img/about_212.jpg" alt="" className="ct_img_450" />
+              </div>
+            </div>
+            <div
+              className="col-lg-6 offset-lg-1 mb-4 mb-lg-0"
+              data-aos="fade-left"
+              data-aos-duration="1000"
+            >
+              <div className="ct_about_section_left">
+                <img
+                  src="assets/img/curve_line_orange.svg"
+                  className="ct_img_56 mb-4"
+                  alt=""
+                />
+                <h4 className="ct_fs_22 ct_ff_Outfit ct_fw_400 mb-0">
+                Why Choose Hank?
+                </h4>
+                <h3 className="ct_ff_Outfit ct_fs_36 ct_fw_600">
+                Australian Designed & Built
+
+
+
+                </h3>
+                <p className="mb-0 mt-4">
+                Proudly developed in Australia, Hank understands the unique needs of the local tutoring market, offering tailored solutions that global competitors simply can’t match.
+                </p>
+                <div className="mt-3">
+                  <h4 className="ct_fs_18 ct_fw_600">Competitive Advantage:</h4>
+                  <ul className="ct_list_style_dot ps-3 pt-2">
+                    <li><span className="ct_fw_600">Full Automation:</span> Unlike other softwares and programs, Hank offers comprehensive automation for onboarding and re-enrolment.
+                    </li>
+                    <li><span className="ct_fw_600">Seamless Integration with Xero:</span> Effortlessly connect with your accounting software for streamlined financial management.
+                    </li>
+                    <li><span className="ct_fw_600">User-Friendly Interface:</span> Designed with simplicity in mind, ensuring that even the least tech-savvy users can navigate with ease.
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          
           </div>
         </div>
       </section>
@@ -1419,12 +1711,19 @@ const Home = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="ct_testimonial_inner_item">
-                <h3 className="ct_fs_36 ct_ff_Outfit ct_fw_700 mb-0">
+              <h4 className="ct_fs_22 ct_ff_Outfit ct_fw_400 mb-0">
+              Testimonials
+
+                </h4>
+                <h3 className="ct_ff_Outfit ct_fs_36 ct_fw_600 mb-4">
+                What Our Users Are Saying:
+                </h3>
+                {/* <h3 className="ct_fs_36 ct_ff_Outfit ct_fw_700 mb-0">
                   See how our “Students & Parents”
                   <br />
                   made their
                   <span className="ct_sky_blue_text">#Success Stories</span>
-                </h3>
+                </h3> */}
                 <OwlCarousel
                   className="owl-carousel owl-theme ct_testimonial_slider mt-4"
                   {...options3}
@@ -1439,24 +1738,15 @@ const Home = () => {
                         />
                       </div>
                       <div className="ct_testimonial_title">
-                        <h4 className="ct_fs_28 ct_fw_600 ct_ff_Outfit mb-0">
-                          I highly recommend this platform, amazing <br />
-                          experience with fast delivery
-                        </h4>
+                       
                         <p className="pt-3 mb-0">
-                          “ Sed ut perspiciatis unde omnis iste natus error sit
-                          voluptatem accusan doloremque laudantium, totam rem
-                          aperiam, eaque ipsa quae ab illo inventore veritatis
-                          et quasi architecto beatae vitae dicta sunt explicabo.
-                          Nemo enime. “
+                        "Hank has revolutionised the way we manage our tutoring business. The automation features have saved us countless hours!
                         </p>
                         <div className="pt-3">
                           <h4 className="ct_fs_22 mb-0 ct_fw_600 ct_ff_Outfit">
-                            Leonard Sullivan
+                          Jane D., Melbourne
                           </h4>
-                          <p className="mb-0 ct_ff_Outfit">
-                            2nd Standard, Manchester UK
-                          </p>
+                       
                         </div>
                       </div>
                     </div>
@@ -1471,60 +1761,20 @@ const Home = () => {
                         />
                       </div>
                       <div className="ct_testimonial_title">
-                        <h4 className="ct_fs_28 ct_fw_600 ct_ff_Outfit mb-0">
-                          I highly recommend this platform, amazing <br />
-                          experience with fast delivery
-                        </h4>
+                      
                         <p className="pt-3 mb-0">
-                          “ Sed ut perspiciatis unde omnis iste natus error sit
-                          voluptatem accusan doloremque laudantium, totam rem
-                          aperiam, eaque ipsa quae ab illo inventore veritatis
-                          et quasi architecto beatae vitae dicta sunt explicabo.
-                          Nemo enime. “
+                        "Thanks to Hank, we can focus more on our students and less on admin. Highly recommended!"
                         </p>
                         <div className="pt-3">
                           <h4 className="ct_fs_22 mb-0 ct_fw_600 ct_ff_Outfit">
-                            Leonard Sullivan
+                          Mark S., Sydney
                           </h4>
-                          <p className="mb-0 ct_ff_Outfit">
-                            2nd Standard, Manchester UK
-                          </p>
+                          
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="item">
-                    <div className="ct_testimonial_slider_cnt">
-                      <div className="ct_tetimonial_img">
-                        <img
-                          src="assets/img/success_story_img.png"
-                          alt=""
-                          className="ct_img_h_387"
-                        />
-                      </div>
-                      <div className="ct_testimonial_title">
-                        <h4 className="ct_fs_28 ct_fw_600 ct_ff_Outfit mb-0">
-                          I highly recommend this platform, amazing <br />
-                          experience with fast delivery
-                        </h4>
-                        <p className="pt-3 mb-0">
-                          “ Sed ut perspiciatis unde omnis iste natus error sit
-                          voluptatem accusan doloremque laudantium, totam rem
-                          aperiam, eaque ipsa quae ab illo inventore veritatis
-                          et quasi architecto beatae vitae dicta sunt explicabo.
-                          Nemo enime. “
-                        </p>
-                        <div className="pt-3">
-                          <h4 className="ct_fs_22 mb-0 ct_fw_600 ct_ff_Outfit">
-                            Leonard Sullivan
-                          </h4>
-                          <p className="mb-0 ct_ff_Outfit">
-                            2nd Standard, Manchester UK
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+               
                 </OwlCarousel>
               </div>
             </div>
@@ -1532,7 +1782,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section
+      {/* <section
         className="ct_explore_section"
         data-aos="fade-down"
         data-aos-duration="1000"
@@ -1974,9 +2224,35 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <footer data-aos="fade-up" data-aos-duration="1000">
+
+<section className="py-5"   data-aos="fade-down"
+              data-aos-duration="1000">
+  <div className="container">
+    <div className="row">
+        <div className="col-md-10 mx-auto">
+          <div className="ct_newleter_bg">
+              <h3>Call to Action</h3>
+              <h5>Ready to Transform Your Tutoring Business?
+              </h5>
+              <p>Join the growing community of tutors and tutoring businesses who are streamlining their operations with Hank.
+              </p>
+              <div className="d-flex align-items-center gap-3 justify-content-center mt-5 flex-wrap">
+              <a href="javascript:void(0)" class="ct_purple_btn ct_ff_Outfit ct_fw_600 ct_py_12 ct_yellow_btn">Start Your 21-Day Free Trial <i class="fa-solid fa-chevron-right ms-2"></i></a>
+              <a href="javascript:void(0)" class="ct_purple_btn ct_ff_Outfit ct_fw_600 ct_py_12 ct_yellow_btn horizontal-shake"> Book a Live Demo</a>
+              </div>
+          </div>
+
+        </div>
+
+    </div>
+
+  </div>
+</section>
+      
+
+      <footer >
         <div className="container">
           <div className="row">
             <div className="col-lg-4 mb-4 mb-lg-0">
@@ -2017,7 +2293,7 @@ const Home = () => {
             <div className="col-lg-4 mb-4 mb-lg-0">
               <div className="ct_footer_cnt">
                 <h4 className="ct_fs_18 ct_ff_Outfit text-white ct_fw_600 mb-4">
-                  Feel free to share your question
+                Stay Connected
                 </h4>
                 <ul className="ct_footer_menu">
                   <li>
@@ -2034,7 +2310,7 @@ const Home = () => {
                       />
                     </svg>
                     <a href="te:1234567890">+01 1234567890</a>
-                    <span>( Mon to Sun 9am - 11pm GMT )</span>
+                    {/* <span>( Mon to Sun 9am - 11pm GMT )</span> */}
                   </li>
                   <li>
                     <svg
@@ -2051,71 +2327,30 @@ const Home = () => {
                     </svg>
                     <a href="javascript:void(0)">user@yourdomain.com</a>
                   </li>
-                  <li>
-                    <svg
-                      width="17"
-                      height="17"
-                      viewBox="0 0 17 17"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g clip-path="url(#clip0_18_8819)">
-                        <path
-                          d="M13.4044 6.15918H12.7638V2.15918C12.7638 1.96126 12.6961 1.80501 12.5607 1.69043C12.4253 1.57585 12.2794 1.51855 12.1232 1.51855H4.04504C3.84713 1.51855 3.69088 1.58626 3.57629 1.72168C3.46171 1.8571 3.40442 2.00293 3.40442 2.15918V6.15918H2.68567C2.16484 6.15918 1.70129 6.35189 1.29504 6.7373C0.888794 7.12272 0.685669 7.59668 0.685669 8.15918V11.5186C0.685669 12.0811 0.878377 12.555 1.26379 12.9404C1.64921 13.3258 2.12317 13.5186 2.68567 13.5186H3.32629V15.5186C3.32629 15.7165 3.394 15.8727 3.52942 15.9873C3.66484 16.1019 3.81067 16.1592 3.96692 16.1592H11.9669C12.1648 16.1592 12.3211 16.0915 12.4357 15.9561C12.5503 15.8206 12.6075 15.6748 12.6075 15.5186V13.5186H13.2482C13.8107 13.5186 14.2846 13.3258 14.67 12.9404C15.0555 12.555 15.2482 12.0811 15.2482 11.5186V8.15918C15.3211 7.59668 15.1622 7.12272 14.7716 6.7373C14.381 6.35189 13.9253 6.15918 13.4044 6.15918ZM4.68567 2.7998H11.3263V6.15918H4.68567V2.7998ZM11.4044 14.7998H4.68567V10.7998H11.3263V14.7998H11.4044ZM14.045 11.4404C14.045 11.6383 13.9773 11.7946 13.8419 11.9092C13.7065 12.0238 13.5607 12.0811 13.4044 12.0811H12.7638V10.0811C12.7638 9.88314 12.6961 9.72689 12.5607 9.6123C12.4253 9.49772 12.2794 9.44043 12.1232 9.44043H4.04504C3.84713 9.44043 3.69088 9.50814 3.57629 9.64355C3.46171 9.77897 3.40442 9.9248 3.40442 10.0811V12.0811H2.68567C2.48775 12.0811 2.3315 12.0133 2.21692 11.8779C2.10234 11.7425 2.04504 11.5967 2.04504 11.4404V8.15918C2.04504 7.96126 2.11275 7.80501 2.24817 7.69043C2.38359 7.57585 2.52942 7.51855 2.68567 7.51855H13.3263C13.5242 7.51855 13.6805 7.58626 13.795 7.72168C13.9096 7.8571 13.9669 8.00293 13.9669 8.15918V11.4404H14.045Z"
-                          fill="#DDDDDD"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_18_8819">
-                          <rect
-                            width="16.09"
-                            height="16"
-                            fill="white"
-                            transform="matrix(1 0 0 -1 0 16.7998)"
-                          />
-                        </clipPath>
-                      </defs>
-                    </svg>
-                    <a href="tel:12312588263">+12 123 12588263</a>
-                  </li>
-                  <li>
-                    <svg
-                      width="14"
-                      height="15"
-                      viewBox="0 0 14 15"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.875 2.4624C13.1875 3.7749 14 5.49365 14 7.36865C14 11.1812 10.8125 14.3062 6.96875 14.3062C5.8125 14.3062 4.6875 13.9937 3.65625 13.4624L0 14.3999L0.96875 10.8062C0.375 9.7749 0.03125 8.5874 0.03125 7.3374C0.03125 3.5249 3.15625 0.399902 6.96875 0.399902C8.84375 0.399902 10.5938 1.1499 11.875 2.4624ZM6.96875 13.1187C10.1562 13.1187 12.8125 10.5249 12.8125 7.36865C12.8125 5.80615 12.1562 4.36865 11.0625 3.2749C9.96875 2.18115 8.53125 1.5874 7 1.5874C3.8125 1.5874 1.21875 4.18115 1.21875 7.3374C1.21875 8.43115 1.53125 9.49365 2.09375 10.4312L2.25 10.6499L1.65625 12.7749L3.84375 12.1812L4.03125 12.3062C4.9375 12.8374 5.9375 13.1187 6.96875 13.1187ZM10.1562 8.80615C10.3125 8.8999 10.4375 8.93115 10.4688 9.0249C10.5312 9.0874 10.5312 9.43115 10.375 9.8374C10.2188 10.2437 9.53125 10.6187 9.21875 10.6499C8.65625 10.7437 8.21875 10.7124 7.125 10.2124C5.375 9.4624 4.25 7.7124 4.15625 7.61865C4.0625 7.49365 3.46875 6.68115 3.46875 5.80615C3.46875 4.9624 3.90625 4.55615 4.0625 4.36865C4.21875 4.18115 4.40625 4.1499 4.53125 4.1499C4.625 4.1499 4.75 4.1499 4.84375 4.1499C4.96875 4.1499 5.09375 4.11865 5.25 4.4624C5.375 4.80615 5.75 5.6499 5.78125 5.74365C5.8125 5.8374 5.84375 5.93115 5.78125 6.05615C5.46875 6.7124 5.09375 6.68115 5.28125 6.99365C5.96875 8.1499 6.625 8.55615 7.65625 9.05615C7.8125 9.1499 7.90625 9.11865 8.03125 9.0249C8.125 8.8999 8.46875 8.49365 8.5625 8.3374C8.6875 8.1499 8.8125 8.18115 8.96875 8.24365C9.125 8.30615 9.96875 8.7124 10.1562 8.80615Z"
-                        fill="#DDDDDD"
-                      />
-                    </svg>
-                    <a href="tel:255557575">(+11)2 55 55 7575</a>
-                    <span>( Mon to Sun 9am - 11pm GMT )</span>
-                  </li>
+                
+              
                 </ul>
               </div>
             </div>
             <div className="col-lg-4 mb-4 mb-lg-0">
               <div className="ct_footer_cnt">
                 <h4 className="ct_fs_18 ct_ff_Outfit text-white ct_fw_600 mb-4">
-                  Signup for newsletter
+                Legal Links:
                 </h4>
-                <p className="ct_fs_16" style={{ color: "#eee" }}>
-                  Corrupti quolores etmquasa molestias epturite sinteam
-                  occaecati amet cupiditate mikume molareshe.
-                </p>
-                <div className="ct_newletter_input">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter Your Email"
-                  />
-                  <div className="ct_send_btn">
-                    <i className="fa-regular fa-paper-plane"></i>
-                  </div>
-                </div>
+                <ul className="ct_footer_menu">
+                  <li>
+                   
+                    <a href="#">Privacy Policy </a>
+                    {/* <span>( Mon to Sun 9am - 11pm GMT )</span> */}
+                  </li>
+                  <li>
+                   
+                    <a href="#">Terms of Service
+                    </a>
+                  </li>
+                
+              
+                </ul>
               </div>
             </div>
           </div>
