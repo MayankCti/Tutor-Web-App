@@ -55,6 +55,18 @@ const Student = () => {
     }
   };
 
+  const handleBulkUpload = (e) => {
+    const data = new FormData();
+    data?.append("file", e.target.files[0]);
+    const callback = (response) => {
+      console.log({ response }, "aa gaya");
+      if (response.success) {
+        dispatch(fetchStudentList());
+        fileInputRef.current.value = null;
+      }
+    };
+    dispatch(uploadStudentFile({ payload: data, callback }));
+  };
   if (isLoading) {
     return <Loader />;
   }
@@ -68,7 +80,9 @@ const Student = () => {
             <div className="ct_white_bg ct_mt_28">
               <div className="ct_px_46">
                 <div className="d-flex align-items-center justify-content-between gap-2 mb-3 flex-wrap">
-                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">All Students</h4>
+                  <h4 className="ct_fs_22 ct_ff_roboto ct_fw_600">
+                    All Students
+                  </h4>
                   <div className="d-flex align-items-center gap-3 flex-wrap">
                     <div>
                       <SelectDropdown
@@ -84,17 +98,7 @@ const Student = () => {
                       ref={fileInputRef}
                       className="d-none"
                       onChange={(e) => {
-                        const data = new FormData();
-                        data?.append("file", e.target.files[0]);
-                        const callback = (response) => {
-                          if (response.success) {
-                            fileInputRef.current.value = null;
-                            dispatch(fetchStudentList());
-                          }
-                        };
-                        dispatch(
-                          uploadStudentFile({ payload: data, callback })
-                        );
+                        handleBulkUpload(e);
                       }}
                     />
 

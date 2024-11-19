@@ -68,17 +68,17 @@ export const messageSlice = createSlice({
   extraReducers: (builder) => {
     // fetch-all-student-chat-list
     builder.addCase(fetchAllStudentChatList.pending, (state, action) => {
-      state.isLoading = true;
+      // state.isLoading = true;
     });
     builder.addCase(fetchAllStudentChatList.fulfilled, (state, action) => {
       const { data } = action?.payload ?? {};
       state.allStudentList = data ?? [];
       state.activeChatDetail = {};
-      state.isLoading = false;
+      // state.isLoading = false;
       state.isToggle = false;
     });
     builder.addCase(fetchAllStudentChatList.rejected, (state, action) => {
-      state.isLoading = false;
+      // state.isLoading = false;
     });
 
     // start-chat
@@ -125,13 +125,13 @@ export const messageSlice = createSlice({
 
     // fetch-all-teacher-chat-list
     builder.addCase(fetchAllTeacherChatList.pending, (state, action) => {
-      state.isLoading = true;
+      // state.isLoading = true;
     });
     builder.addCase(fetchAllTeacherChatList.fulfilled, (state, action) => {
       const { data } = action?.payload ?? {};
       state.allStudentList = data ?? [];
       state.activeChatDetail = {};
-      state.isLoading = false;
+      // state.isLoading = false;
       state.isToggle = false;
     });
     builder.addCase(fetchAllTeacherChatList.rejected, (state, action) => {

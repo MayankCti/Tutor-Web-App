@@ -98,7 +98,7 @@ function StudentLogin() {
                           <div className="form-group mb-4">
                             <label className="d-flex align-items-center justify-content-between mb-3 ct_ff_roboto">
                               <span className="ct_fw_700 ct_fs_20">
-                                Enter Email
+                                Email
                               </span>
                             </label>
                             <div className="position-relative">
@@ -122,7 +122,7 @@ function StudentLogin() {
                           <div className="form-group">
                             <label className="d-flex align-items-center justify-content-between mb-3 ct_ff_roboto">
                               <span className="ct_fw_700 ct_fs_20">
-                                Enter Password
+                                Password
                               </span>
                             </label>
                             <div className="position-relative">

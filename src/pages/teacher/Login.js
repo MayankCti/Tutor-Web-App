@@ -70,7 +70,7 @@ const Login = () => {
                     <div className="ct_login_form_cnt">
                       <div className="ct_mb_50">
                         <h2 className="ct_fs_36 ct_fw_600 ct_mb_30 ct_ff_roboto mb-4">
-                          Login{" "}
+                          Log In{" "}
                         </h2>
                       </div>
                       <div className="form-group mb-4">
@@ -143,7 +143,7 @@ const Login = () => {
                         onClick={handleSubmit}
                         className="ct_purple_btn w-100 justify-content-center ct_line_height_44 ct_ff_roboto ct_extra_dark_btn_bg"
                       >
-                        LogIn
+                        Log In
                       </button>
                     </div>
                     <div className="mt-4">
@@ -151,7 +151,7 @@ const Login = () => {
                         Don’t have any account?{" "}
                         <a
                           href="javascript:void(0)"
-                          className="ct_purple_text ct_fw_700 ms-1"
+                          className="ct_otange_text ct_fw_700 ms-1"
                           onClick={() => navigate(pageRoutes.sign_up)}
                         >
                           Sign up
@@ -166,7 +166,7 @@ const Login = () => {
                           style={{textDecoration: 'none'}}
                           className="ct_purple_text ct_fw_700 ms-3"
                         >
-                          Student Login
+                          Student Log In
                         </a>
                       </p>
                     </div>

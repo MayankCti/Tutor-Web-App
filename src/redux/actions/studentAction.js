@@ -74,7 +74,7 @@ export const uploadStudentFile = createAsyncThunk(
       callback(response);
       return response;
     } catch (error) {
-      callback(null, error);
+      
     }
   }
 );
