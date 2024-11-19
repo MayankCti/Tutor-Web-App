@@ -1,6 +1,7 @@
 {
   "name": "tutor_web_app",
   "version": "0.1.0",
+  "homepage": "http://52.65.19.79/",
   "private": true,
   "dependencies": {
     "@img-comparison-slider/react": "^8.0.2",

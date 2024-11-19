@@ -101,9 +101,10 @@ const EditStudentDetail = () => {
                                   First Name <AstrickMark />
                                 </label>
                                 <FormInput
-                                  id="first_name" 
+                                  id="first_name"
                                   onChange={handleChange}
-                                  onBlur={handleBlur} placeholder="Enter first name"
+                                  onBlur={handleBlur}
+                                  placeholder="Enter first name"
                                   value={values?.first_name}
                                 />
                                 <ErrorMessage
@@ -123,7 +124,8 @@ const EditStudentDetail = () => {
                                 </label>
                                 <FormInput
                                   id="last_name"
-                                  onChange={handleChange} placeholder="Enter last name"
+                                  onChange={handleChange}
+                                  placeholder="Enter last name"
                                   onBlur={handleBlur}
                                   value={values?.last_name}
                                 />
@@ -140,10 +142,11 @@ const EditStudentDetail = () => {
                                   for="email"
                                   className="ct_ff_roboto mb-2 ct_fw_500"
                                 >
-                                  Email  <AstrickMark />
+                                  Email <AstrickMark />
                                 </label>
                                 <FormInput
-                                  id="email" placeholder="Enter email"
+                                  id="email"
+                                  placeholder="Enter email"
                                   type="email"
                                   disabled
                                   onChange={handleChange}
@@ -166,7 +169,8 @@ const EditStudentDetail = () => {
                                   Contact No.
                                 </label>
                                 <FormInput
-                                  id="contact_number" placeholder="Enter contact no."
+                                  id="contact_number"
+                                  placeholder="Enter contact no."
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.contact_number}
@@ -187,7 +191,8 @@ const EditStudentDetail = () => {
                                   Emergency Contact No.
                                 </label>
                                 <FormInput
-                                  id="emergency_contact_number" placeholder=" Enter emergency contact no."
+                                  id="emergency_contact_number"
+                                  placeholder=" Enter emergency contact no."
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values?.emergency_contact_number}
@@ -200,13 +205,17 @@ const EditStudentDetail = () => {
                               </div>
                             </div>
                             <div className="col-md-12 mb-4">
-                              <label for="" className="ct_ff_roboto mb-2 ct_fw_500">
+                              <label
+                                for=""
+                                className="ct_ff_roboto mb-2 ct_fw_500"
+                              >
                                 Student Status
                               </label>
                               <div className="d-flex align-items-center flex-wrap gap-3">
                                 <div className="form-check">
                                   <FormInput
-                                    id="student_status1" placeholder="Enter student status"
+                                    id="student_status1"
+                                    placeholder="Enter student status"
                                     className="form-check-input"
                                     type="radio"
                                     name="student_status"
@@ -320,7 +329,8 @@ const EditStudentDetail = () => {
                                 </label>
                                 <FormInput
                                   id="grade"
-                                  onChange={handleChange} placeholder="Enter grade"
+                                  onChange={handleChange}
+                                  placeholder="Enter grade"
                                   onBlur={handleBlur}
                                   value={values?.grade}
                                 />
@@ -342,7 +352,8 @@ const EditStudentDetail = () => {
                                 </label>
                                 <FormInput
                                   id="school_name"
-                                  onChange={handleChange} placeholder="Enter  school name"
+                                  onChange={handleChange}
+                                  placeholder="Enter  school name"
                                   onBlur={handleBlur}
                                   value={values?.school_name}
                                 />
@@ -363,7 +374,8 @@ const EditStudentDetail = () => {
                                 </label>
                                 <FormInput
                                   id="city"
-                                  onChange={handleChange} placeholder="Enter city"
+                                  onChange={handleChange}
+                                  placeholder="Enter city"
                                   onBlur={handleBlur}
                                   value={values?.city}
                                 />

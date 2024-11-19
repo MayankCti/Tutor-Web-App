@@ -172,3 +172,23 @@ export const fetchStudentProfile = createAsyncThunk("fetch-student-profile", asy
     return response;
   } catch (error) {}
 });
+
+
+// student-change-password
+export const studentChangePassword = createAsyncThunk(
+  "student-change-password",
+  async (props) => {
+    const { payload, callback } = props;
+    try {
+      const response = await API_REQUEST({
+        url: teacherChangePasswordAPI,
+        method: "POST",
+        data: payload,
+      });
+      callback(response);
+      return response;
+    } catch (error) {
+      callback(null, error);
+    }
+  }
+);

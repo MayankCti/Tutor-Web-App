@@ -7,8 +7,11 @@ import { ErrorMessage, Formik } from "formik";
 import { message } from "antd";
 import { pageRoutes } from "../../routes/pageRoutes";
 import { changePasswordValidationSchema } from "../../utils/Schema";
+import { studentChangePassword } from "../../redux/actions/authAction";
+import { useDispatch } from "react-redux";
 
 function StudentChangePassword() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
   const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
@@ -27,7 +30,16 @@ function StudentChangePassword() {
 
   const passwordChanged = (values) => {
     message.success("password has been updated");
-    navigate(pageRoutes?.studentprofile);
+   
+
+    const callback = (response) => {
+      if (response.success) {
+        navigate(pageRoutes?.studentProfile);
+      }
+    };
+    const { confirmPassword, ...rest } = values;
+    dispatch(studentChangePassword({ payload: rest, callback }));
+
   };
 
   return (

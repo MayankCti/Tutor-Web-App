@@ -11,6 +11,7 @@ import {
   fetchProfile,
   fetchStudentProfile,
   studentAndPricing,
+  studentChangePassword,
   teacherChangePassword,
   teacherForgotPassword,
   teacherlogin,
@@ -218,6 +219,18 @@ export const authSlice = createSlice({
     builder.addCase(fetchStudentProfile.rejected, (state, action) => {
       state.isLoading = false;
     });
+
+      // auth-change-password
+      builder.addCase(studentChangePassword.pending, (state, action) => {
+        state.isLoading = true;
+      });
+      builder.addCase(studentChangePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+      });
+      builder.addCase(studentChangePassword.rejected, (state, action) => {
+        state.isLoading = false;
+      });
+
   },
 });
 

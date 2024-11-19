@@ -11,7 +11,7 @@ section{
     overflow-x: hidden;
 }
 :root{
-    --dark_purple:#0098A8;
+    --dark_purple:#EF4444;
     --sky-clr:#1DA1F2;
     --orange_yellow_gredient:linear-gradient(94.15deg, #EAB308 0%, #EF4444 43.23%);
     --orange:#EF4444;
@@ -217,6 +217,9 @@ header.ct_header.sticky_header {
     background: transparent;
     border: 1px solid #DDDDDD;
     color: #000;
+  }
+  .ct_otange_text{
+    color: var(--orange);
   }
 
   .ct_animated_text{
